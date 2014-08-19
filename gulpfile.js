@@ -2,10 +2,10 @@ var gulp = require('gulp'),
     open = require("gulp-open"),
     connect = require('gulp-connect');
 
-var dest = "dist",
+var dest = __dirname, //本地开发时的监测目录，部署时用dist目录
     port = 8088,
-    watchPath = dest + "/**", //监测的文件路径
-    openPath = dest + "/index.html", //用浏览器打开的文件路径
+    watchPath = [dest + "/html/*.*", dest + "/js/*.*", dest + "/css/*.*"], //监测的文件路径
+    openPath = dest + "/html/*.html", //用浏览器打开的文件路径
     openOption = {
         url: "http://127.0.0.1:" + port
     };
