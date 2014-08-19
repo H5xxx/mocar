@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     connect = require('gulp-connect');
 
 var dest = "dist",
-    port = 8080,
+    port = 8088,
     watchPath = dest + "/**", //监测的文件路径
     openPath = dest + "/index.html", //用浏览器打开的文件路径
     openOption = {
