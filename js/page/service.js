@@ -5,8 +5,8 @@ define(function(require, exports) {
     var Service = Spine.Controller.create({
         el: $("body"),
         elements: {
-            '#a': 'carModelEl',
-            '#b': 'carSeriesEl'
+            '#car-model': 'carModelEl',
+            '#car-series': 'carSeriesEl'
         },
         init: function() {
             var carModel = CarModel.init({
@@ -15,12 +15,10 @@ define(function(require, exports) {
             var carSeries = CarSeries.init({
                 el: this.carSeriesEl
             });
-            var sm = new StateMachine;
+            var sm = new StateMachine();
             sm.add(carModel);
             sm.add(carSeries);
             carModel.active();
-            carSeries.active();
-
         }
     }).init();
 });

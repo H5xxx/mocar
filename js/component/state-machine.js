@@ -18,6 +18,7 @@ define(function(require, exports) {
         }, this);
     };
 
+    // test
     // var con1 = {
     //     activate: function() {
     //         console.log("controller 2 activated");
@@ -41,5 +42,6 @@ define(function(require, exports) {
     // sm.add(con2);
 
     // con1.active();
+
     return StateMachine;
 });
