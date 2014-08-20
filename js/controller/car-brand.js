@@ -3,6 +3,9 @@ define(function(require, exports) {
     var Brand = require('../model/brand');
 
     var CarModel = Spine.Controller.create({
+        elements: {
+            '.j-brand-list': 'brandList'
+        },
         init: function() {
             $.ajax({
                 url: 'http://cybwx.sinaapp.com/service.php',
@@ -11,18 +14,25 @@ define(function(require, exports) {
                 },
                 dataType: 'jsonp',
                 jsonp: 'callback',
-                success: function(data) {
+                success: this.proxy(function(data) {
                     data = data.data;
                     console.log(data);
                     var brand;
                     for (var i = 0; i < data.length; i++) {
                         brand = Brand.create(data[i]);
                     }
-                },
+                    this.proxy(this.showAll());
+                }),
                 error: function() {
                     alert('getCarBrandFast 超时');
                 }
             });
+        },
+        showAll: function() {
+            var html = template('template-item', {
+                data: Brand.all()
+            });
+            this.brandList.html(html);
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
