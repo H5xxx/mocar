@@ -11,10 +11,15 @@ define(function(require, exports) {
                 },
                 dataType: 'jsonp',
                 jsonp: 'callback',
-                success: function(data){
+                success: function(data) {
+                    data = data.data;
                     console.log(data);
+                    var brand;
+                    for (var i = 0; i < data.length; i++) {
+                        brand = Brand.create(data[i]);
+                    }
                 },
-                error:function(){
+                error: function() {
                     alert('getCarBrandFast 超时');
                 }
             });

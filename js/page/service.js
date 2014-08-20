@@ -9,10 +9,10 @@ define(function(require, exports) {
             '#car-series': 'carSeriesEl'
         },
         init: function() {
-            var carBrand = CarBrand.init({
+            var carBrand = new CarBrand({
                 el: this.carBrandEl
             });
-            var carSeries = CarSeries.init({
+            var carSeries = new CarSeries({
                 el: this.carSeriesEl
             });
             var sm = new StateMachine();
@@ -20,5 +20,6 @@ define(function(require, exports) {
             sm.add(carSeries);
             carBrand.active();
         }
-    }).init();
+    });
+    new Service().init();
 });
