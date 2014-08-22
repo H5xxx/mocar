@@ -44,5 +44,6 @@ img {
 }
 
 .brand-item > img {
+    height: 50px;
     margin: auto;
 }

@@ -6,6 +6,9 @@ define(function(require, exports) {
         elements: {
             '.j-brand-list': 'brandList'
         },
+        events: {
+            'click .brand-item': 'enterSeries'
+        },
         init: function() {
             $.ajax({
                 url: 'http://cybwx.sinaapp.com/service.php',
@@ -33,6 +36,9 @@ define(function(require, exports) {
                 data: Brand.all()
             });
             this.brandList.html(html);
+        },
+        enterSeries: function(){
+            
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
