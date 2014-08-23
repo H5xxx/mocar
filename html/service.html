@@ -12,14 +12,35 @@
     <script src="../js/lib/spine.js"></script>
 
     <script id="template-brand-item" type="text/html">
+        <div class="schedule-top">品牌</div>
+            <div class="j-brand-list">
+            {{each data as value i}}
+                <div class="brand-item" data-id="{{value.brand_id}}">
+                    <img src="{{value.logo_img_url}}" alt="">
+                    <span>{{value.brand_name}}</span>
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    <script id="template-series-item" type="text/html">
+        <div class="schedule-top">{{brand_name}} >> 车系</div>
+        <div class="j-series-list">
         {{each data as value i}}
-            <div class="brand-item" data-id="{{value.brand_id}}">
+            <div class="series-item" data-id="{{value.series_id}}">
+                <span>{{value.series_name}}</span>
+            </div>
+        {{/each}}
+        </div>
+    </script>
+    <script id="template-model-item" type="text/html">
+        {{each data as value i}}
+            <div class="model-item" data-id="{{value.model_id}}">
                 <img src="{{value.logo_img_url}}" alt="">
-                <span>{{value.brand_name}}</span>
+                <span>{{value.model_name}}</span>
             </div>
         {{/each}}
     </script>
-    <script id="template-series-item" type="text/html">
+    <script id="template-displacement-item" type="text/html">
         <div class="schedule-top">{{brand_name}} >> 车系</div>
         <div class="j-series-list">
         {{each data as value i}}
@@ -32,8 +53,7 @@
 </head>
 <body>
     <div id='car-brand'>
-        <span>品牌</span>
-        <div class="j-brand-list">
+        <div class="j-brand-container">
         </div>
     </div>
     <div id='car-series'>
@@ -41,8 +61,12 @@
         </div>
     </div>
     <div id='car-model'>
+        <div class="j-model-container">
+        </div>
     </div>
     <div id='car-displacement'>
+        <div class="j-displacement-container">
+        </div>
     </div>
     <script>
     seajs.use("../js/page/service");
