@@ -4,7 +4,7 @@ define(function(require, exports) {
 
     var CarBrand = Spine.Controller.create({
         elements: {
-            '.j-brand-list': 'brandList'
+            '.j-brand-container': 'brandContainer'
         },
         events: {
             'click .brand-item': 'enterSeries'
@@ -35,7 +35,7 @@ define(function(require, exports) {
             var html = template('template-brand-item', {
                 data: Brand.all()
             });
-            this.brandList.html(html);
+            this.brandContainer.html(html);
         },
         enterSeries: function(e) {
             var id = e.currentTarget.dataset.id;

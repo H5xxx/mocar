@@ -4,7 +4,10 @@ define(function(require, exports) {
 
     var CarSeries = Spine.Controller.create({
         elements: {
-            '.j-series-list': 'seriesList'
+            '.j-series-container': 'seriesContainer'
+        },
+        events: {
+            'click .series-item': 'enterModel'
         },
         init: function() {},
         showSeries: function(id) {
@@ -14,7 +17,13 @@ define(function(require, exports) {
                 brand_name: currentBrand.brand_name,
                 data: seriess
             });
-            this.seriesList.html(html);
+            this.seriesContainer.html(html);
+        },
+        enterModel: function(e) {
+            var id = e.currentTarget.dataset.id;
+            var carModel = require('./car-model');
+            carModel.showModel(id);
+            carModel.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
