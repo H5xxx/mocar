@@ -20,12 +20,14 @@
         {{/each}}
     </script>
     <script id="template-series-item" type="text/html">
-        {{brand_name}} >> 车系
+        <span>{{brand_name}} >> 车系</span>
+        <div class="j-series-list">
         {{each data as value i}}
             <div class="series-item" data-id="{{value.series_id}}">
                 <span>{{value.series_name}}</span>
             </div>
         {{/each}}
+        </div>
     </script>
 </head>
 <body>
@@ -35,7 +37,7 @@
         </div>
     </div>
     <div id='car-series'>
-        <div class="j-series-list">
+        <div class="j-series-container">
         </div>
     </div>
     <div id='car-model'>

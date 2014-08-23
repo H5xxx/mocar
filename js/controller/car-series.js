@@ -4,7 +4,7 @@ define(function(require, exports) {
 
     var CarSeries = Spine.Controller.create({
         elements: {
-            '.j-series-list': 'seriesList'
+            '.j-series-container': 'seriesList'
         },
         init: function() {},
         showSeries: function(id) {
