@@ -24,14 +24,14 @@ define(function(require, exports) {
                     for (var i = 0; i < data.length; i++) {
                         brand = Brand.create(data[i]);
                     }
-                    this.proxy(this.showAll());
+                    this.proxy(this.showBrand());
                 }),
                 error: function() {
                     alert('getCarBrandFast 超时');
                 }
             });
         },
-        showAll: function() {
+        showBrand: function() {
             var html = template('template-brand-item', {
                 data: Brand.all()
             });

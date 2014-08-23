@@ -46,3 +46,12 @@ img {
     height: 50px;
     margin: auto;
 }
+.schedule-top {
+    height: 45px;
+}
+.series-item {
+    margin: 0 20px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #aaa;
+}
