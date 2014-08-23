@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>选择车型</title>
+    <link rel="stylesheet" href="../css/service.css">
+    <script src="../js/lib/template.js"></script>
+    <script src="../js/lib/sea.js"></script>
+    <script src="../js/lib/zepto.js"></script>
+    <script src="../js/lib/spine.js"></script>
+
+    <script id="template-item" type="text/html">
+        {{each data as value i}}
+            <div class="brand-item" data-id="{{value.brand-id}}">
+                <img src="{{value.logo_img_url}}" alt="">
+                <span>{{value.brand_name}}</span>
+            </div>
+        {{/each}}
+    </script>
+</head>
+
+<body>
+    <!-- 上门信息 开始 -->
+    <div id='schedule-info'>
+        <div id='generalAddress' class='hight110px'>
+            <i class="site-icons icon-location mt60px"></i>
+            <div class='ml130px height109px zero-font-size'>
+                <span class='first border-buttom'>
+                    <select name="citySelect" id="citySelect">
+                        <option value="北京市">北京市</option>
+                        <option value="上海市">上海市</option>
+                        <option value="天津市">天津市</option>
+                    </select>
+                </span>
+                <span class='second border-buttom'>
+                    <select name="districtSelect" id="districtSelect">
+                        <option value="海淀区">海淀区</option>
+                        <option value="东城区">东城区</option>
+                        <option value="西城区">西城区</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div id='detailAddress' class='hight110px'>
+            <div class='ml130px height109px border-buttom'>
+                <input type="text" name='detailAddressInput' id='detailAddressInput' placeholder='输入详细地址'>
+            </div>
+        </div>
+        <div id='scheduleTime' class='hight110px'>
+            <i class="site-icons icon-shedule mt60px"></i>
+            <div class='ml130px height109px zero-font-size'>
+                <span class='first border-buttom'>
+                    <select name="daySelect" id="daySelect">
+                        <option value="2014-07-22">2014-07-22</option>
+                        <option value="2014-07-23">2014-07-23</option>
+                        <option value="2014-07-24">2014-07-24</option>
+                    </select>
+                </span>
+                <span class='second border-buttom'>
+                    <select name="timeSelect" id="timeSelect">
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div id='carNo' class='hight110px'>
+            <i class="site-icons icon-car mt60px"></i>
+
+            <div class='ml130px height109px border-buttom'>
+                <input type="text" placeholder='车牌号，例如京NB520Z' id='carNoInput' name='carNoInput'>
+            </div>
+        </div>
+        <div id='name' class='hight110px'>
+            <i class="site-icons icon-user mt60px"></i>
+            <div class='ml130px height109px border-buttom'>
+                <input type="text" placeholder='姓名' id='nameInput' name='nameInput'>
+            </div>
+        </div>
+        <div id='phoneNumber' class='hight110px'>
+            <i class="site-icons icon-phone mt60px"></i>
+            <div class='ml130px height109px border-buttom'>
+                <input type="text" placeholder='手机号码' id='phoneInput' name='phoneInput'>
+            </div>
+        </div>
+    </div>
+    <!-- 上门信息 结束 -->
+</body>
+
+</html>
