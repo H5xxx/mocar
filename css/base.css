@@ -1,0 +1,68 @@
+.height80px{
+    height: 80px;
+}
+.height109px{
+    height: 109px;
+}
+.height110px{
+    height: 110px;
+}
+.mt20px{
+    margin-top: 20px;
+}
+.mt40px{
+    margin-top: 40px;
+}
+.mt60px{
+    margin-top: 60px;
+}
+.ml130px{
+    margin-left: 130px;
+    display: block;
+}
+.border-buttom{
+    border-bottom: #DB23DB solid 1px;
+}
+.zero-font-size{
+    font-size: 0;
+}
+.site-icons{
+    float: left;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #DB23DB;
+}
+
+.icon-seperator{
+    background:url('./icons/01.png'); 
+    background-size: contain;
+}
+.icon-car{
+    background:url('./icons/02.png'); 
+    background-size: contain;
+}
+.icon-service{
+    background:url('./icons/03.png'); 
+    background-size: contain;
+}
+.icon-accessory{
+    background: url('./icons/04.png');
+    background-size: contain;
+}
+.icon-phone{
+    background:url('./icons/08.png'); 
+    background-size: contain;
+}
+.icon-nextstep{
+    background:url('./icons/09.png'); 
+    background-size: contain;
+}
+.icon-success{
+    background:url('./icons/10.png'); 
+    background-size: contain;
+}
+.icon-home{
+    background:url('./icons/11.png');
+    background-size: contain; 
+}

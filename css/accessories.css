@@ -1,0 +1,99 @@
+/************************  上门信息  ************************/
+#accessories-info{
+    overflow: hidden;
+    clear: both;
+}
+.height80px{
+    height: 80px;
+}
+.height109px{
+    height: 109px;
+}
+.height110px{
+    height: 110px;
+}
+.mt20px{
+    margin-top: 20px;
+}
+.mt40px{
+    margin-top: 40px;
+}
+.mt60px{
+    margin-top: 60px;
+}
+.ml130px{
+    margin-left: 130px;
+    display: block;
+}
+.border-buttom{
+    border-bottom: #DB23DB solid 1px;
+}
+.zero-font-size{
+    font-size: 0;
+}
+.site-icons{
+    float: left;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #DB23DB;
+}
+.content-area{
+    margin-left: 60px;
+    display: block;
+    margin-top: 20px;
+}
+.icon-generalAddress{
+    background:url('http://127.0.0.1:8088/doc/pic/icons/02.png') no-repeat fixed 0 0; 
+}
+#accessories-info .first,#schedule-success .first,#accessories-info .second,#schedule-success .second{
+    width: 49%;
+    display: inline-block;
+    height: 100%;
+    font-size: 20px;
+}
+#accessories-info .second,#schedule-success .second{
+    float: right;
+    margin-left: 2%;
+    width: 49%;
+}
+#accessories-info select{
+    
+}
+#accessories-info option{
+    font-size: 20px;
+}
+#accessories-info select{
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+.justify{
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+#accessories-info .info,#accessories-info .accessory,#accessories-info .last{
+    height: 40px;
+    line-height: 40px;
+}
+#accessories-info .info{
+    font-size: 16px;
+}
+#accessories-info .accessory{
+    height: 20px;
+    line-height: 20px;
+    color: #60C900;
+}
+#accessories-info .last{
+    float: right;
+    margin-right: 20px;
+    color: #8C8C8C;
+}
