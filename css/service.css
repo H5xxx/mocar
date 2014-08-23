@@ -42,72 +42,76 @@ img {
     padding: 5px 0;
     border: 1px solid #eee;
 }
-
 .brand-item > img {
     height: 50px;
     margin: auto;
 }
-
-#schedule-info{
+.schedule-top {
+    height: 45px;
+}
+.series-item {
+    margin: 0 20px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #aaa;
+}
+#schedule-info {
     overflow: hidden;
     clear: both;
 }
-.height80px{
+.height80px {
     height: 80px;
 }
-.height109px{
+.height109px {
     height: 109px;
 }
-.height110px{
+.height110px {
     height: 110px;
 }
-.mt20px{
+.mt20px {
     margin-top: 20px;
 }
-.mt40px{
+.mt40px {
     margin-top: 40px;
 }
-.mt60px{
+.mt60px {
     margin-top: 60px;
 }
-.ml130px{
+.ml130px {
     margin-left: 130px;
     display: block;
 }
-.border-buttom{
+.border-buttom {
     border-bottom: #DB23DB solid 1px;
 }
-.zero-font-size{
+.zero-font-size {
     font-size: 0;
 }
-.site-icons{
+.site-icons {
     float: left;
     display: block;
     width: 40px;
     height: 40px;
     background-color: #DB23DB;
 }
-.icon-generalAddress{
-    background:url('http://127.0.0.1:8088/doc/pic/icons/02.png') no-repeat fixed 0 0; 
+.icon-generalAddress {
+    background: url('http://127.0.0.1:8088/doc/pic/icons/02.png') no-repeat fixed 0 0;
 }
-#schedule-info .first,#schedule-success .first,#schedule-info .second,#schedule-success .second{
+#schedule-info .first, #schedule-success .first, #schedule-info .second, #schedule-success .second {
     width: 49%;
     display: inline-block;
     height: 100%;
     font-size: 20px;
 }
-#schedule-info .second,#schedule-success .second{
+#schedule-info .second, #schedule-success .second {
     float: right;
     margin-left: 2%;
     width: 49%;
 }
-#schedule-info select{
-    
-}
-#schedule-info option{
+#schedule-info select {} #schedule-info option {
     font-size: 20px;
 }
-#schedule-info select, #detailAddressInput, #carNoInput,#nameInput,#phoneInput{
+#schedule-info select, #detailAddressInput, #carNoInput, #nameInput, #phoneInput {
     display: inline-block;
     vertical-align: bottom;
     width: 100%;
@@ -119,34 +123,33 @@ img {
     border: none;
     outline: none;
 }
-
-#schedule-success #success-tip{
+#schedule-success #success-tip {
     background-color: #333333;
 }
-.justify{
+.justify {
     display: table;
     height: 100%;
     width: 100%;
 }
-#schedule-success .content-area{
+#schedule-success .content-area {
     margin-left: 60px;
 }
-#schedule-success #success-tip .tip{   
+#schedule-success #success-tip .tip {
     /*line-height: 54px;*/
     /*height: 54px;*/
     display: table-cell;
     vertical-align: middle;
     font-size: 20px;
-    color:#EAEAEA;
+    color: #EAEAEA;
 }
-#schedule-success .info{
+#schedule-success .info {
     font-size: 20px;
 }
-#schedule-success .accessory{
+#schedule-success .accessory {
     color: #60C900;
     margin-bottom: 10px;
 }
-#schedule-success .last{
+#schedule-success .last {
     float: right;
     margin-right: 20px;
     color: #8C8C8C;
