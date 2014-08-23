@@ -3,15 +3,15 @@ define(function(require, exports) {
     Brand.configure('Brand', 'brand_id', 'brand_name', 'letter', 'logo_img_url', 'series_names', 'series_ids');
 
     Brand.extend({
-        getSeries: function(brand_id) {
+        getSeriesById: function(brand_id) {
             var current = this.findByAttribute('brand_id', brand_id);
-            var item = {};
             var list = [];
             var names = current.series_names.split(',');
             var ids = current.series_ids.split(',');
             for (var i = 0, l = ids.length; i < l; i++) {
-                item.name = names[i];
-                item.id = ids[i];
+                var item = {};
+                item.series_name = names[i];
+                item.series_id = ids[i];
                 list.push(item);
             }
             return list;

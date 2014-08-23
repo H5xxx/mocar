@@ -2,7 +2,7 @@ define(function(require, exports) {
     var Transitions = require('../component/transitions');
     var Brand = require('../model/brand');
 
-    var CarModel = Spine.Controller.create({
+    var CarBrand = Spine.Controller.create({
         elements: {
             '.j-brand-list': 'brandList'
         },
@@ -32,16 +32,26 @@ define(function(require, exports) {
             });
         },
         showAll: function() {
-            var html = template('template-item', {
+            var html = template('template-brand-item', {
                 data: Brand.all()
             });
             this.brandList.html(html);
         },
-        enterSeries: function(){
-            
+        enterSeries: function(e) {
+            var id = e.currentTarget.dataset.id;
+            var carSeries = require('./car-series');
+            carSeries.showSeries(id);
+            carSeries.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
     });
-    return CarModel;
+
+    var carBrand = new CarBrand({
+        el: $('#car-brand')
+    });
+    var sm = require('../component/state-machine');
+    sm.add(carBrand);
+    carBrand.active();
+    return carBrand;
 });

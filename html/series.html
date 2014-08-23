@@ -4,48 +4,32 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <title>选择车型</title>
+    <title>选择系列</title>
     <link rel="stylesheet" href="../css/service.css">
     <script src="../js/lib/template.js"></script>
     <script src="../js/lib/sea.js"></script>
     <script src="../js/lib/zepto.js"></script>
     <script src="../js/lib/spine.js"></script>
 
-    <script id="template-brand-item" type="text/html">
+    <script id="template-series-item" type="text/html">
         {{each data as value i}}
-            <div class="brand-item" data-id="{{value.brand_id}}">
+            <div class="brand-item" data-id="{{value.brand-id}}">
                 <img src="{{value.logo_img_url}}" alt="">
                 <span>{{value.brand_name}}</span>
-            </div>
-        {{/each}}
-    </script>
-    <script id="template-series-item" type="text/html">
-        {{brand_name}} >> 车系
-        {{each data as value i}}
-            <div class="series-item" data-id="{{value.series_id}}">
-                <span>{{value.series_name}}</span>
             </div>
         {{/each}}
     </script>
 </head>
 <body>
 
-    <div id='car-brand'>
-        <span>品牌</span>
+    <div id='car-series'>
         <div class="j-brand-list">
         </div>
-    </div>
-    <div id='car-series'>
-        <div class="j-series-list">
-        </div>
-    </div>
-    <div id='car-model'>
-    </div>
-    <div id='car-displacement'>
+
     </div>
 
     <script>
-    seajs.use("../js/page/service");
+    seajs.use("../js/page/series");
     </script>
 
 </body>

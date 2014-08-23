@@ -1,5 +1,4 @@
 define(function(require, exports) {
-    var StateMachine = require('../component/state-machine');
     var CarBrand = require('../controller/car-brand');
     var CarSeries = require('../controller/car-series');
     var Service = Spine.Controller.create({
@@ -9,16 +8,21 @@ define(function(require, exports) {
             '#car-series': 'carSeriesEl'
         },
         init: function() {
-            var carBrand = new CarBrand({
-                el: this.carBrandEl
-            });
-            var carSeries = new CarSeries({
-                el: this.carSeriesEl
-            });
-            var sm = new StateMachine();
-            sm.add(carBrand);
-            sm.add(carSeries);
-            carBrand.active();
+            //     var carBrand = new CarBrand({
+            //         el: this.carBrandEl
+            //     });
+            // var carSeries = new CarSeries({
+            //     el: this.carSeriesEl
+            // });
+            // var list = {};
+            // list.brand = carBrand;
+            // list.series = carSeries;
+
+            // carBrand.active();
+            // Spine.bind('sm', function(page){
+            //     console.log(page);
+            //     list[page].active();
+            // });
         }
     });
     new Service().init();

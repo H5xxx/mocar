@@ -42,6 +42,7 @@ define(function(require, exports) {
     // sm.add(con2);
 
     // con1.active();
+    var sm = new StateMachine();
 
-    return StateMachine;
+    return sm;
 });
