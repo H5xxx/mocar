@@ -1,10 +1,7 @@
-select {
-    -webkit-appearance: none;
-}
-.justify {
+.select-wrapper{
     position: relative;
 }
-.justify:after {
+.select-wrapper:after{
     content: "";
     top: 14px;
     right: 7px;
@@ -16,7 +13,13 @@ select {
     width: 6px;
     height: 6px;
     background-color: transparent;
-    -webkit-transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);  
+}
+select {
+    -webkit-appearance: none;
+}
+.justify {
+    position: relative;
 }
 
 .height80px{
@@ -130,6 +133,9 @@ select {
     margin-left: 10px;
     width: 20px;
     height: 20px;
+}
+.footer a{
+    display: block;
 }
 .footer .site-icons{
     float: right;

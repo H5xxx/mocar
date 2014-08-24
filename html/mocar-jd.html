@@ -22,7 +22,7 @@
             <i class='site-icons icon-car'></i>
 
             <div class='content-area '>
-                <div class='justify'>
+                <div class='justify select-wrapper'>
                     <select name="carSelect" id="carSelect">
                         <option value="NB520Z">
                             <span class="brand info">
@@ -46,7 +46,7 @@
         <div id='service-info' class=''>
             <i class='site-icons icon-service'></i>
 
-            <div class='content-area '>
+            <div class='content-area select-wrapper'>
                 <select name="serviceSelect" id="serviceSelect">
                     <option value="">
                         <span class="brand info">
@@ -77,55 +77,60 @@
                         <p class="accessory info">
                             机油
                         </p>
-                        <select name="" id="">
-                            <option value="">
-                                <span class='model info'>
-                                    嘉实多磁护SN级5w-40
-                                </span>
-                                <span class='carNo info last'>
-                                    260元
-                                </span>
-                            </option>
-                            <option value="">
-                                <span class='model info'>
-                                    嘉实多磁护SN级5w-40
-                                </span>
-                                <span class='carNo info last'>
-                                    360元
-                                </span>
-                            </option>
-                        </select>
+                        <div class="select-wrapper">
+                            <select name="" id="">
+                                <option value="">
+                                    <span class='model info'>
+                                        嘉实多磁护SN级5w-40
+                                    </span>
+                                    <span class='carNo info last'>
+                                        260元
+                                    </span>
+                                </option>
+                                <option value="">
+                                    <span class='model info'>
+                                        嘉实多磁护SN级5w-40
+                                    </span>
+                                    <span class='carNo info last'>
+                                        360元
+                                    </span>
+                                </option>
+                            </select>
+                        </div>
                     </li>
                     <li class=''>
                         <p class="accessory info">
                             机滤
                         </p>
-                        <select name="" id="">
-                            <option value="">
-                                <span class='model info'>
-                                    曼牌 W 940/25
-                                </span>
-                                <span class='carNo info last'>
-                                    NB520Z
-                                </span>
-                            </option>
-                        </select>
+                        <div class="select-wrapper">
+                            <select name="" id="">
+                                <option value="">
+                                    <span class='model info'>
+                                        曼牌 W 940/25
+                                    </span>
+                                    <span class='carNo info last'>
+                                        NB520Z
+                                    </span>
+                                </option>
+                            </select>
+                        </div>
                     </li>
                     <li class=''>
                         <p class="accessory info">
                             空气过滤器
                         </p>
-                        <select name="" id="">
-                            <option value="">
-                                <span class='model info'>
-                                    曼牌 C27 192/1
-                                </span>
-                                <span class='carNo info last'>
-                                    NB520Z
-                                </span>
-                            </option>
-                        </select>
-                        
+                        <div class="select-wrapper">
+                            <select name="" id="">
+                                <option value="">
+                                    <span class='model info'>
+                                        曼牌 C27 192/1
+                                    </span>
+                                    <span class='carNo info last'>
+                                        NB520Z
+                                    </span>
+                                </option>
+                            </select>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -144,18 +149,29 @@
                 <p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>
             </div>
             <div class="command-area">
-                <a href="javascript:void;" class="mocarbtn">选择摩卡配件</a>
-                <a href="javascript:void;" class="buyelsebtn">自行购买</a>
+                <a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>
+                <a href="./door.html" class="buyelsebtn">自行购买</a>
             </div>
         </div>
     </div>
     <div class='footer'>
-        <i class='site-icons icon-nextstep'></i>
+        <a href="./door.html">
+            <i class='site-icons icon-nextstep'></i>
+        </a>
         <div class='content-area justify-wrap'>
             <span class='tip justify-content'>总价：<span>667</span>元</span>
         </div> 
     </div>
     <!-- 预约服务 选择配件 开始 -->
+    <script>
+        var mocarbtn = document.querySelector(".mocarbtn");
+        var overlayer = document.querySelector(".overlayer");
+        var popupWrapper = document.querySelector(".popup-wrapper");
+        mocarbtn.addEventListener('click', function(e) {
+            popupWrapper.style.display = "none";
+            overlayer.style.display = "none";
+        });
+    </script>
 </body>
 
 </html>

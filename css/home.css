@@ -8,7 +8,9 @@
 	padding-bottom: 65535px;
 	margin-bottom: -65535px;
 }
-
+.service-list li a{
+	display: block;
+}
 .service-list .content-area{
 	margin-left:60px;
 	padding-bottom: 10px;

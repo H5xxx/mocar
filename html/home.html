@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>摩卡服务</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/service.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <script src="../js/lib/template.js"></script>
+    <script src="../js/lib/sea.js"></script>
+    <script src="../js/lib/zepto.js"></script>
+    <script src="../js/lib/spine.js"></script>
+
+    <script id="template-item" type="text/html">
+        {{each data as value i}}
+            <div class="brand-item" data-id="{{value.brand-id}}">
+                <img src="{{value.logo_img_url}}" alt="">
+                <span>{{value.brand_name}}</span>
+            </div>
+        {{/each}}
+    </script>
+</head>
+
+<body>
+    <!-- 摩卡服务 开始 -->
+    <div id='mocar-service-home'>
+        <div class='logo-area'>
+            <img src="../css/icons/mocar.png" alt="摩卡服务" width="308" height="160">
+        </div>
+        <ul class='service-list'>
+            <li class='service-item'>
+                <a href="./accessories.html">
+                    <i class="site-icons icon-changguibaoyang"></i>
+                    <div class="content-area border-buttom">
+                        <p class="title">常规保养</p>
+                        <span class="info">
+                            <span class="price">200元起</span>——最专业的技师，<br>
+                            最专业的工具，最合理的价格
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class='service-item'>
+                <a href="./accessories.html">
+                    <i class="site-icons icon-kongtiaomiejun"></i>
+                    <div class="content-area border-buttom">
+                        <p class="title">空调灭菌</p>
+                        <span class="info">
+                            <span class="price">200元起</span>——德国曼牌工艺<br>
+                            最专业的工具，最合理的价格
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class='service-item'>
+                <a href="./accessories.html">
+                    <i class="site-icons icon-donglitisheng"></i>
+                    <div class="content-area border-buttom">
+                        <p class="title">动力提升</p>
+                        <span class="info">
+                            <span class="price">300元起</span>——看的见的积碳清洁<br>
+                            最专业的工具，最合理的价格
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class='service-item'>
+                <a href="./accessories.html">
+                    <i class="site-icons icon-huanshachepian"></i>
+                    <div class="content-area">
+                        <p class="title">换刹车片</p>
+                        <span class="info">
+                            <span class="price">300元起</span>——看的见的积碳清洁<br>
+                            最专业的工具，最合理的价格
+                        </span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 上门信息 结束 -->
+</body>
+
+</html>
