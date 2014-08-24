@@ -34,6 +34,7 @@ define(function(require, exports) {
                         data: Model.all()
                     });
                     this.modelContainer.html(html);
+                    this.active();
 
                 }),
                 error: function() {
@@ -45,7 +46,6 @@ define(function(require, exports) {
             var id = e.currentTarget.dataset.id;
             var carDisplacement = require('./car-displacement');
             carDisplacement.showDisplacement(id);
-            carDisplacement.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout

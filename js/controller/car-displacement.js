@@ -16,6 +16,7 @@ define(function(require, exports) {
                 data: displacements
             });
             this.displacementContainer.html(html);
+            this.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout

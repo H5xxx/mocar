@@ -36,12 +36,13 @@ define(function(require, exports) {
                 data: Brand.all()
             });
             this.brandContainer.html(html);
+            this.active();
         },
         enterSeries: function(e) {
             var id = e.currentTarget.dataset.id;
+            // var brand = e.currentTarget.dataset.brand;
             var carSeries = require('./car-series');
             carSeries.showSeries(id);
-            carSeries.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
@@ -52,6 +53,5 @@ define(function(require, exports) {
     });
     var sm = require('../component/state-machine');
     sm.add(carBrand);
-    carBrand.active();
     return carBrand;
 });
