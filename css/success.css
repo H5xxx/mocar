@@ -2,6 +2,7 @@
 #schedule-info{
     overflow: hidden;
     clear: both;
+    margin-top: 20px
 }
 #schedule-success .second{
     width: 49%;
@@ -15,9 +16,6 @@
     width: 49%;
 }
 
-#schedule-success #success-tip{
-    background-color: #333333;
-}
 .justify{
     display: table;
     height: 100%;
@@ -44,7 +42,6 @@
     display: table-cell;
     vertical-align: middle;
     font-size: 16px;
-    color:#EAEAEA;
 }
 #schedule-success .info{
     font-size: 16px;

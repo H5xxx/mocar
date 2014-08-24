@@ -1,0 +1,33 @@
+#mocar-service-home{
+	overflow: hidden;
+}
+#mocar-service-home .logo-area{
+	margin-bottom: 30px;
+}
+.service-list{
+	padding-bottom: 65535px;
+	margin-bottom: -65535px;
+}
+
+.service-list .content-area{
+	margin-left:60px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.service-list .content-area .title{
+	color:#67CA2F;
+}
+.service-list .content-area .info{
+	color:#999999;
+}
+.service-list .content-area .price{
+	color:#000000;
+}
+.service-list .site-icons{
+	float: left;
+    display: block;
+    margin-top: 0;
+    margin-left: 10px;
+    width: 36px;
+    height: 36px;
+}
