@@ -3,10 +3,10 @@ define(function(require, exports) {
     Model.configure('Model', 'models_id', 'description', 'year', 'models_img_url', 'model', 'f_series_id');
 
     Model.extend({
-        getDisplacementById: function(model_id) {
-            var current = this.findByAttribute('model_id', model_id);
+        getDisplacementById: function(models_id) {
+            var current = this.findByAttribute('models_id', models_id);
             var list = [];
-            var models = current.series_models.split(',');
+            var models = current.model.split(',');
             for (var i = 0, l = models.length; i < l; i++) {
                 var item = {};
                 item.displacement_name = models[i];

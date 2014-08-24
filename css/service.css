@@ -47,7 +47,7 @@ img {
 }
 .brand-item > img {
     height: 50px;
-    margin: auto;
+    margin: 5px auto 8px;
 }
 .series-item {
     margin: 0 20px;
@@ -63,4 +63,10 @@ img {
     text-align: center;
     padding: 5px 0;
     border: 1px solid #eee;
+}
+.displacement-item {
+    margin: 0 20px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #aaa;
 }

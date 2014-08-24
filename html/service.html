@@ -26,26 +26,29 @@
         <div class="schedule-top">{{brand_name}} >> 车系</div>
         <div class="j-series-list">
         {{each data as value i}}
-            <div class="series-item" data-id="{{value.series_id}}">
+            <div class="series-item" data-id="{{value.series_id}}" data-name="{{value.series_name}}">
                 <span>{{value.series_name}}</span>
             </div>
         {{/each}}
         </div>
     </script>
     <script id="template-model-item" type="text/html">
+        <div class="schedule-top">audi >>  {{series_name}} >> 年款</div>
+        <div class="j-model-list">
         {{each data as value i}}
             <div class="model-item" data-id="{{value.models_id}}">
                 <img src="{{value.models_img_url}}" alt="">
                 <span>{{value.description}}</span>
             </div>
         {{/each}}
+        </div>
     </script>
     <script id="template-displacement-item" type="text/html">
-        <div class="schedule-top">{{brand_name}} >> 车系</div>
-        <div class="j-series-list">
+        <div class="schedule-top">audi >>  {{series_name}} >> 年款 >> 排量</div>
+        <div class="j-displacement-list">
         {{each data as value i}}
-            <div class="series-item" data-id="{{value.series_id}}">
-                <span>{{value.series_name}}</span>
+            <div class="displacement-item" data-id="{{value.displacement_id}}">
+                <span>{{value.displacement_name}}</span>
             </div>
         {{/each}}
         </div>
