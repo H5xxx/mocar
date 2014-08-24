@@ -6,8 +6,12 @@ define(function(require, exports) {
         elements: {
             '.j-model-container': 'modelContainer'
         },
+
+        events: {
+            'click .model-item': 'enterDisplacement'
+        },
         init: function() {},
-        showModel: function(series_id) {
+        showModel: function(series_id, series_name) {
             // http://cybwx.sinaapp.com/service.php?m=getCarModelsFast&series_id=12
             $.ajax({
                 url: 'http://cybwx.sinaapp.com/service.php',
@@ -26,6 +30,7 @@ define(function(require, exports) {
                     }
                     // this.proxy(this.showModel());
                     var html = template('template-model-item', {
+                        series_name: series_name,
                         data: Model.all()
                     });
                     this.modelContainer.html(html);
@@ -35,6 +40,12 @@ define(function(require, exports) {
                     alert('getCarModelFast 超时');
                 }
             });
+        },
+        enterDisplacement: function(e) {
+            var id = e.currentTarget.dataset.id;
+            var carDisplacement = require('./car-displacement');
+            carDisplacement.showDisplacement(id);
+            carDisplacement.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
