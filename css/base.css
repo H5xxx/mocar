@@ -21,17 +21,24 @@
     display: block;
 }
 .border-buttom{
-    border-bottom: #DB23DB solid 1px;
+    border-bottom: #D9D9D9 solid 1px;
 }
 .zero-font-size{
     font-size: 0;
 }
+/*表单区域 单行*/
+.form-row{
+    height: 40px;
+}
+/*表单区域图表公共样式*/
 .site-icons{
     float: left;
     display: block;
-    width: 40px;
-    height: 40px;
-    background-color: #DB23DB;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    background: #DB23DB;
 }
 
 .icon-seperator{
@@ -50,6 +57,18 @@
     background: url('./icons/04.png');
     background-size: contain;
 }
+.icon-location{
+    background: url('./icons/05.png');
+    background-size: contain;
+}
+.icon-time{
+    background: url('./icons/06.png');
+    background-size: contain;
+}
+.icon-user{
+    background: url('./icons/07.png');
+    background-size: contain;
+}
 .icon-phone{
     background:url('./icons/08.png'); 
     background-size: contain;
@@ -64,5 +83,9 @@
 }
 .icon-home{
     background:url('./icons/11.png');
+    background-size: contain; 
+}
+.icon-expand{
+    background:url('./icons/22.png');
     background-size: contain; 
 }

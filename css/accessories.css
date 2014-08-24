@@ -1,51 +1,15 @@
-/************************  上门信息  ************************/
+/************************  选择附件信息  ************************/
 #accessories-info{
     overflow: hidden;
     clear: both;
 }
-.height80px{
-    height: 80px;
-}
-.height109px{
-    height: 109px;
-}
-.height110px{
-    height: 110px;
-}
-.mt20px{
-    margin-top: 20px;
-}
-.mt40px{
-    margin-top: 40px;
-}
-.mt60px{
-    margin-top: 60px;
-}
-.ml130px{
-    margin-left: 130px;
-    display: block;
-}
-.border-buttom{
-    border-bottom: #DB23DB solid 1px;
-}
-.zero-font-size{
-    font-size: 0;
-}
-.site-icons{
-    float: left;
-    display: block;
-    width: 40px;
-    height: 40px;
-    background-color: #DB23DB;
-}
-.content-area{
-    margin-left: 60px;
+
+#accessories-info .content-area{
+    margin-left: 40px;
     display: block;
     margin-top: 20px;
 }
-.icon-generalAddress{
-    background:url('http://127.0.0.1:8088/doc/pic/icons/02.png') no-repeat fixed 0 0; 
-}
+
 #accessories-info .first,#schedule-success .first,#accessories-info .second,#schedule-success .second{
     width: 49%;
     display: inline-block;
