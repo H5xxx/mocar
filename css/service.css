@@ -33,6 +33,9 @@ img {
 .fadeout {
     display: none;
 }
+.schedule-top {
+    height: 45px;
+}
 .brand-item {
     float: left;
     width: 33.33%;
@@ -46,12 +49,18 @@ img {
     height: 50px;
     margin: auto;
 }
-.schedule-top {
-    height: 45px;
-}
 .series-item {
     margin: 0 20px;
     height: 45px;
     line-height: 45px;
     border-bottom: 1px solid #aaa;
+}
+.model-item {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+    padding: 5px 0;
+    border: 1px solid #eee;
 }

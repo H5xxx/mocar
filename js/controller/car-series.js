@@ -21,8 +21,9 @@ define(function(require, exports) {
         },
         enterModel: function(e) {
             var id = e.currentTarget.dataset.id;
+            var name = e.currentTarget.dataset.name;
             var carModel = require('./car-model');
-            carModel.showModel(id);
+            carModel.showModel(id, name);
             carModel.active();
         },
         activate: Transitions.fadein,

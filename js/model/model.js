@@ -1,21 +1,19 @@
 define(function(require, exports) {
-    var Brand = Spine.Model.sub();
-    Brand.configure('Brand', 'models_id', 'description', 'year', 'models_img_url', 'model', 'f_series_id');
+    var Model = Spine.Model.sub();
+    Model.configure('Model', 'models_id', 'description', 'year', 'models_img_url', 'model', 'f_series_id');
 
-    Brand.extend({
+    Model.extend({
         getDisplacementById: function(model_id) {
-            var current = this.findByAttribute('brand_id', brand_id);
+            var current = this.findByAttribute('model_id', model_id);
             var list = [];
-            var names = current.series_names.split(',');
-            var ids = current.series_ids.split(',');
-            for (var i = 0, l = ids.length; i < l; i++) {
+            var models = current.series_models.split(',');
+            for (var i = 0, l = models.length; i < l; i++) {
                 var item = {};
-                item.series_name = names[i];
-                item.series_id = ids[i];
+                item.displacement_name = models[i];
                 list.push(item);
             }
             return list;
         }
     });
-    return Brand;
+    return Model;
 });
