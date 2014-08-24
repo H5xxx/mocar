@@ -42,19 +42,102 @@ select {
     display: block;
 }
 .border-buttom{
-    border-bottom: #DB23DB solid 1px;
+    border-bottom: #D9D9D9 solid 1px;
 }
 .zero-font-size{
     font-size: 0;
 }
+/* 公共header、footer样式 */
+.header, .footer{
+    background-color: #333333;
+    color:#EAEAEA;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+}
+.footer .content-area{
+    margin-left: 30px;
+}
+/*遮罩层*/
+.overlayer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+    background: rgb(0,0,0);
+}
+/*弹出层wrapper,帮助定位*/
+.popup-wrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+/*弹出层*/
+.popup{
+    margin: 0 auto;
+    margin-top: 50%;
+    /*top:-125px;*/
+    width: 250px;
+    height: 250px;
+    background-color: #FAFAFA;
+    z-index: 99;
+    visibility: visible;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.popup .title,.popup .popup-content{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.popup .popup-content{
+    font-size: 14px;
+}
+.popup .command-area{
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 20px;
+}
+.popup .command-area .mocarbtn,.popup .command-area .buyelsebtn{
+    float: right;
+    margin-left: 20px;
+    color: #696969;
+}
+.popup .command-area .mocarbtn{
+    color: #67CA2F;
+}
+
+/*表单区域 单行*/
+.form-row{
+    height: 40px;
+}
+/*表单区域图表公共样式*/
 .site-icons{
     float: left;
     display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+.footer .site-icons{
+    float: right;
     width: 40px;
     height: 40px;
-    background-color: #DB23DB;
+    margin-top: -20px;
+    margin-right: 25px;
 }
-
 .icon-seperator{
     background:url('./icons/01.png'); 
     background-size: contain;
@@ -69,6 +152,18 @@ select {
 }
 .icon-accessory{
     background: url('./icons/04.png');
+    background-size: contain;
+}
+.icon-location{
+    background: url('./icons/05.png');
+    background-size: contain;
+}
+.icon-time{
+    background: url('./icons/06.png');
+    background-size: contain;
+}
+.icon-user{
+    background: url('./icons/07.png');
     background-size: contain;
 }
 .icon-phone{
@@ -86,4 +181,33 @@ select {
 .icon-home{
     background:url('./icons/11.png');
     background-size: contain; 
+}
+.icon-expand{
+    background:url('./icons/22.png');
+    background-size: contain; 
+}
+.icon-changguibaoyang{
+    background:url('./icons/changguibaoyang.png');
+    background-size: contain; 
+}
+.icon-donglitisheng{
+    background:url('./icons/donglitisheng.png');
+    background-size: contain; 
+}
+.icon-huanshachepian{
+    background:url('./icons/huanshachepian.png');
+    background-size: contain; 
+}
+.icon-kongtiaomiejun{
+    background:url('./icons/kongtiaomiejun.png');
+    background-size: contain; 
+}
+/*垂直居中*/
+.justify-wrap{
+    display: table;
+    height: 100%;
+}
+.justify-content{
+    display: table-cell;
+    vertical-align: middle;
 }
