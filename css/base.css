@@ -1,3 +1,24 @@
+select {
+    -webkit-appearance: none;
+}
+.justify {
+    position: relative;
+}
+.justify:after {
+    content: "";
+    top: 14px;
+    right: 7px;
+    position: absolute;
+    display: inline-block;
+    font-size: 0;
+    border-top: 2px solid #666666;
+    border-left: 2px solid #666666;
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+    -webkit-transform: rotate(225deg);
+}
+
 .height80px{
     height: 80px;
 }

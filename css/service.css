@@ -36,7 +36,7 @@ img {
 .fadein {
     position: relative;
     left: 0;
-    -webkit-animation: fadein .5s;
+    -webkit-animation: fadein .5s cubic-bezier(0,0,0.25,1);
 }
 @keyframes fadein {
     0% {
@@ -56,6 +56,8 @@ img {
 }
 .schedule-top {
     height: 45px;
+    line-height: 45px;
+    padding-left: 20px;
 }
 .brand-item {
     float: left;
