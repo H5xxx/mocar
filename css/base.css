@@ -76,17 +76,26 @@ select {
 }
 /*弹出层wrapper,帮助定位*/
 .popup-wrapper{
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    text-align: center;
+}
+.popup-wrapper:after{
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 0;
+    height: 100%;
 }
 /*弹出层*/
 .popup{
-    margin: 0 auto;
-    margin-top: 50%;
-    /*top:-125px;*/
+    display: inline-block; /*垂直居中*/
+    vertical-align: middle;
+
     width: 250px;
     height: 250px;
     background-color: #FAFAFA;
