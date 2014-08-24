@@ -30,6 +30,9 @@ a {
 img {
     display: block;
 }
+.dn {
+    display: none;
+}
 .fadeout {
     display: none;
 }
@@ -54,7 +57,7 @@ img {
         -webkit-transform: translateX(0px)
     }
 }
-.schedule-top {
+.crumble {
     height: 45px;
     line-height: 45px;
     padding-left: 20px;

@@ -18,13 +18,13 @@ define(function(require, exports) {
                 data: seriess
             });
             this.seriesContainer.html(html);
+            this.active();
         },
         enterModel: function(e) {
             var id = e.currentTarget.dataset.id;
             var name = e.currentTarget.dataset.name;
             var carModel = require('./car-model');
             carModel.showModel(id, name);
-            carModel.active();
         },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
