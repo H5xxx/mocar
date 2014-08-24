@@ -33,6 +33,27 @@ img {
 .fadeout {
     display: none;
 }
+.fadein {
+    position: relative;
+    left: 0;
+    -webkit-animation: fadein .5s;
+}
+@keyframes fadein {
+    0% {
+        -webkit-transform: translateX(320px);
+    }
+    100% {
+        -webkit-transform: translateX(0px)
+    }
+}
+@-webkit-keyframes fadein {
+    0% {
+        -webkit-transform: translateX(320px);
+    }
+    100% {
+        -webkit-transform: translateX(0px)
+    }
+}
 .schedule-top {
     height: 45px;
 }

@@ -17,13 +17,6 @@ define(function(require, exports) {
             });
             this.displacementContainer.html(html);
         },
-        // enterModel: function(e) {
-        //     var id = e.currentTarget.dataset.id;
-        //     var name = e.currentTarget.dataset.name;
-        //     var carModel = require('./car-model');
-        //     carModel.showModel(id, name);
-        //     carModel.active();
-        // },
         activate: Transitions.fadein,
         deactivate: Transitions.fadeout
     });
