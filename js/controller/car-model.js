@@ -1,59 +1,53 @@
 define(function(require, exports) {
     var Transitions = require('../component/transitions');
-    var Model = require('../model/model');
 
     var CarModel = Spine.Controller.create({
-        elements: {
-            '.j-model-container': 'modelContainer'
+        el: $('#car-model'),
+
+        init: function() {
         },
 
-        events: {
-            'click .model-item': 'enterDisplacement'
-        },
-        init: function() {},
-        showModel: function(series_id, series_name) {
-            // http://cybwx.sinaapp.com/service.php?m=getCarModelsFast&series_id=12
-            $.ajax({
-                url: 'http://cybwx.sinaapp.com/service.php',
-                data: {
-                    m: 'getCarModelsFast',
-                    series_id: series_id
-                },
-                dataType: 'jsonp',
-                jsonp: 'callback',
-                success: this.proxy(function(data) {
-                    data = data.data;
-                    console.log(data);
-                    var model;
-                    for (var i = 0; i < data.length; i++) {
-                        model = Model.create(data[i]);
-                    }
-                    // this.proxy(this.showModel());
-                    var html = template('template-model-item', {
-                        series_name: series_name,
-                        data: Model.all()
-                    });
-                    this.modelContainer.html(html);
-                    this.active();
+        list: function(params){
+            var list = [];
+            for(var i = 1, num = 10; i <= num; i++){
+                list.push({
+                    id: i,
+                    name: 'model-' + i
+                });
+            }
 
-                }),
-                error: function() {
-                    alert('getCarModelFast 超时');
-                }
+            return list;
+        },
+
+        render: function(params){
+            var params = $.extend(params, {
+                list: this.list(params)
             });
+
+            var html = template('template-model-item', params);
+
+            this.el.html(html);
         },
-        enterDisplacement: function(e) {
-            var id = e.currentTarget.dataset.id;
-            var carDisplacement = require('./car-displacement');
-            carDisplacement.showDisplacement(id);
+
+        clean: function(){
+            this.el.html('');
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        activate: function(params){
+            this.render(params);
+
+            this.fadein();
+        },
+
+        deactivate: function(){
+            this.clean();
+
+            this.fadeout();
+        },
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carModel = new CarModel({
-        el: $('#car-model')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carModel);
-    return carModel;
+
+    return CarModel;
 });

@@ -1,28 +1,45 @@
 define(function(require, exports) {
-    var CarBrand = require('../controller/car-brand');
-    // var Service = Spine.Controller.create({
-    //     el: $("body"),
-    //     elements: {
-    //         '#car-brand': 'carBrandEl',
-    //         '#car-series': 'carSeriesEl'
-    //     },
-    //     init: function() {
-    //         //     var carBrand = new CarBrand({
-    //         //         el: this.carBrandEl
-    //         //     });
-    //         // var carSeries = new CarSeries({
-    //         //     el: this.carSeriesEl
-    //         // });
-    //         // var list = {};
-    //         // list.brand = carBrand;
-    //         // list.series = carSeries;
 
-    //         // carBrand.active();
-    //         // Spine.bind('sm', function(page){
-    //         //     console.log(page);
-    //         //     list[page].active();
-    //         // });
-    //     }
-    // });
-    // new Service().init();
+    var Page = Spine.Stack.sub({
+
+        controllers: {
+            'brand': require('../controller/car-brand'),
+            'series': require('../controller/car-series'),
+            'model': require('../controller/car-model'),
+            'displacement': require('../controller/car-displacement')
+        },
+
+        routes: {
+            '/': function(){
+                this.navigate('/brand');
+            },
+            '/brand': 'brand',
+            '/brand/:bid/series': 'series',
+            '/brand/:bid/series/:sid/model': 'model',
+            '/brand/:bid/series/:sid/model/:mid/displacement': 'displacement'
+        },
+
+        init: function(){
+            var page = this;
+
+            this.navigator = $('#navigator');
+
+            this.el.delegate('.j-nav', 'click', function(e){
+                page.navigate($(e.currentTarget).attr('data-nav'));
+            });
+        }
+    });
+
+    var service = new Page({
+        el: $('body')
+    });
+
+    service.manager.bind('change', function(_, params){
+        service.navigator.html(template('template-navigator', params));
+    });
+
+    service.navigate('/brand');
+
+    Spine.Route.setup();
+
 });

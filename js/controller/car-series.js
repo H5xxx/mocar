@@ -1,38 +1,53 @@
 define(function(require, exports) {
     var Transitions = require('../component/transitions');
-    var Brand = require('../model/brand');
 
     var CarSeries = Spine.Controller.create({
-        elements: {
-            '.j-series-container': 'seriesContainer'
+        el: $('#car-series'),
+
+        init: function() {
         },
-        events: {
-            'click .series-item': 'enterModel'
+
+        list: function(params){
+            var list = [];
+            for(var i = 1, num = 10; i <= num; i++){
+                list.push({
+                    id: i,
+                    name: 'series-' + i
+                });
+            }
+
+            return list;
         },
-        init: function() {},
-        showSeries: function(id) {
-            var currentBrand = Brand.findByAttribute('brand_id', id);
-            var seriess = Brand.getSeriesById(id);
-            var html = template('template-series-item', {
-                brand_name: currentBrand.brand_name,
-                data: seriess
+
+        render: function(params){
+            var params = $.extend(params, {
+                list: this.list(params)
             });
-            this.seriesContainer.html(html);
-            this.active();
+
+            var html = template('template-series-item', params);
+
+            this.el.html(html);
         },
-        enterModel: function(e) {
-            var id = e.currentTarget.dataset.id;
-            var name = e.currentTarget.dataset.name;
-            var carModel = require('./car-model');
-            carModel.showModel(id, name);
+
+        clean: function(){
+            this.el.html('');
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        activate: function(params){
+            this.render(params);
+
+            this.fadein();
+        },
+
+        deactivate: function(){
+            this.clean();
+
+            this.fadeout();
+        },
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carSeries = new CarSeries({
-        el: $('#car-series')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carSeries);
-    return carSeries;
+
+    return CarSeries;
 });

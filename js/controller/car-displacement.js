@@ -1,30 +1,53 @@
 define(function(require, exports) {
     var Transitions = require('../component/transitions');
-    var Model = require('../model/model');
 
     var CarDisplacement = Spine.Controller.create({
-        elements: {
-            '.j-displacement-container': 'displacementContainer'
+        el: $('#car-displacement'),
+
+        init: function() {
         },
-        events: {
-            'click .displacement-item': 'enterModel'
+
+        list: function(params){
+            var list = [];
+            for(var i = 1, num = 10; i <= num; i++){
+                list.push({
+                    id: i,
+                    name: 'displacement-' + i
+                });
+            }
+
+            return list;
         },
-        init: function() {},
-        showDisplacement: function(id) {
-            var displacements = Model.getDisplacementById(id);
-            var html = template('template-displacement-item', {
-                data: displacements
+
+        render: function(params){
+            var params = $.extend(params, {
+                list: this.list(params)
             });
-            this.displacementContainer.html(html);
-            this.active();
+
+            var html = template('template-displacement-item', params);
+
+            this.el.html(html);
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        clean: function(){
+            this.el.html('');
+        },
+
+        activate: function(params){
+            this.render(params);
+
+            this.fadein();
+        },
+
+        deactivate: function(){
+            this.clean();
+
+            this.fadeout();
+        },
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carDisplacement = new CarDisplacement({
-        el: $('#car-displacement')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carDisplacement);
-    return carDisplacement;
+
+    return CarDisplacement;
 });
