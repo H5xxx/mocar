@@ -3,8 +3,10 @@ define(function(require, exports) {
     var navigator = require('../component/navigator');
 
     var CarBrand = Spine.Controller.create({
+        // 该controller要渲染&控制的区域
         el: $('#car-brand'),
 
+        // 只执行一次，初始化时执行
         init: function() {
         },
 
@@ -20,6 +22,7 @@ define(function(require, exports) {
             return list;
         },
 
+        // 渲染内容
         render: function(params){
             var params = $.extend(params, {
                 list: this.list(params)
@@ -32,16 +35,19 @@ define(function(require, exports) {
             navigator.render(params);
         },
 
+        // 清空内容
         clean: function(){
             this.el.html('');
         },
 
+        // 跳转到其对应的url时执行
         activate: function(params){
             this.render(params);
 
             this.fadein();
         },
 
+        // 离开到其对应的url时执行
         deactivate: function(){
             this.clean();
 
