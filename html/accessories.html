@@ -78,7 +78,8 @@
                             机油
                         </p>
                         <div class="select-wrapper"> 
-                            <select name="" id="">
+                            <input type="text" name="accessoryInput" class='custom-select-trigger' placeholder='请选择...'>
+                            <!-- <select name="" id="">
                                 <option value="">
                                     <span class='model info'>
                                         嘉实多磁护SN级5w-40
@@ -95,7 +96,7 @@
                                         360元
                                     </span>
                                 </option>
-                            </select>
+                            </select> -->
                         </div>
                     </li>
                     <li class=''>
@@ -138,6 +139,37 @@
         </div>
         
     </div>
+    <!-- 公共遮罩层 -->
+    <!-- <div class="overlayer"></div> -->
+    <!-- 公共弹出窗口 start -->
+    <!-- <div class="popup-wrapper" style="display:none;">
+        <div class='popup'>
+            <div class="title"></div>
+            <div class="popup-content">
+                <div class="custom-select">
+                    <ul class="custom-option-list">
+                        <li class="custom-option selected">
+                            <span class="product-name">嘉实多磁护SN级5w-40</span>
+                            <span class="product-price fr">330元</span>
+                        </li>
+                        <li class="custom-option">
+                            <span class="product-name">嘉实多极护SN级0w-40</span>
+                            <span class="product-price fr">450元</span>
+                        </li>
+                        <li class="custom-option">
+                            <span class="product-name">自行购买</span>
+                            <span class="product-price fr">0元</span>
+                        </li>
+                    </ul>
+                    <div class="command-area">
+                        <a href="javascript:void(0);" class="btn confirm default">确定</a>
+                        <a href="javascript:void(0);" class="btn concel">取消</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>-->
+    <!-- 公共弹出窗口 end -->
     <div class='footer'>
         <a href="./mocar-jd.html">
             <i class='site-icons icon-nextstep'></i>
@@ -147,6 +179,17 @@
         </div> 
     </div>
     <!-- 预约服务 选择配件 开始 -->
+    <script>
+        seajs.use('../js/widgets/CustomSelect', function (CustomSelect) {
+            var optArr = [
+                ['嘉实多磁护SN级5w-40','330元'],
+                ['嘉实多极护SN级0w-40','450元'],
+                ['自行购买','0元']
+            ];
+            var selectInput = document.querySelector('input[name=accessoryInput]');
+            new CustomSelect(selectInput, optArr);
+        });
+    </script>
 </body>
 
 </html>
