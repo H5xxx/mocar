@@ -22,8 +22,6 @@ define(function(require, exports) {
         init: function(){
             var page = this;
 
-            this.navigator = $('#navigator');
-
             this.el.delegate('.j-nav', 'click', function(e){
                 page.navigate($(e.currentTarget).attr('data-nav'));
             });
@@ -32,10 +30,6 @@ define(function(require, exports) {
 
     var service = new Page({
         el: $('body')
-    });
-
-    service.manager.bind('change', function(_, params){
-        service.navigator.html(template('template-navigator', params));
     });
 
     service.navigate('/brand');

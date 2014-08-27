@@ -1,5 +1,6 @@
 define(function(require, exports) {
     var Transitions = require('../component/transitions');
+    var navigator = require('../component/navigator');
 
     var CarModel = Spine.Controller.create({
         el: $('#car-model'),
@@ -27,6 +28,8 @@ define(function(require, exports) {
             var html = template('template-model-item', params);
 
             this.el.html(html);
+
+            navigator.render(params);
         },
 
         clean: function(){
