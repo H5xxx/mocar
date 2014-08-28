@@ -14,71 +14,88 @@
     <script src="../js/lib/manager.js"></script>
 
     <script id="template-navigator" type="text/html">
-        <span class="j-nav" data-nav="/brand">品牌</span>
-        {{if bid}}
-        <span class="j-nav" data-nav="/brand/{{bid}}/series">车系</span>
-        {{if sid}}
-        <span class="j-nav" data-nav="/brand/{{bid}}/series/{{sid}}/model">年款</span>
-        {{if mid}}
-        <span class="j-nav" data-nav="/brand/{{bid}}/series/{{sid}}/model/{{mid}}/displacement">排量</span>
-        {{/if}}
-        {{/if}}
-        {{/if}}
-        
+        <div class="crumble">
+            {{if brand_id}}
+                <span class="j-nav" data-nav="/brand">{{brand_name}}</span>
+                {{if series_id}}
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">{{series_name}}</span>
+                    {{if mid}}
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">{{model_name}}</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{mid}}/displacement">排量</span>
+                    {{else}}
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">年款</span>
+                    {{/if}}
+                {{else}}
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">车系</span>
+                {{/if}}
+            {{else}}
+                <span class="j-nav" data-nav="/brand">品牌</span>
+            {{/if}}
+        </div>
     </script>
 
-    <script id="template-brand-item" type="text/html">
-        <h1>BRAND</h1>
-        <ul>
-            {{each list as item i}}
-                <li class="j-nav" data-nav="/brand/{{item.id}}/series">{{item.name}}</li>
-            {{/each}}
-        </ul>
+    <script id="template-brand" type="text/html">
+        <div class="j-brand-container">
+            {{include 'template-navigator'}}
+            <div class="j-brand-list">
+                {{each list as item i}}
+                    <div class="brand-item j-nav" data-nav="/brand/{{item.brand_id}}/series">
+                        <img src="{{item.logo_img_url}}" alt="{{item.brand_name}}">
+                        <span>{{item.brand_name}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
     </script>
-    <script id="template-series-item" type="text/html">
-        <h1>SERIES</h1>
-        <ul>
-            {{each list as item i}}
-                <li class="j-nav" data-nav="/brand/{{bid}}/series/{{item.id}}/model">{{item.name}}</li>
-            {{/each}}
-        </ul>
+
+    <script id="template-series" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-series-list">
+                {{each list as item i}}
+                <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.series_id}}/model">
+                    <span>{{item.series_name}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </script>
-    <script id="template-model-item" type="text/html">
-        <h1>MODEL</h1>
-        <ul>
+
+    <script id="template-model" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-model-list">
             {{each list as item i}}
-                <li class="j-nav" data-nav="/brand/{{bid}}/series/{{sid}}/model/{{item.id}}/displacement">{{item.name}}</li>
+                <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.model_id}}/displacement">
+                    <img src="{{item.models_img_url}}" alt="">
+                    <span>{{item.description}}</span>
+                </div>
             {{/each}}
-        </ul>
+            </div>
+        </div>
     </script>
-    <script id="template-displacement-item" type="text/html">
-        <h1>DISPLACEMENT</h1>
-        <ul>
+
+    <script id="template-displacement" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-displacement-list">
             {{each list as item i}}
-                <li class="j-nav" data-nav="/brand">{{item.name}}</li>
+                <div class="displacement-item j-nav" data-nav="/brand">
+                    <span>{{item.displacement_name}}</span>
+                </div>
             {{/each}}
-        </ul>
+            </div>
+        </div>
     </script>
+
 </head>
 <body>
-    <div id="navigator" class="crumble">
-    </div>
-    <div id='car-brand'>
-        <div class="j-brand-container">
-        </div>
-    </div>
-    <div id='car-series'>
-        <div class="j-series-container">
-        </div>
-    </div>
-    <div id='car-model'>
-        <div class="j-model-container">
-        </div>
-    </div>
-    <div id='car-displacement'>
-        <div class="j-displacement-container">
-        </div>
-    </div>
+
+    <div id='car-brand'></div>
+    <div id='car-series'></div>
+    <div id='car-model'></div>
+    <div id='car-displacement'></div>
+
     <script>
     seajs.use("../js/page/service");
     </script>

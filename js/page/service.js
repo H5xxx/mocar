@@ -16,9 +16,9 @@ define(function(require, exports) {
                 this.navigate('/brand');
             },
             '/brand': 'brand',
-            '/brand/:bid/series': 'series',
-            '/brand/:bid/series/:sid/model': 'model',
-            '/brand/:bid/series/:sid/model/:mid/displacement': 'displacement'
+            '/brand/:brand_id/series': 'series',
+            '/brand/:brand_id/series/:series_id/model': 'model',
+            '/brand/:brand_id/series/:series_id/model/:model_id/displacement': 'displacement'
         },
 
         // 页面初始化

@@ -1,6 +1,6 @@
 define(function(require, exports) {
+    var Brand = require('../model/brand');
     var Transitions = require('../component/transitions');
-    var navigator = require('../component/navigator');
 
     var CarBrand = Spine.Controller.create({
         // 该controller要渲染&控制的区域
@@ -10,48 +10,65 @@ define(function(require, exports) {
         init: function() {
         },
 
-        list: function(params){
-            var list = [];
-            for(var i = 1, num = 10; i <= num; i++){
-                list.push({
-                    id: i,
-                    name: 'brand-' + i
-                });
-            }
+        getData: function(params, callback){
+            $.ajax({
+                url: 'http://cybwx.sinaapp.com/service.php',
+                data: {
+                    m: 'getCarBrandFast'
+                },
+                dataType: 'jsonp',
+                jsonp: 'callback',
+                success: function(result) {
+                    var list = result.data;
 
-            return list;
+                    list.forEach(function(item){
+                        Brand.create(item);
+                    });
+
+                    callback(null, {
+                        list: list
+                    });
+                },
+                error: function(err) {
+                    callback(err || 'getCarBrandFast 超时');
+                }
+            });
         },
 
         // 渲染内容
         render: function(params){
-            var params = $.extend(params, {
-                list: this.list(params)
-            });
 
-            var html = template('template-brand-item', params);
+            var html = template('template-brand', params);
 
             this.el.html(html);
-
-            navigator.render(params);
         },
 
         // 清空内容
         clean: function(){
-            this.el.html('');
+            this.el.html('Loading...');
         },
 
         // 跳转到其对应的url时执行
         activate: function(params){
-            this.render(params);
+
+            var me = this;
 
             this.fadein();
+
+            this.getData(params, function(err, data){
+
+                $.extend(params, data);
+
+                me.render(params);
+
+            });
+
         },
 
         // 离开到其对应的url时执行
         deactivate: function(){
-            this.clean();
-
             this.fadeout();
+            this.clean();
         },
 
         fadein: Transitions.fadein,
