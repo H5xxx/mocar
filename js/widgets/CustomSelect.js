@@ -41,7 +41,7 @@
  	}
  	CustomSelect.prototype.bindEevent = function(){
  		var self = this;
- 		var eventName = this._supportTouch ? 'touchstart' : 'click';
+ 		var eventName = /*this._supportTouch ? 'touchstart' : */'click';
  		this.triggerEl.addEventListener(eventName, function(e){
  			self.render();
  		});
@@ -92,7 +92,7 @@
  		this._normalizedOptArr = this._normalizeData(this.optArr);
  		var selectHtmlStr = template.render(selectTmpl)({data: this._normalizedOptArr});
  		Popup.open(selectHtmlStr, function(popupEl){
- 			var eventName = self._supportTouch ? 'touchstart' : 'click';
+ 			var eventName = /*self._supportTouch ? 'touchstart' : */'click';
  			var confirmEl = popupEl.querySelector('.confirm');
  			var concelEl = popupEl.querySelector('.concel');
  			var customList = popupEl.querySelectorAll('.custom-option');
