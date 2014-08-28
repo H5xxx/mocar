@@ -13,11 +13,14 @@
     margin-top: 20px;
 }
 #accessories-info #service-detail .form-row{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     height: auto;
 }
 #accessories-info .site-icons{
     margin-top:0;
+}
+#accessories-info .custom-select-trigger{
+    font-size: 16px;
 }
 #accessories-info .custom-select-trigger .price{
     float: right;

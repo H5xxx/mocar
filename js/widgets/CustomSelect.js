@@ -32,10 +32,17 @@
  		this.optionElArr = [];
  		this._currentSelectedIndex = -1;
  		this._originalSelectIndex = inputEl.value;
+ 		try{
+ 			document.createEvent('TouchEvent');
+ 			this._supportTouch = true;
+ 		}catch(e){
+ 			this._supportTouch = false;
+ 		}
  	}
  	CustomSelect.prototype.bindEevent = function(){
  		var self = this;
- 		this.triggerEl.addEventListener('click', function(e){
+ 		var eventName = this._supportTouch ? 'touchstart' : 'click';
+ 		this.triggerEl.addEventListener(eventName, function(e){
  			self.render();
  		});
  	}
@@ -85,10 +92,11 @@
  		this._normalizedOptArr = this._normalizeData(this.optArr);
  		var selectHtmlStr = template.render(selectTmpl)({data: this._normalizedOptArr});
  		Popup.open(selectHtmlStr, function(popupEl){
+ 			var eventName = self._supportTouch ? 'touchstart' : 'click';
  			var confirmEl = popupEl.querySelector('.confirm');
  			var concelEl = popupEl.querySelector('.concel');
  			var customList = popupEl.querySelectorAll('.custom-option');
- 			confirmEl.addEventListener('click', function(){
+ 			confirmEl.addEventListener(eventName, function(){
  				Popup.close();
  				self._originalSelectIndex = self._currentSelectedIndex;
  				self.inputEl.value = self._currentSelectedIndex;
@@ -96,7 +104,7 @@
 				// self._currentValue = clickedLi.innerText;
 				// self.inputEl.value = clickedLi.innerText;
  			});
-			concelEl.addEventListener('click', function(){
+			concelEl.addEventListener(eventName, function(){
  				Popup.close();
  				self._currentSelectedIndex = self._originalSelectIndex;
  				self.inputEl.value = self._originalSelectIndex;
@@ -116,7 +124,7 @@
  				}
  			}
 			for(var i = 0, ilen = customList.length; i < ilen;i++){
-				customList[i].addEventListener('click', clickHandler)
+				customList[i].addEventListener(eventName, clickHandler)
 			}
  		});
  	};
