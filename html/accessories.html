@@ -97,7 +97,7 @@
         
     </div>
     <div class='footer'>
-        <a href="./mocar-jd.html">
+        <a href="./door.html">
             <i class='site-icons icon-nextstep'></i>
         </a>
         <div class='content-area justify-wrap'>
@@ -106,50 +106,87 @@
     </div>
     <!-- 预约服务 选择配件 开始 -->
     <script>
+        var buyelseTipHtml = [
+            '<div class="buyelse-popup mocar-tip-popup">',
+                '<div class="title">选择配件</div>',
+                '<div class="popup-content">',
+                    '<p>摩卡提供和使用的所有配件，均可<br/>在京东自营商店买到。</p>',
+                    '<br>',
+                    '<p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>',
+                '</div>',
+                '<div class="command-area">',
+                    '<a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>',
+                    '<a href="javascript:void(0);" class="buyelsebtn">自行购买</a>',
+                '</div>',
+            '</div>'].join('');
         seajs.use('../js/widgets/CustomSelect', function (CustomSelect) {
-            var optArrs = [
-                [
-                    ['奥迪 国产A4 1.8T']
-                ],
-                [
-                    ['摩卡汽车保养服务', '160元'],
-                    ['摩卡汽车保养服务（豪华版）', '300元']
-                ],
-                [   ['嘉实多磁护SN级5w-40','330元'],
-                    ['嘉实多极护SN级0w-40','450元'],
-                    ['自行购买','0元']
-                ],
-                [
-                    ['曼牌 W 940/25', '200元'],
-                    ['自行购买','0元']
-                ],
-                [
-                    ['曼牌 C27 192/1', '300元'],
-                    ['自行购买','0元']
-                ]
-            ];
-            var selectWrappers = document.querySelectorAll('.select-wrapper');
-            var selectWrapper, selectTrigger, selectInput;
+            seajs.use('../js/widgets/Popup', function(Popup){
+                Popup.open(buyelseTipHtml,function(popupContent){
+                    var mocarbtn = popupContent.querySelector('.mocarbtn');
+                    var buyelsebtn = popupContent.querySelector('.buyelsebtn');
+                    mocarbtn.addEventListener('click', function(){
+                        initSelect();
+                        Popup.close();
+                    });
+                    buyelsebtn.addEventListener('click', function(){
+                        initSelect(true);
+                        Popup.close();
+                    });
+                });
+            });
+            function initSelect (buyelse) {
+                var optArrs = [
+                    [
+                        ['奥迪 国产A4 1.8T']
+                    ],
+                    [
+                        ['摩卡汽车保养服务', '160元'],
+                        ['摩卡汽车保养服务（豪华版）', '300元']
+                    ],
+                    [   ['嘉实多磁护SN级5w-40','330元'],
+                        ['嘉实多极护SN级0w-40','450元'],
+                        ['自行购买','0元']
+                    ],
+                    [
+                        ['曼牌 W 940/25', '200元'],
+                        ['自行购买','0元']
+                    ],
+                    [
+                        ['曼牌 C27 192/1', '300元'],
+                        ['自行购买','0元']
+                    ]
+                ];
+                var selectWrappers = document.querySelectorAll('.select-wrapper');
+                var selectWrapper, selectTrigger, selectInput;
 
-            for(var i = 0, ilen = selectWrappers.length; i < ilen; i++){
-                selectWrapper = selectWrappers[i];
-                selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
-                selectInput = selectWrapper.querySelector('input');
-                if(selectTrigger && selectInput){
-                    (function(selectTrigger, selectInput, optArr){
-                        new CustomSelect(selectTrigger, selectInput, optArr,  function onchange(selectedIndex){
-                            if(selectedIndex !== -1){
-                                var productNameEl = selectTrigger.querySelector('.product-name');
-                                var priceEl = selectTrigger.querySelector('.price');
-                                productNameEl.innerHTML = optArr[selectedIndex][0];
-                                if(priceEl){
-                                    priceEl.innerHTML = optArr[selectedIndex][1];
+                for(var i = 0, ilen = selectWrappers.length; i < ilen; i++){
+                    selectWrapper = selectWrappers[i];
+                    selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
+                    selectInput = selectWrapper.querySelector('input');
+                    if( i >= 2 && buyelse){
+                        var initialSelectedIndex = optArrs[i].length - 1;
+                        selectInput.value = initialSelectedIndex;
+                        selectTrigger.querySelector('.product-name').innerHTML = optArrs[i][initialSelectedIndex][0];
+                        selectTrigger.querySelector('.price').innerHTML = optArrs[i][initialSelectedIndex][1];
+                    }else{
+                        selectInput.value = 0;
+                    }
+                    if(selectTrigger && selectInput){
+                        (function(selectTrigger, selectInput, optArr){
+                            new CustomSelect(selectTrigger, selectInput, optArr,  function onchange(selectedIndex){
+                                if(selectedIndex !== -1){
+                                    var productNameEl = selectTrigger.querySelector('.product-name');
+                                    var priceEl = selectTrigger.querySelector('.price');
+                                    productNameEl.innerHTML = optArr[selectedIndex][0];
+                                    if(priceEl){
+                                        priceEl.innerHTML = optArr[selectedIndex][1];
+                                    }
                                 }
-                            }
-                        });
-                    })(selectTrigger, selectInput, optArrs[i])
-                }
-            };
+                            });
+                        })(selectTrigger, selectInput, optArrs[i])
+                    }
+                };
+            }
         });
     </script>
 </body>

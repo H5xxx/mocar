@@ -53,6 +53,9 @@ select {
     margin-left: 130px;
     display: block;
 }
+.pr10px{
+    padding-right: 10px;
+}
 .border-bottom{
     border-bottom: #D9D9D9 solid 1px;
 }
@@ -117,14 +120,21 @@ select {
     width: 250px;
     height: 250px;
 }
-.popup .title,.popup .popup-content{
+.popup .popup-content{
     margin: 20px 10px;
-    font-size: 20px;
+    font-size: 14px;
     text-align: left;
 }
 
-.popup .popup-content{
-    font-size: 14px;
+.popup .custom-select{
+    margin: 20px 10px;
+    text-align: left;
+}
+.popup .custom-select .custom-option-list{
+    max-height: 160px;
+    min-width: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .popup .command-area{
     position: absolute;

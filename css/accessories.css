@@ -19,6 +19,16 @@
 #accessories-info .site-icons{
     margin-top:0;
 }
+/* 自行购买or选择摩卡配件 提示弹窗 */
+.buyelse-popup .title{
+    margin: 20px 10px;
+    font-size: 20px;
+    text-align: left;
+}
+.popup .custom-select{
+    margin: 20px 10px;
+    text-align: left;
+}
 #accessories-info .custom-select-trigger{
     font-size: 16px;
 }
@@ -26,6 +36,7 @@
     float: right;
     margin-right: 30px;
 }
+
 #accessories-info .first,#schedule-success .first,#accessories-info .second,#schedule-success .second{
     width: 49%;
     display: inline-block;

@@ -6,12 +6,7 @@
 define(function(require, exports, module) {
 	var Overlay = require('./Overlay');
 	var popupWrapperTmplStr = '<div class="popup-wrapper" style="display:none;"></div>';
-	var popupTmplStr = [
-		'<div class="popup">',
-        	'<div class="title"></div>',
-        	'<div class="popup-content">',
-        	'</div>',
-		'</div>'].join('');
+	var popupTmplStr = '<div class="popup"></div>';
 
 	var wrapperEl;
 	var popupContentEl;
@@ -32,7 +27,7 @@ define(function(require, exports, module) {
 			this._getWrapperEl();
 		}
 		wrapperEl.innerHTML = popupTmplStr;
-		popupContentEl = wrapperEl.querySelector('.popup-content');
+		popupContentEl = wrapperEl.querySelector('.popup');
 		return popupContentEl;
 	};
 	Popup.open = function(elemOrHtml, cb) {
