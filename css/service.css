@@ -62,7 +62,7 @@ img {
     line-height: 45px;
     padding-left: 20px;
 }
-.brand-item {
+/*.brand-item {
     float: left;
     width: 33.33%;
     box-sizing: border-box;
@@ -74,8 +74,8 @@ img {
 .brand-item > img {
     height: 50px;
     margin: 5px auto 8px;
-}
-.series-item, .model-item {
+}*/
+.brand-item, .series-item, .model-item {
     margin: 0 20px;
     height: 45px;
     line-height: 45px;
