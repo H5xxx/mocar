@@ -30,6 +30,8 @@ define(function(require, exports) {
             '/service/:service_id/model/:model_id/success': 'success'
         },
 
+        'default': 'home',
+
         // 页面初始化
         init: function(){
             var page = this;

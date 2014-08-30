@@ -47,6 +47,8 @@ define(function(require, exports) {
 
             this.fadein();
 
+            params = params || {};
+
             this.getData(params, function(err, data){
 
                 $.extend(params, data);
