@@ -121,6 +121,7 @@ select {
 
 .popup {
     display: inline-block;
+    width: 258px;
     /*垂直居中*/
     vertical-align: middle;
     background-color: #FAFAFA;
