@@ -1,4 +1,6 @@
 define(function(require, exports) {
+    var util = require('../component/util');
+
     var Brand = require('../model/brand');
 
     var CarBrand = require('./common').sub({
@@ -7,7 +9,13 @@ define(function(require, exports) {
         template: 'template-brand',
 
         getData: function(params, callback){
-            Brand.fetch(params, callback);
+            util.finish([
+                function(cb){ Brand.fetch(params, cb) }
+            ], function(list){
+                callback(null, {
+                    list: list
+                });
+            });
         }
     });
 

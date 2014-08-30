@@ -5,7 +5,35 @@ define(function(require, exports) {
         });
     };
 
+    var finish = function(tasks, callback){
+        var left = tasks.length,
+            results = [],
+            over = false;
+
+        tasks.forEach(function(task, i){
+            task(function(err, result){
+                if(over){
+                    return;
+                }
+
+                if(err){
+                    over = true;
+                    throw err;
+                }else{
+                    results[i] = result;
+
+                    left--;
+
+                    if(!left){
+                        callback.apply(null, results);
+                    }
+                }
+            });
+        });
+    };
+
     return {
-        format: format
+        format: format,
+        finish: finish
     };
 });

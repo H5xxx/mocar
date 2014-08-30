@@ -6,26 +6,10 @@ define(function(require, exports) {
     var Model = require('../model/model');
 
     var CarSuccess = require('./common').sub({
-        // 该controller要渲染&控制的区域
+
         el: $('#car-success'),
 
-        template: 'template-success',
-
-        getData: function(params, callback){
-            var data = {
-                // brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
-                // list: Brand.getSeriesByBrandId(params.brand_id)
-            };
-
-            callback(null, data);
-        },
-        // 渲染内容
-        render: function(params){
-
-            var html = template(this.template, params);
-
-            this.el.html(html);
-        },
+        template: 'template-success'
     });
 
     return CarSuccess;

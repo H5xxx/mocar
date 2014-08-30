@@ -15,9 +15,7 @@ define(function(require, exports) {
                     Model.create(item);
                 });
 
-                callback(null, {
-                    list: list
-                });
+                callback(null, list);
             });
         }
     });

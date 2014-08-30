@@ -1,4 +1,6 @@
 define(function(require, exports) {
+    var util = require('../component/util');
+
     var Brand = require('../model/brand');
     var Series = require('../model/series');
 
@@ -8,8 +10,17 @@ define(function(require, exports) {
         template: 'template-series',
 
         getData: function(params, callback){
-            Series.fetch(params, function(err, data){
-                data = $.extend(data, Brand.find(params.brand_id));
+            util.finish([
+                function(cb){ Series.fetch(params, cb) },
+                function(cb){ Brand.fetch(params, cb) }
+            ], function(list){
+                data = $.extend(
+                    {
+                        list: list
+                    },
+                    Brand.find(params.brand_id)
+                );
+
                 callback(null, data);
             });
         }
