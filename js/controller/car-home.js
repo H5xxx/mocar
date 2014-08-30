@@ -1,5 +1,5 @@
 /*
- * 预约成功 页面的controller
+ * 服务列表 页面的controller
  */
 define(function(require, exports) {
     var Brand = require('../model/brand');
