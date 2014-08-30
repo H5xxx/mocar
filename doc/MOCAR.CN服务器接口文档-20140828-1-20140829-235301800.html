@@ -2878,21 +2878,28 @@ var list = [].slice.call(document.querySelectorAll('.container > *'));
 var l = list.length;
 
 var waits = {};
+var tags = ['H2', 'H3', 'H4'];
 list.forEach(function(item, i) {
-    var tag = item.tagName;
-    if(['H2', 'H3', 'H4'].indexOf(tag) >= 0){
-        if(waits[tag] !== undefined){
-            var wait = waits[tag],
-                waitItem = list[wait];
-            waitItem.downers = list.slice(wait + 1, i);
-        }
+    var tag = item.tagName,
+        level = tags.indexOf(tag);
+    if(level >= 0){
+        tags.slice(level).forEach(function(t){
+            if(waits[t] !== undefined){
+                var wait = waits[t],
+                    waitItem = list[wait];
+                waitItem.downers = list.slice(wait + 1, i);
+
+                waits[t] = undefined;
+            }
+        });
+
         waits[tag] = i;
 
         if(i >= l -1){
             for(var waitTag in waits) if(waits.hasOwnProperty(waitTag)){
                 var wait = waits[waitTag],
                     waitItem = list[wait];
-                waitItem.downers = list.slice(wait + 1);
+                waitItem && (waitItem.downers = list.slice(wait + 1));
             }
         }
 
