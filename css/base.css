@@ -1,27 +1,25 @@
-html,body{
+html, body {
     height: 100%;
 }
-
-.main-container{
-    width: 350px;
+.main-container {
+    width: 100%;
     height: 100%;
     position: relative;
     margin: 0 auto;
 }
-
-.fl{
+.fl {
     float: left;
 }
-.fr{
+.fr {
     float: right;
 }
-.ib{
+.ib {
     display: inline-block;
 }
-.select-wrapper{
+.select-wrapper {
     position: relative;
 }
-.select-wrapper:after{
+.select-wrapper:after {
     content: "";
     top: 14px;
     right: 7px;
@@ -33,7 +31,7 @@ html,body{
     width: 6px;
     height: 6px;
     background-color: transparent;
-    -webkit-transform: rotate(225deg);  
+    -webkit-transform: rotate(225deg);
 }
 select {
     -webkit-appearance: none;
@@ -41,64 +39,66 @@ select {
 .justify {
     position: relative;
 }
-
-.height80px{
+.height80px {
     height: 80px;
 }
-.height109px{
+.height109px {
     height: 109px;
 }
-.height110px{
+.height110px {
     height: 110px;
 }
-.mt20px{
+.mt20px {
     margin-top: 20px;
 }
-.mt40px{
+.mt40px {
     margin-top: 40px;
 }
-.mt60px{
+.mt60px {
     margin-top: 60px;
 }
-.ml130px{
+.ml130px {
     margin-left: 130px;
     display: block;
 }
-.pr10px{
+.pr10px {
     padding-right: 10px;
 }
-.border-bottom{
+.border-bottom {
     border-bottom: #D9D9D9 solid 1px;
 }
-.zero-font-size{
+.zero-font-size {
     font-size: 0;
 }
 /* 公共header、footer样式 */
-.header, .footer{
+
+.header, .footer {
     background-color: #333333;
-    color:#EAEAEA;
+    color: #EAEAEA;
 }
-.footer{
+.footer {
     position: fixed;
     bottom: 0;
     height: 50px;
     width: 100%;
 }
-.footer .content-area{
+.footer .content-area {
     margin-left: 30px;
 }
 /*遮罩层*/
-.overlayer{
+
+.overlayer {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     opacity: 0.3;
-    background: rgb(0,0,0);
+    background: rgb(0, 0, 0);
 }
 /*弹出层wrapper,帮助定位*/
-.popup-wrapper{
+
+.popup-wrapper {
     position: fixed;
     top: 0;
     right: 0;
@@ -106,7 +106,7 @@ select {
     left: 0;
     text-align: center;
 }
-.popup-wrapper:after{
+.popup-wrapper:after {
     content: " ";
     display: inline-block;
     vertical-align: middle;
@@ -115,10 +115,11 @@ select {
     height: 100%;
 }
 /*弹出层*/
-.popup{
-    display: inline-block; /*垂直居中*/
-    vertical-align: middle;
 
+.popup {
+    display: inline-block;
+    /*垂直居中*/
+    vertical-align: middle;
     background-color: #FAFAFA;
     z-index: 99;
     visibility: visible;
@@ -127,47 +128,46 @@ select {
     position: relative;
 }
 /*  */
-.popup-wrapper .mocar-tip-popup{
+
+.popup-wrapper .mocar-tip-popup {
     width: 250px;
     height: 250px;
 }
-.popup .popup-content{
+.popup .popup-content {
     margin: 20px 10px;
     font-size: 14px;
     text-align: left;
 }
-
-.popup .custom-select{
-    margin: 20px 10px;
+.popup .custom-select {
+    margin: 20px 0 20px 10px;
     text-align: left;
 }
-.popup .custom-select .custom-option-list{
+.popup .custom-select .custom-option-list {
     max-height: 160px;
     min-width: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
-.popup .command-area{
+.popup .command-area {
     position: absolute;
     left: 10px;
     right: 10px;
     bottom: 20px;
 }
-.popup .command-area .mocarbtn,.popup .command-area .buyelsebtn{
+.popup .command-area .mocarbtn, .popup .command-area .buyelsebtn {
     float: right;
     margin-left: 20px;
     color: #696969;
 }
-.popup .command-area .mocarbtn{
+.popup .command-area .mocarbtn {
     color: #67CA2F;
 }
-
 /* 模拟SELECT START */
-.custom-select{
 
-}
+.custom-select {}
 /* 模拟的SELECT在页面上的占位元素样式 */
-.custom-select-trigger{
+
+.custom-select-trigger {
     -webkit-appearance: none;
     outline: none;
     display: inline-block;
@@ -177,29 +177,31 @@ select {
     width: 100%;
 }
 /*SELECT的option选中时的样式*/
-.custom-select .selected{
+
+.custom-select .selected {
     background-color: #D9D9D9;
     /*font-weight: bold;*/
     color: #60C900;
 }
-.custom-select .first{
+.custom-select .first {
     padding-top: 0;
 }
-.custom-option{
+.custom-option {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.custom-option{
+.custom-option {
     border-bottom: #D9D9D9 solid 1px;
+    margin-right: 10px;
 }
-
-.custom-select .command-area{
+.custom-select .command-area {
     position: inherit;
     margin-top: 20px;
-    text-align: center; 
+    text-align: center;
 }
 /*确定/取消 按钮的样式*/
-.custom-select .command-area .btn{
+
+.custom-select .command-area .btn {
     text-decoration: none;
     color: black;
     display: inline-block;
@@ -211,18 +213,21 @@ select {
     height: 20px;
 }
 /*默认（确定） 按钮的样式*/
-.custom-select .command-area .default{
+
+.custom-select .command-area .default {
     /*color:blue;*/
     /*border-color: blue;*/
 }
 /* 模拟SELECT END */
 
 /*表单区域 单行*/
-.form-row{
+
+.form-row {
     height: 40px;
 }
 /*表单区域图表公共样式*/
-.site-icons{
+
+.site-icons {
     float: left;
     display: block;
     margin-top: 10px;
@@ -230,86 +235,87 @@ select {
     width: 20px;
     height: 20px;
 }
-.footer a{
+.footer a {
     display: block;
 }
-.footer .site-icons{
+.footer .site-icons {
     float: right;
     width: 40px;
     height: 40px;
     margin-top: -20px;
     margin-right: 25px;
 }
-.icon-seperator{
-    background:url('./icons/01.png'); 
+.icon-seperator {
+    background: url('./icons/01.png');
     background-size: contain;
 }
-.icon-car{
-    background:url('./icons/02.png'); 
+.icon-car {
+    background: url('./icons/02.png');
     background-size: contain;
 }
-.icon-service{
-    background:url('./icons/03.png'); 
+.icon-service {
+    background: url('./icons/03.png');
     background-size: contain;
 }
-.icon-accessory{
+.icon-accessory {
     background: url('./icons/04.png');
     background-size: contain;
 }
-.icon-location{
+.icon-location {
     background: url('./icons/05.png');
     background-size: contain;
 }
-.icon-time{
+.icon-time {
     background: url('./icons/06.png');
     background-size: contain;
 }
-.icon-user{
+.icon-user {
     background: url('./icons/07.png');
     background-size: contain;
 }
-.icon-phone{
-    background:url('./icons/08.png'); 
+.icon-phone {
+    background: url('./icons/08.png');
     background-size: contain;
 }
-.icon-nextstep{
-    background:url('./icons/09.png'); 
+.icon-nextstep {
+    background: url('./icons/09.png');
     background-size: contain;
 }
-.icon-success{
-    background:url('./icons/10.png'); 
+.icon-success {
+    background: url('./icons/10.png');
     background-size: contain;
 }
-.icon-home{
-    background:url('./icons/11.png');
-    background-size: contain; 
+.icon-home {
+    background: url('./icons/11.png');
+    background-size: contain;
 }
-.icon-expand{
-    background:url('./icons/22.png');
-    background-size: contain; 
+.icon-expand {
+    background: url('./icons/22.png');
+    background-size: contain;
 }
-.icon-changguibaoyang{
-    background:url('./icons/changguibaoyang.png');
-    background-size: contain; 
+.icon-changguibaoyang {
+    background: url('./icons/changguibaoyang.png');
+    background-size: contain;
 }
-.icon-donglitisheng{
-    background:url('./icons/donglitisheng.png');
-    background-size: contain; 
+.icon-donglitisheng {
+    background: url('./icons/donglitisheng.png');
+    background-size: contain;
 }
-.icon-huanshachepian{
-    background:url('./icons/huanshachepian.png');
-    background-size: contain; 
+.icon-huanshachepian {
+    background: url('./icons/huanshachepian.png');
+    background-size: contain;
 }
-.icon-kongtiaomiejun{
-    background:url('./icons/kongtiaomiejun.png');
-    background-size: contain; 
+.icon-kongtiaomiejun {
+    background: url('./icons/kongtiaomiejun.png');
+    background-size: contain;
 }
 /*垂直居中*/
-.justify-wrap{
+
+.justify-wrap {
     display: table;
     height: 100%;
 }
-.justify-content{
+.justify-content {
     display: table-cell;
     vertical-align: middle;
 }

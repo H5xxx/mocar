@@ -1,31 +1,34 @@
-#mocar-service-home{
-	overflow: hidden;
+#mocar-service-home {
+    overflow: hidden;
 }
-#mocar-service-home .logo-area{
-	margin-bottom: 30px;
+#mocar-service-home .logo-area {
+    margin-bottom: 30px;
 }
-.service-list{
-	padding-bottom: 65535px;
-	margin-bottom: -65535px;
+#mocar-service-home .logo-area > img {
+    margin: auto;
 }
-.service-list li a{
-	display: block;
+.service-list {
+    padding-bottom: 65535px;
+    margin-bottom: -65535px;
 }
-.service-list .content-area{
-	margin: 0px 30px 10px 50px;
-	padding: 0 10px 10px 10px;
+.service-list li a {
+    display: block;
 }
-.service-list .content-area .title{
-	color:#67CA2F;
+.service-list .content-area {
+    margin: 0 30px 10px 50px;
+    padding: 0 10px 10px 10px;
 }
-.service-list .content-area .info{
-	color:#999999;
+.service-list .content-area .title {
+    color: #67CA2F;
 }
-.service-list .content-area .price{
-	color:#000000;
+.service-list .content-area .info {
+    color: #999999;
 }
-.service-list .site-icons{
-	float: left;
+.service-list .content-area .price {
+    color: #000000;
+}
+.service-list .site-icons {
+    float: left;
     display: block;
     margin-top: 0;
     margin-left: 10px;
