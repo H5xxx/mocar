@@ -39,7 +39,7 @@ img {
 .fadein {
     position: relative;
     left: 0;
-    -webkit-animation: fadein .5s cubic-bezier(0,0,0.25,1);
+    -webkit-animation: fadein .5s cubic-bezier(0, 0, 0.25, 1);
 }
 @keyframes fadein {
     0% {
@@ -57,11 +57,11 @@ img {
         -webkit-transform: translateX(0px)
     }
 }
-
 .crumble {
     height: 45px;
     line-height: 45px;
     padding-left: 20px;
+    color: #60C900;
 }
 /*.brand-item {
     float: left;
@@ -76,6 +76,7 @@ img {
     height: 50px;
     margin: 5px auto 8px;
 }*/
+
 .brand-item, .series-item, .model-item {
     margin: 0 20px;
     height: 45px;
@@ -91,6 +92,7 @@ img {
     padding: 5px 0;
     border: 1px solid #eee;
 }*/
+
 .displacement-item {
     margin: 0 20px;
     height: 45px;
