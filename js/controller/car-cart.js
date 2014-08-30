@@ -203,17 +203,22 @@ define(function(require, exports) {
                 }
                 if(selectTrigger && selectInput){
                     (function(selectTrigger, selectInput, optArr){
-                        new CustomSelect(selectTrigger, selectInput, optArr,  function onchange(selectedIndex){
-                            if(selectedIndex !== -1){
-                                var productNameEl = selectTrigger.querySelector('.product-name');
-                                var priceEl = selectTrigger.querySelector('.price');
-                                productNameEl.innerHTML = optArr[selectedIndex][0];
-                                if(priceEl){
-                                    priceEl.innerHTML = optArr[selectedIndex][1];
-                                    priceEl.setAttribute('data-price', optArr[selectedIndex][1]);
+                        new CustomSelect({
+                            triggerEl: selectTrigger, 
+                            inputEl: selectInput, 
+                            optArr: optArr,
+                            onchange: function onchange(selectedIndex){
+                                if(selectedIndex !== -1){
+                                    var productNameEl = selectTrigger.querySelector('.product-name');
+                                    var priceEl = selectTrigger.querySelector('.price');
+                                    productNameEl.innerHTML = optArr[selectedIndex][0];
+                                    if(priceEl){
+                                        priceEl.innerHTML = optArr[selectedIndex][1];
+                                        priceEl.setAttribute('data-price', optArr[selectedIndex][1]);
+                                    }
                                 }
+                                calculateTotalPrice();
                             }
-                            calculateTotalPrice();
                         });
                     })(selectTrigger, selectInput, optArrs[i])
                 }

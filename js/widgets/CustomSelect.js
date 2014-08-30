@@ -7,32 +7,37 @@
  	var Events = Spine.Events;
  	var Popup = require("./Popup");
  	var template = require("../lib/template");
- 	var selectTmpl = [
- 		'<div class="custom-select">',
-		    '<ul class="custom-option-list">',
-		    	'{{each data as value i}}',
-		    		'<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}">',
-		    			'<span class="product-name">{{value.left}}</span>',
-		        		'<span class="product-price fr">{{value.right}}</span>',
-		    		'</li>',
-				'{{/each}}',
-		    '</ul>',
-		    '<div class="command-area">',
-		        '<a href="javascript:void(0);" class="btn confirm default">确定</a>',
-		        '<a href="javascript:void(0);" class="btn concel">取消</a>',
-		    '</div>',
-		'</div>'].join('');
-
- 	function CustomSelect(triggerEl, inputEl, optArr, onchange){
- 		this.triggerEl = triggerEl;
- 		this.inputEl = inputEl;
- 		this.optArr = optArr;
- 		this.onchange = onchange || function(){};
- 		this._normalizedOptArr = this._normalizeData(optArr);
+ 	var defaultOptionTmpl = [
+	 	'<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}">',
+			'<span class="product-name">{{value.left}}</span>',
+			'<span class="product-price fr">{{value.right}}</span>',
+		'</li>'
+		].join('');
+ 	
+ 	function CustomSelect(opt){
+ 		this.triggerEl = opt.triggerEl;
+ 		this.inputEl = opt.inputEl;
+ 		this.optArr = opt.optArr;
+ 		this.onchange = opt.onchange || function(){};
+ 		this._normalizedOptArr = this._normalizeData(opt.optArr);
  		this.bindEevent();
  		this.optionElArr = [];
  		this._currentSelectedIndex = -1;
- 		this._originalSelectIndex = inputEl.value;
+ 		this._originalSelectIndex = this.inputEl.value;
+
+ 		this._optionTmpl = opt.optionTmpl || defaultOptionTmpl;
+ 		this._selectTmpl = [
+	 		'<div class="custom-select">',
+			    '<ul class="custom-option-list">',
+			    	'{{each data as value i}}',
+			    		this._optionTmpl,
+					'{{/each}}',
+			    '</ul>',
+			    '<div class="command-area">',
+			        '<a href="javascript:void(0);" class="btn confirm default">确定</a>',
+			        '<a href="javascript:void(0);" class="btn concel">取消</a>',
+			    '</div>',
+			'</div>'].join('');
  		try{
  			document.createEvent('TouchEvent');
  			this._supportTouch = true;
@@ -91,7 +96,7 @@
  			this._originalSelectIndex = this._currentSelectedIndex = -1;
  		}
  		this._normalizedOptArr = this._normalizeData(this.optArr);
- 		var selectHtmlStr = template.render(selectTmpl)({data: this._normalizedOptArr});
+ 		var selectHtmlStr = template.render(this._selectTmpl)({data: this._normalizedOptArr});
  		Popup.open(selectHtmlStr, function(popupEl){
  			var eventName = /*self._supportTouch ? 'touchstart' : */'click';
  			var confirmEl = popupEl.querySelector('.confirm');
