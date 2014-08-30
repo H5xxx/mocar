@@ -53,9 +53,9 @@
             {{include 'template-navigator'}}
             <div class="j-series-list">
                 {{each list as item i}}
-                <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.series_id}}/model">
-                    <span>{{item.series_name}}</span>
-                </div>
+                    <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.series_id}}/model">
+                        <span>{{item.series_name}}</span>
+                    </div>
                 {{/each}}
             </div>
         </div>
@@ -65,12 +65,11 @@
         <div class="j-series-container">
             {{include 'template-navigator'}}
             <div class="j-model-list">
-            {{each list as item i}}
-                <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.model_id}}/displacement">
-                    <img src="{{item.models_img_url}}" alt="">
-                    <span>{{item.description}}</span>
-                </div>
-            {{/each}}
+                {{each list as item i}}
+                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.model_id}}/displacement">
+                        <span>{{item.description}}</span>
+                    </div>
+                {{/each}}
             </div>
         </div>
     </script>
