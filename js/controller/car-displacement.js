@@ -1,30 +1,67 @@
 define(function(require, exports) {
-    var Transitions = require('../component/transitions');
+    var Brand = require('../model/brand');
     var Model = require('../model/model');
 
-    var CarDisplacement = Spine.Controller.create({
-        elements: {
-            '.j-displacement-container': 'displacementContainer'
+    var Transitions = require('../component/transitions');
+
+    var CarSeries = Spine.Controller.create({
+        // 该controller要渲染&控制的区域
+        el: $('#car-series'),
+
+        // 只执行一次，初始化时执行
+        init: function() {
         },
-        events: {
-            'click .displacement-item': 'enterModel'
+
+        getData: function(params, callback){
+            var data = {
+                brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
+                series_name: params.series_id,
+                model_name: Model.findByAttribute('model_id', params.model_id).model_name,
+                list: Model.getDisplacementById(params.model_id)
+            };
+
+            callback(null, data);
         },
-        init: function() {},
-        showDisplacement: function(id) {
-            var displacements = Model.getDisplacementById(id);
-            var html = template('template-displacement-item', {
-                data: displacements
+
+        // 渲染内容
+        render: function(params){
+
+            var html = template('template-series', params);
+
+            this.el.html(html);
+        },
+
+        // 清空内容
+        clean: function(){
+            this.el.html('Loading...');
+        },
+
+        // 跳转到其对应的url时执行
+        activate: function(params){
+
+            var me = this;
+
+            this.fadein();
+
+            this.getData(params, function(err, data){
+
+                $.extend(params, data);
+
+                me.render(params);
+
             });
-            this.displacementContainer.html(html);
-            this.active();
+
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        // 离开到其对应的url时执行
+        deactivate: function(){
+            this.fadeout();
+            this.clean();
+        },
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carDisplacement = new CarDisplacement({
-        el: $('#car-displacement')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carDisplacement);
-    return carDisplacement;
+
+    return CarSeries;
 });

@@ -1,15 +1,16 @@
 define(function(require, exports) {
-    var Transitions = require('../component/transitions');
     var Brand = require('../model/brand');
+    var Transitions = require('../component/transitions');
 
     var CarBrand = Spine.Controller.create({
-        elements: {
-            '.j-brand-container': 'brandContainer'
-        },
-        events: {
-            'click .brand-item': 'enterSeries'
-        },
+        // 该controller要渲染&控制的区域
+        el: $('#car-brand'),
+
+        // 只执行一次，初始化时执行
         init: function() {
+        },
+
+        getData: function(params, callback){
             $.ajax({
                 url: 'http://cybwx.sinaapp.com/service.php',
                 data: {
@@ -17,41 +18,62 @@ define(function(require, exports) {
                 },
                 dataType: 'jsonp',
                 jsonp: 'callback',
-                success: this.proxy(function(data) {
-                    data = data.data;
-                    console.log(data);
-                    var brand;
-                    for (var i = 0; i < data.length; i++) {
-                        brand = Brand.create(data[i]);
-                    }
-                    this.proxy(this.showBrand());
-                }),
-                error: function() {
-                    alert('getCarBrandFast 超时');
+                success: function(result) {
+                    var list = result.data;
+
+                    list.forEach(function(item){
+                        Brand.create(item);
+                    });
+
+                    callback(null, {
+                        list: list
+                    });
+                },
+                error: function(err) {
+                    callback(err || 'getCarBrandFast 超时');
                 }
             });
         },
-        showBrand: function() {
-            var html = template('template-brand-item', {
-                data: Brand.all()
+
+        // 渲染内容
+        render: function(params){
+
+            var html = template('template-brand', params);
+
+            this.el.html(html);
+        },
+
+        // 清空内容
+        clean: function(){
+            this.el.html('Loading...');
+        },
+
+        // 跳转到其对应的url时执行
+        activate: function(params){
+
+            var me = this;
+
+            this.fadein();
+
+            this.getData(params, function(err, data){
+
+                $.extend(params, data);
+
+                me.render(params);
+
             });
-            this.brandContainer.html(html);
-            this.active();
+
         },
-        enterSeries: function(e) {
-            var id = e.currentTarget.dataset.id;
-            // var brand = e.currentTarget.dataset.brand;
-            var carSeries = require('./car-series');
-            carSeries.showSeries(id);
+
+        // 离开到其对应的url时执行
+        deactivate: function(){
+            this.fadeout();
+            this.clean();
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
 
-    var carBrand = new CarBrand({
-        el: $('#car-brand')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carBrand);
-    return carBrand;
+    return CarBrand;
 });

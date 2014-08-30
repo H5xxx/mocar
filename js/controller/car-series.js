@@ -1,38 +1,64 @@
 define(function(require, exports) {
-    var Transitions = require('../component/transitions');
     var Brand = require('../model/brand');
 
+    var Transitions = require('../component/transitions');
+
     var CarSeries = Spine.Controller.create({
-        elements: {
-            '.j-series-container': 'seriesContainer'
+        // 该controller要渲染&控制的区域
+        el: $('#car-series'),
+
+        // 只执行一次，初始化时执行
+        init: function() {
         },
-        events: {
-            'click .series-item': 'enterModel'
+
+        getData: function(params, callback){
+            var data = {
+                brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
+                list: Brand.getSeriesByBrandId(params.brand_id)
+            };
+
+            callback(null, data);
         },
-        init: function() {},
-        showSeries: function(id) {
-            var currentBrand = Brand.findByAttribute('brand_id', id);
-            var seriess = Brand.getSeriesById(id);
-            var html = template('template-series-item', {
-                brand_name: currentBrand.brand_name,
-                data: seriess
+
+        // 渲染内容
+        render: function(params){
+
+            var html = template('template-series', params);
+
+            this.el.html(html);
+        },
+
+        // 清空内容
+        clean: function(){
+            this.el.html('Loading...');
+        },
+
+        // 跳转到其对应的url时执行
+        activate: function(params){
+
+            var me = this;
+
+            this.fadein();
+
+            this.getData(params, function(err, data){
+
+                $.extend(params, data);
+
+                me.render(params);
+
             });
-            this.seriesContainer.html(html);
-            this.active();
+
         },
-        enterModel: function(e) {
-            var id = e.currentTarget.dataset.id;
-            var name = e.currentTarget.dataset.name;
-            var carModel = require('./car-model');
-            carModel.showModel(id, name);
+
+        // 离开到其对应的url时执行
+        deactivate: function(){
+            this.fadeout();
+            this.clean();
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carSeries = new CarSeries({
-        el: $('#car-series')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carSeries);
-    return carSeries;
+
+    return CarSeries;
 });

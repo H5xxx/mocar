@@ -3,11 +3,38 @@
     overflow: hidden;
     clear: both;
 }
-
+#accessories-info .form-row{
+    border-bottom: #D9D9D9 solid 1px; 
+    height: auto;
+}
 #accessories-info .content-area{
     margin-left: 40px;
     display: block;
     margin-top: 20px;
+}
+#accessories-info #service-detail .form-row{
+    margin-bottom: 20px;
+    height: auto;
+}
+#accessories-info .site-icons{
+    margin-top:0;
+}
+/* 自行购买or选择摩卡配件 提示弹窗 */
+.buyelse-popup .title{
+    margin: 20px 10px;
+    font-size: 20px;
+    text-align: left;
+}
+.popup .custom-select{
+    margin: 20px 10px;
+    text-align: left;
+}
+#accessories-info .custom-select-trigger{
+    font-size: 16px;
+}
+#accessories-info .custom-select-trigger .price{
+    float: right;
+    margin-right: 30px;
 }
 
 #accessories-info .first,#schedule-success .first,#accessories-info .second,#schedule-success .second{

@@ -1,3 +1,12 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.ib{
+    display: inline-block;
+}
 .select-wrapper{
     position: relative;
 }
@@ -44,7 +53,10 @@ select {
     margin-left: 130px;
     display: block;
 }
-.border-buttom{
+.pr10px{
+    padding-right: 10px;
+}
+.border-bottom{
     border-bottom: #D9D9D9 solid 1px;
 }
 .zero-font-size{
@@ -96,8 +108,6 @@ select {
     display: inline-block; /*垂直居中*/
     vertical-align: middle;
 
-    width: 250px;
-    height: 250px;
     background-color: #FAFAFA;
     z-index: 99;
     visibility: visible;
@@ -105,15 +115,26 @@ select {
     overflow: hidden;
     position: relative;
 }
-
-.popup .title,.popup .popup-content{
-    margin-top: 20px;
-    margin-left: 10px;
-    font-size: 20px;
+/*  */
+.popup-wrapper .mocar-tip-popup{
+    width: 250px;
+    height: 250px;
+}
+.popup .popup-content{
+    margin: 20px 10px;
+    font-size: 14px;
+    text-align: left;
 }
 
-.popup .popup-content{
-    font-size: 14px;
+.popup .custom-select{
+    margin: 20px 10px;
+    text-align: left;
+}
+.popup .custom-select .custom-option-list{
+    max-height: 160px;
+    min-width: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .popup .command-area{
     position: absolute;
@@ -129,6 +150,59 @@ select {
 .popup .command-area .mocarbtn{
     color: #67CA2F;
 }
+
+/* 模拟SELECT START */
+.custom-select{
+
+}
+/* input */
+.custom-select-trigger{
+    -webkit-appearance: none;
+    outline: none;
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    width: 100%;
+}
+/*选中时的样式*/
+.custom-select .selected{
+    background-color: #B3B3B3;
+    font-weight: bold;
+    /*color: #67CA2F;*/
+}
+.custom-select .first{
+    padding-top: 0;
+}
+.custom-option{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.custom-option{
+    border-bottom: #D9D9D9 solid 1px;
+}
+
+.custom-select .command-area{
+    position: inherit;
+    margin-top: 20px;
+    text-align: center; 
+}
+.custom-select .command-area .btn{
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    background-color: #D9D9D9;
+    border: #D9D9D9 1px solid;
+    margin: 0 20px;
+    padding: 4px 20px;
+    line-height: 20px;
+    height: 20px;
+}
+.custom-select .command-area .default{
+    color:blue;
+    border-color: blue;
+}
+/* 模拟SELECT END */
 
 /*表单区域 单行*/
 .form-row{
