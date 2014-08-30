@@ -5,11 +5,11 @@ define(function(require, exports) {
     var Popup = require('../widgets/Popup');
     var CustomSelect = require('../widgets/CustomSelect');
 
-    var CarService = require('./common').sub({
+    var CarCart = require('./common').sub({
         // 该controller要渲染&控制的区域
-        el: $('#car-service'),
+        el: $('#car-cart'),
 
-        template: 'template-service',
+        template: 'template-cart',
 
         getData: function(params, callback){
             var data = {
@@ -38,7 +38,7 @@ define(function(require, exports) {
             var isNew = Math.random() > 0.5;
 
             if(isNew){
-                this.page.navigate('/brand');
+                this.page.navigate('/service/' + params.service_id + '/brand');
             }else{
                 this.constructor.__super__.activate.apply(this, arguments);
             }
@@ -126,5 +126,5 @@ define(function(require, exports) {
             };
         }
     }
-    return CarService;
+    return CarCart;
 });

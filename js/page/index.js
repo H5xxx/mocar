@@ -10,8 +10,7 @@ define(function(require, exports) {
             'brand': require('../controller/car-brand'),
             'series': require('../controller/car-series'),
             'model': require('../controller/car-model'),
-            'displacement': require('../controller/car-displacement'),
-            'service': require('../controller/car-service'),
+            'cart': require('../controller/car-cart'),
             'schedule': require('../controller/car-schedule'),
             'success': require('../controller/car-success')
         },
@@ -22,17 +21,13 @@ define(function(require, exports) {
                 this.navigate('/brand');
             },
             '/home': 'home',
-            '/brand': 'brand',
-            '/brand/:brand_id/series': 'series',
-            '/brand/:brand_id/series/:series_id/model': 'model',
-            '/brand/:brand_id/series/:series_id/model/:model_id/displacement': 'displacement',
-            '/brand/:brand_id/series/:series_id/model/:model_id/displacement/:displacement_id/service': 'service',
-            '/brand/:brand_id/series/:series_id/model/:model_id/service': 'service',
-            '/service': 'service',
-            '/service/:series_id': 'service',
-            '/service/:series_id/schedule': 'schedule',
-            '/schedule': 'schedule',
-            '/success': 'success'
+            '/service/:service_id/brand': 'brand',
+            '/service/:service_id/brand/:brand_id/series': 'series',
+            '/service/:service_id/brand/:brand_id/series/:series_id/model': 'model',
+            '/service/:service_id/brand/:brand_id/series/:series_id/model/:model_id/cart': 'cart',
+            '/service/:service_id/cart': 'cart',
+            '/service/:service_id/model/:model_id/schedule': 'schedule',
+            '/service/:service_id/model/:model_id/success': 'success'
         },
 
         // 页面初始化
