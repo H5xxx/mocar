@@ -28,6 +28,11 @@ define(function(require, exports) {
             //initPopupAndCustomSelect();
         },
 
+        clean: function(){
+            Popup.close();
+            this.constructor.__super__.clean.apply(this, arguments);
+        },
+
         activate: function(params){
 
             var isNew = Math.random() > 0.5;
@@ -35,7 +40,7 @@ define(function(require, exports) {
             if(isNew){
                 this.page.navigate('/brand');
             }else{
-                this.constructor.__super__.activate.apply(this, params);
+                this.constructor.__super__.activate.apply(this, arguments);
             }
 
         }
