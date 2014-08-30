@@ -1,12 +1,15 @@
+/*
+ * 预约成功 页面的controller
+ */
 define(function(require, exports) {
     var Brand = require('../model/brand');
     var Model = require('../model/model');
 
     var Transitions = require('../component/transitions');
 
-    var CarDisplacement = Spine.Controller.create({
+    var CarSuccess = Spine.Controller.create({
         // 该controller要渲染&控制的区域
-        el: $('#car-displacement'),
+        el: $('#car-success'),
 
         // 只执行一次，初始化时执行
         init: function() {
@@ -14,10 +17,10 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             var data = {
-                brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
-                series_name: params.series_id,
-                model_name: Model.findByAttribute('model_id', params.model_id).model_name,
-                list: Model.getDisplacementById(params.model_id)
+                // brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
+                // series_name: params.series_id,
+                // model_name: Model.findByAttribute('model_id', params.model_id).model_name,
+                // list: Model.getDisplacementById(params.model_id)
             };
 
             callback(null, data);
@@ -26,7 +29,7 @@ define(function(require, exports) {
         // 渲染内容
         render: function(params){
 
-            var html = template('template-displacement', params);
+            var html = template('template-success', params);
 
             this.el.html(html);
         },
@@ -63,5 +66,5 @@ define(function(require, exports) {
         fadeout: Transitions.fadeout
     });
 
-    return CarDisplacement;
+    return CarSuccess;
 });

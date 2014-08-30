@@ -117,7 +117,7 @@
  						return;
  					}
  					for(var i = 0, ilen = customList.length; i < ilen;i++){
-						customList[i].className = customList[i].className.replace('selected', '');
+						customList[i].className = customList[i].className.replace(' selected', '');
 					}
  					clickedLi.className = clickedLi.className + ' selected';
  					self._currentSelectedIndex = parseInt(seq);

@@ -1,12 +1,15 @@
+/*
+ * 选择服务类型和配件页面的controller
+ */
 define(function(require, exports) {
     var Brand = require('../model/brand');
     var Model = require('../model/model');
 
     var Transitions = require('../component/transitions');
 
-    var CarDisplacement = Spine.Controller.create({
+    var CarService = Spine.Controller.create({
         // 该controller要渲染&控制的区域
-        el: $('#car-displacement'),
+        el: $('#car-service'),
 
         // 只执行一次，初始化时执行
         init: function() {
@@ -26,7 +29,7 @@ define(function(require, exports) {
         // 渲染内容
         render: function(params){
 
-            var html = template('template-displacement', params);
+            var html = template('template-service', params);
 
             this.el.html(html);
         },
@@ -63,5 +66,5 @@ define(function(require, exports) {
         fadeout: Transitions.fadeout
     });
 
-    return CarDisplacement;
+    return CarService;
 });
