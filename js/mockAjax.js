@@ -1,6 +1,27 @@
 define(function(require, exports) {
     var Mock = require('mock');
 
+    Mock.mock(/\/models\/generic\/services$/, function(options) {
+        return [
+            {
+                "id":1,
+                "name":"常规保养",
+                "slogan":"附赠发动机仓清洗服务",
+                "description":"最专业的技师，最合理的价格。",
+                "price":150.0,
+                "highestPrice":300.0
+            },
+            {
+                "id":2,
+                "name":"空调灭菌",
+                "slogan":"专业、严谨",
+                "description":"使用德国进口药液，有效杀灭细菌。",
+                "price":400.0,
+                "highestPrice":600.0
+            }
+        ];
+    });
+
     Mock.mock(/\/automobile\/brands$/, function(options) {
         return [
             {

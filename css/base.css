@@ -1,6 +1,13 @@
 html,body{
     height: 100%;
 }
+
+.main-container{
+    width: 350px;
+    position: relative;
+    margin: 0 auto;
+}
+
 .fl{
     float: left;
 }

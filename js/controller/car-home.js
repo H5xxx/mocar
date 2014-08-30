@@ -14,20 +14,24 @@ define(function(require, exports) {
         template: 'template-home',
 
         getData: function(params, callback){
-            var data = {
-                // brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
-                // list: Brand.getSeriesByBrandId(params.brand_id)
+
+            var icons = {
+                '1': 'changguibaoyang',
+                '2': 'kongtiaomiejun',
+                '3': 'donglitisheng',
+                '4': 'huanshachepian',
             };
 
-            callback(null, data);
-        },
-        // 渲染内容
-        render: function(params){
+            $.getJSON('http://api.mocar.cn/models/generic/services', function(services){
+                services.forEach(function(service){
+                    service.icon = icons[service.id];
+                });
 
-            var html = template(this.template, params);
-
-            this.el.html(html);
-        },
+                callback(null, {
+                    services: services
+                });
+            });
+        }
     });
 
     return CarHome;

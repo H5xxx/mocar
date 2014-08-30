@@ -25,55 +25,22 @@
                     <img src="../css/icons/mocar.png" alt="摩卡服务" width="308" height="160">
                 </div>
                 <ul class='service-list'>
+                    {{each services as service i}}
                     <li class='service-item'>
                         <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
                         <a href="javascript:void(0)" class="j-nav" data-nav="/service">
-                            <i class="site-icons icon-changguibaoyang"></i>
+                            <i class="site-icons icon-{{service.icon}}"></i>
                             <div class="content-area border-bottom">
-                                <p class="title">常规保养</p>
+                                <p class="title">{{service.name}}</p>
                                 <span class="info">
-                                    <span class="price">200元起</span>——最专业的技师，<br>
-                                    最专业的工具，最合理的价格
+                                    <span class="price">{{service.price}}元起</span>
+                                    ——
+                                    <span>{{service.description}}</span>
                                 </span>
                             </div>
                         </a>
                     </li>
-                    <li class='service-item'>
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
-                            <i class="site-icons icon-kongtiaomiejun"></i>
-                            <div class="content-area border-bottom">
-                                <p class="title">空调灭菌</p>
-                                <span class="info">
-                                    <span class="price">200元起</span>——德国曼牌工艺<br>
-                                    最专业的工具，最合理的价格
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class='service-item'>
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
-                            <i class="site-icons icon-donglitisheng"></i>
-                            <div class="content-area border-bottom">
-                                <p class="title">动力提升</p>
-                                <span class="info">
-                                    <span class="price">300元起</span>——看的见的积碳清洁<br>
-                                    最专业的工具，最合理的价格
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class='service-item'>
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
-                            <i class="site-icons icon-huanshachepian"></i>
-                            <div class="content-area">
-                                <p class="title">换刹车片</p>
-                                <span class="info">
-                                    <span class="price">300元起</span>——看的见的积碳清洁<br>
-                                    最专业的工具，最合理的价格
-                                </span>
-                            </div>
-                        </a>
-                    </li>
+                    {{/each}}
                 </ul>
             </div>
         </div>
@@ -401,14 +368,19 @@
 </head>
 <body>
 
-    <div id='car-home'></div>
-    <div id='car-brand'></div>
-    <div id='car-series'></div>
-    <div id='car-model'></div>
-    <div id='car-displacement'></div>
-    <div id='car-service'></div>
-    <div id='car-schedule'></div>
-    <div id='car-success'></div>
+    <!-- main-container是所有内容的容器，保持在页面中居中，通过控制main-container的宽度可以实现响应式 -->
+    <div id="main-container" class="main-container">
+
+        <div id='car-home'></div>
+        <div id='car-brand'></div>
+        <div id='car-series'></div>
+        <div id='car-model'></div>
+        <div id='car-displacement'></div>
+        <div id='car-service'></div>
+        <div id='car-schedule'></div>
+        <div id='car-success'></div>
+
+    </div>
 
     <script>
 

@@ -45,11 +45,13 @@ define(function(require, exports) {
         }
     });
 
-    var service = new Page({
-        el: $('body')
+    var page = new Page({
+        el: $('#main-container')
     });
 
-    service.navigate('/brand');
+    page.manager.controllers.forEach(function(controller){
+        controller.page = page;
+    });
 
     Spine.Route.setup();
 

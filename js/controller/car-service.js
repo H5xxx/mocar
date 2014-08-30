@@ -2,8 +2,6 @@
  * 选择服务类型和配件页面的controller
  */
 define(function(require, exports) {
-    var Brand = require('../model/brand');
-    var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
     var CustomSelect = require('../widgets/CustomSelect');
 
@@ -15,13 +13,11 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             var data = {
-                // brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
-                // list: Brand.getSeriesByBrandId(params.brand_id)
             };
 
             callback(null, data);
         },
-        // 渲染内容
+
         render: function(params){
 
             var html = template(this.template, params);
@@ -31,6 +27,18 @@ define(function(require, exports) {
             setTimeout(initPopupAndCustomSelect, 500);
             //initPopupAndCustomSelect();
         },
+
+        activate: function(params){
+
+            var isNew = Math.random() > 0.5;
+
+            if(isNew){
+                this.page.navigate('/brand');
+            }else{
+                this.constructor.__super__.activate.apply(this, params);
+            }
+
+        }
     });
 
     function initPopupAndCustomSelect(){
