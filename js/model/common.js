@@ -9,14 +9,18 @@ define(function(require, exports) {
         fetch: function(params, callback){
             var Model = this;
 
-            $.getJSON(util.format(Model.url, params), function(list){
+            var fetch = function(cb){
+                $.getJSON(util.format(Model.url, params), function(list){
 
-                list.forEach(function(item){
-                    Model.create(item);
+                    list.forEach(function(item){
+                        Model.create(item);
+                    });
+
+                    cb(null, list);
                 });
+            };
 
-                callback(null, list);
-            });
+            return callback ? fetch(callback) : fetch;
         }
     });
     return Common;

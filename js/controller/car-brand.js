@@ -10,7 +10,7 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             util.finish([
-                function(cb){ Brand.fetch(params, cb) }
+                Brand.fetch(params)
             ], function(list){
                 callback(null, {
                     list: list

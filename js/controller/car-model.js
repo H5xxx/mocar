@@ -12,9 +12,9 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             util.finish([
-                function(cb){ Model.fetch(params, cb) },
-                function(cb){ Series.fetch(params, cb) },
-                function(cb){ Brand.fetch(params, cb) }
+                Model.fetch(params),
+                Series.fetch(params),
+                Brand.fetch(params)
             ], function(list){
                 data = $.extend(
                     {
