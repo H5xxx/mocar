@@ -2873,4 +2873,57 @@
 
 
 <h3 id="订单状态">订单状态</h3></div></body>
+<script type="text/javascript">
+var list = [].slice.call(document.querySelectorAll('.container > *'));
+var l = list.length;
+
+var waits = {};
+list.forEach(function(item, i) {
+    var tag = item.tagName;
+    if(['H2', 'H3', 'H4'].indexOf(tag) >= 0){
+        if(waits[tag] !== undefined){
+            var wait = waits[tag],
+                waitItem = list[wait];
+            waitItem.downers = list.slice(wait + 1, i);
+        }
+        waits[tag] = i;
+
+        if(i >= l -1){
+            for(var waitTag in waits) if(waits.hasOwnProperty(waitTag)){
+                var wait = waits[waitTag],
+                    waitItem = list[wait];
+                waitItem.downers = list.slice(wait + 1);
+            }
+        }
+
+        item.onclick = function(){
+            var visible = this.downers[0].style.display !== 'none';
+            this.downers.forEach(function(downer){
+                downer.style.display = visible ? 'none' : '';
+            });
+        }
+    }
+    item.style.display = 'none';
+});
+[].slice.call(document.querySelectorAll('.container > h2')).forEach(function(h2){
+    h2.style.display = '';
+})
+</script>
+<style type="text/css">
+.container > *, .container > pre{
+    margin-left: 120px;
+}
+.container > h2, .container > h3, .container > h4{
+    cursor: pointer;
+}
+.container > h2{
+    margin-left: 30px;
+}
+.container > h3{
+    margin-left: 60px;
+}
+.container > h4{
+    margin-left: 90px;
+}
+</style>
 </html>
