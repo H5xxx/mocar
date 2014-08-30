@@ -1,59 +1,92 @@
 define(function(require, exports) {
-    var Transitions = require('../component/transitions');
+    var Brand = require('../model/brand');
     var Model = require('../model/model');
 
+    var Transitions = require('../component/transitions');
+
     var CarModel = Spine.Controller.create({
-        elements: {
-            '.j-model-container': 'modelContainer'
+        // 该controller要渲染&控制的区域
+        el: $('#car-model'),
+
+        // 只执行一次，初始化时执行
+        init: function() {
         },
 
-        events: {
-            'click .model-item': 'enterDisplacement'
-        },
-        init: function() {},
-        showModel: function(series_id, series_name) {
+        getData: function(params, callback){
+            var data = {
+                brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
+                series_name: params.series_id
+            };
+
             // http://cybwx.sinaapp.com/service.php?m=getCarModelsFast&series_id=12
             $.ajax({
                 url: 'http://cybwx.sinaapp.com/service.php',
                 data: {
                     m: 'getCarModelsFast',
-                    series_id: series_id
+                    series_id: params.series_id
                 },
                 dataType: 'jsonp',
                 jsonp: 'callback',
-                success: this.proxy(function(data) {
-                    data = data.data;
-                    console.log(data);
-                    var model;
-                    for (var i = 0; i < data.length; i++) {
-                        model = Model.create(data[i]);
-                    }
-                    // this.proxy(this.showModel());
-                    var html = template('template-model-item', {
-                        series_name: series_name,
-                        data: Model.all()
+                success: function(result) {
+                    var list = result.data;
+                    
+                    list.forEach(function(item){
+                        item.model_id = item.models_id;
+                        item.model_name = item.description;
+                        Model.create(item);
                     });
-                    this.modelContainer.html(html);
-                    this.active();
 
-                }),
+                    data.list = list;
+
+                    callback(null, data);
+                },
                 error: function() {
-                    alert('getCarModelFast 超时');
+                    callback(err || 'getCarBrandFast 超时');
                 }
             });
+
+            callback(null, data);
         },
-        enterDisplacement: function(e) {
-            var id = e.currentTarget.dataset.id;
-            var carDisplacement = require('./car-displacement');
-            carDisplacement.showDisplacement(id);
+
+        // 渲染内容
+        render: function(params){
+
+            var html = template('template-model', params);
+
+            this.el.html(html);
         },
-        activate: Transitions.fadein,
-        deactivate: Transitions.fadeout
+
+        // 清空内容
+        clean: function(){
+            this.el.html('Loading...');
+        },
+
+        // 跳转到其对应的url时执行
+        activate: function(params){
+
+            var me = this;
+
+            this.fadein();
+
+            this.getData(params, function(err, data){
+
+                $.extend(params, data);
+
+                me.render(params);
+
+            });
+
+        },
+
+        // 离开到其对应的url时执行
+        deactivate: function(){
+            this.fadeout();
+            this.clean();
+        },
+
+        fadein: Transitions.fadein,
+        fadeout: Transitions.fadeout
     });
-    var carModel = new CarModel({
-        el: $('#car-model')
-    });
-    var sm = require('../component/state-machine');
-    sm.add(carModel);
-    return carModel;
+
+    return CarModel;
 });

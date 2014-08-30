@@ -10,73 +10,91 @@
     <script src="../js/lib/sea.js"></script>
     <script src="../js/lib/zepto.js"></script>
     <script src="../js/lib/spine.js"></script>
+    <script src="../js/lib/route.js"></script>
+    <script src="../js/lib/manager.js"></script>
 
-    <script id="template-brand-item" type="text/html">
-        <div class="crumble">品牌</div>
+    <script id="template-navigator" type="text/html">
+        <div class="crumble">
+            {{if brand_id}}
+                <span class="j-nav" data-nav="/brand">{{brand_name}}</span>
+                {{if series_id}}
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">{{series_name}}</span>
+                    {{if mid}}
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">{{model_name}}</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{mid}}/displacement">排量</span>
+                    {{else}}
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">年款</span>
+                    {{/if}}
+                {{else}}
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">车系</span>
+                {{/if}}
+            {{else}}
+                <span class="j-nav" data-nav="/brand">品牌</span>
+            {{/if}}
+        </div>
+    </script>
+
+    <script id="template-brand" type="text/html">
+        <div class="j-brand-container">
+            {{include 'template-navigator'}}
             <div class="j-brand-list">
-            {{each data as value i}}
-                <div class="brand-item" data-id="{{value.brand_id}}" data-brand="{{value.brand_name}}">
-                    <img src="{{value.logo_img_url}}" alt="">
-                    <span>{{value.brand_name}}</span>
+                {{each list as item i}}
+                    <div class="brand-item j-nav" data-nav="/brand/{{item.brand_id}}/series">
+                        <img src="{{item.logo_img_url}}" alt="{{item.brand_name}}">
+                        <span>{{item.brand_name}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <script id="template-series" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-series-list">
+                {{each list as item i}}
+                    <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.series_id}}/model">
+                        <span>{{item.series_name}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <script id="template-model" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-model-list">
+                {{each list as item i}}
+                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.model_id}}/displacement">
+                        <span>{{item.description}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <script id="template-displacement" type="text/html">
+        <div class="j-series-container">
+            {{include 'template-navigator'}}
+            <div class="j-displacement-list">
+            {{each list as item i}}
+                <div class="displacement-item j-nav" data-nav="/brand">
+                    <span>{{item.displacement_name}}</span>
                 </div>
             {{/each}}
-        </div>
-    </script>
-    <script id="template-series-item" type="text/html">
-        <div class="crumble">{{brand_name}} >> 车系</div>
-        <div class="j-series-list">
-        {{each data as value i}}
-            <div class="series-item" data-id="{{value.series_id}}" data-name="{{value.series_name}}">
-                <span>{{value.series_name}}</span>
             </div>
-        {{/each}}
         </div>
     </script>
-    <script id="template-model-item" type="text/html">
-        <div class="crumble">audi >>  {{series_name}} >> 年款</div>
-        <div class="j-model-list">
-        {{each data as value i}}
-            <div class="model-item" data-id="{{value.models_id}}">
-                <img src="{{value.models_img_url}}" alt="">
-                <span>{{value.description}}</span>
-            </div>
-        {{/each}}
-        </div>
-    </script>
-    <script id="template-displacement-item" type="text/html">
-        <div class="crumble">audi >>  {{series_name}} >> 年款 >> 排量</div>
-        <div class="j-displacement-list">
-        {{each data as value i}}
-            <div class="displacement-item" data-id="{{value.displacement_id}}">
-                <span>{{value.displacement_name}}</span>
-            </div>
-        {{/each}}
-        </div>
-    </script>
+
 </head>
 <body>
-    <div class="crumble">
-        <span class="dn" id="crumble-brand">品牌</span>
-        <span class="dn" id="crumble-series">车系</span>
-        <span class="dn" id="crumble-model">年款</span>
-        <span class="dn" id="crumble-displacement">排量</span>
-    </div>
-    <div id='car-brand'>
-        <div class="j-brand-container">
-        </div>
-    </div>
-    <div id='car-series'>
-        <div class="j-series-container">
-        </div>
-    </div>
-    <div id='car-model'>
-        <div class="j-model-container">
-        </div>
-    </div>
-    <div id='car-displacement'>
-        <div class="j-displacement-container">
-        </div>
-    </div>
+
+    <div id='car-brand'></div>
+    <div id='car-series'></div>
+    <div id='car-model'></div>
+    <div id='car-displacement'></div>
+
     <script>
     seajs.use("../js/page/service");
     </script>
