@@ -1,60 +1,54 @@
 /************************  选择附件信息  ************************/
-#car-cart{
-    height: 100%;
-}
-#accessories-info{
+
+#car-cart {} #accessories-info {
     overflow: hidden;
     clear: both;
 }
-#accessories-info .form-row{
-    border-bottom: #D9D9D9 solid 1px; 
+#accessories-info .form-row {
+    border-bottom: #D9D9D9 solid 1px;
     height: auto;
 }
-#accessories-info .content-area{
+#accessories-info .content-area {
     margin-left: 40px;
     display: block;
     margin-top: 20px;
 }
-#accessories-info #service-detail .form-row{
+#accessories-info #service-detail .form-row {
     margin-bottom: 20px;
     height: auto;
 }
-#accessories-info .site-icons{
-    margin-top:0;
+#accessories-info .site-icons {
+    margin-top: 0;
 }
 /* 自行购买or选择摩卡配件 提示弹窗 */
-.buyelse-popup .title{
+
+.buyelse-popup .title {
     margin: 20px 10px;
     font-size: 20px;
     text-align: left;
 }
-
-#accessories-info .custom-select-trigger{
+#accessories-info .custom-select-trigger {
     font-size: 16px;
 }
-#accessories-info .custom-select-trigger .price{
+#accessories-info .custom-select-trigger .price {
     float: right;
     margin-right: 30px;
 }
-
-#accessories-info .first,#schedule-success .first,#accessories-info .second,#schedule-success .second{
+#accessories-info .first, #schedule-success .first, #accessories-info .second, #schedule-success .second {
     width: 49%;
     display: inline-block;
     height: 100%;
     font-size: 20px;
 }
-#accessories-info .second,#schedule-success .second{
+#accessories-info .second, #schedule-success .second {
     float: right;
     margin-left: 2%;
     width: 49%;
 }
-#accessories-info select{
-    
-}
-#accessories-info option{
+#accessories-info select {} #accessories-info option {
     font-size: 20px;
 }
-#accessories-info select{
+#accessories-info select {
     display: inline-block;
     vertical-align: bottom;
     width: 100%;
@@ -65,25 +59,24 @@
     border: none;
     outline: none;
 }
-
-.justify{
+.justify {
     display: table;
     height: 100%;
     width: 100%;
 }
-#accessories-info .info,#accessories-info .accessory,#accessories-info .last{
+#accessories-info .info, #accessories-info .accessory, #accessories-info .last {
     height: 40px;
     line-height: 40px;
 }
-#accessories-info .info{
+#accessories-info .info {
     font-size: 16px;
 }
-#accessories-info .accessory{
+#accessories-info .accessory {
     height: 20px;
     line-height: 20px;
     color: #60C900;
 }
-#accessories-info .last{
+#accessories-info .last {
     float: right;
     margin-right: 20px;
     color: #8C8C8C;

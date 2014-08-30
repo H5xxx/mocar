@@ -7,6 +7,9 @@ html, body {
     position: relative;
     margin: 0 auto;
 }
+.page-container {
+    padding-bottom: 50px;
+}
 .fl {
     float: left;
 }
