@@ -81,12 +81,12 @@
     <script id="template-navigator" type="text/html">
         <div class="crumble">
             {{if brand_id}}
-                <span class="j-nav" data-nav="/brand">{{brand_name}}</span>
+                <span class="j-nav" data-nav="/brand">{{brand}}</span>
                 {{if series_id}}
-                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">{{series_name}}</span>
-                    {{if mid}}
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">{{model_name}}</span>
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{mid}}/displacement">排量</span>
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">{{family}}</span>
+                    {{if model_id}}
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">{{model}}</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">排量</span>
                     {{else}}
                         <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">年款</span>
                     {{/if}}
@@ -104,9 +104,8 @@
             {{include 'template-navigator'}}
             <div class="j-brand-list">
                 {{each list as item i}}
-                    <div class="brand-item j-nav" data-nav="/brand/{{item.brand_id}}/series">
-                        <img src="{{item.logo_img_url}}" alt="{{item.brand_name}}">
-                        <span>{{item.brand_name}}</span>
+                    <div class="brand-item j-nav" data-nav="/brand/{{item.id}}/series">
+                        <span>{{item.brand}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -118,8 +117,8 @@
             {{include 'template-navigator'}}
             <div class="j-series-list">
                 {{each list as item i}}
-                    <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.series_id}}/model">
-                        <span>{{item.series_name}}</span>
+                    <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.id}}/model">
+                        <span>{{item.prefix}} {{item.family}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -131,8 +130,8 @@
             {{include 'template-navigator'}}
             <div class="j-model-list">
                 {{each list as item i}}
-                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.model_id}}/displacement">
-                        <span>{{item.description}}</span>
+                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/displacement">
+                        <span>{{item.suffix}} {{item.model}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -412,6 +411,13 @@
     <div id='car-success'></div>
 
     <script>
+
+    seajs.config({
+      alias: {
+        "mock": "http://mockjs.com/dist/mock.js"
+      }
+    })
+
     seajs.use("../js/page/service");
     </script>
 

@@ -1,14 +1,14 @@
 define(function(require, exports) {
-    var Brand = Spine.Model.sub();
+    var Series = Spine.Model.sub();
 
-    Brand.configure('Brand', 'id', 'brand', 'latter');
+    Series.configure('Series', 'id', 'prefix', 'family');
 
-    Brand.extend({
+    Series.extend({
         fetch: function(params, callback){
-            $.getJSON('http://api.mocar.cn/automobile/brands', function(list){
+            $.getJSON('http://api.mocar.cn/automobile/brands/1/families', function(list){
 
                 list.forEach(function(item){
-                    Brand.create(item);
+                    Series.create(item);
                 });
 
                 callback(null, {
@@ -17,5 +17,5 @@ define(function(require, exports) {
             });
         }
     });
-    return Brand;
+    return Series;
 });

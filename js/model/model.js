@@ -1,18 +1,20 @@
 define(function(require, exports) {
     var Model = Spine.Model.sub();
-    Model.configure('Model', 'model_id', 'description', 'year', 'models_img_url', 'model', 'f_series_id');
+
+    Model.configure('Model', 'id', 'model', 'suffix');
 
     Model.extend({
-        getDisplacementById: function(model_id) {
-            var current = this.findByAttribute('model_id', model_id);
-            var list = [];
-            var models = current.model.split(',');
-            for (var i = 0, l = models.length; i < l; i++) {
-                var item = {};
-                item.displacement_name = models[i];
-                list.push(item);
-            }
-            return list;
+        fetch: function(params, callback){
+            $.getJSON('http://api.mocar.cn/automobile/brands/1/families/1/models', function(list){
+
+                list.forEach(function(item){
+                    Model.create(item);
+                });
+
+                callback(null, {
+                    list: list
+                });
+            });
         }
     });
     return Model;

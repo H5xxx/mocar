@@ -1,5 +1,6 @@
 define(function(require, exports) {
     var Brand = require('../model/brand');
+    var Series = require('../model/series');
 
     var CarSeries = require('./common').sub({
         el: $('#car-series'),
@@ -7,12 +8,10 @@ define(function(require, exports) {
         template: 'template-series',
 
         getData: function(params, callback){
-            var data = {
-                brand_name: Brand.findByAttribute('brand_id', params.brand_id).brand_name,
-                list: Brand.getSeriesByBrandId(params.brand_id)
-            };
-
-            callback(null, data);
+            Series.fetch(params, function(err, data){
+                data = $.extend(data, Brand.find(params.brand_id));
+                callback(null, data);
+            });
         }
     });
 
