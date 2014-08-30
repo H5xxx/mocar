@@ -142,7 +142,7 @@
                         <p class="accessory info">车辆型号</p>
                         <div class='select-wrapper'>
                             <div class='custom-select-trigger'>
-                                <span class='product-name'>奥迪 国产A4 1.8T</span>    
+                                <span class='product-name'>{{currentVehicle.model}}</span>    
                             </div>
                             <input type="text" name="carInput" style="display:none">
                         </div>
@@ -154,8 +154,8 @@
                         <p class="accessory info">服务项目</p>
                         <div class="select-wrapper">
                             <div class='custom-select-trigger'>
-                                <span class='product-name'>摩卡汽车保养服务</span>
-                                <span class='price'>160元</span>    
+                                <span class='product-name'>{{name}}</span>
+                                <span class='price' data-price='{{price}}'>{{price}}元</span>    
                             </div>
                             <input type="text" name="serviceInput" style="display:none">
                         </div>
@@ -165,52 +165,30 @@
                     <i class='site-icons icon-accessory'></i>
                     <div class='content-area'>
                         <ul>
-                            <li class='form-row'>
+                        {{each parts as part i}}
+                            <li class='form-row' data-part-seq="{{i}}">
                                 <p class="accessory info">
-                                    机油
+                                    {{part.name}} {{part.quantity}} {{part.unit}}
                                 </p>
                                 <div class="select-wrapper">
                                     <div class='custom-select-trigger'>
-                                        <span class='product-name'>嘉实多磁护SN级5w-40</span>
-                                        <span class='price'>260元</span>    
-                                    </div>
-                                    <input type="text" name="accessoryInput" placeholder='请选择...' style="display:none">
-                                </div>
-                            </li>
-                            <li class='form-row'>
-                                <p class="accessory info">
-                                    机滤
-                                </p>
-                                <div class="select-wrapper">
-                                    <div class='custom-select-trigger'>
-                                        <span class='product-name'>曼牌 W 940/25</span>
-                                        <span class='price'>260元</span>    
+                                        <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}元</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none">
                                 </div>
                             </li>
-                            <li class='form-row'>
-                                <p class="accessory info">
-                                    空气过滤器
-                                </p>
-                                <div class="select-wrapper">
-                                    <div class='custom-select-trigger'>
-                                        <span class='product-name'>曼牌 C27 192/1</span>
-                                        <span class='price'>260元</span>    
-                                    </div>
-                                    <input type="text" name="accessoryInput" style="display:none">
-                                </div>
-                            </li>
+                        {{/each}}
                         </ul>
                     </div>
                 </div>
             </div>
             <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav" data-nav="/service/2/model/2/schedule">
+                <a href="javascript:void(0);" class="j-nav" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
                     <i class='site-icons icon-nextstep'></i>
                 </a>
                 <div class='content-area justify-wrap'>
-                    <span class='tip justify-content'>总价：<span>667</span>元</span>
+                    <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{price}}</span>元</span>
                 </div> 
             </div>
         </div>
@@ -400,9 +378,12 @@
 
     seajs.config({
       alias: {
-        "mock": "http://mockjs.com/dist/mock.js"
+        "mock": "../js/lib/mock.js"
       }
     })
+    seajs.use('../js/mockAjax', function () {
+        
+    });
 
     seajs.use("../js/page/index");
     </script>

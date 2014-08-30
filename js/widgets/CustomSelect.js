@@ -4,6 +4,7 @@
  * @useage: new CustomSelect(inputEl, optArr)
  */
  define(function (require, exports, module) {
+ 	var Events = Spine.Events;
  	var Popup = require("./Popup");
  	var template = require("../lib/template");
  	var selectTmpl = [
@@ -128,6 +129,6 @@
 			}
  		});
  	};
-
+ 	$.extend(CustomSelect.prototype, Events);
  	module.exports = CustomSelect;
  })

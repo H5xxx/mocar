@@ -2,6 +2,12 @@
  * 选择服务类型和配件页面的controller
  */
 define(function(require, exports) {
+    var util = require('../component/util');
+    var Vehicle = require('../model/vehicle');
+    var Contact = require('../model/contact');
+    var Brand = require('../model/brand');
+    var Series = require('../model/series');
+    var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
     var CustomSelect = require('../widgets/CustomSelect');
 
@@ -16,8 +22,32 @@ define(function(require, exports) {
         getData: function(params, callback){
             var data = {
             };
-
-            callback(null, data);
+            var url = ['http://api.mocar.cn/models/',params.model_id,'/services/', params.service_id].join('');
+            $.ajax({
+                url:url,
+                success:function(data, status, xhr){
+                    function normalizeData(){
+                        var parts = data.parts, options, option;
+                        for(var i = 0, ilen = parts.length; i < ilen; i++){
+                            options = parts[i].options;
+                            if(options){
+                                for(var j = 0, jlen = options.length; j < jlen; j++){
+                                    option = options[j];
+                                    if(option.price == 0 && options.hint){
+                                        options.price = options.hint;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    normalizeData(data);
+                    callback(null, data)
+                },
+                error: function(xhr, errorType, error){
+                    Popup.open('Error: ' + errorType + error);
+                }
+            });
+            //callback(null, data);
         },
 
         render: function(params){
@@ -26,7 +56,9 @@ define(function(require, exports) {
 
             this.el.html(html);
             //TODO 弹出窗口，初始化自定义select
-            setTimeout(initPopupAndCustomSelect, 500);
+            setTimeout(function(){
+                initPopupAndCustomSelect(params)
+            }, 500);
             //initPopupAndCustomSelect();
         },
 
@@ -36,65 +68,110 @@ define(function(require, exports) {
         },
 
         activate: function(params){
+            var self = this;
+            //TODO 现在先一次性把车辆和用户地址一次都给取出来，等后端接口可以联调后，再按需请求
+            util.finish([
+                Vehicle.fetch({uid:'me'}),
+                Contact.fetch({uid:'me'})
+            ], function(vehicles, contacts){
+                if(!params.model_id){
+                    //TODO $.ajax(); 调用接口获取用户的车辆列表，如果 有，传入model_id；如果没有跳到选车页面
 
-            if(!params.model_id){
-                //TODO $.ajax();
-                this.page.navigate('/service/' + params.service_id + '/brand');
-            }else{
-                this.constructor.__super__.activate.apply(this, arguments);
-            }
+                    // util.f([
+                    //     Model.fetch(params),
+                    //     Series.fetch(params),
+                    //     Brand.fetch(params)
+                    // ], function(list){
+                    //     data = $.extend(
+                    //         {
+                    //             list: list
+                    //         },
+                    //         Brand.find(params.brand_id),
+                    //         Series.find(params.series_id)
+                    //     );
 
+                    //     callback(null, data);
+                    // });
+                    if(vehicles.length == 0){//去选车
+                        self.page.navigate('/service/' + params.service_id + '/brand');
+                    }else{
+                        params.model_id = vehicles[0].modelId;
+                        self.getData(params, function(err, data){
+                            $.extend(params, data, {
+                                currentVehicle: vehicles[0],
+                                allVehicles: vehicles
+                            });
+                            util.title(self.title);
+                            self.fadein();
+                            self.render(params);
+
+                        });
+                    }
+                }else{
+                    self.constructor.__super__.activate.apply(self, arguments);
+                }
+            });
         }
     });
 
-    function initPopupAndCustomSelect(){
-        var buyelseTipHtml = [
-            '<div class="buyelse-popup mocar-tip-popup">',
-                '<div class="title">选择配件</div>',
-                '<div class="popup-content">',
-                    '<p>摩卡提供和使用的所有配件，均可<br/>在京东自营商店买到。</p>',
-                    '<br>',
-                    '<p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>',
-                '</div>',
-                '<div class="command-area">',
-                    '<a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>',
-                    '<a href="javascript:void(0);" class="buyelsebtn">自行购买</a>',
-                '</div>',
-            '</div>'].join('');
+    function initPopupAndCustomSelect(data){
+        var buyelseTipHtml = document.querySelector('#template-buyelsetip').innerHTML;
         Popup.open(buyelseTipHtml,function(popupContent){
             var mocarbtn = popupContent.querySelector('.mocarbtn');
             var buyelsebtn = popupContent.querySelector('.buyelsebtn');
             mocarbtn.addEventListener('click', function(){
                 initSelect();
+                calculateTotalPrice();
                 Popup.close();
             });
             buyelsebtn.addEventListener('click', function(){
                 initSelect(true);
+                calculateTotalPrice();
                 Popup.close();
             });
         });
+        function calculateTotalPrice(){
+            var totalPrice = 0, itemPrice;
+            var priceEl = $('[data-price]');
+            var totalPriceEl = $('[data-totalprice]');
+            priceEl.each(function(i, el){
+                itemPrice = el.getAttribute('data-price');
+                if(itemPrice){
+                    itemPrice = parseFloat(itemPrice);
+                    if(itemPrice){
+                        totalPrice += itemPrice;
+                    }
+                }
+            });
+            totalPriceEl.html(totalPrice);
+            totalPriceEl.attr('data-totalprice', totalPrice);
+        }
         function initSelect (buyelse) {
             var optArrs = [
+                    /*['奥迪 国产A4 1.8T']*/
+                ([data.currentVehicle.model].concat(data.allVehicles.filter(function(v){
+                    return data.currentVehicle.id != v.id;
+                    }).map(function(v){
+                        return v.model;
+                    }))).map(function(name){
+                        return [name]
+                    })
+                ,
                 [
-                    ['奥迪 国产A4 1.8T']
+                    // ['摩卡汽车保养服务', '160元'],
+                    // ['摩卡汽车保养服务（豪华版）', '300元']
+                    [data.name, data.price]
                 ],
-                [
-                    ['摩卡汽车保养服务', '160元'],
-                    ['摩卡汽车保养服务（豪华版）', '300元']
-                ],
-                [   ['嘉实多磁护SN级5w-40','330元'],
-                    ['嘉实多极护SN级0w-40','450元'],
-                    ['自行购买','0元']
-                ],
-                [
-                    ['曼牌 W 940/25', '200元'],
-                    ['自行购买','0元']
-                ],
-                [
-                    ['曼牌 C27 192/1', '300元'],
-                    ['自行购买','0元']
-                ]
+                // [   ['嘉实多磁护SN级5w-40','330元'],
+                //     ['嘉实多极护SN级0w-40','450元'],
+                //     ['自行购买','0元']
+                // ],
             ];
+            for(var i = 0, ilen = data.parts.length; i < ilen; i++){
+                optArrs.push([].concat(data.parts[i].options.map(function(opt){
+                    return [opt.brand + opt.name + " " + opt.extra, opt.price + '元']
+                })));
+            }
             var selectWrappers = document.querySelectorAll('.select-wrapper');
             var selectWrapper, selectTrigger, selectInput;
 
@@ -103,10 +180,24 @@ define(function(require, exports) {
                 selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
                 selectInput = selectWrapper.querySelector('input');
                 if( i >= 2 && buyelse){
-                    var initialSelectedIndex = optArrs[i].length - 1;
+                    var initialSelectedIndex;
+
+                    var filtered = optArrs[i].filter(function(opt, i){
+                        if(opt[0].indexOf('自行购买') !== -1){
+                            initialSelectedIndex = i;
+                            return true;
+                        }
+                    });
+                    if(!initialSelectedIndex){
+                        initialSelectedIndex = 0;
+                    }
                     selectInput.value = initialSelectedIndex;
-                    selectTrigger.querySelector('.product-name').innerHTML = optArrs[i][initialSelectedIndex][0];
-                    selectTrigger.querySelector('.price').innerHTML = optArrs[i][initialSelectedIndex][1];
+                    var optionNameEl = selectTrigger.querySelector('.product-name');
+                    var priceEl = selectTrigger.querySelector('.price');
+                    
+                    optionNameEl.innerHTML = optArrs[i][initialSelectedIndex][0];
+                    priceEl.innerHTML = optArrs[i][initialSelectedIndex][1];
+                    priceEl.setAttribute('data-price', optArrs[i][initialSelectedIndex][1]);
                 }else{
                     selectInput.value = 0;
                 }
@@ -119,8 +210,10 @@ define(function(require, exports) {
                                 productNameEl.innerHTML = optArr[selectedIndex][0];
                                 if(priceEl){
                                     priceEl.innerHTML = optArr[selectedIndex][1];
+                                    priceEl.setAttribute('data-price', optArr[selectedIndex][1]);
                                 }
                             }
+                            calculateTotalPrice();
                         });
                     })(selectTrigger, selectInput, optArrs[i])
                 }

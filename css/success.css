@@ -1,6 +1,7 @@
 /************************  预约成功  ************************/
 #car-success{
     height: 100%;
+    position: static;
 }
 #schedule-info{
     overflow: hidden;

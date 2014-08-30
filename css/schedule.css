@@ -1,6 +1,7 @@
 /************************  上门信息  ************************/
 #car-schedule{
     height: 100%;
+    position: static;
 }
 #schedule-info{
     overflow: hidden;

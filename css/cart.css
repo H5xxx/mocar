@@ -1,6 +1,10 @@
 /************************  选择附件信息  ************************/
 
-#car-cart {} #accessories-info {
+#car-cart {
+    height: 100%;
+    position: static;
+} 
+#accessories-info {
     overflow: hidden;
     clear: both;
 }

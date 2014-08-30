@@ -1,7 +1,5 @@
 define(function(require, exports) {
 
-    require('../mockAjax');
-
     var Page = Spine.Stack.sub({
 
         // 所有controller
