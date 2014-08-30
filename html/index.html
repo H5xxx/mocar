@@ -8,8 +8,8 @@
     <link rel='stylesheet' href='../css/base.css'>
     <link rel='stylesheet' href='../css/home.css'>
     <link rel="stylesheet" href="../css/service.css">
-    <link rel='stylesheet' href='../css/accessories.css'>
-    <link rel='stylesheet' href='../css/door.css'>
+    <link rel='stylesheet' href='../css/cart.css'>
+    <link rel='stylesheet' href='../css/schedule.css'>
     <link rel='stylesheet' href='../css/success.css'>
     <script src="../js/lib/template.js"></script>
     <script src="../js/lib/sea.js"></script>
@@ -97,7 +97,7 @@
             {{include 'template-navigator'}}
             <div class="j-model-list">
                 {{each list as item i}}
-                    <div class="model-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/cart">
+                    <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
                         <span>{{item.suffix}} {{item.model}}</span>
                     </div>
                 {{/each}}
@@ -119,7 +119,7 @@
     </script>
     <!-- 选择服务类型 与 配件 页面 模板 -->
     <script id="template-cart" type="text/html">
-        <div class="j-service-container">
+        <div class="j-cart-container">
             <div id='accessories-info'>
                 <div id='car-info' class='mt20px'>
                     <i class='site-icons icon-car'></i>
@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav" data-nav="/schedule">
+                <a href="javascript:void(0);" class="j-nav" data-nav="/service/2/model/2/schedule">
                     <i class='site-icons icon-nextstep'></i>
                 </a>
                 <div class='content-area justify-wrap'>
@@ -272,7 +272,7 @@
                 </div>
             </div>
             <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav" data-nav="/success">
+                <a href="javascript:void(0);" class="j-nav" data-nav="/service/2/model/1/success">
                     <i class='site-icons icon-success'></i>
                 </a>
                 <div class='content-area justify-wrap'>

@@ -11,7 +11,7 @@ define(function(require, exports) {
         // 该controller要渲染&控制的区域
         el: $('#car-home'),
 
-        title: '预约服务',
+        title: '摩卡服务',
 
         template: 'template-home',
 

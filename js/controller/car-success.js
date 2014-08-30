@@ -8,6 +8,8 @@ define(function(require, exports) {
     var CarSuccess = require('./common').sub({
 
         el: $('#car-success'),
+        
+        title : '预约提交成功',
 
         template: 'template-success'
     });

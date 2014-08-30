@@ -10,6 +10,8 @@ define(function(require, exports) {
         // 该controller要渲染&控制的区域
         el: $('#car-schedule'),
 
+        title: '上门服务信息',
+
         template: 'template-schedule',
 
         getData: function(params, callback){

@@ -24,7 +24,7 @@ define(function(require, exports) {
             '/service/:service_id/brand': 'brand',
             '/service/:service_id/brand/:brand_id/series': 'series',
             '/service/:service_id/brand/:brand_id/series/:series_id/model': 'model',
-            '/service/:service_id/brand/:brand_id/series/:series_id/model/:model_id/cart': 'cart',
+            '/service/:service_id/model/:model_id/cart': 'cart',
             '/service/:service_id/cart': 'cart',
             '/service/:service_id/model/:model_id/schedule': 'schedule',
             '/service/:service_id/model/:model_id/success': 'success'

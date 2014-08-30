@@ -8,7 +8,9 @@ define(function(require, exports) {
     var CarCart = require('./common').sub({
         // 该controller要渲染&控制的区域
         el: $('#car-cart'),
-
+        
+        title: '选择配件',
+        
         template: 'template-cart',
 
         getData: function(params, callback){
@@ -35,9 +37,8 @@ define(function(require, exports) {
 
         activate: function(params){
 
-            var isNew = Math.random() > 0.5;
-
-            if(isNew){
+            if(!params.model_id){
+                //TODO $.ajax();
                 this.page.navigate('/service/' + params.service_id + '/brand');
             }else{
                 this.constructor.__super__.activate.apply(this, arguments);

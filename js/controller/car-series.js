@@ -1,3 +1,6 @@
+/*
+ * 选择车系
+ */
 define(function(require, exports) {
     var util = require('../component/util');
 
