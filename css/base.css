@@ -4,6 +4,7 @@ html,body{
 
 .main-container{
     width: 350px;
+    height: 100%;
     position: relative;
     margin: 0 auto;
 }

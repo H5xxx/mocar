@@ -29,6 +29,7 @@ define(function(require, exports) {
             '/brand/:brand_id/series/:series_id/model/:model_id/displacement/:displacement_id/service': 'service',
             '/brand/:brand_id/series/:series_id/model/:model_id/service': 'service',
             '/service': 'service',
+            '/service/:series_id': 'service',
             '/service/:series_id/schedule': 'schedule',
             '/schedule': 'schedule',
             '/success': 'success'

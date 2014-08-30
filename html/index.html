@@ -28,7 +28,7 @@
                     {{each services as service i}}
                     <li class='service-item'>
                         <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}">
                             <i class="site-icons icon-{{service.icon}}"></i>
                             <div class="content-area border-bottom">
                                 <p class="title">{{service.name}}</p>
