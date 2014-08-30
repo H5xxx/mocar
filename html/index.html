@@ -28,7 +28,7 @@
                     {{each services as service i}}
                     <li class='service-item'>
                         <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}">
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/cart">
                             <i class="site-icons icon-{{service.icon}}"></i>
                             <div class="content-area border-bottom">
                                 <p class="title">{{service.name}}</p>
@@ -48,20 +48,20 @@
     <script id="template-navigator" type="text/html">
         <div class="crumble">
             {{if brand_id}}
-                <span class="j-nav" data-nav="/brand">{{brand}}</span>
+                <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span>
                 {{if series_id}}
-                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">>> {{family}}</span>
+                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> {{family}}</span>
                     {{if model_id}}
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span>
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span>
                     {{else}}
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span>
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span>
                     {{/if}}
                 {{else}}
-                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">>> 车系</span>
+                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> 车系</span>
                 {{/if}}
             {{else}}
-                <span class="j-nav" data-nav="/brand">品牌</span>
+                <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
             {{/if}}
         </div>
     </script>
@@ -71,7 +71,7 @@
             {{include 'template-navigator'}}
             <div class="j-brand-list">
                 {{each list as item i}}
-                    <div class="brand-item j-nav" data-nav="/brand/{{item.id}}/series">
+                    <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
                         <span>{{item.brand}}</span>
                     </div>
                 {{/each}}
@@ -84,7 +84,7 @@
             {{include 'template-navigator'}}
             <div class="j-series-list">
                 {{each list as item i}}
-                    <div class="series-item j-nav" data-nav="/brand/{{brand_id}}/series/{{item.id}}/model">
+                    <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
                         <span>{{item.prefix}} {{item.family}}</span>
                     </div>
                 {{/each}}
@@ -97,7 +97,7 @@
             {{include 'template-navigator'}}
             <div class="j-model-list">
                 {{each list as item i}}
-                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/service">
+                    <div class="model-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/cart">
                         <span>{{item.suffix}} {{item.model}}</span>
                     </div>
                 {{/each}}
@@ -110,7 +110,7 @@
             {{include 'template-navigator'}}
             <div class="j-displacement-list">
             {{each list as item i}}
-                <div class="displacement-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement/{{item.displacement_id}}/service">
+                <div class="displacement-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement/{{item.displacement_id}}/service">
                     <span>{{item.displacement}}</span>
                 </div>
             {{/each}}
@@ -118,7 +118,7 @@
         </div>
     </script>
     <!-- 选择服务类型 与 配件 页面 模板 -->
-    <script id="template-service" type="text/html">
+    <script id="template-cart" type="text/html">
         <div class="j-service-container">
             <div id='accessories-info'>
                 <div id='car-info' class='mt20px'>
@@ -375,8 +375,7 @@
         <div id='car-brand'></div>
         <div id='car-series'></div>
         <div id='car-model'></div>
-        <div id='car-displacement'></div>
-        <div id='car-service'></div>
+        <div id='car-cart'></div>
         <div id='car-schedule'></div>
         <div id='car-success'></div>
 
