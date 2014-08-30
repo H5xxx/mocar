@@ -1,4 +1,5 @@
 define(function(require, exports) {
+    var Brand = require('../model/brand');
     var Series = require('../model/series');
     var Model = require('../model/model');
 
@@ -9,7 +10,7 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             Model.fetch(params, function(err, data){
-                data = $.extend(data, Series.find(params.series_id));
+                data = $.extend(data, Brand.find(params.brand_id), Series.find(params.series_id));
                 callback(null, data);
             });
         }

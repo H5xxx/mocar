@@ -1,21 +1,11 @@
 define(function(require, exports) {
-    var Series = Spine.Model.sub();
+    var Series = require('./common').sub();
 
     Series.configure('Series', 'id', 'prefix', 'family');
 
     Series.extend({
-        fetch: function(params, callback){
-            $.getJSON('http://api.mocar.cn/automobile/brands/1/families', function(list){
-
-                list.forEach(function(item){
-                    Series.create(item);
-                });
-
-                callback(null, {
-                    list: list
-                });
-            });
-        }
+        url: 'http://api.mocar.cn/automobile/brands/${brand_id}/families'
     });
+
     return Series;
 });

@@ -45,4 +45,19 @@ define(function(require, exports) {
             }
         ];
     });
+
+    Mock.mock(/\/automobile\/brands\/\w+\/families\/\w+\/models\/\w+\/displacements$/, function(options) {
+        return [
+            {
+                "id" : 1,
+                "displacement" : "SAMPLE DISPLACEMENT",
+                "description" : "..."
+            },
+            {
+                "id" : 2,
+                "displacement" : "SAMPLE DISPLACEMENT2",
+                "description" : "..."
+            }
+        ];
+    });
 });

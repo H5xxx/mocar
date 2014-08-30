@@ -18,15 +18,15 @@
             {{if brand_id}}
                 <span class="j-nav" data-nav="/brand">{{brand}}</span>
                 {{if series_id}}
-                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">{{family}}</span>
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">>> {{family}}</span>
                     {{if model_id}}
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">{{model}}</span>
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">排量</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span>
                     {{else}}
-                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">年款</span>
+                        <span class="j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span>
                     {{/if}}
                 {{else}}
-                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">车系</span>
+                    <span class="j-nav" data-nav="/brand/{{brand_id}}/series">>> 车系</span>
                 {{/if}}
             {{else}}
                 <span class="j-nav" data-nav="/brand">品牌</span>
@@ -79,7 +79,7 @@
             <div class="j-displacement-list">
             {{each list as item i}}
                 <div class="displacement-item j-nav" data-nav="/brand">
-                    <span>{{item.displacement_name}}</span>
+                    <span>{{item.displacement}}</span>
                 </div>
             {{/each}}
             </div>
