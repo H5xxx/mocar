@@ -5,7 +5,12 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <title>选择车型</title>
+    <link rel='stylesheet' href='../css/base.css'>
+    <link rel='stylesheet' href='../css/home.css'>
     <link rel="stylesheet" href="../css/service.css">
+    <link rel='stylesheet' href='../css/accessories.css'>
+    <link rel='stylesheet' href='../css/door.css'>
+    <link rel='stylesheet' href='../css/success.css'>
     <script src="../js/lib/template.js"></script>
     <script src="../js/lib/sea.js"></script>
     <script src="../js/lib/zepto.js"></script>
@@ -13,6 +18,66 @@
     <script src="../js/lib/route.js"></script>
     <script src="../js/lib/manager.js"></script>
 
+    <script id="template-home" type="text/html">
+        <div class="j-home-container">
+            <div id='mocar-service-home'>
+                <div class='logo-area'>
+                    <img src="../css/icons/mocar.png" alt="摩卡服务" width="308" height="160">
+                </div>
+                <ul class='service-list'>
+                    <li class='service-item'>
+                        <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
+                            <i class="site-icons icon-changguibaoyang"></i>
+                            <div class="content-area border-bottom">
+                                <p class="title">常规保养</p>
+                                <span class="info">
+                                    <span class="price">200元起</span>——最专业的技师，<br>
+                                    最专业的工具，最合理的价格
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class='service-item'>
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
+                            <i class="site-icons icon-kongtiaomiejun"></i>
+                            <div class="content-area border-bottom">
+                                <p class="title">空调灭菌</p>
+                                <span class="info">
+                                    <span class="price">200元起</span>——德国曼牌工艺<br>
+                                    最专业的工具，最合理的价格
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class='service-item'>
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
+                            <i class="site-icons icon-donglitisheng"></i>
+                            <div class="content-area border-bottom">
+                                <p class="title">动力提升</p>
+                                <span class="info">
+                                    <span class="price">300元起</span>——看的见的积碳清洁<br>
+                                    最专业的工具，最合理的价格
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class='service-item'>
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service">
+                            <i class="site-icons icon-huanshachepian"></i>
+                            <div class="content-area">
+                                <p class="title">换刹车片</p>
+                                <span class="info">
+                                    <span class="price">300元起</span>——看的见的积碳清洁<br>
+                                    最专业的工具，最合理的价格
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </script>
     <script id="template-navigator" type="text/html">
         <div class="crumble">
             {{if brand_id}}
@@ -61,11 +126,11 @@
     </script>
 
     <script id="template-model" type="text/html">
-        <div class="j-series-container">
+        <div class="j-model-container">
             {{include 'template-navigator'}}
             <div class="j-model-list">
                 {{each list as item i}}
-                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/displacement">
+                    <div class="model-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{item.id}}/service">
                         <span>{{item.suffix}} {{item.model}}</span>
                     </div>
                 {{/each}}
@@ -74,14 +139,261 @@
     </script>
 
     <script id="template-displacement" type="text/html">
-        <div class="j-series-container">
+        <div class="j-displacement-container">
             {{include 'template-navigator'}}
             <div class="j-displacement-list">
             {{each list as item i}}
-                <div class="displacement-item j-nav" data-nav="/brand">
+                <div class="displacement-item j-nav" data-nav="/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement/{{item.displacement_id}}/service">
                     <span>{{item.displacement}}</span>
                 </div>
             {{/each}}
+            </div>
+        </div>
+    </script>
+    <!-- 选择服务类型 与 配件 页面 模板 -->
+    <script id="template-service" type="text/html">
+        <div class="j-service-container">
+            <div id='accessories-info'>
+                <div id='car-info' class='mt20px'>
+                    <i class='site-icons icon-car'></i>
+                    <div class='content-area form-row'>
+                        <p class="accessory info">车辆型号</p>
+                        <div class='select-wrapper'>
+                            <div class='custom-select-trigger'>
+                                <span class='product-name'>奥迪 国产A4 1.8T</span>    
+                            </div>
+                            <input type="text" name="carInput" style="display:none">
+                        </div>
+                    </div>
+                </div>
+                <div id='service-info' class=''>
+                    <i class='site-icons icon-service'></i>
+                    <div class='content-area form-row'>
+                        <p class="accessory info">服务项目</p>
+                        <div class="select-wrapper">
+                            <div class='custom-select-trigger'>
+                                <span class='product-name'>摩卡汽车保养服务</span>
+                                <span class='price'>160元</span>    
+                            </div>
+                            <input type="text" name="serviceInput" style="display:none">
+                        </div>
+                    </div>
+                </div>
+                <div id='service-detail' class=''>
+                    <i class='site-icons icon-accessory'></i>
+                    <div class='content-area'>
+                        <ul>
+                            <li class='form-row'>
+                                <p class="accessory info">
+                                    机油
+                                </p>
+                                <div class="select-wrapper">
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>嘉实多磁护SN级5w-40</span>
+                                        <span class='price'>260元</span>    
+                                    </div>
+                                    <input type="text" name="accessoryInput" placeholder='请选择...' style="display:none">
+                                </div>
+                            </li>
+                            <li class='form-row'>
+                                <p class="accessory info">
+                                    机滤
+                                </p>
+                                <div class="select-wrapper">
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>曼牌 W 940/25</span>
+                                        <span class='price'>260元</span>    
+                                    </div>
+                                    <input type="text" name="accessoryInput" style="display:none">
+                                </div>
+                            </li>
+                            <li class='form-row'>
+                                <p class="accessory info">
+                                    空气过滤器
+                                </p>
+                                <div class="select-wrapper">
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>曼牌 C27 192/1</span>
+                                        <span class='price'>260元</span>    
+                                    </div>
+                                    <input type="text" name="accessoryInput" style="display:none">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class='footer'>
+                <a href="javascript:void(0);" class="j-nav" data-nav="/schedule">
+                    <i class='site-icons icon-nextstep'></i>
+                </a>
+                <div class='content-area justify-wrap'>
+                    <span class='tip justify-content'>总价：<span>667</span>元</span>
+                </div> 
+            </div>
+        </div>
+    </script>
+    <!-- 预约上门信息 页面 模板 -->
+    <script id="template-schedule" type="text/html">
+        <div class="j-schedule-container">
+            <div id='schedule-info'>
+                <div id='generalAddress' class='hight110px'>
+                    <i class="site-icons icon-location"></i>
+                    <div class='content-area zero-font-size'>
+                        <span class='first border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>北京市</span>  
+                                </div>
+                                <input type="text" name="cityInput" style="display:none">
+                            </div>
+                        </span>
+                        <span class='second border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>海淀区</span>  
+                                </div>
+                                <input type="text" name="districtInput" style="display:none">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div id='detailAddress' class='hight110px'>
+                    <div class='content-area border-bottom'>
+                        <input type="text" name='detailAddressInput' id='detailAddressInput' placeholder='输入详细地址'>
+                    </div>
+                </div>
+                <div id='scheduleTime' class='hight110px'>
+                    <i class="site-icons icon-time"></i>
+                    <div class='content-area zero-font-size'>
+                        <span class='first border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>2014-07-22</span>  
+                                </div>
+                                <input type="text" name="dayInput" style="display:none">
+                            </div>
+                        </span>
+                        <span class='second border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>13:00</span>  
+                                </div>
+                                <input type="text" name="timeInput" style="display:none">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div id='carNo' class='hight110px'>
+                    <i class="site-icons icon-car"></i>
+
+                    <div class='content-area border-bottom'>
+                        <input type="text" placeholder='车牌号，例如京NB520Z' id='carNoInput' name='carNoInput'>
+                    </div>
+                </div>
+                <div id='name' class='hight110px'>
+                    <i class="site-icons icon-user"></i>
+                    <div class='content-area border-bottom'>
+                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput'>
+                    </div>
+                </div>
+                <div id='phoneNumber' class='hight110px'>
+                    <i class="site-icons icon-phone"></i>
+                    <div class='content-area border-bottom'>
+                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput'>
+                    </div>
+                </div>
+            </div>
+            <div class='footer'>
+                <a href="javascript:void(0);" class="j-nav" data-nav="/success">
+                    <i class='site-icons icon-success'></i>
+                </a>
+                <div class='content-area justify-wrap'>
+                    <span class='tip justify-content'>总价：<span>667</span>元</span>
+                </div> 
+            </div>
+        </div>
+    </script>
+    <!-- 预约成功 页面 模板 -->
+    <script id="template-success" type="text/html">
+        <div class="j-success-container">
+            <div id='schedule-success'>
+                <div id='success-tip' class='header'>
+                    <i class='site-icons icon-success'></i>
+                    <div class='content-area'>
+                        <div class='justify'>
+                            <span class='tip'>稍候客服会联系您确认服务信息，请保持手机通讯畅通</span>
+                        </div>
+                    </div> 
+                </div>
+                <div id='car-info' class='mt20px'>
+                    <i class='site-icons icon-car'></i>
+                    <div class='content-area form-row'>
+                        <div class='justify'>
+                            <span class="brand info">奥迪</span>
+                            <span class='model info'>国产A4</span>
+                            <span class="displacement info">1.8T</span>
+                            <span class='carNo info last'>NB520Z</span>
+                        </div>
+                    </div>
+                </div>
+                <div id='service-info' class=''>
+                    <i class='site-icons icon-service'></i>
+
+                    <div class='content-area form-row'>
+                        <span class="brand info">摩卡汽车保养服务</span>
+                        <span class='carNo info last'>160元</span>
+                    </div>
+                </div>
+                <div id='service-detail' class=''>
+                    <i class='site-icons icon-accessory'></i>
+
+                    <div class='content-area'>
+                        <ul>
+                            <li class='form-row'>
+                                <p class="accessory info">机油</p>
+                                <span class='model info'>嘉实多磁护SN级5w-40</span>
+                                <span class='carNo info last'>260元</span>
+                            </li>
+                            <li class='form-row'>
+                                <p class="accessory info">机滤</p>
+                                <span class='model info'>曼牌 W 940/25</span>
+                                <span class='carNo info last'>NB520Z</span>
+                            </li>
+                            <li class='form-row'>
+                                <p class="accessory info">空气过滤器</p>
+                                <span class='model info'>曼牌 C27 192/1</span>
+                                <span class='carNo info last'>NB520Z</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id='address-info' class=''>
+                    <i class='site-icons icon-location'></i>
+                    <div class='content-area form-row pr10px'>
+                            <span class='city info'>北京市</span>
+                            <span class='district info'>海淀区</span>
+                            <span class='district info'>
+                                西二旗西路领秀新硅谷D区54号101
+                            </span>
+                    </div>
+                </div>
+                <div id='schedule-info' class=''>
+                    <i class='site-icons icon-time'></i>
+                    <div class='content-area form-row'>
+                            <span class='day info'>2014-07-22</span>
+                            <span class='time info last'>13:00</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class='footer'>
+                <a href="javascript:void(0);" class="j-nav" data-nav="/home">
+                    <i class='site-icons icon-home'></i>
+                </a>
+                <div class='content-area justify-wrap'>
+                    <span class='tip justify-content'>总价：<span>667</span>元</span>
+                </div> 
             </div>
         </div>
     </script>
@@ -89,10 +401,14 @@
 </head>
 <body>
 
+    <div id='car-home'></div>
     <div id='car-brand'></div>
     <div id='car-series'></div>
     <div id='car-model'></div>
     <div id='car-displacement'></div>
+    <div id='car-service'></div>
+    <div id='car-schedule'></div>
+    <div id='car-success'></div>
 
     <script>
 

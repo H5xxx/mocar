@@ -1,8 +1,11 @@
 /************************  预约成功  ************************/
+#car-success{
+    height: 100%;
+}
 #schedule-info{
     overflow: hidden;
     clear: both;
-    margin-top: 20px
+    padding-top: 20px
 }
 #schedule-success .second{
     width: 49%;
