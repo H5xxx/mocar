@@ -32,8 +32,13 @@ define(function(require, exports) {
         });
     };
 
+    var title = function(t){
+        return t ? $('title').text(t).text() : $('title').text();
+    };
+
     return {
         format: format,
-        finish: finish
+        finish: finish,
+        title: title
     };
 });

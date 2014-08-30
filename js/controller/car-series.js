@@ -7,6 +7,8 @@ define(function(require, exports) {
     var CarSeries = require('./common').sub({
         el: $('#car-series'),
 
+        title: '选择车系',
+
         template: 'template-series',
 
         getData: function(params, callback){

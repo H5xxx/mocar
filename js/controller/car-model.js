@@ -8,6 +8,8 @@ define(function(require, exports) {
     var CarModel = require('./common').sub({
         el: $('#car-model'),
 
+        title: '选择年款',
+
         template: 'template-model',
 
         getData: function(params, callback){

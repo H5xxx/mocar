@@ -6,6 +6,8 @@ define(function(require, exports) {
     var CarBrand = require('./common').sub({
         el: $('#car-brand'),
 
+        title: '选择品牌',
+
         template: 'template-brand',
 
         getData: function(params, callback){
