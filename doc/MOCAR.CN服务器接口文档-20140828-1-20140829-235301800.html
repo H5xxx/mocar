@@ -2897,12 +2897,10 @@ list.forEach(function(item, i) {
         }
 
         item.onclick = function(){
-            var visible = this.downersVisible;
+            var visible = this.downers[0].style.display !== 'none';
             this.downers.forEach(function(downer){
                 downer.style.display = visible ? 'none' : '';
             });
-
-            this.downersVisible = !visible;
         }
     }
     item.style.display = 'none';
@@ -2914,6 +2912,9 @@ list.forEach(function(item, i) {
 <style type="text/css">
 .container > *, .container > pre{
     margin-left: 120px;
+}
+.container > h2, .container > h3, .container > h4{
+    cursor: pointer;
 }
 .container > h2{
     margin-left: 30px;
