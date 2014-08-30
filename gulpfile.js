@@ -12,12 +12,17 @@ var dest = __dirname, //本地开发时的监测目录，部署时用dist目录
     openPath = dest + "/html/index.html", //用浏览器打开的文件路径
     openOption = {
         url: "http://127.0.0.1:" + port + "/html/index.html#/"
+    },
+    openOption2 = {
+        url: "http://127.0.0.1:" + port + "/html/index.html#/service/1/cart"
     };
 
 //用浏览器打开dest目录下的index.html文件
 gulp.task('open', /*['server'],*/ function(){
     gulp.src(openPath)
         .pipe(open("", openOption));
+    gulp.src(openPath)
+        .pipe(open("", openOption2));
 });
 
 /*

@@ -18,7 +18,7 @@ define(function(require, exports) {
         // 每个controller对应一个url，从中取到参数
         routes: {
             '/': function(){
-                this.navigate('/brand');
+                this.navigate('/home');
             },
             '/home': 'home',
             '/service/:service_id/brand': 'brand',
