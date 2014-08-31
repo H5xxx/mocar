@@ -106,7 +106,7 @@ define(function(require, exports) {
             {
                 "id" : 183642,
                 "name" : "张先生",
-                "cityCode" : "110100",
+                "cityCode" : "100080",
                 "city" : "北京市",
                 "address" : "海淀区西二旗西路领袖新硅谷D区101",
                 "phone" : "186xxxxxxxx"
@@ -124,35 +124,6 @@ define(function(require, exports) {
     //城市
     Mock.mock(/\/location\/cities/, function(options){
         return [
-            {
-                "province":"北京市",
-                "cities":[
-                    {
-                        "cityCode":100010,
-                        "city":"东城区"
-                    },
-                    {
-                        "cityCode":100020,
-                        "city":"朝阳区"
-                    },
-                    {
-                        "cityCode":100030,
-                        "city":"西城区"
-                    },
-                    {
-                        "cityCode":100080,
-                        "city":"海淀区"
-                    },
-                    {
-                        "cityCode":100180,
-                        "city":"石景山区"
-                    },
-                    {
-                        "cityCode":100280,
-                        "city":"通州区"
-                    },
-                ]
-            },
             {
                 "province":"上海市",
                 "cities":[
@@ -181,6 +152,35 @@ define(function(require, exports) {
                         "city":"虹桥区"
                     }
                 ]
+            },
+            {
+                "province":"北京市",
+                "cities":[
+                    {
+                        "cityCode":100010,
+                        "city":"东城区"
+                    },
+                    {
+                        "cityCode":100020,
+                        "city":"朝阳区"
+                    },
+                    {
+                        "cityCode":100030,
+                        "city":"西城区"
+                    },
+                    {
+                        "cityCode":100080,
+                        "city":"海淀区"
+                    },
+                    {
+                        "cityCode":100180,
+                        "city":"石景山区"
+                    },
+                    {
+                        "cityCode":100280,
+                        "city":"通州区"
+                    },
+                ]
             }
         ];
     });
@@ -208,8 +208,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":102,
+                                    "typeId":1,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -224,8 +224,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":201,
+                                    "typeId":2,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -233,8 +233,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":202,
+                                    "typeId":2,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -249,8 +249,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":301,
+                                    "typeId":3,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -258,8 +258,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":302,
+                                    "typeId":3,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -267,8 +267,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":3,
-                                    "typeId":0,
+                                    "id":303,
+                                    "typeId":3,
                                     "brand":"",
                                     "name":"不更换该配件",
                                     "extra":"",
@@ -283,8 +283,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":401,
+                                    "typeId":4,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -292,8 +292,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":402,
+                                    "typeId":4,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -301,8 +301,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":3,
-                                    "typeId":0,
+                                    "id":403,
+                                    "typeId":4,
                                     "brand":"",
                                     "name":"不更换该配件",
                                     "extra":"",
@@ -317,8 +317,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":501,
+                                    "typeId":5,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -326,8 +326,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":502,
+                                    "typeId":5,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -335,8 +335,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":3,
-                                    "typeId":0,
+                                    "id":503,
+                                    "typeId":5,
                                     "brand":"",
                                     "name":"不更换该配件",
                                     "extra":"",
@@ -351,8 +351,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":601,
+                                    "typeId":6,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -360,8 +360,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":602,
+                                    "typeId":6,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -369,8 +369,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":3,
-                                    "typeId":0,
+                                    "id":603,
+                                    "typeId":6,
                                     "brand":"",
                                     "name":"不更换该配件",
                                     "extra":"",
@@ -385,8 +385,8 @@ define(function(require, exports) {
                             "quantity":1,
                             "options":[
                                 {
-                                    "id":1,
-                                    "typeId":0,
+                                    "id":701,
+                                    "typeId":7,
                                     "brand":"",
                                     "name":"原厂代购",
                                     "extra":"",
@@ -394,8 +394,8 @@ define(function(require, exports) {
                                     "hint":"21.50"
                                 },
                                 {
-                                    "id":2,
-                                    "typeId":0,
+                                    "id":702,
+                                    "typeId":7,
                                     "brand":"",
                                     "name":"自行购买",
                                     "extra":"",
@@ -403,8 +403,8 @@ define(function(require, exports) {
                                     "hint":""
                                 },
                                 {
-                                    "id":3,
-                                    "typeId":0,
+                                    "id":703,
+                                    "typeId":7,
                                     "brand":"",
                                     "name":"不更换该配件",
                                     "extra":"",
