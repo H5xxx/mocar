@@ -67,6 +67,9 @@ select {
     margin-left: 130px;
     display: block;
 }
+.mb50px {
+    margin-bottom: 50px;
+}
 .pr10px {
     padding-right: 10px;
 }
@@ -126,6 +129,7 @@ select {
     left: 0;
     opacity: 0.3;
     background: rgb(0, 0, 0);
+    z-index: 10;
 }
 /*弹出层wrapper,帮助定位*/
 
@@ -136,6 +140,7 @@ select {
     bottom: 0;
     left: 0;
     text-align: center;
+    z-index: 10;
 }
 .popup-wrapper:after {
     content: " ";
