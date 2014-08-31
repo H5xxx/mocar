@@ -1,4 +1,5 @@
 define(function(require, exports) {
+    require('../controller/access-token').init();
 
     var Page = Spine.Stack.sub({
 

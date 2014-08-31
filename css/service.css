@@ -84,13 +84,17 @@ img {
     border-left: 4px solid #f8f8f8;
 }
 .brand-item {
-    height: 75px;
     width: 33.33%;
     box-sizing: border-box;
     float: left;
     line-height: 45px;
+    text-align: center;
     border-bottom: 4px solid #f8f8f8;
     border-right: 4px solid #f8f8f8;
+}
+.brand-item > img {
+    height: 50px;
+    margin: 8px auto 5px;
 }
 .series-item, .model-item {
     margin: 0 20px;
