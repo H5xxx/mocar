@@ -65,6 +65,7 @@
                 <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
             {{/if}}
         </div>
+        <div style="height: 5px;background: -webkit-linear-gradient(top,#ccc,#fff);"></div>
     </script>
 
     <script id="template-brand" type="text/html">
@@ -361,13 +362,12 @@
             </div>
         </div>
     </script>
-
 </head>
+
 <body>
 
     <!-- main-container是所有内容的容器，保持在页面中居中，通过控制main-container的宽度可以实现响应式 -->
     <div id="main-container" class="main-container">
-
         <div class="page-container" id='car-home'></div>
         <div class="page-container" id='car-brand'></div>
         <div class="page-container" id='car-series'></div>
@@ -375,18 +375,16 @@
         <div class="page-container" id='car-cart'></div>
         <div class="page-container" id='car-schedule'></div>
         <div class="page-container" id='car-success'></div>
-
     </div>
 
     <script>
-
     seajs.config({
-      alias: {
-        "mock": "../js/lib/mock.js"
-      }
+        alias: {
+            "mock": "../js/lib/mock.js"
+        }
     })
-    seajs.use('../js/mockAjax', function () {
-        
+    seajs.use('../js/mockAjax', function() {
+
     });
 
     seajs.use("../js/page/index");
