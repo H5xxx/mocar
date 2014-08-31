@@ -121,7 +121,69 @@ define(function(require, exports) {
             }
         ];
     });
-    
+    //城市
+    Mock.mock(/\/location\/cities/, function(options){
+        return [
+            {
+                "province":"北京市",
+                "cities":[
+                    {
+                        "cityCode":100010,
+                        "city":"东城区"
+                    },
+                    {
+                        "cityCode":100020,
+                        "city":"朝阳区"
+                    },
+                    {
+                        "cityCode":100030,
+                        "city":"西城区"
+                    },
+                    {
+                        "cityCode":100080,
+                        "city":"海淀区"
+                    },
+                    {
+                        "cityCode":100180,
+                        "city":"石景山区"
+                    },
+                    {
+                        "cityCode":100280,
+                        "city":"通州区"
+                    },
+                ]
+            },
+            {
+                "province":"上海市",
+                "cities":[
+                    {
+                        "cityCode":200010,
+                        "city":"浦东新区"
+                    },
+                    {
+                        "cityCode":200020,
+                        "city":"黄埔区"
+                    },
+                    {
+                        "cityCode":200030,
+                        "city":"长宁区"
+                    },
+                    {
+                        "cityCode":200080,
+                        "city":"闵行区"
+                    },
+                    {
+                        "cityCode":200180,
+                        "city":"宝山区"
+                    },
+                    {
+                        "cityCode":200280,
+                        "city":"虹桥区"
+                    }
+                ]
+            }
+        ];
+    });
     //获取服务详情(*)
     Mock.mock(/\/models\/\w+\/services\/\w+$/, function(options) {
         return  {
