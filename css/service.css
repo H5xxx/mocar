@@ -62,6 +62,7 @@ img {
     line-height: 45px;
     padding-left: 20px;
     color: #60C900;
+    font-size: 16px;
 }
 /*.brand-item {
     float: left;
@@ -77,7 +78,21 @@ img {
     margin: 5px auto 8px;
 }*/
 
-.brand-item, .series-item, .model-item {
+.j-brand-list {
+    float: left;
+    border-top: 4px solid #eee;
+    border-left: 4px solid #eee;
+}
+.brand-item {
+    height: 75px;
+    width: 33.33%;
+    box-sizing: border-box;
+    float: left;
+    line-height: 45px;
+    border-bottom: 4px solid #eee;
+    border-right: 4px solid #eee;
+}
+.series-item, .model-item {
     margin: 0 20px;
     height: 45px;
     line-height: 45px;

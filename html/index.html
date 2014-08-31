@@ -47,7 +47,7 @@
         </div>
     </script>
     <script id="template-navigator" type="text/html">
-        <div class="crumble">
+        <div class="header">
             {{if brand_id}}
                 <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span>
                 {{if series_id}}
@@ -65,15 +65,18 @@
                 <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
             {{/if}}
         </div>
+        <div class="btw-header-main"></div>
     </script>
 
     <script id="template-brand" type="text/html">
-        <div class="j-brand-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-brand-container">
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
-                        <span>{{item.brand}}</span>
+                        <div>
+                            <span>{{item.brand}}</span>
+                        </div>
                     </div>
                 {{/each}}
             </div>
@@ -81,8 +84,8 @@
     </script>
 
     <script id="template-series" type="text/html">
-        <div class="j-series-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-series-container">
             <div class="j-series-list">
                 {{each list as item i}}
                     <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
@@ -94,8 +97,8 @@
     </script>
 
     <script id="template-model" type="text/html">
-        <div class="j-model-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-model-container">
             <div class="j-model-list">
                 {{each list as item i}}
                     <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
@@ -106,18 +109,6 @@
         </div>
     </script>
 
-    <script id="template-displacement" type="text/html">
-        <div class="j-displacement-container">
-            {{include 'template-navigator'}}
-            <div class="j-displacement-list">
-            {{each list as item i}}
-                <div class="displacement-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement/{{item.displacement_id}}/service">
-                    <span>{{item.displacement}}</span>
-                </div>
-            {{/each}}
-            </div>
-        </div>
-    </script>
     <!-- -->
     <script id="template-buyelsetip" type="text/html">
         <div class="buyelse-popup mocar-tip-popup">
@@ -282,7 +273,7 @@
     <script id="template-success" type="text/html">
         <div class="j-success-container">
             <div id='schedule-success'>
-                <div id='success-tip' class='header'>
+                <div id='success-tip' class='success-header'>
                     <i class='site-icons icon-success'></i>
                     <div class='content-area'>
                         <div class='justify'>
@@ -361,13 +352,12 @@
             </div>
         </div>
     </script>
-
 </head>
+
 <body>
 
     <!-- main-container是所有内容的容器，保持在页面中居中，通过控制main-container的宽度可以实现响应式 -->
     <div id="main-container" class="main-container">
-
         <div class="page-container" id='car-home'></div>
         <div class="page-container" id='car-brand'></div>
         <div class="page-container" id='car-series'></div>
@@ -375,18 +365,16 @@
         <div class="page-container" id='car-cart'></div>
         <div class="page-container" id='car-schedule'></div>
         <div class="page-container" id='car-success'></div>
-
     </div>
 
     <script>
-
     seajs.config({
-      alias: {
-        "mock": "../js/lib/mock.js"
-      }
+        alias: {
+            "mock": "../js/lib/mock.js"
+        }
     })
-    seajs.use('../js/mockAjax', function () {
-        
+    seajs.use('../js/mockAjax', function() {
+
     });
 
     seajs.use("../js/page/index");

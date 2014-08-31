@@ -27,6 +27,8 @@ define(function(require, exports) {
                 );
 
                 callback(null, data);
+                var s = new iScroll('j-model-container');
+
             });
         }
     });
