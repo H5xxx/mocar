@@ -4,7 +4,8 @@
 define(function(require, exports) {
     var util = require('../component/util');
     var Vehicle = require('../model/vehicle');
-    var Contact = require('../model/contact');
+    var Service = require('../model/service');
+    var Order = require('../model/order');
     var Brand = require('../model/brand');
     var Series = require('../model/series');
     var Model = require('../model/model');
@@ -22,19 +23,21 @@ define(function(require, exports) {
         getData: function(params, callback){
             var data = {
             };
+
             var url = ['http://api.mocar.cn/models/',params.model_id,'/services/', params.service_id].join('');
             $.ajax({
                 url:url,
                 success:function(data, status, xhr){
                     function normalizeData(){
+
                         var parts = data.parts, options, option;
                         for(var i = 0, ilen = parts.length; i < ilen; i++){
                             options = parts[i].options;
                             if(options){
                                 for(var j = 0, jlen = options.length; j < jlen; j++){
                                     option = options[j];
-                                    if(option.price == 0 && options.hint){
-                                        options.price = options.hint;
+                                    if(option.price == 0 && option.hint){
+                                        option.price = option.hint;
                                     }
                                 }
                             }
@@ -59,7 +62,10 @@ define(function(require, exports) {
             setTimeout(function(){
                 initPopupAndCustomSelect.call(self, params);
             }, 500);
-            //initPopupAndCustomSelect();
+            
+            this.currrentOrder = Order.create(params);
+            var nextStepBtn = this.el.find('.j-nextstep');
+
         },
 
         clean: function(){
@@ -70,11 +76,10 @@ define(function(require, exports) {
         activate: function(params){
             var self = this;
             var args = arguments;
-            //TODO 现在先一次性把车辆和用户地址一次都给取出来，等后端接口可以联调后，再按需请求
+            //TODO 现在先一次性把车辆给取出来
             util.finish([
-                Vehicle.fetch({uid:'me'}),
-                Contact.fetch({uid:'me'})
-            ], function(vehicles, contacts){
+                Vehicle.fetch({uid:'me'})
+            ], function(vehicles){
                 var currentVehicle;
                 if(params.model_id){
                     //经过选车流程到达本页

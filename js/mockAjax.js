@@ -230,7 +230,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
@@ -255,7 +255,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
@@ -289,7 +289,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
@@ -323,7 +323,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
@@ -357,7 +357,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
@@ -391,7 +391,7 @@ define(function(require, exports) {
                                     "name":"原厂代购",
                                     "extra":"",
                                     "price":0.0,
-                                    "hint":"实价"
+                                    "hint":"21.50"
                                 },
                                 {
                                     "id":2,
