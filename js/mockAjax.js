@@ -380,7 +380,7 @@ define(function(require, exports) {
                             ]
                         },
                         {
-                            "name":"空调滤清器",
+                            "name":"bottom清器",
                             "unit":"个",
                             "quantity":1,
                             "options":[

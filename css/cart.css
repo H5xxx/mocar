@@ -1,13 +1,13 @@
 /************************  选择附件信息  ************************/
 
-#car-cart {
-    height: 100%;
-    position: static;
-} 
-#accessories-info {
+#car-cart {} #j-cart-container {
+    position: fixed;
+    top: 0;
+    bottom: 50px;
+    width: 100%;
     overflow: hidden;
-    clear: both;
 }
+#accessories-info {}
 #accessories-info .form-row {
     border-bottom: #D9D9D9 solid 1px;
     height: auto;
@@ -15,7 +15,6 @@
 #accessories-info .content-area {
     margin-left: 40px;
     display: block;
-    margin-top: 20px;
 }
 #accessories-info #service-detail .form-row {
     margin-bottom: 20px;
