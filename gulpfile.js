@@ -21,8 +21,8 @@ var dest = __dirname, //本地开发时的监测目录，部署时用dist目录
 gulp.task('open', /*['server'],*/ function(){
     gulp.src(openPath)
         .pipe(open("", openOption));
-    gulp.src(openPath)
-        .pipe(open("", openOption2));
+    // gulp.src(openPath)
+    //     .pipe(open("", openOption2));
 });
 
 /*

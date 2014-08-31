@@ -38,6 +38,7 @@ define(function(require, exports) {
             var html = template(this.template, data);
 
             this.el.html(html);
+            var s = new iScroll('j-success-container');
         },
         activate: function(params) {
             var self = this;

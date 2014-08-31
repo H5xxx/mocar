@@ -270,7 +270,7 @@
     </script>
     <!-- 预约成功 页面 模板 -->
     <script id="template-success" type="text/html">
-        <div class="j-success-container">
+        <div class="main mb50px" id="j-success-container">
             <div id='schedule-success'>
                 <div id='success-tip' class='success-header'>
                     <i class='site-icons icon-success'></i>
@@ -346,14 +346,14 @@
                 </div>
                 
             </div>
-            <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav" data-nav="/home">
-                    <i class='site-icons icon-home'></i>
-                </a>
-                <div class='content-area justify-wrap'>
-                    <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span>元</span>
-                </div> 
-            </div>
+        </div>
+        <div class='footer'>
+            <a href="javascript:void(0);" class="j-nav" data-nav="/home">
+                <i class='site-icons icon-home'></i>
+            </a>
+            <div class='content-area justify-wrap'>
+                <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span>元</span>
+            </div> 
         </div>
     </script>
 </head>
