@@ -424,4 +424,8 @@ define(function(require, exports) {
             }]
         };
     });
+
+    Mock.mock(/\/user\/me\/orders$/, function(options){
+        return {};
+    });
 });
