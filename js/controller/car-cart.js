@@ -69,47 +69,57 @@ define(function(require, exports) {
 
         activate: function(params){
             var self = this;
+            var args = arguments;
             //TODO 现在先一次性把车辆和用户地址一次都给取出来，等后端接口可以联调后，再按需请求
             util.finish([
                 Vehicle.fetch({uid:'me'}),
                 Contact.fetch({uid:'me'})
             ], function(vehicles, contacts){
-                if(!params.model_id){
-                    //TODO $.ajax(); 调用接口获取用户的车辆列表，如果 有，传入model_id；如果没有跳到选车页面
-
-                    // util.f([
-                    //     Model.fetch(params),
-                    //     Series.fetch(params),
-                    //     Brand.fetch(params)
-                    // ], function(list){
-                    //     data = $.extend(
-                    //         {
-                    //             list: list
-                    //         },
-                    //         Brand.find(params.brand_id),
-                    //         Series.find(params.series_id)
-                    //     );
-
-                    //     callback(null, data);
-                    // });
-                    if(vehicles.length == 0){//去选车
-                        self.page.navigate('/service/' + params.service_id + '/brand');
+                var currentVehicle;
+                if(params.model_id){
+                    //经过选车流程到达本页
+                    if(vehicles && vehicles.length > 0){
+                        currentVehicle = vehicles.filter(function(v){
+                            return v.modelId == params.model_id;
+                        })[0];
+                        if(!currentVehicle){//新选的车，加入用户车辆列表
+                            currentVehicle = Model.find(params.model_id);
+                            if(currentVehicle){
+                                vehicles.unshift(currentVehicle);
+                            } 
+                        }else{//把用户选中的车，挪到用户车辆列表中的第一个
+                            vehicles = [currentVehicle].concat(vehicles.filter(function(v){
+                                return v.modelId != currentVehicle.modelId;
+                            }));
+                        }
                     }else{
-                        params.model_id = vehicles[0].modelId;
-                        self.getData(params, function(err, data){
-                            $.extend(params, data, {
-                                currentVehicle: vehicles[0],
-                                allVehicles: vehicles
-                            });
-                            util.title(self.title);
-                            self.fadein();
-                            self.render(params);
-
-                        });
+                        //新选的车，加到用户车辆列表
+                        currentVehicle = Model.find(params.model_id);
+                        if(currentVehicle){
+                            vehicles =[currentVehicle];
+                        } 
                     }
-                }else{
-                    self.constructor.__super__.activate.apply(self, arguments);
+                }else{//当前没经过选车流程
+                    if(vehicles && vehicles.length > 0){
+                        //选用户uid在数据库中的第一辆车
+                        currentVehicle = vehicles[0];
+                        params.model_id = currentVehicle.modelId;
+                    }else{
+                        //用户uid在数据库中没车
+                        self.page.navigate('/service/' + params.service_id + '/brand');
+                        return;
+                    }
                 }
+                
+                self.getData(params, function(err, data){
+                    $.extend(params, data, {
+                        currentVehicle: currentVehicle,
+                        allVehicles: vehicles || []
+                    });    
+                    util.title(self.title);
+                    self.fadein();
+                    self.render(params);
+                });
             });
         }
     });
