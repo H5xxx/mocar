@@ -67,6 +67,9 @@ select {
     margin-left: 130px;
     display: block;
 }
+.mb50px {
+    margin-bottom: 50px;
+}
 .pr10px {
     padding-right: 10px;
 }
@@ -111,7 +114,7 @@ select {
     top: 45px;
     width: 100%;
     height: 5px;
-    background: -webkit-linear-gradient(top, #ccc, #fff);
+    background: -webkit-linear-gradient(top, #ccc, #f8f8f8);
 }
 .footer .content-area {
     margin-left: 30px;
@@ -126,6 +129,7 @@ select {
     left: 0;
     opacity: 0.3;
     background: rgb(0, 0, 0);
+    z-index: 10;
 }
 /*弹出层wrapper,帮助定位*/
 
@@ -136,6 +140,7 @@ select {
     bottom: 0;
     left: 0;
     text-align: center;
+    z-index: 10;
 }
 .popup-wrapper:after {
     content: " ";
