@@ -75,6 +75,14 @@ define(function(require, exports) {
                         tempArr.unshift(currentCity);
                         currentCityIndex = 0;
                     }
+                }else{
+                    allCityMatrix = [];
+                    allProvinceArr = cities.map(function(c){
+                        allCityMatrix.push(c.cities.map(function(d){
+                            return d.city;
+                        }));
+                        return c.province;
+                    });
                 }
                 currentProvince = cities[currentProvinceIndex].province;
                 currentCity = cities[currentProvinceIndex].cities[currentCityIndex].city;
@@ -215,7 +223,7 @@ define(function(require, exports) {
             data.allProvinceArr.map(function(p) {
                 return [p];
             }),
-            data.allCityMatrix[data.currentProvinceIndex].map(function(c) {
+            (data.allCityMatrix[data.currentProvinceIndex] || []).map(function(c) {
                 return [c];
             }),
             data.allDayArr.map(function(d) {

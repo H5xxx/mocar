@@ -164,6 +164,7 @@ define(function(require, exports) {
     });
     //用户地址
     Mock.mock(/\/user\/\w+\/contacts/, function(options) {
+        //return [];
         return [{
             "id": 183642,
             "name": "张先生",
