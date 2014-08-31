@@ -99,6 +99,7 @@ define(function(require, exports) {
             }
             
             var nextStepBtn = this.el.find('.j-nextstep');
+            //表单信息收集
             nextStepBtn.bind('click', function(e){
                 var accessoryInput = self.el.find('input[name=accessoryInput]');
                 accessoryInput.forEach(function(input, i){
@@ -218,7 +219,7 @@ define(function(require, exports) {
                 [
                     // ['摩卡汽车保养服务', '160元'],
                     // ['摩卡汽车保养服务（豪华版）', '300元']
-                    [data.name, data.price]
+                    [data.currentService.name, data.currentService.price]
                 ],
                 // [   ['嘉实多磁护SN级5w-40','330元'],
                 //     ['嘉实多极护SN级0w-40','450元'],
@@ -284,6 +285,7 @@ define(function(require, exports) {
                                         self.page.navigate('/service/' + data.service_id + '/brand');
                                     }else if(selectedIndex >= 0){
                                         data.currentVehicle = data.allVehicles[selectedIndex];
+                                        self.currrentOrder.__currentVehicle = data.currentVehicle;
                                         data.model_id =data.currentVehicle.modelId;
                                     }
                                 }
