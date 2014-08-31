@@ -65,10 +65,45 @@ define(function(require, exports) {
             setTimeout(function(){
                 initPopupAndCustomSelect.call(self, params);
             }, 500);
+            //TODO Order.find("-1") first
+            try{
+                this.currrentOrder = Order.find("-1");
+            }catch(e){
+                
+            }
+            if(!this.currrentOrder){
+                this.currrentOrder = Order.create({
+                    "id": '-1',
+                    "sum" : 0,
+                    "modelId" : params.currentVehicle.modelId,
+                    "model" : params.currentVehicle.model,
+                    "vid" : params.currentVehicle.vid,
+                    "plate" : params.currentVehicle.plate,
+                    "cityCode" : '',
+                    "province" : '',
+                    "city" : '',
+                    "address" : "",
+                    "name" : "",
+                    "phone" : "",
+                    "date": 0,
+                    "services" : {
+                        'id': params.service_id,
+                        'parts': params.parts.map(function(p){
+                            return {
+                                typeId: p.options[0].typeId
+                            }
+                        })
+                    }
+                });
+            }
             
-            this.currrentOrder = Order.create(params);
             var nextStepBtn = this.el.find('.j-nextstep');
-
+            nextStepBtn.bind('click', function(e){
+                var accessoryInput = self.el.find('input[name=accessoryInput]');
+                accessoryInput.forEach(function(input, i){
+                    self.currrentOrder.services.parts[i].id = params.parts[i].options[input.value].id;
+                });
+            });
         },
 
         clean: function(){

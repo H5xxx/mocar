@@ -178,7 +178,7 @@
         </div>
 
         <div class='footer'>
-            <a href="javascript:void(0);" class="j-nav" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
+            <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
                 <i class='site-icons icon-nextstep'></i>
             </a>
             <div class='content-area justify-wrap'>
@@ -213,7 +213,7 @@
                 </div>
                 <div id='detailAddress' class='hight110px'>
                     <div class='content-area border-bottom'>
-                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}">
+                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
                     </div>
                 </div>
                 <div id='scheduleTime' class='hight110px'>
@@ -222,7 +222,7 @@
                         <span class='first border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>2014-07-22</span>  
+                                    <span class='product-name'>{{currentDay}}</span>  
                                 </div>
                                 <input type="text" name="dayInput" style="display:none">
                             </div>
@@ -230,7 +230,7 @@
                         <span class='second border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>13:00</span>  
+                                    <span class='product-name'>{{currentTime}}</span>  
                                 </div>
                                 <input type="text" name="timeInput" style="display:none">
                             </div>
@@ -249,13 +249,13 @@
                 <div id='name' class='hight110px'>
                     <i class="site-icons icon-user"></i>
                     <div class='content-area border-bottom'>
-                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}">
+                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
                     </div>
                 </div>
                 <div id='phoneNumber' class='hight110px'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
-                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}">
+                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
                     </div>
                 </div>
             </div>
