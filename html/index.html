@@ -65,12 +65,12 @@
                 <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
             {{/if}}
         </div>
-        <div style="height: 5px;background: -webkit-linear-gradient(top,#ccc,#fff);"></div>
+        <div class="btw-header-main"></div>
     </script>
 
     <script id="template-brand" type="text/html">
         {{include 'template-navigator'}}
-        <div id="j-brand-iscroll">
+        <div class="main mt50px" id="j-brand-container">
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
@@ -84,8 +84,8 @@
     </script>
 
     <script id="template-series" type="text/html">
-        <div class="j-series-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-series-container">
             <div class="j-series-list">
                 {{each list as item i}}
                     <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
@@ -97,8 +97,8 @@
     </script>
 
     <script id="template-model" type="text/html">
-        <div class="j-model-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-model-container">
             <div class="j-model-list">
                 {{each list as item i}}
                     <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
@@ -109,18 +109,6 @@
         </div>
     </script>
 
-    <script id="template-displacement" type="text/html">
-        <div class="j-displacement-container">
-            {{include 'template-navigator'}}
-            <div class="j-displacement-list">
-            {{each list as item i}}
-                <div class="displacement-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement/{{item.displacement_id}}/service">
-                    <span>{{item.displacement}}</span>
-                </div>
-            {{/each}}
-            </div>
-        </div>
-    </script>
     <!-- -->
     <script id="template-buyelsetip" type="text/html">
         <div class="buyelse-popup mocar-tip-popup">

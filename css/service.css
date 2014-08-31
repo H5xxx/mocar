@@ -78,19 +78,12 @@ img {
     margin: 5px auto 8px;
 }*/
 
-#j-brand-iscroll {
-    position: fixed;
-    top: 50px;
-    bottom: 0;
-    width: 100%;
-    overflow: hidden;
-}
 .j-brand-list {
+    float: left;
     border-top: 4px solid #eee;
     border-left: 4px solid #eee;
-    float: left;
 }
-.brand-item, .series-item, .model-item {
+.brand-item {
     height: 75px;
     width: 33.33%;
     box-sizing: border-box;
@@ -98,6 +91,12 @@ img {
     line-height: 45px;
     border-bottom: 4px solid #eee;
     border-right: 4px solid #eee;
+}
+.series-item, .model-item {
+    margin: 0 20px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #aaa;
 }
 /*.model-item {
     float: left;

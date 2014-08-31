@@ -17,7 +17,7 @@ define(function(require, exports) {
                 callback(null, {
                     list: list
                 });
-                var s = new iScroll('j-brand-iscroll');
+                var s = new iScroll('j-brand-container');
             });
         }
     });
