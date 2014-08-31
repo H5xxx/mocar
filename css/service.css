@@ -78,11 +78,26 @@ img {
     margin: 5px auto 8px;
 }*/
 
+#j-brand-iscroll {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+.j-brand-list {
+    border-top: 4px solid #eee;
+    border-left: 4px solid #eee;
+    float: left;
+}
 .brand-item, .series-item, .model-item {
-    margin: 0 20px;
-    height: 45px;
+    height: 75px;
+    width: 33.33%;
+    box-sizing: border-box;
+    float: left;
     line-height: 45px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 4px solid #eee;
+    border-right: 4px solid #eee;
 }
 /*.model-item {
     float: left;

@@ -47,7 +47,7 @@
         </div>
     </script>
     <script id="template-navigator" type="text/html">
-        <div class="crumble">
+        <div class="header">
             {{if brand_id}}
                 <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span>
                 {{if series_id}}
@@ -69,12 +69,14 @@
     </script>
 
     <script id="template-brand" type="text/html">
-        <div class="j-brand-container">
-            {{include 'template-navigator'}}
+        {{include 'template-navigator'}}
+        <div id="j-brand-iscroll">
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
-                        <span>{{item.brand}}</span>
+                        <div>
+                            <span>{{item.brand}}</span>
+                        </div>
                     </div>
                 {{/each}}
             </div>
@@ -283,7 +285,7 @@
     <script id="template-success" type="text/html">
         <div class="j-success-container">
             <div id='schedule-success'>
-                <div id='success-tip' class='header'>
+                <div id='success-tip' class='success-header'>
                     <i class='site-icons icon-success'></i>
                     <div class='content-area'>
                         <div class='justify'>

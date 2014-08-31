@@ -3,6 +3,11 @@
     height: 100%;
     position: static;
 }
+
+.success-header {
+    background-color: #333333;
+    color: #EAEAEA;
+}
 #schedule-info{
     overflow: hidden;
     clear: both;
