@@ -30,7 +30,7 @@
 #schedule-info option{
     font-size: 16px;
 }
-#schedule-info select, #detailAddressInput, #carNoInput,#nameInput,#phoneInput{
+#schedule-info select, #addressInput, #carNoInput,#nameInput,#phoneInput{
     display: inline-block;
     vertical-align: bottom;
     width: 100%;

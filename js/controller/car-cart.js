@@ -89,7 +89,11 @@ define(function(require, exports) {
                             currentVehicle = Model.find(params.model_id);
                             if(currentVehicle){
                                 vehicles.unshift(currentVehicle);
-                            } 
+                            }else{
+                                //非法路径进入
+                                self.page.navigate('/service/' + params.service_id + '/brand');
+                                return;
+                            }
                         }else{//把用户选中的车，挪到用户车辆列表中的第一个
                             vehicles = [currentVehicle].concat(vehicles.filter(function(v){
                                 return v.modelId != currentVehicle.modelId;

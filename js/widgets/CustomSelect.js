@@ -82,6 +82,7 @@
  		}
  		return retArr;
  	}
+
  	CustomSelect.prototype.change = function(selectedIndex){
  		if(selectedIndex < this.optArr.length - 1){
  			this._originalSelectIndex = this._currentSelectedIndex = selectedIndex;
@@ -89,13 +90,19 @@
  			self.onchange(self._currentSelectedIndex);
  		}
  	};
- 	CustomSelect.prototype.render = function(optArr) {
- 		var self = this;
+
+ 	CustomSelect.prototype.rebuildOptArr = function(optArr){
  		if(optArr){
  			this.optArr = optArr;
- 			this._originalSelectIndex = this._currentSelectedIndex = -1;
+ 			this._originalSelectIndex = this._currentSelectedIndex = 0;
+ 			this.inputEl.value = this._currentSelectedIndex;
  		}
  		this._normalizedOptArr = this._normalizeData(this.optArr);
+ 	}
+
+ 	CustomSelect.prototype.render = function(optArr) {
+ 		var self = this;
+ 		this.rebuildOptArr(optArr);
  		var selectHtmlStr = template.render(this._selectTmpl)({data: this._normalizedOptArr});
  		Popup.open(selectHtmlStr, function(popupEl){
  			var eventName = /*self._supportTouch ? 'touchstart' : */'click';

@@ -205,24 +205,24 @@
                         <span class='first border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>北京市</span>  
+                                    <span class='product-name'>{{currentProvince}}</span>  
                                 </div>
-                                <input type="text" name="cityInput" style="display:none">
+                                <input type="text" name="provinceInput" style="display:none">
                             </div>
                         </span>
                         <span class='second border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>海淀区</span>  
+                                    <span class='product-name'>{{currentCity}}</span>  
                                 </div>
-                                <input type="text" name="districtInput" style="display:none">
+                                <input type="text" name="cityInput" style="display:none">
                             </div>
                         </span>
                     </div>
                 </div>
                 <div id='detailAddress' class='hight110px'>
                     <div class='content-area border-bottom'>
-                        <input type="text" name='detailAddressInput' id='detailAddressInput' placeholder='输入详细地址'>
+                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}">
                     </div>
                 </div>
                 <div id='scheduleTime' class='hight110px'>
@@ -246,6 +246,7 @@
                         </span>
                     </div>
                 </div>
+                <!-- 
                 <div id='carNo' class='hight110px'>
                     <i class="site-icons icon-car"></i>
 
@@ -253,16 +254,17 @@
                         <input type="text" placeholder='车牌号，例如京NB520Z' id='carNoInput' name='carNoInput'>
                     </div>
                 </div>
+                 -->
                 <div id='name' class='hight110px'>
                     <i class="site-icons icon-user"></i>
                     <div class='content-area border-bottom'>
-                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput'>
+                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}">
                     </div>
                 </div>
                 <div id='phoneNumber' class='hight110px'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
-                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput'>
+                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}">
                     </div>
                 </div>
             </div>
