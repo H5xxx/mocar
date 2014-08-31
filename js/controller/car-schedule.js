@@ -87,7 +87,7 @@ define(function(require, exports) {
                     '13:00', '14:00', '15:00', '16:00', '17:00'
                 ];
 
-                var data = $.extend(params, {
+                var data = {
                     currentProvinceIndex: currentProvinceIndex,
                     currentCityIndex: currentCityIndex,
                     currentProvince: currentProvince,
@@ -104,7 +104,7 @@ define(function(require, exports) {
                     name: name,
                     address: address,
                     phone: phone
-                });
+                };
                 callback(null, data);
             });
         },
@@ -160,6 +160,7 @@ define(function(require, exports) {
                 self.currrentOrder.phone = phone;
                 var d = new Date(self.currrentOrder.day + " " + self.currrentOrder.time);
                 self.currrentOrder.date = d.valueOf();
+                self.currrentOrder.save();
                 var url = 'http://api.mocar.cn/user/me/orders';
                 $.ajax({
                     type: 'POST',
@@ -198,7 +199,9 @@ define(function(require, exports) {
             }
 
             self.getData(params, function(err, data) {
-                $.extend(params, data);
+                $.extend(params, data, {
+                    sum: self.currrentOrder.sum
+                });
                 util.title(self.title);
                 self.fadein();
                 self.render(params);

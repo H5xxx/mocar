@@ -21,9 +21,7 @@ define(function(require, exports) {
         template: 'template-cart',
 
         getData: function(params, callback){
-            var data = {
-            };
-
+            
             var url = ['http://api.mocar.cn/models/',params.model_id,'/services/', params.service_id].join('');
             $.ajax({
                 url:url,
@@ -44,6 +42,7 @@ define(function(require, exports) {
                         }
                     }
                     normalizeData(data);
+                    //debugger;
                     callback(null, data)
                 },
                 error: function(xhr, errorType, error){
@@ -69,7 +68,7 @@ define(function(require, exports) {
             try{
                 this.currrentOrder = Order.find("-1");
             }catch(e){
-                
+
             }
             if(!this.currrentOrder){
                 this.currrentOrder = Order.create({
@@ -86,14 +85,16 @@ define(function(require, exports) {
                     "name" : "",
                     "phone" : "",
                     "date": 0,
-                    "services" : {
+                    "__currentService": params.currentService,
+                    "__currentVehicle": params.currentVehicle,
+                    "services" : [{
                         'id': params.service_id,
-                        'parts': params.parts.map(function(p){
+                        'parts': params.currentService.parts.map(function(p){
                             return {
                                 typeId: p.options[0].typeId
                             }
                         })
-                    }
+                    }]
                 });
             }
             
@@ -101,8 +102,9 @@ define(function(require, exports) {
             nextStepBtn.bind('click', function(e){
                 var accessoryInput = self.el.find('input[name=accessoryInput]');
                 accessoryInput.forEach(function(input, i){
-                    self.currrentOrder.services.parts[i].id = params.parts[i].options[input.value].id;
+                    self.currrentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
+                self.currrentOrder.save();
             });
         },
 
@@ -159,7 +161,8 @@ define(function(require, exports) {
                 }
                 
                 self.getData(params, function(err, data){
-                    $.extend(params, data, {
+                    $.extend(params, {
+                        currentService: data,
                         currentVehicle: currentVehicle,
                         allVehicles: vehicles || []
                     });    
@@ -201,6 +204,7 @@ define(function(require, exports) {
                     }
                 }
             });
+            self.currrentOrder.sum = totalPrice;
             totalPriceEl.html(totalPrice);
             totalPriceEl.attr('data-totalprice', totalPrice);
         }
@@ -221,8 +225,8 @@ define(function(require, exports) {
                 //     ['自行购买','0元']
                 // ],
             ];
-            for(var i = 0, ilen = data.parts.length; i < ilen; i++){
-                optArrs.push([].concat(data.parts[i].options.map(function(opt){
+            for(var i = 0, ilen = data.currentService.parts.length; i < ilen; i++){
+                optArrs.push([].concat(data.currentService.parts[i].options.map(function(opt){
                     return [opt.brand + opt.name + " " + opt.extra, opt.price + '元']
                 })));
             }

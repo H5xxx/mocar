@@ -20,7 +20,7 @@ define(function(require, exports) {
     "date": 1388505700000,
     "services" : [
 */
-    Order.configure('Order', 'id', 'status', 'created','modified', 'sum', 'modelId','model', 'vid','plate', 'cityCode', 'province', 'city', 'address', 'name','phone', 'services');
+    Order.configure('Order', 'id', 'status', 'created','modified', 'sum', 'modelId','model', 'vid','plate', 'cityCode', 'province', 'city', 'address', 'date', 'day', 'time','name','phone', 'services', '__currentService', '__currentVehicle');
 
     Order.extend({
         url: 'http://api.mocar.cn/user/${uid}/orders'

@@ -2,10 +2,10 @@
  * 服务列表 页面的controller
  */
 define(function(require, exports) {
+    var util = require('../component/util');
+    var Service = require('../model/service');
     var Brand = require('../model/brand');
     var Model = require('../model/model');
-
-    var Transitions = require('../component/transitions');
 
     var CarHome = require('./common').sub({
         // 该controller要渲染&控制的区域
@@ -23,8 +23,9 @@ define(function(require, exports) {
                 '3': 'donglitisheng',
                 '4': 'huanshachepian',
             };
-
-            $.getJSON('http://api.mocar.cn/models/generic/services', function(services){
+            util.finish([
+                Service.fetch({}),
+            ], function(services){
                 services.forEach(function(service){
                     service.icon = icons[service.id];
                 });
