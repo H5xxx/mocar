@@ -80,8 +80,8 @@ img {
 
 .j-brand-list {
     float: left;
-    border-top: 4px solid #eee;
-    border-left: 4px solid #eee;
+    border-top: 4px solid #f8f8f8;
+    border-left: 4px solid #f8f8f8;
 }
 .brand-item {
     height: 75px;
@@ -89,8 +89,8 @@ img {
     box-sizing: border-box;
     float: left;
     line-height: 45px;
-    border-bottom: 4px solid #eee;
-    border-right: 4px solid #eee;
+    border-bottom: 4px solid #f8f8f8;
+    border-right: 4px solid #f8f8f8;
 }
 .series-item, .model-item {
     margin: 0 20px;

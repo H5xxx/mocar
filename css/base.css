@@ -114,7 +114,7 @@ select {
     top: 45px;
     width: 100%;
     height: 5px;
-    background: -webkit-linear-gradient(top, #ccc, #fff);
+    background: -webkit-linear-gradient(top, #ccc, #f8f8f8);
 }
 .footer .content-area {
     margin-left: 30px;
