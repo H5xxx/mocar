@@ -51,13 +51,13 @@ define(function(require, exports) {
         },
 
         render: function(params){
-
+            var self = this;
             var html = template(this.template, params);
 
             this.el.html(html);
             //TODO 弹出窗口，初始化自定义select
             setTimeout(function(){
-                initPopupAndCustomSelect(params)
+                initPopupAndCustomSelect.call(self, params);
             }, 500);
             //initPopupAndCustomSelect();
         },
@@ -115,6 +115,7 @@ define(function(require, exports) {
     });
 
     function initPopupAndCustomSelect(data){
+        var self = this;
         var buyelseTipHtml = document.querySelector('#template-buyelsetip').innerHTML;
         Popup.open(buyelseTipHtml,function(popupContent){
             var mocarbtn = popupContent.querySelector('.mocarbtn');
@@ -149,13 +150,9 @@ define(function(require, exports) {
         function initSelect (buyelse) {
             var optArrs = [
                     /*['奥迪 国产A4 1.8T']*/
-                ([data.currentVehicle.model].concat(data.allVehicles.filter(function(v){
-                    return data.currentVehicle.id != v.id;
-                    }).map(function(v){
-                        return v.model;
-                    }))).map(function(name){
-                        return [name]
-                    })
+                    data.allVehicles.map(function(v){
+                        return [v.model]
+                    }).concat([['重新选车']])
                 ,
                 [
                     // ['摩卡汽车保养服务', '160元'],
@@ -202,7 +199,7 @@ define(function(require, exports) {
                     selectInput.value = 0;
                 }
                 if(selectTrigger && selectInput){
-                    (function(selectTrigger, selectInput, optArr){
+                    (function(selectTrigger, selectInput, optArr, i){
                         new CustomSelect({
                             triggerEl: selectTrigger, 
                             inputEl: selectInput, 
@@ -217,10 +214,21 @@ define(function(require, exports) {
                                         priceEl.setAttribute('data-price', optArr[selectedIndex][1]);
                                     }
                                 }
-                                calculateTotalPrice();
+                                if(i >= 2){
+                                    calculateTotalPrice();
+                                }
+                                if( i == 0){
+                                    //check 是否选择 “重新选车”
+                                    if(selectedIndex == optArr.length -1){
+                                        self.page.navigate('/service/' + data.service_id + '/brand');
+                                    }else if(selectedIndex >= 0){
+                                        data.currentVehicle = data.allVehicles[selectedIndex];
+                                        data.model_id =data.currentVehicle.modelId;
+                                    }
+                                }
                             }
                         });
-                    })(selectTrigger, selectInput, optArrs[i])
+                    })(selectTrigger, selectInput, optArrs[i], i)
                 }
             };
         }
