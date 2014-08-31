@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='../css/cart.css'>
     <link rel='stylesheet' href='../css/schedule.css'>
     <link rel='stylesheet' href='../css/success.css'>
+    <script src="../js/lib/iScroll-v4.2.5.js"></script>
     <script src="../js/lib/template.js"></script>
     <script src="../js/lib/sea.js"></script>
     <script src="../js/lib/zepto.js"></script>
@@ -134,7 +135,7 @@
     </script>
     <!-- 选择服务类型 与 配件 页面 模板 -->
     <script id="template-cart" type="text/html">
-        <div class="j-cart-container">
+        <div id="j-cart-container">
             <div id='accessories-info'>
                 <div id='car-info' class='mt20px'>
                     <i class='site-icons icon-car'></i>
@@ -183,14 +184,15 @@
                     </div>
                 </div>
             </div>
-            <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
-                    <i class='site-icons icon-nextstep'></i>
-                </a>
-                <div class='content-area justify-wrap'>
-                    <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{price}}</span>元</span>
-                </div> 
-            </div>
+        </div>
+
+        <div class='footer'>
+            <a href="javascript:void(0);" class="j-nav" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
+                <i class='site-icons icon-nextstep'></i>
+            </a>
+            <div class='content-area justify-wrap'>
+                <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{price}}</span>元</span>
+            </div> 
         </div>
     </script>
     <!-- 预约上门信息 页面 模板 -->

@@ -14,7 +14,7 @@ define(function(require, exports) {
     var CarCart = require('./common').sub({
         // 该controller要渲染&控制的区域
         el: $('#car-cart'),
-        
+
         title: '选择配件',
         
         template: 'template-cart',
@@ -55,6 +55,9 @@ define(function(require, exports) {
             var html = template(this.template, params);
 
             this.el.html(html);
+
+            var scroll = new iScroll('j-cart-container',{hScrollbar:false, vScrollbar:false});
+            
             //TODO 弹出窗口，初始化自定义select
             setTimeout(function(){
                 initPopupAndCustomSelect.call(self, params);
