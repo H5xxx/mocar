@@ -306,21 +306,24 @@
 
                     <div class='content-area'>
                         <ul>
+                        {{each currentService.parts as part i }}
                             <li class='form-row'>
-                                <p class="accessory info">机油</p>
-                                <span class='model info'>嘉实多磁护SN级5w-40</span>
-                                <span class='carNo info last'>260元</span>
+                                <p class="accessory info">{{part.name}} {{part.quantity}} {{part.unit}}</p>
+                                {{each part.options as option j}}
+                                    {{if (option.id == currentOrder.services[0].parts[i].id)
+}}
+                                        <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
+                                        <span class='carNo info last'>
+                                            {{if (option.price == 0 && option.extra)}}
+                                                {{option.extra}}
+                                            {{else}}
+                                                {{option.price}}
+                                            {{/if}}
+                                        元</span>
+                                    {{/if}}
+                                {{/each}}
                             </li>
-                            <li class='form-row'>
-                                <p class="accessory info">机滤</p>
-                                <span class='model info'>曼牌 W 940/25</span>
-                                <span class='carNo info last'>NB520Z</span>
-                            </li>
-                            <li class='form-row'>
-                                <p class="accessory info">空气过滤器</p>
-                                <span class='model info'>曼牌 C27 192/1</span>
-                                <span class='carNo info last'>NB520Z</span>
-                            </li>
+                        {{/each}}
                         </ul>
                     </div>
                 </div>
