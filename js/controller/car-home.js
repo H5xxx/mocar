@@ -15,7 +15,7 @@ define(function(require, exports) {
 
         template: 'template-home',
 
-        getData: function(params, callback){
+        getData: function(params, callback) {
 
             var icons = {
                 '1': 'changguibaoyang',
@@ -23,16 +23,31 @@ define(function(require, exports) {
                 '3': 'donglitisheng',
                 '4': 'huanshachepian',
             };
-            util.finish([
-                Service.fetch({}),
-            ], function(services){
-                services.forEach(function(service){
-                    service.icon = icons[service.id];
-                });
+            // util.finish([
+            //     Service.fetch({}),
+            // ], function(services){
+            //     services.forEach(function(service){
+            //         service.icon = icons[service.id];
+            //     });
 
-                callback(null, {
-                    services: services
-                });
+            //     callback(null, {
+            //         services: services
+            //     });
+
+
+            $.ajax({
+                url: 'http://api.mocar.cn/models/generic/services',
+                context: $('body'),
+                dataType: 'json',
+                success: function(services) {
+                    services.forEach(function(service) {
+                        service.icon = icons[service.id];
+                    });
+
+                    callback(null, {
+                        services: services
+                    });
+                }
             });
         }
     });

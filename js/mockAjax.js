@@ -425,7 +425,13 @@ define(function(require, exports) {
         };
     });
 
-    Mock.mock(/\/user\/me\/orders$/, function(options){
+    Mock.mock(/\/user\/me\/orders$/, function(options) {
         return {};
+    });
+    Mock.mock(/\/authority\/token/, function(options) {
+        return {
+            "accessToken": "126688deb863604b",
+            "expiresIn": 7200
+        };
     });
 });

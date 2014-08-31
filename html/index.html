@@ -74,9 +74,8 @@
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
-                        <div>
-                            <span>{{item.brand}}</span>
-                        </div>
+                        <img src="item.img">
+                        <span>{{item.brand}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -375,9 +374,7 @@
             "mock": "../js/lib/mock.js"
         }
     })
-    seajs.use('../js/mockAjax', function() {
-
-    });
+    seajs.use('../js/mockAjax', function() {});
 
     seajs.use("../js/page/index");
     </script>

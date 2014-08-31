@@ -17,16 +17,15 @@ define(function(require, exports) {
         template: 'template-...',
 
         // 只执行一次，初始化时执行
-        init: function() {
-        },
+        init: function() {},
 
         // 获取需要的数据
-        getData: function(params, callback){
+        getData: function(params, callback) {
             callback(null, {});
         },
 
         // 渲染内容
-        render: function(params){
+        render: function(params) {
 
             var html = template(this.template, params);
 
@@ -34,12 +33,12 @@ define(function(require, exports) {
         },
 
         // 清空内容
-        clean: function(){
+        clean: function() {
             this.el.html('Loading...');
         },
 
         // 跳转到其对应的url时执行
-        activate: function(params){
+        activate: function(params) {
 
             var me = this;
 
@@ -49,7 +48,7 @@ define(function(require, exports) {
 
             params = params || {};
 
-            this.getData(params, function(err, data){
+            this.getData(params, function(err, data) {
 
                 $.extend(params, data);
 
@@ -60,7 +59,7 @@ define(function(require, exports) {
         },
 
         // 离开到其对应的url时执行
-        deactivate: function(){
+        deactivate: function() {
             this.fadeout();
             this.clean();
         },
