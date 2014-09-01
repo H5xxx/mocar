@@ -163,8 +163,12 @@ define(function(require, exports) {
         }];
     });
     //用户地址
+    var i = 0;
     Mock.mock(/\/user\/\w+\/contacts/, function(options) {
-        //return [];
+        i++;
+        if(i%2 == 0){
+            return [];
+        }
         return [{
             "id": 183642,
             "name": "张先生",

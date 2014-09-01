@@ -3,7 +3,7 @@
  */
 define(function(require, exports) {
 	var util = require('../component/util');
-    var Service = require('../model/Service');
+    var Service = require('../model/service');
     var Order = require('../model/order');
     
     var Brand = require('../model/brand');
