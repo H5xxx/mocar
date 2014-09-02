@@ -5,7 +5,7 @@ define(function(require, exports) {
     Contact.configure('Contact', 'id', 'name', 'cityCode','city', 'address', 'phone');
 
     Contact.extend({
-        url: config.API_HOST + '/user/${uid}/contacts'
+        url: config.API_HOST + '/users/${uid}/contacts'
     });
 
     return Contact;

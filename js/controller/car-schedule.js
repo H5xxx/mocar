@@ -170,7 +170,7 @@ define(function(require, exports) {
                 var d = new Date(self.currrentOrder.day + " " + self.currrentOrder.time);
                 self.currrentOrder.date = d.valueOf();
                 self.currrentOrder.save();
-                var url = config.API_HOST + '/user/me/orders';
+                var url = config.API_HOST + '/users/me/orders';
                 $.ajax({
                     type: 'POST',
                     url: url,
