@@ -373,13 +373,14 @@
 
     <script>
     seajs.config({
+        base: './js',
         alias: {
-            "mock": "./js/lib/mock.js"
+            "mock": "lib/mock.js"
         }
     })
-    seajs.use('./js/mockAjax', function() {});
+    seajs.use('mockAjax', function() {});
 
-    seajs.use("./js/page/index");
+    seajs.use("page/index");
     </script>
 
 </body>
