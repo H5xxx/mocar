@@ -229,7 +229,7 @@ define(function(require, exports) {
             ];
             for(var i = 0, ilen = data.currentService.parts.length; i < ilen; i++){
                 optArrs.push([].concat(data.currentService.parts[i].options.map(function(opt){
-                    return [opt.brand + opt.name + " " + opt.extra, opt.price + '元']
+                    return [opt.brand + opt.name + " " + opt.extra, opt.price + '&nbsp;']
                 })));
             }
             var selectWrappers = document.querySelectorAll('.select-wrapper');
