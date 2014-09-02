@@ -175,7 +175,7 @@ define(function(require, exports) {
                     type: 'POST',
                     url: url,
                     contentType: 'application/json',
-                    data: {
+                    data: JSON.stringify({
                         "modelId": self.currrentOrder.modelId,
                         "cityCode": self.currrentOrder.cityCode,
                         "name": self.currrentOrder.name,
@@ -183,7 +183,7 @@ define(function(require, exports) {
                         "phone": self.currrentOrder.phone,
                         "date": self.currrentOrder.date,
                         "services": self.currrentOrder.services
-                    },
+                    }),
                     success: function(responseData, status, xhr) {
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
                     },

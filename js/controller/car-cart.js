@@ -132,6 +132,8 @@ define(function(require, exports) {
                         if(!currentVehicle){//新选的车，加入用户车辆列表
                             currentVehicle = Model.find(params.model_id);
                             if(currentVehicle){
+                                currentVehicle.modelId = currentVehicle.id;
+                                currentVehicle.save();
                                 vehicles.unshift(currentVehicle);
                             }else{
                                 //非法路径进入
@@ -147,6 +149,8 @@ define(function(require, exports) {
                         //新选的车，加到用户车辆列表
                         currentVehicle = Model.find(params.model_id);
                         if(currentVehicle){
+                            currentVehicle.modelId = currentVehicle.id;
+                            currentVehicle.save();
                             vehicles =[currentVehicle];
                         } 
                     }
