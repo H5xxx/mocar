@@ -7,6 +7,7 @@ DATE=`date`
 
 # checkout to gh-pages
 git checkout -B $BRANCH
+git pull origin $BRANCH
 
 if [ $? -eq 0 ]; then
     echo "[DONE] CHECKOUT TO '$BRANCH'"
@@ -16,13 +17,15 @@ else
 fi
 
 
-# adjust page resource path & output to ./index.html
-sed "s/\.\.\//\.\//g" $PAGE > $TARGET
+# merge & adjust page resource path & output to ./index.html
+git merge master
+sed "s/\.\.\/css/\.\/css/g; s/\.\.\/js/\.\/js/g" $PAGE > $TARGET
+echo '<!-- '$DATE' -->' >> $TARGET
 
 if [ $? -eq 0 ]; then
-    echo "[DONE] PROCESS PAGE $PAGE"
+    echo "[DONE] MERGE CHANGE & PROCESS PAGE $PAGE"
 else
-    echo "[FAIL] PROCESS PAGE $PAGE"
+    echo "[FAIL] MERGE CHANGE & PROCESS PAGE $PAGE"
     exit 0
 fi
 
@@ -49,7 +52,6 @@ fi
 
 # checkout back to master
 git checkout master
-rm index.html
 
 if [ $? -eq 0 ]; then
     echo "[DONE] CHECKOUT BACK TO 'master'"
