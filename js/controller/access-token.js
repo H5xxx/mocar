@@ -1,4 +1,5 @@
 define(function(require, exports) {
+    var config = require('../component/config');
     var util = require('../component/util');
     // test
     // $(document).on('ajaxBeforeSend', function(e, xhr, options) {
@@ -18,7 +19,7 @@ define(function(require, exports) {
         },
         updateToken: function(code) {
             $.ajax({
-                url: '/authority/token?credential=' + code,
+                url: config.API_HOST +'/authority/token?credential=' + code,
                 success: function(data) {
                     var accessToken = data.accessToken;
                     $(document).on('ajaxBeforeSend', function(e, xhr, options) {

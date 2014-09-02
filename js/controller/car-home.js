@@ -2,6 +2,7 @@
  * 服务列表 页面的controller
  */
 define(function(require, exports) {
+    var config = require('../component/config');
     var util = require('../component/util');
     var Service = require('../model/service');
     var Brand = require('../model/brand');
@@ -36,7 +37,7 @@ define(function(require, exports) {
 
 
             $.ajax({
-                url: 'http://api.mocar.cn/models/generic/services',
+                url: config.API_HOST +  '/models/generic/services',
                 context: $('body'),
                 dataType: 'json',
                 success: function(services) {

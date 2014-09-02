@@ -2,6 +2,7 @@
  * 选择服务类型和配件页面的controller
  */
 define(function(require, exports) {
+    var config = require('../component/config');
     var util = require('../component/util');
     var Vehicle = require('../model/vehicle');
     var Service = require('../model/service');
@@ -22,7 +23,7 @@ define(function(require, exports) {
 
         getData: function(params, callback){
             
-            var url = ['http://api.mocar.cn/models/',params.model_id,'/services/', params.service_id].join('');
+            var url = [config.API_HOST + '/models/',params.model_id,'/services/', params.service_id].join('');
             $.ajax({
                 url:url,
                 success:function(data, status, xhr){

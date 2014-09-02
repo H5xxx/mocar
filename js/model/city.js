@@ -1,10 +1,11 @@
 define(function(require, exports) {
+	var config = require('../component/config');
     var City = require('./common').sub();
 
     City.configure('City', 'province', 'cities');
 
     City.extend({
-        url: 'http://api.mocar.cn/location/cities'
+        url: config.API_HOST + '/location/cities'
     });
 
     return City;

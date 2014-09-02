@@ -1,4 +1,5 @@
 define(function(require, exports) {
+    var config = require('../component/config');
     var Order = require('./common').sub();
 /*
  "id" : 243213,
@@ -23,7 +24,7 @@ define(function(require, exports) {
     Order.configure('Order', 'id', 'status', 'created','modified', 'sum', 'modelId','model', 'vid','plate', 'cityCode', 'province', 'city', 'address', 'date', 'day', 'time','name','phone', 'services', '__currentService', '__currentVehicle');
 
     Order.extend({
-        url: 'http://api.mocar.cn/user/${uid}/orders'
+        url: config.API_HOST + '/user/${uid}/orders'
     });
 
     return Order;
