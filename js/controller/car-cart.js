@@ -92,7 +92,7 @@ define(function(require, exports) {
                         'id': params.service_id,
                         'parts': params.currentService.parts.map(function(p){
                             return {
-                                typeId: p.options[0].typeId
+                                typeId: p.id
                             }
                         })
                     }]
