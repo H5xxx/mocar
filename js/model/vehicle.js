@@ -5,7 +5,7 @@ define(function(require, exports) {
     Vehicle.configure('Vehicle', 'id', 'modelId', 'model','plate', 'vid');
 
     Vehicle.extend({
-        url: config.API_HOST + '/user/${uid}/vehicles'
+        url: config.API_HOST + '/users/${uid}/vehicles'
     });
 
     return Vehicle;
