@@ -10,7 +10,7 @@
 #schedule-info .content-area{
     display: block;
     margin-left: 40px;
-    margin-top:20px;
+    /*margin-top:20px;*/
 }
 
 #schedule-info .first,#schedule-success .first,#schedule-info .second,#schedule-success .second{
