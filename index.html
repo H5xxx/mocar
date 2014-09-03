@@ -35,7 +35,8 @@
                                 <p class="title">{{service.name}}</p>
                                 <span class="info">
                                     <span class="price">{{service.price}}元起</span>
-                                    ——
+                                    —— {{service.slogan}}
+                                    <br/>
                                     <span>{{service.description}}</span>
                                 </span>
                             </div>
@@ -133,7 +134,13 @@
                         <p class="accessory info">车辆型号</p>
                         <div class='select-wrapper'>
                             <div class='custom-select-trigger'>
-                                <span class='product-name'>{{currentVehicle.model}}</span>    
+                                <span class='product-name'>
+                                {{currentVehicle.prefix}}
+                                {{currentVehicle.brand}}
+                                {{currentVehicle.family}}
+                                {{currentVehicle.model}}
+                                {{currentVehicle.suffix}}
+                                </span>    
                             </div>
                             <input type="text" name="carInput" style="display:none">
                         </div>
@@ -146,7 +153,7 @@
                         <div class="select-wrapper">
                             <div class='custom-select-trigger'>
                                 <span class='product-name'>{{currentService.name}}</span>
-                                <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}元</span>    
+                                <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}&nbsp;</span>    
                             </div>
                             <input type="text" name="serviceInput" style="display:none">
                         </div>
@@ -164,7 +171,7 @@
                                 <div class="select-wrapper">
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}元</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none">
                                 </div>
@@ -189,7 +196,7 @@
     <script id="template-schedule" type="text/html">
         <div class="j-schedule-container">
             <div id='schedule-info'>
-                <div id='generalAddress' class='hight110px'>
+                <div id='generalAddress' class='form-row'>
                     <i class="site-icons icon-location"></i>
                     <div class='content-area zero-font-size'>
                         <span class='first border-bottom'>
@@ -210,12 +217,12 @@
                         </span>
                     </div>
                 </div>
-                <div id='detailAddress' class='hight110px'>
+                <div id='detailAddress' class='form-row'>
                     <div class='content-area border-bottom'>
                         <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
                     </div>
                 </div>
-                <div id='scheduleTime' class='hight110px'>
+                <div id='scheduleTime' class='form-row'>
                     <i class="site-icons icon-time"></i>
                     <div class='content-area zero-font-size'>
                         <span class='first border-bottom'>
@@ -237,7 +244,7 @@
                     </div>
                 </div>
                 <!-- 
-                <div id='carNo' class='hight110px'>
+                <div id='carNo' class='form-row'>
                     <i class="site-icons icon-car"></i>
 
                     <div class='content-area border-bottom'>
@@ -245,13 +252,13 @@
                     </div>
                 </div>
                  -->
-                <div id='name' class='hight110px'>
+                <div id='name' class='form-row'>
                     <i class="site-icons icon-user"></i>
                     <div class='content-area border-bottom'>
                         <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
                     </div>
                 </div>
-                <div id='phoneNumber' class='hight110px'>
+                <div id='phoneNumber' class='form-row'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
                         <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
@@ -284,12 +291,13 @@
                     <i class='site-icons icon-car'></i>
                     <div class='content-area form-row'>
                         <div class='justify'>
-                            <span class="brand info">{{currentVehicle.model}}</span>
-                    <!--    <span class='model info'>国产A4</span>
-                            <span class="displacement info">1.8T</span>
-                    
-                            <span class='carNo info last'>{{currentVehicle.plate}}</span>
-                    -->
+                            <span class="brand info">
+                                {{currentVehicle.prefix}}
+                                {{currentVehicle.brand}}
+                                {{currentVehicle.family}}
+                                {{currentVehicle.model}}
+                                {{currentVehicle.suffix}}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -298,7 +306,7 @@
 
                     <div class='content-area form-row'>
                         <span class="brand info">{{currentService.name}}</span>
-                        <span class='carNo info last'>{{currentService.price}}元</span>
+                        <span class='carNo info last'>{{currentService.price}}&nbsp;</span>
                     </div>
                 </div>
                 <div id='service-detail' class=''>
@@ -319,7 +327,7 @@
                                             {{else}}
                                                 {{option.price}}
                                             {{/if}}
-                                        元</span>
+                                        &nbsp;</span>
                                     {{/if}}
                                 {{/each}}
                             </li>
@@ -378,11 +386,12 @@
             "mock": "lib/mock.js"
         }
     })
-    seajs.use('mockAjax', function() {});
+    // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
 
 </body>
 
-</html><!-- Tue Sep 2 10:49:49 CST 2014 -->
+</html>
+<!-- 2014年 9月 3日 星期三 21时43分11秒 CST -->
