@@ -65,39 +65,40 @@ define(function(require, exports) {
             setTimeout(function(){
                 initPopupAndCustomSelect.call(self, params);
             }, 500);
-            //TODO Order.find("-1") first
+            //每次进入选配件页面，都删除之前未保存/刚刚提交的订单
             try{
                 this.currentOrder = Order.find("-1");
+                if(this.currentOrder){
+                    this.currentOrder.destroy();
+                }
             }catch(e){
-                delete this.currentOrder;
             }
-            if(!this.currentOrder || this.currentOrder.destroyed){
-                this.currentOrder = Order.create({
-                    "id": '-1',
-                    "sum" : 0,
-                    "modelId" : params.currentVehicle.modelId,
-                    "model" : params.currentVehicle.model,
-                    "vid" : params.currentVehicle.vid,
-                    "plate" : params.currentVehicle.plate,
-                    "cityCode" : '',
-                    "province" : '',
-                    "city" : '',
-                    "address" : "",
-                    "name" : "",
-                    "phone" : "",
-                    "date": 0,
-                    "__currentService": params.currentService,
-                    "__currentVehicle": params.currentVehicle,
-                    "services" : [{
-                        'id': params.service_id,
-                        'parts': params.currentService.parts.map(function(p){
-                            return {
-                                typeId: p.id
-                            }
-                        })
-                    }]
-                });
-            }
+            delete this.currentOrder;
+            this.currentOrder = Order.create({
+                "id": '-1',
+                "sum" : 0,
+                "modelId" : params.currentVehicle.modelId,
+                "model" : params.currentVehicle.model,
+                "vid" : params.currentVehicle.vid,
+                "plate" : params.currentVehicle.plate,
+                "cityCode" : '',
+                "province" : '',
+                "city" : '',
+                "address" : "",
+                "name" : "",
+                "phone" : "",
+                "date": 0,
+                "__currentService": params.currentService,
+                "__currentVehicle": params.currentVehicle,
+                "services" : [{
+                    'id': params.service_id,
+                    'parts': params.currentService.parts.map(function(p){
+                        return {
+                            typeId: p.id
+                        }
+                    })
+                }]
+            });
             
             var nextStepBtn = this.el.find('.j-nextstep');
             //表单信息收集

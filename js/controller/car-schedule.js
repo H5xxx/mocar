@@ -198,10 +198,10 @@ define(function(require, exports) {
             var self = this;
             //TODO Order.find("-1") first
             // debugger;
+            delete this.currentOrder;
             try {
                 this.currentOrder = Order.find("-1");
             } catch (e) {
-                delete this.currentOrder;
             }
             if (!this.currentOrder  || this.currentOrder.destroyed) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
