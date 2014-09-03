@@ -33,6 +33,9 @@
 #schedule-success .content-area{
     margin-left: 40px;
 }
+#schedule-success .form-row{
+    margin-bottom: 10px;
+}
 
 /*提示文案区*/
 #schedule-success #success-tip .site-icons{
