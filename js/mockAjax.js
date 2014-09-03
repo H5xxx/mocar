@@ -147,7 +147,7 @@ define(function(require, exports) {
         }];
     });
     //用户车辆
-    Mock.mock(/\/user\/\w+\/vehicles/, function(options) {
+    Mock.mock(/\/users\/\w+\/vehicles/, function(options) {
         return [{
             "id": 28473,
             "modelId": 12,
@@ -164,7 +164,7 @@ define(function(require, exports) {
     });
     //用户地址
     var i = 0;
-    Mock.mock(/\/user\/\w+\/contacts/, function(options) {
+    Mock.mock(/\/users\/\w+\/contacts/, function(options) {
         i++;
         if(i%2 == 0){
             return [];
@@ -430,7 +430,7 @@ define(function(require, exports) {
         };
     });
 
-    Mock.mock(/\/user\/me\/orders$/, function(options) {
+    Mock.mock(/\/users\/me\/orders$/, function(options) {
         return {};
     });
     Mock.mock(/\/authority\/token/, function(options) {

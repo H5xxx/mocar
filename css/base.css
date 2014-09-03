@@ -35,6 +35,7 @@ html, body {
     height: 6px;
     background-color: transparent;
     -webkit-transform: rotate(225deg);
+    -moz-transform: rotate(225deg);
 }
 select {
     -webkit-appearance: none;

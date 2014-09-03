@@ -29,6 +29,9 @@ define(function(require, exports) {
             	currentService: currentService,
             	currentVehicle: currentVehicle
             });
+            // debugger;
+            currentOrder.destroy(); //订单提交成功，删除浏览器端未保存的记录
+
 			callback(null, data);
 
         },
@@ -51,12 +54,13 @@ define(function(require, exports) {
                 return;
             }
             //TODO Order.find("-1") first
+            // debugger;
             try {
                 this.currentOrder = Order.find("-1");
             } catch (e) {
-
+                delete this.currentOrder;
             }
-            if (!this.currentOrder) {
+            if (!this.currentOrder || this.currentOrder.destroyed) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
                 return;
             }

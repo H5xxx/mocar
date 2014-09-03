@@ -95,12 +95,26 @@ define(function(require, exports) {
         };
     };
 
+    var makeDateFromStr = function(str){
+        var arr = (str || "").match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/);
+        if(arr && arr.length == 6){
+            var year = parseInt(arr[1]);
+            var month = parseInt(arr[2]);
+            var day = parseInt(arr[3]);
+            var hour = parseInt(arr[4]);
+            var minutes = parseInt(arr[5]);
+
+            return new Date(year, month - 1, day, hour, minutes);
+        }
+        return;
+    };
 
     return {
         format: format,
         finish: finish,
         title: title,
         getDayArr: getDayArr,
-        parseURL: parseURL
+        parseURL: parseURL,
+        makeDateFromStr: makeDateFromStr
     };
 });

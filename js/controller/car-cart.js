@@ -67,12 +67,12 @@ define(function(require, exports) {
             }, 500);
             //TODO Order.find("-1") first
             try{
-                this.currrentOrder = Order.find("-1");
+                this.currentOrder = Order.find("-1");
             }catch(e){
-
+                delete this.currentOrder;
             }
-            if(!this.currrentOrder){
-                this.currrentOrder = Order.create({
+            if(!this.currentOrder || this.currentOrder.destroyed){
+                this.currentOrder = Order.create({
                     "id": '-1',
                     "sum" : 0,
                     "modelId" : params.currentVehicle.modelId,
@@ -104,9 +104,9 @@ define(function(require, exports) {
             nextStepBtn.bind('click', function(e){
                 var accessoryInput = self.el.find('input[name=accessoryInput]');
                 accessoryInput.forEach(function(input, i){
-                    self.currrentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
+                    self.currentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
-                self.currrentOrder.save();
+                self.currentOrder.save();
             });
         },
 
@@ -210,7 +210,7 @@ define(function(require, exports) {
                     }
                 }
             });
-            self.currrentOrder.sum = totalPrice;
+            self.currentOrder.sum = totalPrice;
             totalPriceEl.html(totalPrice);
             totalPriceEl.attr('data-totalprice', totalPrice);
         }
@@ -290,7 +290,7 @@ define(function(require, exports) {
                                         self.page.navigate('/service/' + data.service_id + '/brand');
                                     }else if(selectedIndex >= 0){
                                         data.currentVehicle = data.allVehicles[selectedIndex];
-                                        self.currrentOrder.__currentVehicle = data.currentVehicle;
+                                        self.currentOrder.__currentVehicle = data.currentVehicle;
                                         data.model_id =data.currentVehicle.modelId;
                                     }
                                 }

@@ -159,30 +159,30 @@ define(function(require, exports) {
                     return;
                 }
 
-                self.currrentOrder.province = data.allProvinceArr[province];
-                self.currrentOrder.city = data.allCityMatrix[province][city];
-                self.currrentOrder.cityCode = data.allCities[province].cities[city].cityCode;
-                self.currrentOrder.address = address;
-                self.currrentOrder.day = data.allDayArr[day];
-                self.currrentOrder.time = data.allTimeArr[time];
-                self.currrentOrder.name = name;
-                self.currrentOrder.phone = phone;
-                var d = new Date(self.currrentOrder.day + " " + self.currrentOrder.time);
-                self.currrentOrder.date = d.valueOf();
-                self.currrentOrder.save();
+                self.currentOrder.province = data.allProvinceArr[province];
+                self.currentOrder.city = data.allCityMatrix[province][city];
+                self.currentOrder.cityCode = data.allCities[province].cities[city].cityCode;
+                self.currentOrder.address = address;
+                self.currentOrder.day = data.allDayArr[day];
+                self.currentOrder.time = data.allTimeArr[time];
+                self.currentOrder.name = name;
+                self.currentOrder.phone = phone;
+                var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
+                self.currentOrder.date = d.valueOf();
+                self.currentOrder.save();
                 var url = config.API_HOST + '/users/me/orders';
                 $.ajax({
                     type: 'POST',
                     url: url,
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        "modelId": self.currrentOrder.modelId,
-                        "cityCode": self.currrentOrder.cityCode,
-                        "name": self.currrentOrder.name,
-                        "address": self.currrentOrder.address,
-                        "phone": self.currrentOrder.phone,
-                        "date": self.currrentOrder.date,
-                        "services": self.currrentOrder.services
+                        "modelId": self.currentOrder.modelId,
+                        "cityCode": self.currentOrder.cityCode,
+                        "name": self.currentOrder.name,
+                        "address": self.currentOrder.address,
+                        "phone": self.currentOrder.phone,
+                        "date": self.currentOrder.date,
+                        "services": self.currentOrder.services
                     }),
                     success: function(responseData, status, xhr) {
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
@@ -197,19 +197,20 @@ define(function(require, exports) {
         activate: function(params) {
             var self = this;
             //TODO Order.find("-1") first
+            // debugger;
             try {
-                this.currrentOrder = Order.find("-1");
+                this.currentOrder = Order.find("-1");
             } catch (e) {
-
+                delete this.currentOrder;
             }
-            if (!this.currrentOrder) {
+            if (!this.currentOrder  || this.currentOrder.destroyed) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
                 return;
             }
 
             self.getData(params, function(err, data) {
                 $.extend(params, data, {
-                    sum: self.currrentOrder.sum
+                    sum: self.currentOrder.sum
                 });
                 util.title(self.title);
                 self.fadein();
