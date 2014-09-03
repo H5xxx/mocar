@@ -19,6 +19,15 @@ define(function(require, exports) {
                 Series.fetch(params),
                 Brand.fetch(params)
             ], function(list){
+                list.forEach(function(s){
+                    try{
+                        s = Series.find(s.id);
+                        s.brandId = params.brand_id;
+                        s.save();
+                    }catch(e){
+                        debugger;
+                    }
+                });
                 data = $.extend(
                     {
                         list: list

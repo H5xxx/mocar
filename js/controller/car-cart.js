@@ -132,6 +132,11 @@ define(function(require, exports) {
                         })[0];
                         if(!currentVehicle){//新选的车，加入用户车辆列表
                             currentVehicle = Model.find(params.model_id);
+                            var series = Series.find(currentVehicle.familyId);
+                            var brand = Brand.find(series.brandId);
+                            currentVehicle.prefix = series.prefix;
+                            currentVehicle.family = series.family;
+                            currentVehicle.brand = brand.brand;
                             if(currentVehicle){
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
@@ -141,7 +146,7 @@ define(function(require, exports) {
                                 self.page.navigate('/service/' + params.service_id + '/brand');
                                 return;
                             }
-                        }else{//把用户选中的车，挪到用户车辆列表中的第一个
+                        }else{//把用户选中的车（库中本来已经存在的），挪到用户车辆列表中的第一个
                             vehicles = [currentVehicle].concat(vehicles.filter(function(v){
                                 return v.modelId != currentVehicle.modelId;
                             }));
@@ -149,6 +154,11 @@ define(function(require, exports) {
                     }else{
                         //新选的车，加到用户车辆列表
                         currentVehicle = Model.find(params.model_id);
+                        var series = Series.find(currentVehicle.familyId);
+                        var brand = Brand.find(series.brandId);
+                        currentVehicle.prefix = series.prefix;
+                        currentVehicle.family = series.family;
+                        currentVehicle.brand = series.brand;
                         if(currentVehicle){
                             currentVehicle.modelId = currentVehicle.id;
                             currentVehicle.save();
@@ -219,7 +229,8 @@ define(function(require, exports) {
             var optArrs = [
                     /*['奥迪 国产A4 1.8T']*/
                     data.allVehicles.map(function(v){
-                        return [v.model]
+                        //prefix+brand+family+model+suffix
+                        return [v.prefix + v.brand + v.family + v.model + v.suffix]
                     }).concat([['重新选车']])
                 ,
                 [
