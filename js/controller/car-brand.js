@@ -1,5 +1,6 @@
 define(function(require, exports) {
     var util = require('../component/util');
+    var config = require('../component/config');
 
     var Brand = require('../model/brand');
 
@@ -10,10 +11,14 @@ define(function(require, exports) {
 
         template: 'template-brand',
 
-        getData: function(params, callback){
+        getData: function(params, callback) {
             util.finish([
                 Brand.fetch(params)
-            ], function(list){
+            ], function(list) {
+                template.helper('getBrandImg', function(id) {
+                    return config.API_HOST + '/images/automobile-signs/' + id + '.png';
+                });
+
                 callback(null, {
                     list: list
                 });
