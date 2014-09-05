@@ -63,11 +63,19 @@ define(function(require, exports) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
                 return;
             }
+            window.history.pushState({from:'success'},"", '#/home');
             self.getData(params, function(err, data) {
                 $.extend(params, data);
                 util.title(self.title);
                 self.fadein();
                 self.render(params);
+                window.history.pushState({}, '');
+                window.onpopstate = function(event){
+                    //下单成功之后，从success页面后退时，直接退到服务首页
+                    if(event.state && event.state.from == 'success' && location.hash == '#/home'){
+                        self.page.navigate(location.hash);
+                    }
+                }
             });
         }
     });

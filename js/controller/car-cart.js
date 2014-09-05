@@ -12,7 +12,7 @@ define(function(require, exports) {
     var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
     var CustomSelect = require('../widgets/CustomSelect');
-
+    var BUY_ELSE = "自行购买";
     var CarCart = require('./common').sub({
         // 该controller要渲染&控制的区域
         el: $('#car-cart'),
@@ -60,10 +60,35 @@ define(function(require, exports) {
             this.el.html(html);
 
             var scroll = new iScroll('j-cart-container',{hScrollbar:false, vScrollbar:false});
-            
-            //TODO 弹出窗口，初始化自定义select
+            var showPopup = true;
+            //从 地址信息页面 返回到 选配件页面，不弹窗
+            if(sessionStorage && sessionStorage.stepSchedule){
+                showPopup = false;
+                delete sessionStorage.stepSchedule;
+            }
+            //服务无配件，or 配件中无 自行购买，不弹自行购买提醒
+            if(showPopup){
+                showPopup = false;
+                var parts = params.currentService.parts, part, options, option;
+                if(parts && parts.length > 0){
+                    outer: for(var i = 0, ilen = parts.length; i < ilen; i++){
+                        part = parts[i];
+                        options = part.options;
+                        if(options && options.length > 0){
+                            inner: for(var j = 0, jlen = options.length; j < jlen; j++){
+                                option = options[j];
+                                if(option.name == BUY_ELSE){
+                                    showPopup = true;
+                                    break outer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //弹出窗口，初始化自定义select
             setTimeout(function(){
-                initPopupAndCustomSelect.call(self, params);
+                initPopupAndCustomSelect.call(self, params, showPopup);
             }, 500);
             //每次进入选配件页面，都删除之前未保存/刚刚提交的订单
             try{
@@ -191,23 +216,28 @@ define(function(require, exports) {
         }
     });
 
-    function initPopupAndCustomSelect(data){
+    function initPopupAndCustomSelect(data, showPopup){
         var self = this;
         var buyelseTipHtml = document.querySelector('#template-buyelsetip').innerHTML;
-        Popup.open(buyelseTipHtml,function(popupContent){
-            var mocarbtn = popupContent.querySelector('.mocarbtn');
-            var buyelsebtn = popupContent.querySelector('.buyelsebtn');
-            mocarbtn.addEventListener('click', function(){
-                initSelect();
-                calculateTotalPrice();
-                Popup.close();
+        if(showPopup){
+            Popup.open(buyelseTipHtml,function(popupContent){
+                var mocarbtn = popupContent.querySelector('.mocarbtn');
+                var buyelsebtn = popupContent.querySelector('.buyelsebtn');
+                mocarbtn.addEventListener('click', function(){
+                    initSelect();
+                    calculateTotalPrice();
+                    Popup.close();
+                });
+                buyelsebtn.addEventListener('click', function(){
+                    initSelect(true);
+                    calculateTotalPrice();
+                    Popup.close();
+                });
             });
-            buyelsebtn.addEventListener('click', function(){
-                initSelect(true);
-                calculateTotalPrice();
-                Popup.close();
-            });
-        });
+        }else{
+            initSelect(true);
+            calculateTotalPrice();
+        }
         function calculateTotalPrice(){
             var totalPrice = 0, itemPrice;
             var priceEl = $('[data-price]');
@@ -259,7 +289,7 @@ define(function(require, exports) {
                     var initialSelectedIndex;
 
                     var filtered = optArrs[i].filter(function(opt, i){
-                        if(opt[0].indexOf('自行购买') !== -1){
+                        if(opt[0].indexOf(BUY_ELSE) !== -1){
                             initialSelectedIndex = i;
                             return true;
                         }

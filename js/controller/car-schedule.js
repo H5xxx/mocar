@@ -88,12 +88,21 @@ define(function(require, exports) {
                 currentProvince = cities[currentProvinceIndex].province;
                 currentCity = cities[currentProvinceIndex].cities[currentCityIndex].city;
 
+                /*
+                    如果是当天下午2点前，时间列表包括明天，否则从后天开始，
+                    时间段仅分“上午”和“下午”，分别以9点和13点表示
+                */
+                var startOffset = 1;
+                var d = new Date();
+                if(d.getHours() >= 14){
+                    startOffset = 2;
+                }
                 //可提前7天预订
-                var allDayArr = util.getDayArr(7);
+                var allDayArr = util.getDayArr(7,startOffset);
                 //可预订的时间
                 var allTimeArr = [
-                    '08:00', '09:00', '10:00', '11:00', '12:00',
-                    '13:00', '14:00', '15:00', '16:00', '17:00'
+                    '上午',
+                    '下午'
                 ];
 
                 var data = {
@@ -164,7 +173,7 @@ define(function(require, exports) {
                 self.currentOrder.cityCode = data.allCities[province].cities[city].cityCode;
                 self.currentOrder.address = address;
                 self.currentOrder.day = data.allDayArr[day];
-                self.currentOrder.time = data.allTimeArr[time];
+                self.currentOrder.time = ['09:00','13:00'][time];
                 self.currentOrder.name = name;
                 self.currentOrder.phone = phone;
                 var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
@@ -185,6 +194,11 @@ define(function(require, exports) {
                         "services": self.currentOrder.services
                     }),
                     success: function(responseData, status, xhr) {
+                        try{
+                            delete sessionStorage.stepSchedule;
+                        }catch(e){
+                            
+                        }
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
                     },
                     error: function(xhr, errorType, error) {
@@ -207,7 +221,12 @@ define(function(require, exports) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
                 return;
             }
+            try{
+                //标示用户来到上门信息页面
+                sessionStorage.stepSchedule = 1;
+            }catch(e){
 
+            }
             self.getData(params, function(err, data) {
                 $.extend(params, data, {
                     sum: self.currentOrder.sum

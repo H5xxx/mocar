@@ -36,7 +36,8 @@ define(function(require, exports) {
         return t ? $('title').text(t).text() : $('title').text();
     };
 
-    var getDayArr = function(n) {
+    var getDayArr = function(n, startOffset) {
+        startOffset = startOffset || 0;
         function padding(num) {
             num = num + '';
             if (num.length == 1) {
@@ -54,6 +55,9 @@ define(function(require, exports) {
         }
         var retArr = [];
         d = new Date;
+        if(startOffset){
+            d.setDate(d.getDate() + startOffset);
+        }
         retArr.push(format(d.valueOf()));
         while (--n) {
             d.setDate(d.getDate() + 1);

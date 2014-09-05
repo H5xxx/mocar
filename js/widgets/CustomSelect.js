@@ -19,11 +19,11 @@ define(function(require, exports, module) {
         this.inputEl = opt.inputEl;
         this.optArr = opt.optArr;
         this.onchange = opt.onchange || function() {};
+        this._originalSelectIndex = this.inputEl.value;
         this._normalizedOptArr = this._normalizeData(opt.optArr);
         this.bindEevent();
         this.optionElArr = [];
-        // this._currentSelectedIndex = -1;
-        this._originalSelectIndex = this.inputEl.value;
+        this._currentSelectedIndex = this._normalizedOptArr.selectedIndex;
 
         this._optionTmpl = opt.optionTmpl || defaultOptionTmpl;
         this._selectTmpl = [
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
     CustomSelect.prototype._normalizeData = function(optArr) {
         var retArr = [],
             originItem, newItem;
-        var selected;
+        var selected, selectedIndex;
         for (var i = 0, ilen = optArr.length; i < ilen; i++) {
             originItem = optArr[i];
             newItem = {};
@@ -68,6 +68,7 @@ define(function(require, exports, module) {
                 newItem.right = originItem.price;
                 if (newItem.selected) {
                     selected = newItem; //最后一个selected的才算做selected
+                    selectedIndex = i;
                 }
             } else {
                 newItem.left = originItem;
@@ -80,8 +81,10 @@ define(function(require, exports, module) {
         } else if (this._originalSelectIndex != -1 && retArr[this._originalSelectIndex]) {
             retArr[this._originalSelectIndex].selected = true;
         } else {
+            selectedIndex = 0;
             retArr[0] && (retArr[0].selected = true);
         }
+        retArr.selectedIndex = selectedIndex;
         return retArr;
     }
 
