@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>选择车型</title>
+    <link rel='stylesheet' href='./css/base.css'>
+    <link rel='stylesheet' href='./css/home.css'>
+    <link rel="stylesheet" href="./css/service.css">
+    <link rel='stylesheet' href='./css/cart.css'>
+    <link rel='stylesheet' href='./css/schedule.css'>
+    <link rel='stylesheet' href='./css/success.css'>
+    <script src="./js/lib/iScroll-v4.2.5.js"></script>
+    <script src="./js/lib/template.js"></script>
+    <script src="./js/lib/sea.js"></script>
+    <script src="./js/lib/zepto.js"></script>
+    <script src="./js/lib/spine.js"></script>
+    <script src="./js/lib/route.js"></script>
+    <script src="./js/lib/manager.js"></script>
+
+    <script id="template-home" type="text/html">
+        <div class="j-home-container">
+            <div id='mocar-service-home'>
+                <div class='logo-area'>
+                    <img src="./css/icons/mocar.png" alt="摩卡服务" width="308" height="160">
+                </div>
+                <ul class='service-list'>
+                    {{each services as service i}}
+                    <li class='service-item'>
+                        <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/cart">
+                            <i class="site-icons icon-{{service.icon}}"></i>
+                            <div class="content-area border-bottom">
+                                <p class="title">{{service.name}}</p>
+                                <span class="info">
+                                    <span class="price">{{service.price}}元起</span>
+                                    —— {{service.slogan}}
+                                    <br/>
+                                    <span>{{service.description}}</span>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </script>
+    <script id="template-navigator" type="text/html">
+        <div class="header">
+            {{if brand_id}}
+                <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span>
+                {{if series_id}}
+                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> {{family}}</span>
+                    {{if model_id}}
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span>
+                    {{else}}
+                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span>
+                    {{/if}}
+                {{else}}
+                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> 车系</span>
+                {{/if}}
+            {{else}}
+                <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
+            {{/if}}
+        </div>
+        <div class="btw-header-main"></div>
+    </script>
+
+    <script id="template-brand" type="text/html">
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-brand-container">
+            <div class="j-brand-list">
+                {{each list as item i}}
+                    <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
+                        <img src="{{item.img}}">
+                        <span>{{item.brand}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <script id="template-series" type="text/html">
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-series-container">
+            <div class="j-series-list">
+                {{each list as item i}}
+                    <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
+                        <span>{{item.prefix}} {{item.family}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <script id="template-model" type="text/html">
+        {{include 'template-navigator'}}
+        <div class="main mt50px" id="j-model-container">
+            <div class="j-model-list">
+                {{each list as item i}}
+                    <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
+                        <span>{{item.suffix}} {{item.model}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+
+    <!-- -->
+    <script id="template-buyelsetip" type="text/html">
+        <div class="buyelse-popup mocar-tip-popup">
+            <div class="title">选择配件</div>
+            <div class="popup-content">
+                <p>摩卡提供和使用的所有配件，均可<br/>在京东自营商店买到。</p>
+                <br>
+                <p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>
+            </div>
+            <div class="command-area">
+                <a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>
+                <a href="javascript:void(0);" class="buyelsebtn">自行购买</a>
+            </div>
+        </div>
+    </script>
+    <!-- 选择服务类型 与 配件 页面 模板 -->
+    <script id="template-cart" type="text/html">
+        <div class="main mb50px" id="j-cart-container">
+            <div id='accessories-info'>
+                <div id='car-info' class='mt20px'>
+                    <i class='site-icons icon-car'></i>
+                    <div class='content-area form-row'>
+                        <p class="accessory info">车辆型号</p>
+                        <div class='select-wrapper'>
+                            <div class='custom-select-trigger'>
+                                <span class='product-name'>
+                                {{currentVehicle.prefix}}
+                                {{currentVehicle.brand}}
+                                {{currentVehicle.family}}
+                                {{currentVehicle.model}}
+                                {{currentVehicle.suffix}}
+                                </span>    
+                            </div>
+                            <input type="text" name="carInput" style="display:none">
+                        </div>
+                    </div>
+                </div>
+                <div id='service-info' class=''>
+                    <i class='site-icons icon-service'></i>
+                    <div class='content-area form-row'>
+                        <p class="accessory info">服务项目</p>
+                        <div class="select-wrapper">
+                            <div class='custom-select-trigger'>
+                                <span class='product-name'>{{currentService.name}}</span>
+                                <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}&nbsp;</span>    
+                            </div>
+                            <input type="text" name="serviceInput" style="display:none">
+                        </div>
+                    </div>
+                </div>
+                <div id='service-detail' class=''>
+                    <i class='site-icons icon-accessory'></i>
+                    <div class='content-area'>
+                        <ul>
+                        {{each currentService.parts as part i}}
+                            <li class='form-row' data-part-seq="{{i}}">
+                                <p class="accessory info">
+                                    {{part.name}} {{part.quantity}} {{part.unit}}
+                                </p>
+                                <div class="select-wrapper">
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
+                                    </div>
+                                    <input type="text" name="accessoryInput" style="display:none">
+                                </div>
+                            </li>
+                        {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='footer'>
+            <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/schedule">
+                <i class='site-icons icon-nextstep'></i>
+            </a>
+            <div class='content-area justify-wrap'>
+                <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{currentService.price}}</span>元</span>
+            </div> 
+        </div>
+    </script>
+    <!-- 预约上门信息 页面 模板 -->
+    <script id="template-schedule" type="text/html">
+        <div class="j-schedule-container">
+            <div id='schedule-info'>
+                <div id='generalAddress' class='form-row'>
+                    <i class="site-icons icon-location"></i>
+                    <div class='content-area zero-font-size'>
+                        <span class='first border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>{{currentProvince}}</span>  
+                                </div>
+                                <input type="text" name="provinceInput" style="display:none">
+                            </div>
+                        </span>
+                        <span class='second border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>{{currentCity}}</span>  
+                                </div>
+                                <input type="text" name="cityInput" style="display:none">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div id='detailAddress' class='form-row'>
+                    <div class='content-area border-bottom'>
+                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
+                    </div>
+                </div>
+                <div id='scheduleTime' class='form-row'>
+                    <i class="site-icons icon-time"></i>
+                    <div class='content-area zero-font-size'>
+                        <span class='first border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>{{currentDay}}</span>  
+                                </div>
+                                <input type="text" name="dayInput" style="display:none">
+                            </div>
+                        </span>
+                        <span class='second border-bottom'>
+                            <div class="select-wrapper">
+                                <div class='custom-select-trigger'>
+                                    <span class='product-name'>{{currentTime}}</span>  
+                                </div>
+                                <input type="text" name="timeInput" style="display:none">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <!-- 
+                <div id='carNo' class='form-row'>
+                    <i class="site-icons icon-car"></i>
+
+                    <div class='content-area border-bottom'>
+                        <input type="text" placeholder='车牌号，例如京NB520Z' id='carNoInput' name='carNoInput'>
+                    </div>
+                </div>
+                 -->
+                <div id='name' class='form-row'>
+                    <i class="site-icons icon-user"></i>
+                    <div class='content-area border-bottom'>
+                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
+                    </div>
+                </div>
+                <div id='phoneNumber' class='form-row'>
+                    <i class="site-icons icon-phone"></i>
+                    <div class='content-area border-bottom'>
+                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
+                    </div>
+                </div>
+            </div>
+            <div class='footer'>
+                <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
+                    <i class='site-icons icon-success'></i>
+                </a>
+                <div class='content-area justify-wrap'>
+                    <span class='tip justify-content'>总价：<span>{{sum}}</span>元</span>
+                </div> 
+            </div>
+        </div>
+    </script>
+    <!-- 预约成功 页面 模板 -->
+    <script id="template-success" type="text/html">
+        <div class="main mb50px" id="j-success-container">
+            <div id='schedule-success'>
+                <div id='success-tip' class='success-header'>
+                    <i class='site-icons icon-success'></i>
+                    <div class='content-area'>
+                        <div class='justify'>
+                            <span class='tip'>稍候客服会联系您确认服务信息，请保持手机通讯畅通</span>
+                        </div>
+                    </div> 
+                </div>
+                <div id='car-info' class='mt20px'>
+                    <i class='site-icons icon-car'></i>
+                    <div class='content-area form-row'>
+                        <div class='justify'>
+                            <span class="brand info">
+                                {{currentVehicle.prefix}}
+                                {{currentVehicle.brand}}
+                                {{currentVehicle.family}}
+                                {{currentVehicle.model}}
+                                {{currentVehicle.suffix}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id='service-info' class=''>
+                    <i class='site-icons icon-service'></i>
+
+                    <div class='content-area form-row'>
+                        <span class="brand info">{{currentService.name}}</span>
+                        <span class='carNo info last'>{{currentService.price}}&nbsp;</span>
+                    </div>
+                </div>
+                <div id='service-detail' class=''>
+                    <i class='site-icons icon-accessory'></i>
+
+                    <div class='content-area'>
+                        <ul>
+                        {{each currentService.parts as part i }}
+                            <li class='form-row'>
+                                <p class="accessory info">{{part.name}} {{part.quantity}} {{part.unit}}</p>
+                                {{each part.options as option j}}
+                                    {{if (option.id == currentOrder.services[0].parts[i].id)
+}}
+                                        <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
+                                        <span class='carNo info last'>
+                                            {{if (option.price == 0 && option.extra)}}
+                                                {{option.extra}}
+                                            {{else}}
+                                                {{option.price}}
+                                            {{/if}}
+                                        &nbsp;</span>
+                                    {{/if}}
+                                {{/each}}
+                            </li>
+                        {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                <div id='address-info' class=''>
+                    <i class='site-icons icon-location'></i>
+                    <div class='content-area form-row pr10px'>
+                            <span class='city info'>{{currentOrder.province}}</span>
+                            <span class='district info'>{{currentOrder.city}}</span>
+                            <span class='district info'>
+                                {{currentOrder.address}}
+                            </span>
+                    </div>
+                </div>
+                <div id='schedule-info' class=''>
+                    <i class='site-icons icon-time'></i>
+                    <div class='content-area form-row'>
+                            <span class='day info'>{{currentOrder.day}}</span>
+                            <span class='time info last'>{{currentOrder.time}}</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class='footer'>
+            <a href="javascript:void(0);" class="j-nav" data-nav="/home">
+                <i class='site-icons icon-home'></i>
+            </a>
+            <div class='content-area justify-wrap'>
+                <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span>元</span>
+            </div> 
+        </div>
+    </script>
+</head>
+
+<body>
+
+    <!-- main-container是所有内容的容器，保持在页面中居中，通过控制main-container的宽度可以实现响应式 -->
+    <div id="main-container" class="main-container">
+        <div class="page-container" id='car-home'></div>
+        <div class="page-container" id='car-brand'></div>
+        <div class="page-container" id='car-series'></div>
+        <div class="page-container" id='car-model'></div>
+        <div class="page-container" id='car-cart'></div>
+        <div class="page-container" id='car-schedule'></div>
+        <div class="page-container" id='car-success'></div>
+    </div>
+
+    <script>
+    seajs.config({
+        base: './js',
+        alias: {
+            "mock": "lib/mock.js"
+        }
+    })
+    // seajs.use('mockAjax', function() {});
+
+    seajs.use("page/index");
+    </script>
+
+</body>
+
+</html>
+<!-- 2014年 9月 4日 星期四 10时06分24秒 CST -->
