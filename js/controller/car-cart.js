@@ -140,10 +140,73 @@ define(function(require, exports) {
             Popup.close();
             this.constructor.__super__.clean.apply(this, arguments);
         },
+        saveUserInput: function(){
+            //将用户的操作/选择 存储到sessionStorage
+            var self = this;
+            var currentOrder = self.currentOrder;
+            if(!currentOrder){
+                return;
+            }
+            var service_id = currentOrder.__currentService.id;
+            var model_id = currentOrder.__currentVehicle.modelId;
 
+            var userInputs={
+                accessoryInputs:[]
+            };
+            var userInput = self.el.find('input'), inputName;
+            userInput.forEach(function(input, i){
+                inputName = input.name;
+                if(inputName == 'accessoryInput'){
+                    userInputs.accessoryInputs.push(input.value || '');
+                }else{
+                    userInputs[inputName] = input.value || '';
+                }
+            });
+            
+            var userInputObj = {};
+            userInputObj[model_id] = {};
+            userInputObj[model_id][service_id] = userInputs;
+            
+            sessionStorage['cartUserInput'] = JSON.stringify(userInputObj);
+            sessionStorage['lastServiceId'] = service_id;
+            sessionStorage['lastModelId'] = model_id;
+        },
+        // 离开到其对应的url时执行
+        deactivate: function() {
+            this.saveUserInput();
+            this.fadeout();
+            this.clean();
+        },
+        // 回复用户之前输入/选择的内容
+        restoreUserInput: function(params){
+            var userInputs, userInputObj;
+            userInputObj = sessionStorage['cartUserInput'];
+            if(userInputObj){
+                try{
+                    userInputObj = JSON.parse(userInputObj);
+                    userInputObj = userInputObj && userInputObj[params.model_id] || {};
+                    userInputs = userInputObj && userInputObj[params.service_id] || {};
+                }catch(e){
+                    userInputs = {
+                        accessoryInputs:[]
+                    }
+                }
+            }
+            delete sessionStorage['cartUserInput'];
+            return userInputs;
+        },
         activate: function(params){
             var self = this;
             var args = arguments;
+            var userInputs;
+            var lastModelId = sessionStorage['lastModelId'];
+            var lastServiceId = sessionStorage['lastServiceId']
+            if(lastModelId && !params.model_id){
+                params.model_id = lastModelId;
+            }
+            if(lastServiceId && !params.service_id){
+                params.service_id = lastServiceId;
+            }
             //TODO 现在先一次性把车辆给取出来
             util.finish([
                 Vehicle.fetch({uid:'me'})
@@ -201,12 +264,29 @@ define(function(require, exports) {
                         return;
                     }
                 }
-                
+                userInputs = self.restoreUserInput(params);
                 self.getData(params, function(err, data){
+                    // if(userInputs && userInputs.accessoryInputs && userInputs.accessoryInputs.length){
+                    //     var inputs = userInputs.accessoryInputs, userSelect;
+                    //     var part, options, option;
+                    //     for(var i = 0, ilen = inputs.length; i < ilen; i++){
+                    //         part = data.parts[i];
+                    //         options = part && part.options;
+                    //         if(options.length && inputs[i]){
+                    //             userSelect = parseInt(inputs[i]);
+                    //             if(userSelect){
+                    //                 //把用户之前选择的，放到列表中的第一个位置
+                    //                 userSelect = options.splice(userSelect,1);
+                    //                 options.unshift(userSelect);
+                    //             }
+                    //         }
+                    //     }
+                    // }
                     $.extend(params, {
                         currentService: data,
                         currentVehicle: currentVehicle,
-                        allVehicles: vehicles || []
+                        allVehicles: vehicles || [],
+                        userInputs: userInputs
                     });    
                     util.title(self.title);
                     self.fadein();
@@ -215,7 +295,7 @@ define(function(require, exports) {
             });
         }
     });
-
+// -----------------------------    ---------------------------//
     function initPopupAndCustomSelect(data, showPopup){
         var self = this;
         var buyelseTipHtml = document.querySelector('#template-buyelsetip').innerHTML;
@@ -235,7 +315,7 @@ define(function(require, exports) {
                 });
             });
         }else{
-            initSelect(true);
+            initSelect();
             calculateTotalPrice();
         }
         function calculateTotalPrice(){
@@ -304,7 +384,7 @@ define(function(require, exports) {
                     optionNameEl.innerHTML = optArrs[i][initialSelectedIndex][0];
                     priceEl.innerHTML = optArrs[i][initialSelectedIndex][1];
                     priceEl.setAttribute('data-price', optArrs[i][initialSelectedIndex][1]);
-                }else{
+                }else if(!selectInput.value){
                     selectInput.value = 0;
                 }
                 if(selectTrigger && selectInput){

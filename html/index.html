@@ -178,11 +178,26 @@
                                     {{part.name}} {{part.quantity}} {{part.unit}}
                                 </p>
                                 <div class="select-wrapper">
+                                {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>
+                                        {{part.options[i].brand}}
+                                        {{part.options[i].name}}
+                                        {{part.options[i].extra}}
+                                        </span>
+                                        <span class='price' data-price='{{part.options[i].price}}'>
+                                        {{part.options[i].price}}&nbsp;
+                                        </span>
+                                    </div>
+                                    <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
+                                {{else}}
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
                                         <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
                                     </div>
-                                    <input type="text" name="accessoryInput" style="display:none">
+                                    <input type="text" name="accessoryInput" style="display:none" value="0">
+                                    
+                                {{/if}}
                                 </div>
                             </li>
                         {{/each}}
