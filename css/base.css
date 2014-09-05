@@ -68,11 +68,18 @@ select {
     margin-left: 130px;
     display: block;
 }
+.mb20px {
+    margin-bottom: 20px;
+}
+
 .mb50px {
     margin-bottom: 50px;
 }
 .pr10px {
     padding-right: 10px;
+}
+.pt20px {
+    padding-top: 20px;
 }
 .border-bottom {
     border-bottom: #D9D9D9 solid 1px;
