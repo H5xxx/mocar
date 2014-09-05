@@ -22,6 +22,7 @@ define(function(require, exports) {
 
         getData: function(params, callback) {
             var self = this;
+            var userInputs = params.userInputs || {};
             util.finish([
                 City.fetch(),
                 Contact.fetch({
@@ -29,16 +30,29 @@ define(function(require, exports) {
                 })
             ], function(cities, contacts) {
                 var currentContact, currentProvinceIndex, currentCityIndex, currentProvince, currentCity;
-                var name, address, phone;
+                var name, address, phone, cityCode;
                 var allProvinceArr = [],
                     allCityMatrix = [];
                 currentProvinceIndex = currentCityIndex = 0;
+                
+                var previousProvinceIndex = userInputs.provinceInput;
+                var previousCityIndex = userInputs.cityInput;
+                //cityCode = userInputs.cityCode;
+                var previousDayIndex = userInputs.dayInput;
+                var previousTimeIndex = userInputs.timeInput;
+
+                name = userInputs.nameInput;
+                address = userInputs.addressInput;
+                phone = userInputs.phoneInput;
+                dayIndex = previousDayIndex || 0;
+                timeIndex = previousTimeIndex || 0;
 
                 if (contacts && contacts.length) {
                     currentContact = contacts[0];
-                    name = currentContact.name;
-                    address = currentContact.address;
-                    phone = currentContact.phone;
+                    name = name || currentContact.name;
+                    address = address || currentContact.address;
+                    phone = phone || currentContact.phone;
+                    
                     var tempArr;
                     cities.forEach(function(c, i) {
                         tempArr = [];
@@ -46,7 +60,7 @@ define(function(require, exports) {
                         allCityMatrix.push(tempArr);
                         c.cities.forEach(function(d, j) {
                             tempArr.push(d.city);
-                            if (d.cityCode == currentContact.cityCode) {
+                            if (d.cityCode == cityCode) {
                                 currentProvinceIndex = i;
                                 currentCityIndex = j;
                             }
@@ -85,6 +99,12 @@ define(function(require, exports) {
                         return c.province;
                     });
                 }
+                if(previousProvinceIndex){
+                    currentProvinceIndex = previousProvinceIndex;
+                }
+                if(previousCityIndex){
+                    currentCityIndex = previousCityIndex;
+                }
                 currentProvince = cities[currentProvinceIndex].province;
                 currentCity = cities[currentProvinceIndex].cities[currentCityIndex].city;
 
@@ -115,10 +135,10 @@ define(function(require, exports) {
                     allCityMatrix: allCityMatrix,
                     allDayArr: allDayArr,
                     allTimeArr: allTimeArr,
-                    currentDayIndex: 0,
-                    currentTimeIndex: 0,
-                    currentDay: allDayArr[0],
-                    currentTime: allTimeArr[0],
+                    currentDayIndex: dayIndex,
+                    currentTimeIndex: timeIndex,
+                    currentDay: allDayArr[dayIndex],
+                    currentTime: allTimeArr[timeIndex],
                     name: name,
                     address: address,
                     phone: phone
@@ -197,7 +217,7 @@ define(function(require, exports) {
                         try{
                             delete sessionStorage.stepSchedule;
                         }catch(e){
-                            
+
                         }
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
                     },
@@ -207,6 +227,38 @@ define(function(require, exports) {
                 });
 
             });
+        },
+        saveUserInput: function(){
+            //将用户的操作/选择 存储到sessionStorage
+            var self = this;
+        
+            var userInputs={};
+            var userInputEls = self.el.find('input'), inputName;
+            userInputEls.forEach(function(input, i){
+                inputName = input.name;
+                userInputs[inputName] = input.value || '';
+            });
+            sessionStorage['scheduleUserInput'] = JSON.stringify(userInputs);
+        },
+        // 离开到其对应的url时执行
+        deactivate: function() {
+            this.saveUserInput();
+            this.fadeout();
+            this.clean();
+        },
+        // 回复用户之前输入/选择的内容
+        restoreUserInput: function(){
+            var userInputs;
+            userInputs = sessionStorage['scheduleUserInput'];
+            if(userInputs){
+                try{
+                    userInputs = JSON.parse(userInputs);
+                }catch(e){
+                    userInputs = {}
+                }
+            }
+            delete sessionStorage['scheduleUserInput'];
+            return userInputs;
         },
         activate: function(params) {
             var self = this;
@@ -227,6 +279,8 @@ define(function(require, exports) {
             }catch(e){
 
             }
+            userInputs = self.restoreUserInput();
+            params.userInputs = userInputs;
             self.getData(params, function(err, data) {
                 $.extend(params, data, {
                     sum: self.currentOrder.sum
@@ -263,7 +317,9 @@ define(function(require, exports) {
             selectWrapper = selectWrappers[i];
             selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
             selectInput = selectWrapper.querySelector('input');
-            selectInput.value = 0; //默认第一个为selected
+            if(!selectInput.value){
+                selectInput.value = 0; //默认第一个为selected
+            }
             selectTriggerArr.push(selectTrigger);
             selectInputArr.push(selectInput);
 
