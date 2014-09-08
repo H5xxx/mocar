@@ -353,9 +353,14 @@ define(function(require, exports) {
                 //     ['自行购买','0元']
                 // ],
             ];
+            var part;
             for(var i = 0, ilen = data.currentService.parts.length; i < ilen; i++){
-                optArrs.push([].concat(data.currentService.parts[i].options.map(function(opt){
-                    return [opt.brand + opt.name + " " + opt.extra, opt.price + '&nbsp;']
+                part = data.currentService.parts[i];
+                optArrs.push([].concat(part.options.map(function(opt){
+                    return [
+                        opt.brand + opt.name + " " + opt.extra,
+                        (part.quantity || 1) * opt.price + ' '
+                    ]
                 })));
             }
             var selectWrappers = document.querySelectorAll('.select-wrapper');
