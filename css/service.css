@@ -78,6 +78,15 @@ img {
     margin: 5px auto 8px;
 }*/
 
+.header .j-nav {
+    display: inline-block;
+    overflow: hidden;
+}
+.header .j-nav:nth-child(2) {
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    max-width: 167px;
+}
 .j-brand-list {
     float: left;
     border-top: 4px solid #f8f8f8;
