@@ -108,7 +108,7 @@
             <div class="j-model-list">
                 {{each list as item i}}
                     <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
-                        <span>{{item.suffix}} {{item.model}}</span>
+                        <span>{{item.model}} {{item.suffix}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -185,15 +185,15 @@
                                         {{part.options[i].name}}
                                         {{part.options[i].extra}}
                                         </span>
-                                        <span class='price' data-price='{{part.options[i].price}}'>
-                                        {{part.options[i].price}}&nbsp;
+                                        <span class='price' data-price='{{part.quantity * part.options[i].price}}'>
+                                        {{part.quantity * part.options[i].price}}&nbsp;
                                         </span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
                                 {{else}}
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
+                                        <span class='price' data-price='{{part.quantity * part.options[0].price}}'>{{part.quantity * part.options[0].price}}&nbsp;</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="0">
                                     
@@ -350,10 +350,14 @@
 }}
                                         <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
                                         <span class='carNo info last'>
-                                            {{if (option.price == 0 && option.extra)}}
-                                                {{option.extra}}
+                                            {{if (option.price == 0 && option.hint)}}
+                                                {{if (option.hint == '实价' ) }}
+                                                    {{option.hint}}
+                                                {{else}}
+                                                    {{part.quantity * option.hint}}
+                                                {{/if}}
                                             {{else}}
-                                                {{option.price}}
+                                                {{part.quantity * option.price}}
                                             {{/if}}
                                         &nbsp;</span>
                                     {{/if}}
@@ -422,7 +426,7 @@
             "mock": "lib/mock.js"
         }
     })
-    // seajs.use('mockAjax', function() {});
+     seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
@@ -430,4 +434,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月 6日 星期六 02时01分41秒 CST -->
+<!-- 2014年 9月 8日 星期一 23时46分29秒 CST -->
