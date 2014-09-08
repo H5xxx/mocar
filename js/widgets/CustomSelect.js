@@ -127,8 +127,8 @@ define(function(require, exports, module) {
                 self._currentSelectedIndex = self._originalSelectIndex;
                 self.inputEl.value = self._originalSelectIndex;
             }
-            confirmEl.addEventListener(eventName, confirmListener);
-            concelEl.addEventListener(eventName, concelListener);
+            // confirmEl.addEventListener(eventName, confirmListener);
+            // concelEl.addEventListener(eventName, concelListener);
 
             var clickHandler = function(e) {
                 var clickedLi = e.currentTarget;
