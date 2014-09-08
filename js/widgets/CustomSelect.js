@@ -33,10 +33,10 @@ define(function(require, exports, module) {
             this._optionTmpl,
             '{{/each}}',
             '</ul>',
-            '<div class="command-area">',
+            /*'<div class="command-area">',
             '<a href="javascript:void(0);" class="btn confirm default">确定</a>',
             '<a href="javascript:void(0);" class="btn concel">取消</a>',
-            '</div>',
+            '</div>',*/
             '</div>'
         ].join('');
         try {
@@ -116,19 +116,20 @@ define(function(require, exports, module) {
             var confirmEl = popupEl.querySelector('.confirm');
             var concelEl = popupEl.querySelector('.concel');
             var customList = popupEl.querySelectorAll('.custom-option');
-            confirmEl.addEventListener(eventName, function() {
+            var confirmListener = function(){
                 Popup.close();
                 self._originalSelectIndex = self._currentSelectedIndex;
                 self.inputEl.value = self._currentSelectedIndex;
                 self.onchange(self._currentSelectedIndex);
-                // self._currentValue = clickedLi.innerText;
-                // self.inputEl.value = clickedLi.innerText;
-            });
-            concelEl.addEventListener(eventName, function() {
+            };
+            var concelListener = function(){
                 Popup.close();
                 self._currentSelectedIndex = self._originalSelectIndex;
                 self.inputEl.value = self._originalSelectIndex;
-            });
+            }
+            confirmEl.addEventListener(eventName, confirmListener);
+            concelEl.addEventListener(eventName, concelListener);
+
             var clickHandler = function(e) {
                 var clickedLi = e.currentTarget;
                 var seq = clickedLi.getAttribute('data-seq');
@@ -142,6 +143,7 @@ define(function(require, exports, module) {
                     clickedLi.className = clickedLi.className + ' selected';
                     self._currentSelectedIndex = parseInt(seq);
                 }
+                confirmListener();
             }
             for (var i = 0, ilen = customList.length; i < ilen; i++) {
                 customList[i].addEventListener(eventName, clickHandler)

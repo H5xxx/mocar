@@ -6,7 +6,7 @@ define(function (require, exports, module) {
 	if(json && json.params && json.params['api_hostname']){
 		API_HOST = 'http://'+ json.params['api_hostname'];
 		if(json.params['api_port']){
-			API_HOST += json.params['api_port'];
+			API_HOST += ":" + json.params['api_port'];
 		}
 	}
 	module.exports = {
