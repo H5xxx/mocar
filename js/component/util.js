@@ -38,6 +38,7 @@ define(function(require, exports) {
 
     var getDayArr = function(n, startOffset) {
         startOffset = startOffset || 0;
+
         function padding(num) {
             num = num + '';
             if (num.length == 1) {
@@ -55,7 +56,7 @@ define(function(require, exports) {
         }
         var retArr = [];
         d = new Date;
-        if(startOffset){
+        if (startOffset) {
             d.setDate(d.getDate() + startOffset);
         }
         retArr.push(format(d.valueOf()));
@@ -99,18 +100,31 @@ define(function(require, exports) {
         };
     };
 
-    var makeDateFromStr = function(str){
+    var makeDateFromStr = function(str) {
         var arr = (str || "").match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/);
-        if(arr && arr.length == 6){
-            var year = parseInt(arr[1]);
-            var month = parseInt(arr[2]);
-            var day = parseInt(arr[3]);
-            var hour = parseInt(arr[4]);
-            var minutes = parseInt(arr[5]);
+        if (arr && arr.length == 6) {
+            var year = parseInt(arr[1], 10);
+            var month = parseInt(arr[2], 10);
+            var day = parseInt(arr[3], 10);
+            var hour = parseInt(arr[4], 10);
+            var minutes = parseInt(arr[5], 10);
 
             return new Date(year, month - 1, day, hour, minutes);
         }
         return;
+    };
+
+    /**格式化数字为一个定长的字符串，前面补０ 
+     * 参数:
+     * source 待格式化的字符串
+     * length 需要得到的字符串的长度
+     */
+    var formatNum = function(source, length) {
+        var strTemp = "";
+        for (var i = 1; i <= length - (source + '').length; i++) {
+            strTemp += "0";
+        }
+        return strTemp + source;
     };
 
     return {
@@ -119,6 +133,7 @@ define(function(require, exports) {
         title: title,
         getDayArr: getDayArr,
         parseURL: parseURL,
-        makeDateFromStr: makeDateFromStr
+        makeDateFromStr: makeDateFromStr,
+        formatNum: formatNum
     };
 });

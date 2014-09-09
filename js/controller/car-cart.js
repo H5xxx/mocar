@@ -21,7 +21,7 @@ define(function(require, exports) {
         
         template: 'template-cart',
 
-        getData: function(params, callback){
+        doGetData: function(params, callback){
             
             var url = [config.API_HOST + '/models/',params.model_id,'/services/', params.service_id].join('');
             $.ajax({
@@ -52,7 +52,6 @@ define(function(require, exports) {
             });
             //callback(null, data);
         },
-
         render: function(params){
             var self = this;
             var html = template(this.template, params);
@@ -195,7 +194,7 @@ define(function(require, exports) {
             delete sessionStorage['cartUserInput'];
             return userInputs;
         },
-        activate: function(params){
+        getData: function(params, callback){
             var self = this;
             var args = arguments;
             var userInputs;
@@ -278,7 +277,7 @@ define(function(require, exports) {
                     }
                 }
                 userInputs = self.restoreUserInput(params);
-                self.getData(params, function(err, data){
+                self.doGetData(params, function(err, data){
                     // if(userInputs && userInputs.accessoryInputs && userInputs.accessoryInputs.length){
                     //     var inputs = userInputs.accessoryInputs, userSelect;
                     //     var part, options, option;
@@ -301,9 +300,7 @@ define(function(require, exports) {
                         allVehicles: vehicles || [],
                         userInputs: userInputs
                     });    
-                    util.title(self.title);
-                    self.movein();
-                    self.render(params);
+                    callback(err, params);
                 });
             });
         }

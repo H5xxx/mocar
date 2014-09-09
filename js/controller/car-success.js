@@ -17,7 +17,7 @@ define(function(require, exports) {
 
         template: 'template-success',
 
-        getData: function(params, callback) {
+        doGetData: function(params, callback) {
             var self = this;
             var currentService, currentVehicle;
             //currentService = Service.find(params.service_id);
@@ -43,7 +43,7 @@ define(function(require, exports) {
             this.el.html(html);
             var s = new iScroll('j-success-container');
         },
-        activate: function(params) {
+        getData: function(params, callback) {
             var self = this;
             if (!params.service_id) {
                 this.page.navigate('/home');
@@ -63,11 +63,9 @@ define(function(require, exports) {
                 return;
             }
             // window.history.pushState({from:'success'},"", '#/home');
-            self.getData(params, function(err, data) {
+            self.doGetData(params, function(err, data) {
                 $.extend(params, data);
-                util.title(self.title);
-                self.movein();
-                self.render(params);
+                callback(err,data);
                 // window.history.pushState({}, '');
                 // window.onpopstate = function(event){
                 //     //下单成功之后，从success页面后退时，直接退到服务首页

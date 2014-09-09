@@ -5,8 +5,6 @@ define(function(require, exports) {
     var config = require('../component/config');
     var util = require('../component/util');
     var Service = require('../model/service');
-    var Brand = require('../model/brand');
-    var Model = require('../model/model');
 
     var CarHome = require('./common').sub({
         // 该controller要渲染&控制的区域
@@ -29,7 +27,7 @@ define(function(require, exports) {
                 Service.fetch(params)
             ], function(services){
                 services.forEach(function(service){
-                    service.icon = icons[service.id];
+                    service.icon = config.API_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
                 });
 
                 callback(null, {

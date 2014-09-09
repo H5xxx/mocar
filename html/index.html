@@ -24,14 +24,14 @@
         <div class="j-home-container">
             <div id='mocar-service-home'>
                 <div class='logo-area'>
-                    <img src="../css/icons/mocar.png" alt="摩卡服务" width="308" height="160">
+                    <img src="../css/icons/mocar.png" alt="摩卡服务" width="100%">
                 </div>
                 <ul class='service-list'>
                     {{each services as service i}}
                     <li class='service-item'>
                         <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
                         <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/cart">
-                            <i class="site-icons icon-{{service.icon}}"></i>
+                            <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                             <div class="content-area border-bottom">
                                 <p class="title">{{service.name}}</p>
                                 <span class="info">
@@ -79,7 +79,7 @@
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
-                        <img src="{{item.id | getBrandImg}}">
+                        <img src="{{item.icon}}">
                         <span>{{item.brand}}</span>
                     </div>
                 {{/each}}
@@ -426,7 +426,7 @@
             "mock": "lib/mock.js"
         }
     })
-    seajs.use('mockAjax', function() {});
+    // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>

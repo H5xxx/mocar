@@ -34,7 +34,7 @@ define(function(require, exports) {
 
         // 清空内容
         clean: function() {
-            this.el.html('Loading...');
+            this.el.html('<div id="loading"><img src="../css/icons/loading.gif"></div>');
         },
 
         // 跳转到其对应的url时执行
