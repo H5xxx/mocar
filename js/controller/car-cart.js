@@ -332,21 +332,25 @@ define(function(require, exports) {
             calculateTotalPrice();
         }
         function calculateTotalPrice(){
-            var totalPrice = 0, itemPrice;
-            var priceEl = $('[data-price]');
-            var totalPriceEl = $('[data-totalprice]');
-            priceEl.each(function(i, el){
-                itemPrice = el.getAttribute('data-price');
-                if(itemPrice){
-                    itemPrice = parseFloat(itemPrice);
+            try{
+                var totalPrice = 0, itemPrice;
+                var priceEl = $('[data-price]');
+                var totalPriceEl = $('[data-totalprice]');
+                priceEl.each(function(i, el){
+                    itemPrice = el.getAttribute('data-price');
                     if(itemPrice){
-                        totalPrice += itemPrice;
+                        itemPrice = parseFloat(itemPrice);
+                        if(itemPrice){
+                            totalPrice += itemPrice;
+                        }
                     }
-                }
-            });
-            self.currentOrder.sum = totalPrice;
-            totalPriceEl.html(totalPrice);
-            totalPriceEl.attr('data-totalprice', totalPrice);
+                });
+                self.currentOrder.sum = totalPrice;
+                totalPriceEl.html(totalPrice);
+                totalPriceEl.attr('data-totalprice', totalPrice);
+            }catch(e){
+                alert('计算总价出错啦 ' + e);
+            }
         }
         function initSelect (buyelse) {
             var optArrs = [
