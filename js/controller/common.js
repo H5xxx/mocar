@@ -41,7 +41,7 @@ define(function(require, exports) {
         // 清空内容
         // 尽情地重写吧
         clean: function() {
-            this.el.html('<div id="loading"><img src="../css/icons/loading.gif"></div>');
+            this.el.html('');
         },
 
         // 跳转到其对应的url时执行
@@ -83,6 +83,7 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         deactivate: function() {
+            this.el.html('<div id="loading"><img src="../css/icons/loading.gif"></div>');
         },
 
         // 清理当前controller的内容并移出视图
