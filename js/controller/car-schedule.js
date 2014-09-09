@@ -243,8 +243,7 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         deactivate: function() {
             this.saveUserInput();
-            this.moveout();
-            this.clean();
+            this.constructor.__super__.deactivate.apply(this, arguments);
         },
         // 回复用户之前输入/选择的内容
         restoreUserInput: function(){
