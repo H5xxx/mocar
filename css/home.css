@@ -2,36 +2,45 @@
     overflow: hidden;
 }
 #mocar-service-home .logo-area {
-    margin-bottom: 30px;
+    padding-bottom: 8px;
 }
 #mocar-service-home .logo-area > img {
     margin: auto;
 }
 .service-list {
-    padding-bottom: 65535px;
-    margin-bottom: -65535px;
+    /*margin: 16px;*/
+    /* padding-bottom: 65535px;
+    margin-bottom: -65535px;*/
 }
 .service-list li a {
     display: block;
 }
 .service-list .content-area {
-    margin: 0 30px 10px 50px;
-    padding: 0 10px 10px 10px;
+    margin-left: 64px;
+    padding-bottom: 16px;
 }
 .service-list .content-area .title {
+    font-size: 16px;
     color: #67CA2F;
 }
 .service-list .content-area .info {
+    padding-top: 8px;
+    font-size: 14px;
     color: #999999;
 }
 .service-list .content-area .price {
+    font-size: 14px;
     color: #000000;
+    float: right;
 }
 .service-list .site-icons {
     float: left;
     display: block;
     margin-top: 0;
-    margin-left: 10px;
-    width: 36px;
-    height: 36px;
+    margin-left: 0;
+    width: 40px;
+    height: 40px;
+}
+.service-item {
+    margin: 16px;
 }
