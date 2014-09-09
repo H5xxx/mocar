@@ -130,7 +130,8 @@ select {
     height: 100%;
 }
 #loading > img {
-    margin: 230px auto;
+    /*margin: 230px auto;*/
+    margin: 0 auto;
 }
 /*遮罩层*/
 
