@@ -4,8 +4,8 @@
 
 define(function(require, exports) {
     var util = require('../component/util');
-    var Popup = require('../widgets/Popup');
     var Transitions = require('../component/transitions');
+    var Popup = require('../widgets/Popup');
 
     var Common = Spine.Controller.sub({
         // 该controller要渲染&控制的区域
@@ -42,7 +42,7 @@ define(function(require, exports) {
         // 清空内容
         // 尽情地重写吧
         clean: function() {
-            Popup.close();
+            this.el.html('');
         },
 
         // 跳转到其对应的url时执行
@@ -90,6 +90,8 @@ define(function(require, exports) {
         // 清理当前controller的内容并移出视图
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         leave: function(){
+            Popup.close();
+
             this.moveout();
             this.clean();
         },
