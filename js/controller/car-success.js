@@ -66,7 +66,7 @@ define(function(require, exports) {
             self.getData(params, function(err, data) {
                 $.extend(params, data);
                 util.title(self.title);
-                self.fadein();
+                self.movein();
                 self.render(params);
                 // window.history.pushState({}, '');
                 // window.onpopstate = function(event){
