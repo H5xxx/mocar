@@ -33,13 +33,14 @@
                         <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/cart">
                             <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                             <div class="content-area border-bottom">
-                                <p class="title">{{service.name}}</p>
-                                <span class="info">
-                                    <span class="price">{{service.price}}元起</span>
-                                    —— {{service.slogan}}
+                                <span class="title">{{service.name}}</span>
+                                <span class="price">{{service.price}}元</span>
+                                <br/>
+                                <div class="info">
+                                    {{service.slogan}}
                                     <br/>
                                     <span>{{service.description}}</span>
-                                </span>
+                                </div>
                             </div>
                         </a>
                     </li>
