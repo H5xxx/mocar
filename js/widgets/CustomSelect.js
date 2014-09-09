@@ -13,7 +13,14 @@ define(function(require, exports, module) {
         '<span class="product-price fr">{{value.right}}</span>',
         '</li>'
     ].join('');
-
+    var _supportTouch = (function(){
+        try {
+            document.createEvent('TouchEvent');
+            return true;
+        } catch (e) {
+            return false;
+        }
+    })();
     function CustomSelect(opt) {
         this.triggerEl = opt.triggerEl;
         this.inputEl = opt.inputEl;
@@ -39,12 +46,7 @@ define(function(require, exports, module) {
             '</div>',*/
             '</div>'
         ].join('');
-        try {
-            document.createEvent('TouchEvent');
-            this._supportTouch = true;
-        } catch (e) {
-            this._supportTouch = false;
-        }
+        this._supportTouch = _supportTouch;
     }
     CustomSelect.prototype.bindEevent = function() {
         var self = this;
