@@ -20,7 +20,7 @@ define(function(require, exports) {
 
         template: 'template-schedule',
 
-        getData: function(params, callback) {
+        doGetData: function(params, callback) {
             var self = this;
             var userInputs = params.userInputs || {};
             util.finish([
@@ -243,8 +243,7 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         deactivate: function() {
             this.saveUserInput();
-            this.moveout();
-            this.clean();
+            this.constructor.__super__.deactivate.apply(this, arguments);
         },
         // 回复用户之前输入/选择的内容
         restoreUserInput: function(){
@@ -260,7 +259,7 @@ define(function(require, exports) {
             delete sessionStorage['scheduleUserInput'];
             return userInputs;
         },
-        activate: function(params) {
+        getData: function(params, callback) {
             var self = this;
             //TODO Order.find("-1") first
             // debugger;
@@ -281,13 +280,11 @@ define(function(require, exports) {
             }
             userInputs = self.restoreUserInput();
             params.userInputs = userInputs;
-            self.getData(params, function(err, data) {
+            self.doGetData(params, function(err, data) {
                 $.extend(params, data, {
                     sum: self.currentOrder.sum
                 });
-                util.title(self.title);
-                self.movein();
-                self.render(params);
+                callback(err, data);
             });
         }
     });

@@ -57,10 +57,6 @@ define(function(require, exports) {
         el: $('#main-container')
     });
 
-    page.manager.bind('change', function(controller){
-        page.curr = controller;
-    });
-
     Spine.Route.setup();
 
 });

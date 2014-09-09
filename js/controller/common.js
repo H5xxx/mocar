@@ -42,35 +42,46 @@ define(function(require, exports) {
 
             var me = this;
 
-            util.title(this.title);
-
-            this.movein();
-
             params = params || {};
 
             this.getData(params, function(err, data) {
 
-                $.extend(params, data);
+                me.enter();
 
-                me.render(params);
+                me.render($.extend(params, data));
 
             });
 
         },
 
+        // 视图正式进入当前controller
+        enter: function(){
+            var prev = this.page.curr,
+                prevId = prev  ? prev.squenceId : -1,
+                currId = this.squenceId,
+                direction = currId >= prevId ? 'right' : 'left';
+
+            if(prev){
+                prev.leave();
+            }
+
+            this.movein(direction);
+            util.title(this.title);
+
+            this.page.curr = this;
+        },
+
         // 离开到其对应的url时执行
         deactivate: function() {
+        },
+
+        // 清理当前controller的内容并移出视图
+        leave: function(){
             this.moveout();
             this.clean();
         },
 
-        movein: function(){
-            var prev = this.page.curr ? this.page.curr.squenceId : -1,
-                curr = this.squenceId,
-                direction = curr >= prev ? 'right' : 'left';
-
-            Transitions.movein.call(this, direction);
-        },
+        movein: Transitions.movein,
         moveout: Transitions.moveout
     });
 
