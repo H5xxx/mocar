@@ -69,6 +69,8 @@ define(function(require, exports) {
                 curr = this.squenceId,
                 direction = curr >= prev ? 'right' : 'left';
 
+            this.page.curr = this;
+
             Transitions.movein.call(this, direction);
         },
         moveout: Transitions.moveout
