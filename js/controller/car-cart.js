@@ -219,12 +219,19 @@ define(function(require, exports) {
                             return v.modelId == params.model_id;
                         })[0];
                         if(!currentVehicle){//新选的车，加入用户车辆列表
-                            currentVehicle = Model.find(params.model_id);
-                            var series = Series.find(currentVehicle.familyId);
-                            var brand = Brand.find(series.brandId);
-                            currentVehicle.prefix = series.prefix;
-                            currentVehicle.family = series.family;
-                            currentVehicle.brand = brand.brand;
+                            try{
+                                currentVehicle = Model.find(params.model_id);
+                                var series = Series.find(currentVehicle.familyId);
+                                var brand = Brand.find(series.brandId);
+                                currentVehicle.prefix = series.prefix;
+                                currentVehicle.family = series.family;
+                                currentVehicle.brand = brand.brand;
+                            }catch(e){
+                            /*  本页面可能被用户直接刷新，而导致前序流程的内存数据丢失，
+                                调用Brand/Series/Model的find会抛Unknown record的异常
+                            */
+                                currentVehicle = null;
+                            }
                             if(currentVehicle){
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
@@ -241,17 +248,23 @@ define(function(require, exports) {
                         }
                     }else{
                         //新选的车，加到用户车辆列表
-                        currentVehicle = Model.find(params.model_id);
-                        var series = Series.find(currentVehicle.familyId);
-                        var brand = Brand.find(series.brandId);
-                        currentVehicle.prefix = series.prefix;
-                        currentVehicle.family = series.family;
-                        currentVehicle.brand = series.brand;
-                        if(currentVehicle){
-                            currentVehicle.modelId = currentVehicle.id;
-                            currentVehicle.save();
-                            vehicles =[currentVehicle];
-                        } 
+                        try{
+                            currentVehicle = Model.find(params.model_id);
+                            var series = Series.find(currentVehicle.familyId);
+                            var brand = Brand.find(series.brandId);
+                            currentVehicle.prefix = series.prefix;
+                            currentVehicle.family = series.family;
+                            currentVehicle.brand = series.brand;
+                            if(currentVehicle){
+                                currentVehicle.modelId = currentVehicle.id;
+                                currentVehicle.save();
+                                vehicles =[currentVehicle];
+                            }
+                        }catch(e){
+                            //非法流程进入，比如直接刷新当前页面了
+                            self.page.navigate('/service/' + params.service_id + '/brand');
+                            return;
+                        }
                     }
                 }else{//当前没经过选车流程
                     if(vehicles && vehicles.length > 0){
