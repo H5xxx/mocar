@@ -317,14 +317,14 @@ define(function(require, exports) {
                 var mocarbtn = popupContent.querySelector('.mocarbtn');
                 var buyelsebtn = popupContent.querySelector('.buyelsebtn');
                 mocarbtn.addEventListener('click', function(){
+                    Popup.close();
                     initSelect();
                     calculateTotalPrice();
-                    Popup.close();
                 });
                 buyelsebtn.addEventListener('click', function(){
+                    Popup.close();
                     initSelect(true);
                     calculateTotalPrice();
-                    Popup.close();
                 });
             });
         }else{
