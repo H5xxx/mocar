@@ -6,7 +6,6 @@ define(function(require, exports) {
     var util = require('../component/util');
     var Transitions = require('../component/transitions');
     var Popup = require('../widgets/Popup');
-    var popupEl;
     var Common = Spine.Controller.sub({
         // 该controller要渲染&控制的区域
         // 尽情地重写吧
@@ -84,17 +83,13 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         deactivate: function() {
-            Popup.open('<div id="loading"><img src="../css/icons/loading.gif"></div>', function(pEl){
-                popupEl = pEl;
-                popupEl.style.cssText = "width:auto";
-            });
+            Popup.openLoading();
         },
 
         // 清理当前controller的内容并移出视图
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         leave: function(){
             Popup.close();
-            popupEl.style.cssText = "";
             this.moveout();
             this.clean();
         },

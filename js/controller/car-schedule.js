@@ -200,6 +200,7 @@ define(function(require, exports) {
                 self.currentOrder.date = d.valueOf();
                 self.currentOrder.save();
                 var url = config.API_HOST + '/users/me/orders';
+                Popup.openLoading();
                 $.ajax({
                     type: 'POST',
                     url: url,
@@ -214,6 +215,7 @@ define(function(require, exports) {
                         "services": self.currentOrder.services
                     }),
                     success: function(responseData, status, xhr) {
+                        Popup.close();
                         try{
                             delete sessionStorage.stepSchedule;
                         }catch(e){
@@ -222,7 +224,8 @@ define(function(require, exports) {
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
                     },
                     error: function(xhr, errorType, error) {
-                        alert("Error: " + errorType + error);
+                        Popup.close();
+                        alert("出错啦: " + errorType + error);
                     }
                 });
 

@@ -53,9 +53,15 @@ define(function(require, exports, module) {
 			return;
 		}
 		wrapperEl.innerHTML = "";
+		popupContentEl.style.cssText = "";
 		popupContentEl = null;
 		wrapperEl.style.display = "none";
+
 	};
+	Popup.openLoading = function(){
+		Popup.open('<div id="loading"><img src="../css/icons/loading.gif"></div>');
+		popupContentEl.style.cssText = "width:auto";
+	}
 
 	module.exports = Popup;
 })
