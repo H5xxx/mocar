@@ -346,10 +346,12 @@ define(function(require, exports) {
                     }
                 });
                 self.currentOrder.sum = totalPrice;
-                totalPriceEl.html(totalPrice);
-                totalPriceEl.attr('data-totalprice', totalPrice);
+                // totalPriceEl.html(totalPrice);
+                // totalPriceEl.attr('data-totalprice', totalPrice);
+                totalPriceEl[0].innerHTML = totalPrice + "";
+                totalPriceEl[0].setAttribute('data-totalprice', totalPrice);
             }catch(e){
-                alert('计算总价出错啦 ' + e);
+                alert('计算总价出错啦');
             }
         }
         function initSelect (buyelse) {
