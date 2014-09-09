@@ -84,7 +84,9 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         deactivate: function() {
-            Popup.open('<div id="loading"><img src="../css/icons/loading.gif"></div>');
+            if(this === this.page.curr){
+                Popup.open('<div id="loading"><img src="../css/icons/loading.gif"></div>');
+            }
         },
 
         // 清理当前controller的内容并移出视图
