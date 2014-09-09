@@ -411,13 +411,13 @@
 
     <!-- main-container是所有内容的容器，保持在页面中居中，通过控制main-container的宽度可以实现响应式 -->
     <div id="main-container" class="main-container">
-        <div class="page-container" id='car-home'></div>
-        <div class="page-container" id='car-brand'></div>
-        <div class="page-container" id='car-series'></div>
-        <div class="page-container" id='car-model'></div>
-        <div class="page-container" id='car-cart'></div>
-        <div class="page-container" id='car-schedule'></div>
-        <div class="page-container" id='car-success'></div>
+        <div class="page-container moveout" id='car-home'></div>
+        <div class="page-container moveout" id='car-brand'></div>
+        <div class="page-container moveout" id='car-series'></div>
+        <div class="page-container moveout" id='car-model'></div>
+        <div class="page-container moveout" id='car-cart'></div>
+        <div class="page-container moveout" id='car-schedule'></div>
+        <div class="page-container moveout" id='car-success'></div>
     </div>
 
     <script>
@@ -427,7 +427,7 @@
             "mock": "lib/mock.js"
         }
     })
-    // seajs.use('mockAjax', function() {});
+    seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
@@ -435,4 +435,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月 9日 星期二 23时37分53秒 CST -->
+<!-- 2014年 9月10日 星期三 00时44分50秒 CST -->
