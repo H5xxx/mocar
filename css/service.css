@@ -33,15 +33,20 @@ img {
 .dn {
     display: none;
 }
-.fadeout {
+.moveout {
     display: none;
 }
-.fadein {
+.rightin {
+    -webkit-animation: rightin .5s cubic-bezier(0, 0, 0.25, 1);
+}
+.leftin {
+    -webkit-animation: leftin .5s cubic-bezier(0, 0, 0.25, 1);
+}
+.movein {
     position: relative;
     left: 0;
-    -webkit-animation: fadein .5s cubic-bezier(0, 0, 0.25, 1);
 }
-@keyframes fadein {
+@keyframes rightin {
     0% {
         -webkit-transform: translateX(320px);
     }
@@ -49,9 +54,25 @@ img {
         -webkit-transform: translateX(0px)
     }
 }
-@-webkit-keyframes fadein {
+@-webkit-keyframes rightin {
     0% {
         -webkit-transform: translateX(320px);
+    }
+    100% {
+        -webkit-transform: translateX(0px)
+    }
+}
+@keyframes leftin {
+    0% {
+        -webkit-transform: translateX(-320px);
+    }
+    100% {
+        -webkit-transform: translateX(0px)
+    }
+}
+@-webkit-keyframes leftin {
+    0% {
+        -webkit-transform: translateX(-320px);
     }
     100% {
         -webkit-transform: translateX(0px)

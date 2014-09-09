@@ -1,7 +1,16 @@
 define(function(require, exports) {
     var Mock = require('mock');
 
-    Mock.mock(/\/models\/generic\/services$/, function(options) {
+    var mock = function(path, handler){
+        return Mock.mock(path, function(options){
+            var result = handler.apply(this, arguments);
+
+            console.log('[MOCK]', path, 'RESULT:', result);
+            return result;
+        });
+    };
+
+    mock(/\/models\/generic\/services$/, function(options) {
         return [{
             "id": 1,
             "name": "常规保养",
@@ -19,7 +28,7 @@ define(function(require, exports) {
         }];
     });
 
-    Mock.mock(/\/automobile\/brands$/, function(options) {
+    mock(/\/automobile\/brands$/, function(options) {
         return [{
             "id": 1,
             "latter": "A",
@@ -111,7 +120,7 @@ define(function(require, exports) {
         }];
     });
 
-    Mock.mock(/\/automobile\/brands\/\w+\/families$/, function(options) {
+    mock(/\/automobile\/brands\/\w+\/families$/, function(options) {
         return [{
             "id": 1,
             "prefix": "进口",
@@ -123,7 +132,7 @@ define(function(require, exports) {
         }];
     });
 
-    Mock.mock(/\/automobile\/brands\/\w+\/families\/\w+\/models$/, function(options) {
+    mock(/\/automobile\/brands\/\w+\/families\/\w+\/models$/, function(options) {
         return [{
             "id": 1,
             "model": "1.2 TFSI (8X)",
@@ -135,7 +144,7 @@ define(function(require, exports) {
         }];
     });
 
-    Mock.mock(/\/automobile\/brands\/\w+\/families\/\w+\/models\/\w+\/displacements$/, function(options) {
+    mock(/\/automobile\/brands\/\w+\/families\/\w+\/models\/\w+\/displacements$/, function(options) {
         return [{
             "id": 1,
             "displacement": "SAMPLE DISPLACEMENT",
@@ -147,16 +156,24 @@ define(function(require, exports) {
         }];
     });
     //用户车辆
-    Mock.mock(/\/users\/\w+\/vehicles/, function(options) {
+    mock(/\/users\/\w+\/vehicles/, function(options) {
         return [{
             "id": 28473,
             "modelId": 12,
+            "prefix": "",
+            "suffix": "",
+            "family": "",
+            "brand":"",
             "model": "奥迪进口A4 1.8T",
             "plate": "京NB110A",
             "vid": "1G1BL52P7TR115520",
         }, {
             "id": 28474,
             "modelId": 13,
+            "prefix": "",
+            "suffix": "",
+            "family": "",
+            "brand":"",
             "model": "奥迪进口A4 2.0",
             "plate": "京NB110B",
             "vid": "1G1BL52P7TR115521",
@@ -164,7 +181,7 @@ define(function(require, exports) {
     });
     //用户地址
     var i = 0;
-    Mock.mock(/\/users\/\w+\/contacts/, function(options) {
+    mock(/\/users\/\w+\/contacts/, function(options) {
         i++;
         if(i%2 == 0){
             return [];
@@ -186,7 +203,7 @@ define(function(require, exports) {
         }];
     });
     //城市
-    Mock.mock(/\/location\/cities/, function(options) {
+    mock(/\/location\/cities/, function(options) {
         return [{
             "province": "上海市",
             "cities": [{
@@ -232,7 +249,7 @@ define(function(require, exports) {
         }];
     });
     //获取服务详情(*)
-    Mock.mock(/\/models\/\w+\/services\/\w+$/, function(options) {
+    mock(/\/models\/\w+\/services\/\w+$/, function(options) {
         return {
             "id": 1,
             "name": "常规保养",
@@ -430,10 +447,10 @@ define(function(require, exports) {
         };
     });
 
-    Mock.mock(/\/users\/me\/orders$/, function(options) {
+    mock(/\/users\/me\/orders$/, function(options) {
         return {};
     });
-    Mock.mock(/\/authority\/token/, function(options) {
+    mock(/\/authority\/token/, function(options) {
         return {
             "accessToken": "126688deb863604b",
             "expiresIn": 7200

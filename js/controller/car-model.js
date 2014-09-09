@@ -17,8 +17,20 @@ define(function(require, exports) {
                 Model.fetch(params),
                 Series.fetch(params),
                 Brand.fetch(params)
-            ], function(list){
-                list.forEach(function(m){
+            ], function(modelList, seriesList, brandList){
+                /*  每次重新调用Series.fetch， series里面的brandId（在car-series.js里面赋值的）
+                    就又丢掉了，需要重新赋值
+                */
+                seriesList.forEach(function(s){
+                    try{
+                        s = Series.find(s.id);
+                        s.brandId = params.brand_id;
+                        s.save();
+                    }catch(e){
+                        debugger;
+                    }
+                });
+                modelList.forEach(function(m){
                     m = Model.find(m.id);
                     m.brandId = params.brand_id;
                     m.familyId = params.series_id;
@@ -30,7 +42,7 @@ define(function(require, exports) {
                 });
                 data = $.extend(
                     {
-                        list: list
+                        list: modelList
                     },
                     Brand.find(params.brand_id),
                     Series.find(params.series_id)

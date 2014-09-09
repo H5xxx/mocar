@@ -24,32 +24,19 @@ define(function(require, exports) {
                 '3': 'donglitisheng',
                 '4': 'huanshachepian',
             };
-            // util.finish([
-            //     Service.fetch({}),
-            // ], function(services){
-            //     services.forEach(function(service){
-            //         service.icon = icons[service.id];
-            //     });
 
-            //     callback(null, {
-            //         services: services
-            //     });
+            util.finish([
+                Service.fetch(params)
+            ], function(services){
+                services.forEach(function(service){
+                    service.icon = icons[service.id];
+                });
 
-
-            $.ajax({
-                url: config.API_HOST +  '/models/generic/services',
-                context: $('body'),
-                dataType: 'json',
-                success: function(services) {
-                    services.forEach(function(service) {
-                        service.icon = icons[service.id];
-                    });
-
-                    callback(null, {
-                        services: services
-                    });
-                }
+                callback(null, {
+                    services: services
+                });
             });
+
         }
     });
 

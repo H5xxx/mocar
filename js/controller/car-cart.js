@@ -174,7 +174,7 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         deactivate: function() {
             this.saveUserInput();
-            this.fadeout();
+            this.moveout();
             this.clean();
         },
         // 回复用户之前输入/选择的内容
@@ -219,12 +219,19 @@ define(function(require, exports) {
                             return v.modelId == params.model_id;
                         })[0];
                         if(!currentVehicle){//新选的车，加入用户车辆列表
-                            currentVehicle = Model.find(params.model_id);
-                            var series = Series.find(currentVehicle.familyId);
-                            var brand = Brand.find(series.brandId);
-                            currentVehicle.prefix = series.prefix;
-                            currentVehicle.family = series.family;
-                            currentVehicle.brand = brand.brand;
+                            try{
+                                currentVehicle = Model.find(params.model_id);
+                                var series = Series.find(currentVehicle.familyId);
+                                var brand = Brand.find(series.brandId);
+                                currentVehicle.prefix = series.prefix;
+                                currentVehicle.family = series.family;
+                                currentVehicle.brand = brand.brand;
+                            }catch(e){
+                            /*  本页面可能被用户直接刷新，而导致前序流程的内存数据丢失，
+                                调用Brand/Series/Model的find会抛Unknown record的异常
+                            */
+                                currentVehicle = null;
+                            }
                             if(currentVehicle){
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
@@ -241,17 +248,23 @@ define(function(require, exports) {
                         }
                     }else{
                         //新选的车，加到用户车辆列表
-                        currentVehicle = Model.find(params.model_id);
-                        var series = Series.find(currentVehicle.familyId);
-                        var brand = Brand.find(series.brandId);
-                        currentVehicle.prefix = series.prefix;
-                        currentVehicle.family = series.family;
-                        currentVehicle.brand = series.brand;
-                        if(currentVehicle){
-                            currentVehicle.modelId = currentVehicle.id;
-                            currentVehicle.save();
-                            vehicles =[currentVehicle];
-                        } 
+                        try{
+                            currentVehicle = Model.find(params.model_id);
+                            var series = Series.find(currentVehicle.familyId);
+                            var brand = Brand.find(series.brandId);
+                            currentVehicle.prefix = series.prefix;
+                            currentVehicle.family = series.family;
+                            currentVehicle.brand = series.brand;
+                            if(currentVehicle){
+                                currentVehicle.modelId = currentVehicle.id;
+                                currentVehicle.save();
+                                vehicles =[currentVehicle];
+                            }
+                        }catch(e){
+                            //非法流程进入，比如直接刷新当前页面了
+                            self.page.navigate('/service/' + params.service_id + '/brand');
+                            return;
+                        }
                     }
                 }else{//当前没经过选车流程
                     if(vehicles && vehicles.length > 0){
@@ -289,7 +302,7 @@ define(function(require, exports) {
                         userInputs: userInputs
                     });    
                     util.title(self.title);
-                    self.fadein();
+                    self.movein();
                     self.render(params);
                 });
             });
@@ -304,14 +317,14 @@ define(function(require, exports) {
                 var mocarbtn = popupContent.querySelector('.mocarbtn');
                 var buyelsebtn = popupContent.querySelector('.buyelsebtn');
                 mocarbtn.addEventListener('click', function(){
+                    Popup.close();
                     initSelect();
                     calculateTotalPrice();
-                    Popup.close();
                 });
                 buyelsebtn.addEventListener('click', function(){
+                    Popup.close();
                     initSelect(true);
                     calculateTotalPrice();
-                    Popup.close();
                 });
             });
         }else{
@@ -319,21 +332,33 @@ define(function(require, exports) {
             calculateTotalPrice();
         }
         function calculateTotalPrice(){
-            var totalPrice = 0, itemPrice;
-            var priceEl = $('[data-price]');
-            var totalPriceEl = $('[data-totalprice]');
-            priceEl.each(function(i, el){
-                itemPrice = el.getAttribute('data-price');
-                if(itemPrice){
-                    itemPrice = parseFloat(itemPrice);
+            try{
+                var totalPrice = 0, itemPrice;
+                var priceEl = $('[data-price]');
+                var totalPriceEl = $('[data-totalprice]');
+                priceEl.each(function(i, el){
+                    itemPrice = el.getAttribute('data-price');
                     if(itemPrice){
-                        totalPrice += itemPrice;
+                        itemPrice = parseFloat(itemPrice);
+                        if(itemPrice){
+                            totalPrice += itemPrice;
+                        }
                     }
-                }
-            });
-            self.currentOrder.sum = totalPrice;
-            totalPriceEl.html(totalPrice);
-            totalPriceEl.attr('data-totalprice', totalPrice);
+                });
+                self.currentOrder.sum = totalPrice;
+                // totalPriceEl.html(totalPrice);
+                // totalPriceEl.attr('data-totalprice', totalPrice);
+                totalPriceEl[0].innerHTML = totalPrice + "";
+                totalPriceEl[0].setAttribute('data-totalprice', totalPrice);
+                setTimeout(function(){
+                    Popup.open("");
+                    setTimeout(function(){
+                        Popup.close();
+                    }, 0);
+                },0);
+            }catch(e){
+                alert('计算总价出错啦');
+            }
         }
         function initSelect (buyelse) {
             var optArrs = [

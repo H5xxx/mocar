@@ -13,13 +13,20 @@ define(function(require, exports, module) {
         '<span class="product-price fr">{{value.right}}</span>',
         '</li>'
     ].join('');
-
+    var _supportTouch = (function(){
+        try {
+            document.createEvent('TouchEvent');
+            return true;
+        } catch (e) {
+            return false;
+        }
+    })();
     function CustomSelect(opt) {
         this.triggerEl = opt.triggerEl;
         this.inputEl = opt.inputEl;
         this.optArr = opt.optArr;
         this.onchange = opt.onchange || function() {};
-        this._originalSelectIndex = this.inputEl.value;
+        this._originalSelectIndex = parseInt(this.inputEl.value || "");
         this._normalizedOptArr = this._normalizeData(opt.optArr);
         this.bindEevent();
         this.optionElArr = [];
@@ -39,12 +46,7 @@ define(function(require, exports, module) {
             '</div>',*/
             '</div>'
         ].join('');
-        try {
-            document.createEvent('TouchEvent');
-            this._supportTouch = true;
-        } catch (e) {
-            this._supportTouch = false;
-        }
+        this._supportTouch = _supportTouch;
     }
     CustomSelect.prototype.bindEevent = function() {
         var self = this;
@@ -79,6 +81,7 @@ define(function(require, exports, module) {
         if (selected) {
             selected.selected = true;
         } else if (this._originalSelectIndex != -1 && retArr[this._originalSelectIndex]) {
+            selectedIndex = this._originalSelectIndex;
             retArr[this._originalSelectIndex].selected = true;
         } else {
             selectedIndex = 0;

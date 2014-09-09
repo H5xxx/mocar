@@ -44,7 +44,7 @@ define(function(require, exports) {
 
             util.title(this.title);
 
-            this.fadein();
+            this.movein();
 
             params = params || {};
 
@@ -60,12 +60,18 @@ define(function(require, exports) {
 
         // 离开到其对应的url时执行
         deactivate: function() {
-            this.fadeout();
+            this.moveout();
             this.clean();
         },
 
-        fadein: Transitions.fadein,
-        fadeout: Transitions.fadeout
+        movein: function(){
+            var prev = this.page.curr ? this.page.curr.squenceId : -1,
+                curr = this.squenceId,
+                direction = curr >= prev ? 'right' : 'left';
+
+            Transitions.movein.call(this, direction);
+        },
+        moveout: Transitions.moveout
     });
 
     return Common;

@@ -31,6 +31,17 @@ define(function(require, exports) {
 
         'default': 'home',
 
+        squenceNum: 0,
+
+        add: function(controller){
+            var page = this;
+
+            controller.page = page;
+            controller.squenceId = page.squenceNum = page.squenceNum + 1;
+
+            return Page.__super__.add.apply(page, arguments);
+        },
+
         // 页面初始化
         init: function(){
             var page = this;
@@ -46,8 +57,8 @@ define(function(require, exports) {
         el: $('#main-container')
     });
 
-    page.manager.controllers.forEach(function(controller){
-        controller.page = page;
+    page.manager.bind('change', function(controller){
+        page.curr = controller;
     });
 
     Spine.Route.setup();

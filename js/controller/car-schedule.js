@@ -243,7 +243,7 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         deactivate: function() {
             this.saveUserInput();
-            this.fadeout();
+            this.moveout();
             this.clean();
         },
         // 回复用户之前输入/选择的内容
@@ -286,7 +286,7 @@ define(function(require, exports) {
                     sum: self.currentOrder.sum
                 });
                 util.title(self.title);
-                self.fadein();
+                self.movein();
                 self.render(params);
             });
         }
