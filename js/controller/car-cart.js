@@ -350,6 +350,12 @@ define(function(require, exports) {
                 // totalPriceEl.attr('data-totalprice', totalPrice);
                 totalPriceEl[0].innerHTML = totalPrice + "";
                 totalPriceEl[0].setAttribute('data-totalprice', totalPrice);
+                setTimeout(function(){
+                    Popup.open("");
+                    setTimeout(function(){
+                        Popup.close();
+                    }, 0);
+                },0);
             }catch(e){
                 alert('计算总价出错啦');
             }
