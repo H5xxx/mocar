@@ -1,11 +1,6 @@
 define(function(require, exports) {
     var config = require('../component/config');
     var util = require('../component/util');
-    // test
-    // $(document).on('ajaxBeforeSend', function(e, xhr, options) {
-    //     console.log('haha');
-    //     xhr.setRequestHeader('Access-Token', 'asdfasdf');
-    // });
     var tokenKey = 'accessToken';
     var AccessToken = require('./common').sub({
         init: function() {
@@ -15,20 +10,19 @@ define(function(require, exports) {
             if (!code) {
                 alert('no param code');
             } else {
-                var callback = function(accessToken){
+                var callback = function(accessToken) {
                     $(document).on('ajaxBeforeSend', function(e, xhr, options) {
-                        console.log('haha');
                         xhr.setRequestHeader('Access-Token', accessToken);
                     });
-                }
+                };
                 var token;
-                try{
+                try {
                     token = JSON.parse(localStorage[tokenKey] || "");
-                    if(token && token.code == code && token.expiresAt > Date.now() && token.accessToken){
+                    if (token && token.code == code && token.expiresAt > Date.now() && token.accessToken) {
                         callback(token.accessToken);
                         return;
                     }
-                }catch(e){
+                } catch (e) {
 
                 }
                 delete localStorage[tokenKey];
@@ -37,16 +31,16 @@ define(function(require, exports) {
         },
         updateToken: function(code, cb) {
             $.ajax({
-                url: config.API_HOST +'/authority/token?credential=' + code,
+                url: config.API_HOST + '/authority/token?credential=' + code,
                 success: function(data) {
                     var accessToken = data.accessToken;
-                    try{
+                    try {
                         data.code = code;
                         localStorage[tokenKey] = JSON.stringify(data);
-                    }catch(e){
+                    } catch (e) {
                         console.log(e);
                     }
-                    cb(accessToken)
+                    cb(accessToken);
 
                 }
             });
