@@ -4,6 +4,7 @@
 
 define(function(require, exports) {
     var util = require('../component/util');
+    var Popup = require('../widgets/Popup');
     var Transitions = require('../component/transitions');
     var Popup = require('../widgets/Popup');
 
@@ -42,7 +43,7 @@ define(function(require, exports) {
         // 清空内容
         // 尽情地重写吧
         clean: function() {
-            this.el.html('');
+            Popup.close();
         },
 
         // 跳转到其对应的url时执行
