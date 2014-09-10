@@ -380,7 +380,7 @@ define(function(require, exports) {
                 optArrs.push([].concat(part.options.map(function(opt){
                     return [
                         opt.brand + opt.name + " " + opt.extra,
-                        (part.quantity || 1) * opt.price + ' '
+                        typeof opt.price == 'number' ? opt.price : (part.quantity || 1) * opt.price + ' '
                     ]
                 })));
             }
