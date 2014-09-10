@@ -11,6 +11,7 @@ define(function(require, exports) {
     var Series = require('../model/series');
     var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
+    var FastButton = require('../widgets/FastButton');
     var CustomSelect = require('../widgets/CustomSelect');
     var BUY_ELSE = "自行购买";
     var CarCart = require('./common').sub({
@@ -255,7 +256,7 @@ define(function(require, exports) {
                             var brand = Brand.find(series.brandId);
                             currentVehicle.prefix = series.prefix;
                             currentVehicle.family = series.family;
-                            currentVehicle.brand = series.brand;
+                            currentVehicle.brand = brand.brand;
                             if(currentVehicle){
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
@@ -315,16 +316,26 @@ define(function(require, exports) {
             Popup.open(buyelseTipHtml,function(popupContent){
                 var mocarbtn = popupContent.querySelector('.mocarbtn');
                 var buyelsebtn = popupContent.querySelector('.buyelsebtn');
-                mocarbtn.addEventListener('click', function(){
+                new FastButton(mocarbtn, function(){
                     Popup.close();
                     initSelect();
                     calculateTotalPrice();
                 });
-                buyelsebtn.addEventListener('click', function(){
+                new FastButton(buyelsebtn, function(){
                     Popup.close();
                     initSelect(true);
                     calculateTotalPrice();
                 });
+                // mocarbtn.addEventListener('click', function(){
+                //     Popup.close();
+                //     initSelect();
+                //     calculateTotalPrice();
+                // });
+                // buyelsebtn.addEventListener('click', function(){
+                //     Popup.close();
+                //     initSelect(true);
+                //     calculateTotalPrice();
+                // });
             });
         }else{
             initSelect();
