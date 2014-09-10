@@ -209,9 +209,15 @@
                                         {{part.options[i].name}}
                                         {{part.options[i].extra}}
                                         </span>
-                                        <span class='price' data-price='{{part.quantity * part.options[i].price}}'>
-                                        {{part.quantity * part.options[i].price}}&nbsp;
-                                        </span>
+                                        {{if (typeof part.options[i].price == 'number')}}
+                                            <span class='price' data-price='{{part.quantity * part.options[i].price}}'>
+                                            {{part.quantity * part.options[i].price}}&nbsp;
+                                            </span>
+                                        {{else}}
+                                            <span class='price' data-price='{{part.options[i].price}}'>
+                                            {{part.options[i].price}}&nbsp;
+                                            </span>
+                                        {{/if}}
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
                                 {{else}}
@@ -375,10 +381,10 @@
                                         <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
                                         <span class='carNo info last'>
                                             {{if (option.price == 0 && option.hint)}}
-                                                {{if (option.hint == '实价' ) }}
-                                                    {{option.hint}}
-                                                {{else}}
+                                                {{if (typeof option.hint == 'number' ) }}
                                                     {{part.quantity * option.hint}}
+                                                {{else}}
+                                                    {{option.hint}}
                                                 {{/if}}
                                             {{else}}
                                                 {{part.quantity * option.price}}
@@ -450,7 +456,7 @@
             "mock": "lib/mock.js"
         }
     })
-    //seajs.use('mockAjax', function() {});
+    // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
@@ -458,4 +464,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月10日 星期三 09时34分55秒 CST -->
+<!-- 2014年 9月10日 星期三 13时07分23秒 CST -->
