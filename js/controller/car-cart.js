@@ -38,6 +38,9 @@ define(function(require, exports) {
                                     if(option.price == 0 && option.hint){
                                         option.price = option.hint;
                                     }
+                                    if(typeof option.price == 'number'){
+                                        option.price *= parts[i].quantity;
+                                    }
                                 }
                             }
                         }
@@ -380,7 +383,7 @@ define(function(require, exports) {
                 optArrs.push([].concat(part.options.map(function(opt){
                     return [
                         opt.brand + opt.name + " " + opt.extra,
-                        typeof opt.price == 'number' ? opt.price : (part.quantity || 1) * opt.price + ' '
+                        opt.price + ""
                     ]
                 })));
             }

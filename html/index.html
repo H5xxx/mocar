@@ -209,21 +209,15 @@
                                         {{part.options[i].name}}
                                         {{part.options[i].extra}}
                                         </span>
-                                        {{if (typeof part.options[i].price == 'number')}}
-                                            <span class='price' data-price='{{part.quantity * part.options[i].price}}'>
-                                            {{part.quantity * part.options[i].price}}&nbsp;
-                                            </span>
-                                        {{else}}
-                                            <span class='price' data-price='{{part.options[i].price}}'>
-                                            {{part.options[i].price}}&nbsp;
-                                            </span>
-                                        {{/if}}
+                                        <span class='price' data-price='{{part.options[i].price}}'>
+                                        {{part.options[i].price}}&nbsp;
+                                        </span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
                                 {{else}}
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                        <span class='price' data-price='{{part.quantity * part.options[0].price}}'>{{part.quantity * part.options[0].price}}&nbsp;</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="0">
                                     
@@ -380,15 +374,7 @@
 }}
                                         <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
                                         <span class='carNo info last'>
-                                            {{if (option.price == 0 && option.hint)}}
-                                                {{if (typeof option.hint == 'number' ) }}
-                                                    {{part.quantity * option.hint}}
-                                                {{else}}
-                                                    {{option.hint}}
-                                                {{/if}}
-                                            {{else}}
-                                                {{part.quantity * option.price}}
-                                            {{/if}}
+                                            {{option.price}}
                                         &nbsp;</span>
                                     {{/if}}
                                 {{/each}}
