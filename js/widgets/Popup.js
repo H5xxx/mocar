@@ -53,8 +53,14 @@ define(function(require, exports, module) {
 			return;
 		}
 		wrapperEl.innerHTML = "";
+		popupContentEl.style.cssText = "";
 		popupContentEl = null;
 		wrapperEl.style.display = "none";
+
+	};
+	Popup.openLoading = function(){
+		Popup.open(template('template-loading', {}));
+		popupContentEl.style.cssText = "width:auto";
 	};
 
 	module.exports = Popup;
