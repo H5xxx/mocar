@@ -1,39 +1,37 @@
 /************************  上门信息  ************************/
-#car-schedule{
+
+#car-schedule {
     height: 100%;
     position: static;
 }
-#car-schedule .form-row{
+#car-schedule .form-row {
     height: 80px;
 }
-#schedule-info{
+#schedule-info {
     overflow: hidden;
     clear: both;
 }
-#schedule-info .content-area{
+#schedule-info .content-area {
     display: block;
-    margin-left: 40px;
+    margin-left: 72px;
+    margin-right: 16px;
     /*margin-top:20px;*/
 }
-
-#schedule-info .first,#schedule-success .first,#schedule-info .second,#schedule-success .second{
+#schedule-info .first, #schedule-success .first, #schedule-info .second, #schedule-success .second {
     width: 49%;
     display: inline-block;
     height: 100%;
     font-size: 20px;
 }
-#schedule-info .second,#schedule-success .second{
+#schedule-info .second, #schedule-success .second {
     float: right;
     margin-left: 2%;
     width: 49%;
 }
-#schedule-info select{
-    
-}
-#schedule-info option{
+#schedule-info select {} #schedule-info option {
     font-size: 16px;
 }
-#schedule-info select, #addressInput, #carNoInput,#nameInput,#phoneInput{
+#schedule-info select, #addressInput, #carNoInput, #nameInput, #phoneInput {
     display: inline-block;
     vertical-align: bottom;
     width: 100%;

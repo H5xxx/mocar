@@ -24,7 +24,7 @@ html, body {
 }
 .select-wrapper:after {
     content: "";
-    top: 14px;
+    top: 10px;
     right: 7px;
     position: absolute;
     display: inline-block;
@@ -225,7 +225,7 @@ select {
     display: inline-block;
     /*height: 40px;*/
     font-size: 14px;
-    line-height: 40px;
+    line-height: 35px;
     width: 100%;
 }
 /*SELECT的option选中时的样式*/
@@ -283,9 +283,9 @@ select {
     float: left;
     display: block;
     margin-top: 10px;
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
+    margin-left: 16px;
+    width: 24px;
+    height: 24px;
 }
 .footer a {
     display: block;
