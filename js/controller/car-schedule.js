@@ -10,6 +10,7 @@ define(function(require, exports) {
     var Brand = require('../model/brand');
     var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
+    var FastButton = require('../widgets/FastButton');
     var CustomSelect = require('../widgets/CustomSelect');
 
     var CarSchedule = require('./common').sub({
@@ -157,15 +158,16 @@ define(function(require, exports) {
                 initCustomSelect.call(self, data)
             }, 200);
 
+            var addressInput = self.el.find('input[name=addressInput]');
+            var nameInput = self.el.find('input[name=nameInput]');
+            var phoneInput = self.el.find('input[name=phoneInput]');
+
             var nextStepBtn = this.el.find('.j-nextstep');
-            nextStepBtn.bind('click', function(e) {
+            var handleSubmit = function(e) {
                 var provinceInput = self.el.find('input[name=provinceInput]');
                 var cityInput = self.el.find('input[name=cityInput]');
-                var addressInput = self.el.find('input[name=addressInput]');
                 var dayInput = self.el.find('input[name=dayInput]');
                 var timeInput = self.el.find('input[name=timeInput]');
-                var nameInput = self.el.find('input[name=nameInput]');
-                var phoneInput = self.el.find('input[name=phoneInput]');
 
                 var province = provinceInput.val();
                 var city = cityInput.val();
@@ -175,8 +177,8 @@ define(function(require, exports) {
                 var name = nameInput.val();
                 var phone = phoneInput.val();
 
-                e.stopPropagation();
-                e.preventDefault();
+                // e.stopPropagation();
+                // e.preventDefault();
                 if (!address || !name || !phone) {
                     if (!address) {
                         alert("请填写详细地址后再提交，谢谢：）");
@@ -228,8 +230,14 @@ define(function(require, exports) {
                         alert("出错啦: " + errorType + error);
                     }
                 });
-
-            });
+            };
+            new FastButton(nextStepBtn[0], handleSubmit);
+            var onFocus = function(e){
+                //TODO input 获取焦点时修改样式
+            };
+            new FastButton(addressInput[0], onFocus);
+            new FastButton(nameInput[0], onFocus);
+            new FastButton(phoneInput[0], onFocus);
         },
         saveUserInput: function(){
             //将用户的操作/选择 存储到sessionStorage

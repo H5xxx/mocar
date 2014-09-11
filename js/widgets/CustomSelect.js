@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     var FastButton = require("./FastButton");
     var template = require("../lib/template");
     var defaultOptionTmpl = [
-        '<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}">',
+        '<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}" lazytap="lazytap">',
         '<span class="product-name">{{value.left}}</span>',
         '<span class="product-price fr">{{value.right}}</span>',
         '</li>'
