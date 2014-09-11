@@ -7,6 +7,7 @@
  *  翻滚吧，少年！
  * 变更记录：
  *  2014-09-11 加入lazyTap的补丁，解决点击元素隐藏后出发input类型获取焦点从而弹出虚拟键盘的问题。
+ *  2014-09-11 注释掉touchstart 和 touchend时的stopPropagation，解决无法scroll的问题
  */
 define(function(require, exports, module) {
     var clickbuster = {};
@@ -38,7 +39,7 @@ define(function(require, exports, module) {
     };
 
     FastButton.prototype.onTouchStart = function(event) {
-        event.stopPropagation();
+        // event.stopPropagation();
 
         this.element.addEventListener('touchend', this, false);
         document.body.addEventListener('touchmove', this, false);
@@ -55,7 +56,7 @@ define(function(require, exports, module) {
     };
 
     FastButton.prototype.onClick = function(event) {
-        event.stopPropagation();
+        // event.stopPropagation();
         this.reset();
         this.handler(event);
         if(this._lazyTap){
