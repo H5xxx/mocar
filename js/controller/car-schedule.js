@@ -155,7 +155,7 @@ define(function(require, exports) {
             this.el.html(html);
             //TODO，初始化自定义select
             setTimeout(function() {
-                initCustomSelect.call(self, data)
+                initCustomSelect.call(self, data);
             }, 200);
 
             var addressInput = self.el.find('input[name=addressInput]');
@@ -178,17 +178,14 @@ define(function(require, exports) {
                 var phone = phoneInput.val();
 
                 // e.stopPropagation();
-                // e.preventDefault();
+                e.preventDefault();
                 if (!address || !name || !phone) {
                     if (!address) {
-                        //TODO 显示验证错误DOM
-                        alert("请填写详细地址后再提交，谢谢：）");
+                        $('#addressInput-error').removeClass('dn');
                     } else if (!name) {
-                        //TODO 显示验证错误DOM
-                        alert("请填写姓名后再提交，谢谢：）");
+                        $('#nameInput-error').removeClass('dn');
                     } else if (!phone) {
-                        //TODO 显示验证错误DOM
-                        alert("请填写电话号码后再提交，谢谢：）");
+                        $('#phoneInput-error').removeClass('dn');
                     }
                     return;
                 }
@@ -240,7 +237,10 @@ define(function(require, exports) {
                 //TODO input 获取焦点时修改样式，和隐藏验证失败提示
                 input = $(this);
                 var row = input.parents('.form-row');
-                input.css('color','green');
+                input.css('color','#88bb7d');
+                console.log(this);
+                var errorId = this.id + '-error';
+                $('#' + errorId).addClass('dn');
             };
             var onBlur = function(e){
                 //TODO input 失去焦点时，重置样式

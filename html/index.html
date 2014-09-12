@@ -272,6 +272,7 @@
                         <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="addressInput-error">未填写详细地址</div>
                 <div id='scheduleTime' class='form-row'>
                     <i class="site-icons icon-time"></i>
                     <div class='content-area zero-font-size'>
@@ -308,12 +309,14 @@
                         <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="nameInput-error">未填写姓名</div>
                 <div id='phoneNumber' class='form-row'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
                         <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="phoneInput-error">未填写手机号码</div>
             </div>
             <div class='footer'>
                 <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
