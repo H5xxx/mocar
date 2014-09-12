@@ -199,7 +199,7 @@
                         {{each currentService.parts as part i}}
                             <li class='form-row' data-part-seq="{{i}}">
                                 <p class="accessory info">
-                                    {{part.name}} {{part.quantity}} {{part.unit}}
+                                    {{part.name}}
                                 </p>
                                 <div class="select-wrapper">
                                 {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
@@ -368,7 +368,7 @@
                         <ul>
                         {{each currentService.parts as part i }}
                             <li class='form-row'>
-                                <p class="accessory info">{{part.name}} {{part.quantity}} {{part.unit}}</p>
+                                <p class="accessory info">{{part.name}}</p>
                                 {{each part.options as option j}}
                                     {{if (option.id == currentOrder.services[0].parts[i].id)
 }}
@@ -450,4 +450,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月11日 星期四 23时30分49秒 CST -->
+<!-- 2014年 9月12日 星期五 13时17分28秒 CST -->
