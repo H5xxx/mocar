@@ -40,7 +40,7 @@ define(function(require, exports) {
                                         option.price = option.hint;
                                     }
                                     if(typeof option.price == 'number'){
-                                        option.price *= parts[i].quantity;
+                                        option.price *= option.count;
                                     }
                                 }
                             }
