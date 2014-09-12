@@ -181,10 +181,13 @@ define(function(require, exports) {
                 // e.preventDefault();
                 if (!address || !name || !phone) {
                     if (!address) {
+                        //TODO 显示验证错误DOM
                         alert("请填写详细地址后再提交，谢谢：）");
                     } else if (!name) {
+                        //TODO 显示验证错误DOM
                         alert("请填写姓名后再提交，谢谢：）");
                     } else if (!phone) {
+                        //TODO 显示验证错误DOM
                         alert("请填写电话号码后再提交，谢谢：）");
                     }
                     return;
@@ -232,12 +235,23 @@ define(function(require, exports) {
                 });
             };
             new FastButton(nextStepBtn[0], handleSubmit);
+            var currentFocusInput;
             var onFocus = function(e){
-                //TODO input 获取焦点时修改样式
+                //TODO input 获取焦点时修改样式，和隐藏验证失败提示
+                input = $(this);
+                var row = input.parents('.form-row');
+                input.css('color','green');
             };
-            new FastButton(addressInput[0], onFocus);
-            new FastButton(nameInput[0], onFocus);
-            new FastButton(phoneInput[0], onFocus);
+            var onBlur = function(e){
+                //TODO input 失去焦点时，重置样式
+                input = $(this);
+                var row = input.parents('.form-row');
+                input.css('color', '');
+            };
+            [addressInput, nameInput, phoneInput].forEach(function(input){
+                input.on('focus', onFocus);
+                input.on('blur', onBlur);
+            });
         },
         saveUserInput: function(){
             //将用户的操作/选择 存储到sessionStorage
