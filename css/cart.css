@@ -6,10 +6,11 @@
 #accessories-info .form-row {
     border-bottom: #D9D9D9 solid 1px;
     margin-bottom: 20px;
+    margin-right: 16px;
     height: auto;
 }
 #accessories-info .content-area {
-    margin-left: 40px;
+    margin-left: 72px;
     display: block;
 }
 /*#accessories-info #service-detail .form-row {
@@ -18,7 +19,7 @@
 }*/
 
 #accessories-info .site-icons {
-    margin-top: 0;
+    margin-top: 6px;
 }
 /* 自行购买or选择摩卡配件 提示弹窗 */
 

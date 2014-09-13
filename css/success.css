@@ -11,7 +11,7 @@
 #schedule-info{
     overflow: hidden;
     clear: both;
-    padding-top: 20px
+    padding-top: 8px
 }
 #schedule-success .second{
     width: 49%;
@@ -31,7 +31,7 @@
     width: 100%;
 }
 #schedule-success .content-area{
-    margin-left: 40px;
+    margin-left: 72px;
 }
 #schedule-success .form-row{
     margin-bottom: 10px;

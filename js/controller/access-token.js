@@ -31,7 +31,7 @@ define(function(require, exports) {
         },
         updateToken: function(code, cb) {
             $.ajax({
-                url: config.API_HOST + '/authority/token?credential=' + code,
+                url: config.API_HOST + '/authority/token?credential=WX' + code,
                 success: function(data) {
                     var accessToken = data.accessToken;
                     try {

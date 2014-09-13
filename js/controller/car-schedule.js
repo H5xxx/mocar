@@ -10,6 +10,7 @@ define(function(require, exports) {
     var Brand = require('../model/brand');
     var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
+    var FastButton = require('../widgets/FastButton');
     var CustomSelect = require('../widgets/CustomSelect');
 
     var CarSchedule = require('./common').sub({
@@ -154,18 +155,19 @@ define(function(require, exports) {
             this.el.html(html);
             //TODO，初始化自定义select
             setTimeout(function() {
-                initCustomSelect.call(self, data)
+                initCustomSelect.call(self, data);
             }, 200);
 
+            var addressInput = self.el.find('input[name=addressInput]');
+            var nameInput = self.el.find('input[name=nameInput]');
+            var phoneInput = self.el.find('input[name=phoneInput]');
+
             var nextStepBtn = this.el.find('.j-nextstep');
-            nextStepBtn.bind('click', function(e) {
+            var handleSubmit = function(e) {
                 var provinceInput = self.el.find('input[name=provinceInput]');
                 var cityInput = self.el.find('input[name=cityInput]');
-                var addressInput = self.el.find('input[name=addressInput]');
                 var dayInput = self.el.find('input[name=dayInput]');
                 var timeInput = self.el.find('input[name=timeInput]');
-                var nameInput = self.el.find('input[name=nameInput]');
-                var phoneInput = self.el.find('input[name=phoneInput]');
 
                 var province = provinceInput.val();
                 var city = cityInput.val();
@@ -175,15 +177,15 @@ define(function(require, exports) {
                 var name = nameInput.val();
                 var phone = phoneInput.val();
 
-                e.stopPropagation();
+                // e.stopPropagation();
                 e.preventDefault();
                 if (!address || !name || !phone) {
                     if (!address) {
-                        alert("请填写详细地址后再提交，谢谢：）");
+                        $('#addressInput-error').removeClass('dn');
                     } else if (!name) {
-                        alert("请填写姓名后再提交，谢谢：）");
+                        $('#nameInput-error').removeClass('dn');
                     } else if (!phone) {
-                        alert("请填写电话号码后再提交，谢谢：）");
+                        $('#phoneInput-error').removeClass('dn');
                     }
                     return;
                 }
@@ -228,7 +230,27 @@ define(function(require, exports) {
                         alert("出错啦: " + errorType + error);
                     }
                 });
-
+            };
+            new FastButton(nextStepBtn[0], handleSubmit);
+            var currentFocusInput;
+            var onFocus = function(e){
+                //TODO input 获取焦点时修改样式，和隐藏验证失败提示
+                input = $(this);
+                var row = input.parents('.form-row');
+                input.css('color','#88bb7d');
+                console.log(this);
+                var errorId = this.id + '-error';
+                $('#' + errorId).addClass('dn');
+            };
+            var onBlur = function(e){
+                //TODO input 失去焦点时，重置样式
+                input = $(this);
+                var row = input.parents('.form-row');
+                input.css('color', '');
+            };
+            [addressInput, nameInput, phoneInput].forEach(function(input){
+                input.on('focus', onFocus);
+                input.on('blur', onBlur);
             });
         },
         saveUserInput: function(){

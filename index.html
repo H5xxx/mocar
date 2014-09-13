@@ -18,6 +18,29 @@
     <script src="./js/lib/spine.js"></script>
     <script src="./js/lib/route.js"></script>
     <script src="./js/lib/manager.js"></script>
+
+    <script id="template-loading" type="text/html">
+        <div class="spinner">
+            <div class="spinner-container container1">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container2">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container3">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+        </div>
+    </script>
     
     <!-- 摩卡服务首页 模板 开始 -->
     <script id="template-home" type="text/html">
@@ -176,7 +199,7 @@
                         {{each currentService.parts as part i}}
                             <li class='form-row' data-part-seq="{{i}}">
                                 <p class="accessory info">
-                                    {{part.name}} {{part.quantity}} {{part.unit}}
+                                    {{part.name}}
                                 </p>
                                 <div class="select-wrapper">
                                 {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
@@ -186,15 +209,15 @@
                                         {{part.options[i].name}}
                                         {{part.options[i].extra}}
                                         </span>
-                                        <span class='price' data-price='{{part.quantity * part.options[i].price}}'>
-                                        {{part.quantity * part.options[i].price}}&nbsp;
+                                        <span class='price' data-price='{{part.options[i].price}}'>
+                                        {{part.options[i].price}}&nbsp;
                                         </span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
                                 {{else}}
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                        <span class='price' data-price='{{part.quantity * part.options[0].price}}'>{{part.quantity * part.options[0].price}}&nbsp;</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="0">
                                     
@@ -249,6 +272,7 @@
                         <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="addressInput-error">未填写详细地址</div>
                 <div id='scheduleTime' class='form-row'>
                     <i class="site-icons icon-time"></i>
                     <div class='content-area zero-font-size'>
@@ -285,12 +309,14 @@
                         <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="nameInput-error">未填写姓名</div>
                 <div id='phoneNumber' class='form-row'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
                         <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
                     </div>
                 </div>
+                <div  class="error dn" id="phoneInput-error">未填写手机号码</div>
             </div>
             <div class='footer'>
                 <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
@@ -345,21 +371,13 @@
                         <ul>
                         {{each currentService.parts as part i }}
                             <li class='form-row'>
-                                <p class="accessory info">{{part.name}} {{part.quantity}} {{part.unit}}</p>
+                                <p class="accessory info">{{part.name}}</p>
                                 {{each part.options as option j}}
                                     {{if (option.id == currentOrder.services[0].parts[i].id)
 }}
                                         <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
                                         <span class='carNo info last'>
-                                            {{if (option.price == 0 && option.hint)}}
-                                                {{if (option.hint == '实价' ) }}
-                                                    {{option.hint}}
-                                                {{else}}
-                                                    {{part.quantity * option.hint}}
-                                                {{/if}}
-                                            {{else}}
-                                                {{part.quantity * option.price}}
-                                            {{/if}}
+                                            {{option.price}}
                                         &nbsp;</span>
                                     {{/if}}
                                 {{/each}}
@@ -427,7 +445,7 @@
             "mock": "lib/mock.js"
         }
     })
-    seajs.use('mockAjax', function() {});
+    // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
@@ -435,4 +453,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月10日 星期三 00时44分50秒 CST -->
+<!-- 2014年 9月12日 星期五 23时20分12秒 CST -->

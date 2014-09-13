@@ -6,21 +6,15 @@
 define(function(require, exports, module) {
     var Events = Spine.Events;
     var Popup = require("./Popup");
+    var FastButton = require("./FastButton");
     var template = require("../lib/template");
     var defaultOptionTmpl = [
-        '<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}">',
+        '<li class="custom-option {{if value.selected}}selected{{/if}}" data-seq="{{i}}" lazytap="lazytap">',
         '<span class="product-name">{{value.left}}</span>',
         '<span class="product-price fr">{{value.right}}</span>',
         '</li>'
     ].join('');
-    var _supportTouch = (function(){
-        try {
-            document.createEvent('TouchEvent');
-            return true;
-        } catch (e) {
-            return false;
-        }
-    })();
+    
     function CustomSelect(opt) {
         this.triggerEl = opt.triggerEl;
         this.inputEl = opt.inputEl;
@@ -46,14 +40,16 @@ define(function(require, exports, module) {
             '</div>',*/
             '</div>'
         ].join('');
-        this._supportTouch = _supportTouch;
     }
     CustomSelect.prototype.bindEevent = function() {
         var self = this;
-        var eventName = /*this._supportTouch ? 'touchstart' : */ 'click';
-        this.triggerEl.addEventListener(eventName, function(e) {
+        new FastButton(this.triggerEl, function(e){
             self.render();
         });
+        // var eventName = /*this._supportTouch ? 'touchstart' : */ 'click';
+        // this.triggerEl.addEventListener(eventName, function(e) {
+        //     self.render();
+        // });
     }
     CustomSelect.prototype._normalizeData = function(optArr) {
         var retArr = [],
@@ -149,7 +145,8 @@ define(function(require, exports, module) {
                 confirmListener();
             }
             for (var i = 0, ilen = customList.length; i < ilen; i++) {
-                customList[i].addEventListener(eventName, clickHandler)
+                new FastButton(customList[i], clickHandler);
+                //customList[i].addEventListener(eventName, clickHandler)
             }
         });
     };

@@ -25,9 +25,9 @@ define(function(require, exports) {
 
             util.finish([
                 Service.fetch(params)
-            ], function(services){
-                services.forEach(function(service){
-                    service.icon = config.API_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
+            ], function(services) {
+                services.forEach(function(service) {
+                    service.icon = config.STATIC_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
                 });
 
                 callback(null, {
