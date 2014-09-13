@@ -4,7 +4,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <title>选择车型</title>
+    <title>摩卡汽车服务</title>
     <link rel='stylesheet' href='../css/base.css'>
     <link rel='stylesheet' href='../css/home.css'>
     <link rel="stylesheet" href="../css/service.css">
@@ -52,8 +52,7 @@
                 <ul class='service-list'>
                     {{each services as service i}}
                     <li class='service-item'>
-                        <!-- 这里需要逻辑判断，如果是新用户，nav到选车页面；如果是老用户，直接nav到选择服务类型页面，在服务类型页面里面选车 -->
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/cart">
+                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/{{next}}">
                             <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                             <div class="content-area border-bottom">
                                 <span class="title">{{service.name}}</span>
