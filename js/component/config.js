@@ -1,8 +1,7 @@
 define(function(require, exports, module) {
     var util = require('./util');
     var API_HOST = 'http://api.mocar.cn';
-    API_HOST = 'http://182.92.185.233:8080';
-    var STATIC_HOST = 'http://182.92.185.233';
+    var STATIC_HOST = 'http://static.mocar.cn';
     var json = util.parseURL();
     if (json && json.params && json.params['api_hostname']) {
         API_HOST = 'http://' + json.params['api_hostname'];
@@ -14,4 +13,4 @@ define(function(require, exports, module) {
         API_HOST: API_HOST,
         STATIC_HOST: STATIC_HOST
     };
-})
+});
