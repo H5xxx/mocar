@@ -4,7 +4,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <title>选择车型</title>
+    <title>摩卡汽车服务</title>
     <link rel='stylesheet' href='./css/base.css'>
     <link rel='stylesheet' href='./css/home.css'>
     <link rel="stylesheet" href="./css/service.css">
@@ -165,11 +165,7 @@
                         <div class='select-wrapper'>
                             <div class='custom-select-trigger'>
                                 <span class='product-name'>
-                                {{currentVehicle.prefix}}
-                                {{currentVehicle.brand}}
-                                {{currentVehicle.family}}
-                                {{currentVehicle.model}}
-                                {{currentVehicle.suffix}}
+                                {{currentVehicle.prefix}}{{currentVehicle.brand}} {{currentVehicle.family}} {{currentVehicle.model}}
                                 </span>    
                             </div>
                             <input type="text" name="carInput" style="display:none">
@@ -344,11 +340,7 @@
                     <div class='content-area form-row'>
                         <div class='justify'>
                             <span class="brand info">
-                                {{currentVehicle.prefix}}
-                                {{currentVehicle.brand}}
-                                {{currentVehicle.family}}
-                                {{currentVehicle.model}}
-                                {{currentVehicle.suffix}}
+                                {{currentVehicle.prefix}}{{currentVehicle.brand}} {{currentVehicle.family}} {{currentVehicle.model}}
                             </span>
                         </div>
                     </div>
@@ -444,7 +436,7 @@
             "mock": "lib/mock.js"
         }
     })
-    // seajs.use('mockAjax', function() {});
+    seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
@@ -452,4 +444,4 @@
 </body>
 
 </html>
-<!-- 2014年 9月12日 星期五 23时20分12秒 CST -->
+<!-- 2014年 9月14日 星期日 13时45分27秒 CST -->
