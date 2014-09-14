@@ -1,7 +1,7 @@
 define(function(require, exports) {
     var util = require('../component/util');
     var config = require('../component/config');
-
+    var Popup = require('../widgets/Popup');
     var Brand = require('../model/brand');
 
     var CarBrand = require('./common').sub({
@@ -26,6 +26,12 @@ define(function(require, exports) {
                     list: list
                 });
                 var s = new iScroll('j-brand-container');
+                setTimeout(function(){
+                    Popup.open("");
+                    setTimeout(function(){
+                        Popup.close();
+                    }, 0);
+                },600);
             });
         }
     });
