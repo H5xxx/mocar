@@ -292,9 +292,9 @@ select {
 }
 .footer .site-icons {
     float: right;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px;
+    width: 56px;
+    height: 56px;
+    margin-top: -25px;
     margin-right: 25px;
 }
 .icon-seperator {
@@ -370,6 +370,7 @@ select {
 .justify-content {
     display: table-cell;
     vertical-align: middle;
+    color: #60C900;
 }
 
 /*loading*/

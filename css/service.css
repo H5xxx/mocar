@@ -104,7 +104,7 @@ img {
     overflow: hidden;
 }
 .header .j-nav:nth-child(2) {
-    white-space:nowrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 167px;
 }
@@ -131,6 +131,10 @@ img {
     height: 45px;
     line-height: 45px;
     border-bottom: 1px solid #aaa;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 280px;
+    overflow: hidden;
 }
 /*.model-item {
     float: left;
