@@ -267,6 +267,7 @@ define(function(require, exports) {
                     "name": "0W-40",
                     "extra": "",
                     "price": 85.0,
+                    "count": 5,
                     "hint": ""
                 }, {
                     "id": 102,
@@ -275,6 +276,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 5,
                     "hint": ""
                 }]
             }, {
@@ -288,6 +290,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 202,
@@ -295,6 +298,7 @@ define(function(require, exports) {
                     "brand": "",
                     "name": "自行购买",
                     "extra": "",
+                    "count": 1,
                     "price": 0.0,
                     "hint": ""
                 }]
@@ -309,6 +313,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 302,
@@ -317,6 +322,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }, {
                     "id": 303,
@@ -325,6 +331,7 @@ define(function(require, exports) {
                     "name": "不更换该配件",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }]
             }, {
@@ -338,6 +345,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 402,
@@ -346,6 +354,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }, {
                     "id": 403,
@@ -354,6 +363,7 @@ define(function(require, exports) {
                     "name": "不更换该配件",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }]
             }, {
@@ -367,6 +377,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 502,
@@ -375,6 +386,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }, {
                     "id": 503,
@@ -383,6 +395,7 @@ define(function(require, exports) {
                     "name": "不更换该配件",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }]
             }, {
@@ -396,6 +409,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 602,
@@ -404,6 +418,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }, {
                     "id": 603,
@@ -412,6 +427,7 @@ define(function(require, exports) {
                     "name": "不更换该配件",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }]
             }, {
@@ -425,6 +441,7 @@ define(function(require, exports) {
                     "name": "原厂代购",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": "21.50"
                 }, {
                     "id": 702,
@@ -433,6 +450,7 @@ define(function(require, exports) {
                     "name": "自行购买",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }, {
                     "id": 703,
@@ -441,6 +459,7 @@ define(function(require, exports) {
                     "name": "不更换该配件",
                     "extra": "",
                     "price": 0.0,
+                    "count": 1,
                     "hint": ""
                 }]
             }]

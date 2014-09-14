@@ -66,6 +66,8 @@ define(function(require, exports) {
             self.doGetData(params, function(err, data) {
                 $.extend(params, data);
                 callback(err,data);
+                //标识已经访问过成功页面
+                sessionStorage['success'] = 1;
                 // window.history.pushState({}, '');
                 // window.onpopstate = function(event){
                 //     //下单成功之后，从success页面后退时，直接退到服务首页
