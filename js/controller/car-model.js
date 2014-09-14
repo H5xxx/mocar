@@ -47,7 +47,16 @@ define(function(require, exports) {
                     Brand.find(params.brand_id),
                     Series.find(params.series_id)
                 );
+                try{
+                    //需要在本地记住上次选择的车型
+                    localStorage["brand"] = data.brand;
+                    localStorage["brandId"] = params.brand_id;
+                    localStorage["family"] = data.family;
+                    localStorage["familyId"] = params.series_id;
+                    localStorage["prefix"] = data.prefix;
+                }catch(e){
 
+                }
                 callback(null, data);
                 var s = new iScroll('j-model-container');
 

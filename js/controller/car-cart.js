@@ -209,6 +209,18 @@ define(function(require, exports) {
             if(lastServiceId && !params.service_id){
                 params.service_id = lastServiceId;
             }
+
+            var lastUnsavedVehicle = {
+                brand: localStorage["brand"] || "",
+                family: localStorage["family"] || "",
+                prefix: localStorage["prefix"] || "",
+                model: localStorage["model"] || "",
+                modelId: localStorage["modelId"] || ""
+            };
+            if(!(lastUnsavedVehicle.modelId && lastUnsavedVehicle.model &&
+                lastUnsavedVehicle.brand && lastUnsavedVehicle.family)){
+                lastUnsavedVehicle = null;
+            }
             //TODO 现在先一次性把车辆给取出来
             util.finish([
                 Vehicle.fetch({uid:'me'})
@@ -234,10 +246,18 @@ define(function(require, exports) {
                             */
                                 currentVehicle = null;
                             }
+
                             if(currentVehicle){
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
                                 vehicles.unshift(currentVehicle);
+                                try{
+                                    //需要在本地记住上次选择的车型
+                                    localStorage["model"] = currentVehicle.model;
+                                    localStorage["modelId"] = currentVehicle.modelId;
+                                }catch(e){
+
+                                }
                             }else{
                                 //非法路径进入
                                 self.page.navigate('/service/' + params.service_id + '/brand');
@@ -261,17 +281,35 @@ define(function(require, exports) {
                                 currentVehicle.modelId = currentVehicle.id;
                                 currentVehicle.save();
                                 vehicles =[currentVehicle];
+                                try{
+                                    //需要在本地记住上次选择的车型
+                                    localStorage["model"] = currentVehicle.model;
+                                    localStorage["modelId"] = currentVehicle.modelId;
+                                }catch(e){
+
+                                }
                             }
                         }catch(e){
-                            //非法流程进入，比如直接刷新当前页面了
-                            self.page.navigate('/service/' + params.service_id + '/brand');
-                            return;
+                            //使用最近一次选过的车
+                            if(lastUnsavedVehicle){
+                                currentVehicle = lastUnsavedVehicle;
+                                vehicles = [currentVehicle];
+                            }else{
+                                //非法流程进入，比如直接刷新当前页面了
+                                self.page.navigate('/service/' + params.service_id + '/brand');
+                                return;
+                            }
                         }
                     }
                 }else{//当前没经过选车流程
                     if(vehicles && vehicles.length > 0){
                         //选用户uid在数据库中的第一辆车
                         currentVehicle = vehicles[0];
+                        params.model_id = currentVehicle.modelId;
+                    }else if(lastUnsavedVehicle){
+                        //使用最近一次选过的车
+                        currentVehicle = lastUnsavedVehicle;
+                        vehicles = [currentVehicle];
                         params.model_id = currentVehicle.modelId;
                     }else{
                         //用户uid在数据库中没车

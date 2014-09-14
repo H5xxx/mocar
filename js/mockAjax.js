@@ -157,12 +157,13 @@ define(function(require, exports) {
     });
     //用户车辆
     mock(/\/users\/\w+\/vehicles/, function(options) {
+        return [];
         return [{
             "id": 28473,
             "modelId": 12,
             "prefix": "",
             "suffix": "",
-            "family": "",
+            "family": "family",
             "brand":"",
             "model": "奥迪进口A4 1.8T",
             "plate": "京NB110A",
@@ -172,7 +173,7 @@ define(function(require, exports) {
             "modelId": 13,
             "prefix": "",
             "suffix": "",
-            "family": "",
+            "family": "family",
             "brand":"",
             "model": "奥迪进口A4 2.0",
             "plate": "京NB110B",
