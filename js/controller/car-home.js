@@ -17,7 +17,7 @@ define(function(require, exports) {
         template: 'template-home',
 
         getData: function(params, callback) {
-
+            var self = this;
             var icons = {
                 '1': 'changguibaoyang',
                 '2': 'kongtiaomiejun',
@@ -37,6 +37,23 @@ define(function(require, exports) {
                     services: services,
                     next: vehicles && vehicles.length ? 'cart' : 'brand'
                 });
+                //当前页面是从下单成功页面过来的
+                if(sessionStorage && sessionStorage['success']){
+                    delete sessionStorage['success'];
+                    setTimeout(function(){
+                        window.history.replaceState({referrer:'success',curr:1},'', location.hash);
+                        window.history.pushState({referrer:'success', curr: 2}, '', location.hash);
+                        window.onpopstate = function(event){
+                            //下单成功之后，从success页面后退时，直接退到服务首页
+                            if(event.state && event.state.referrer == 'success'){
+                                self.page.navigate(location.hash);
+                                setTimeout(function(){
+                                    window.history.pushState({referrer:'success', curr:3}, '', location.hash);
+                                });
+                            }
+                        }                        
+                    });
+                }
             });
 
         }

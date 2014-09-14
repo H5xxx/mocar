@@ -375,7 +375,7 @@ define(function(require, exports) {
                     /*['奥迪 国产A4 1.8T']*/
                     data.allVehicles.map(function(v){
                         //prefix+brand+family+model+suffix
-                        return [v.prefix + v.brand + v.family + v.model + v.suffix]
+                        return [v.prefix + v.brand + " " + v.family + " " + v.model/* + v.suffix*/]
                     }).concat([['重新选车']])
                 ,
                 [
