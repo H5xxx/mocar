@@ -382,27 +382,38 @@
                 <div id='address-info' class=''>
                     <i class='site-icons icon-location'></i>
                     <div class='content-area form-row pr10px'>
-                            <span class='city info'>{{currentOrder.province}}</span>
-                            <span class='district info'>{{currentOrder.city}}</span>
-                            <span class='district info'>
-                                {{currentOrder.address}}
-                            </span>
+                        <span class='city info'>{{currentOrder.province}}</span>
+                        <span class='district info'>{{currentOrder.city}}</span>
+                        <span class='district info'>
+                            {{currentOrder.address}}
+                        </span>
                     </div>
                 </div>
                 <div id='schedule-info' class=''>
                     <i class='site-icons icon-time'></i>
                     <div class='content-area form-row'>
-                            <span class='day info'>{{currentOrder.day}}</span>
-                            <span class='time info last'>
-                            {{if (currentOrder.time == '09:00')}}
-                            上午
-                            {{else}}
-                            下午
-                            {{/if}}
-                            </span>
+                        <span class='day info'>{{currentOrder.day}}</span>
+                        <span class='time info last'>
+                        {{if (currentOrder.time == '09:00')}}
+                        上午
+                        {{else}}
+                        下午
+                        {{/if}}
+                        </span>
                     </div>
                 </div>
-                
+                <div id='user-info' class=''>
+                    <i class='site-icons icon-user'></i>
+                    <div class='content-area form-row'>
+                        <span class='day info'>{{currentOrder.name}}</span>
+                    </div>
+                </div>
+                <div id='phone-info' class=''>
+                    <i class='site-icons icon-phone'></i>
+                    <div class='content-area form-row'>
+                        <span class='day info'>{{currentOrder.phone}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class='footer'>
