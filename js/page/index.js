@@ -1,5 +1,4 @@
 define(function(require, exports) {
-    require('../controller/access-token').init();
 
     var Page = Spine.Stack.sub({
 
@@ -28,8 +27,6 @@ define(function(require, exports) {
             '/service/:service_id/model/:model_id/schedule': 'schedule',
             '/service/:service_id/model/:model_id/success': 'success'
         },
-
-        'default': 'home',
 
         squenceNum: 0,
 
