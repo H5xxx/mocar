@@ -7,8 +7,9 @@ var gulp = require('gulp'),
     // combineCSS = require('combine-css'),
     concat = require('gulp-concat'),
     htmlreplace = require('gulp-html-replace'),
-    // uglify = require('gulp-uglify'),
-    minify = require('gulp-minify');
+    uglify = require('gulp-uglify'),
+    // minify = require('gulp-minify'),
+    minifyCSS = require('gulp-minify-css');
 
 var dest = __dirname, //本地开发时的监测目录，部署时用dist目录
     releaseDest = "dist/",
@@ -123,15 +124,15 @@ gulp.task('combineCSS', function(cb) {
 });
 //压缩css/js
 gulp.task('compress', function() {
-    // gulp.src('dist/css/*.css')
-    //     .pipe(minify({"datauri": true}))
-    //     .pipe(gulp.dest('dist/css/'));
+    gulp.src('dist/css/*.css')
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('dist/css/'));
 
     gulp.src('dist/js/lib/*.js')
-        .pipe(minify())
+        .pipe(uglify())
         .pipe(gulp.dest('dist/js/lib/'));
     gulp.src('dist/js/page/*.js')
-        .pipe(minify())
+        .pipe(uglify())
         .pipe(gulp.dest('dist/js/page/'));
 });
 
@@ -165,5 +166,5 @@ gulp.task('default', ['connect', 'open', 'connect-watch']);
 //合并小文件
 gulp.task('combine', ['clean', 'concat', 'combineCSS', 'relocateHtml', "connect-dist", "open"]);
 //在combine的基础上压缩js大文件
-gulp.task('release', ['compress', 'releaseHtml']);
+gulp.task('release', ['compress', 'releaseHtml', "connect-dist", "open"]);
 
