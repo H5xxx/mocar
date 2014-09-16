@@ -16,7 +16,7 @@ define(function(require, exports) {
         // 每个controller对应一个url，从中取到参数
         routes: {
             '/': function(){
-                this.navigate('/home');
+                this.navigate(this.indexPage);
             },
             '/home': 'home',
             '/service/:service_id/brand': 'brand',
@@ -27,6 +27,8 @@ define(function(require, exports) {
             '/service/:service_id/model/:model_id/schedule': 'schedule',
             '/service/:service_id/model/:model_id/success': 'success'
         },
+
+        indexPage: '/home',
 
         squenceNum: 0,
 
@@ -47,6 +49,10 @@ define(function(require, exports) {
             this.el.delegate('.j-nav', 'click', function(e){
                 page.navigate($(e.currentTarget).attr('data-nav'));
             });
+
+            if(!location.hash || location.hash === '#'){
+                this.navigate(this.indexPage);
+            }
         }
     });
 
