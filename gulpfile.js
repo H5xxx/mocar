@@ -84,7 +84,7 @@ gulp.task('clean', function(cb) {
     });
 });
 //cmd transport & concat
-gulp.task('concat', ['clean'], function(cb) {
+gulp.task('conbineJS', ['clean'], function(cb) {
     //把js/lib/目录下的所有js 按顺序合并到一个大文件中
     gulp.src([
         'js/lib/iScroll-v4.2.5.js',
@@ -107,6 +107,31 @@ gulp.task('concat', ['clean'], function(cb) {
     cb();
 });
 
+//cmd transport & concat & compress
+gulp.task('compressJS', ['clean'], function(cb) {
+    //把js/lib/目录下的所有js 按顺序合并到一个大文件中
+    gulp.src([
+        'js/lib/iScroll-v4.2.5.js',
+        'js/lib/template.js',
+        'js/lib/sea.js',
+        'js/lib/zepto.js',
+        'js/lib/spine.js',
+        'js/lib/route.js',
+        'js/lib/route.js',
+        'js/lib/manager.js'
+    ])
+        .pipe(concat('libAllInOne.js', {
+            newLine: ';'
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js/lib/'));
+    //把所有的业务代码合并到一个大文件中
+    gulp.src('js/page/index.js')
+        .pipe(seajs('page/index'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js/page/'));
+    cb();
+});
 //combine css
 gulp.task('combineCSS', function(cb) {
     //TODO 目前只是对css文件做简单的拼接合并，以后用专门的css 合并工具
@@ -122,22 +147,25 @@ gulp.task('combineCSS', function(cb) {
         .pipe(gulp.dest('dist/css/'));
     cb();
 });
-//压缩css/js
-gulp.task('compress', function() {
-    gulp.src('dist/css/*.css')
+//combine & compress css
+gulp.task('compressCSS', function(cb) {
+    //TODO 目前只是对css文件做简单的拼接合并，以后用专门的css 合并工具
+    gulp.src([
+        'css/base.css',
+        'css/home.css',
+        'css/service.css',
+        'css/cart.css',
+        'css/schedule.css',
+        'css/success.css',
+    ])
+        .pipe(concat('cssAllInOne.css'))
         .pipe(minifyCSS())
         .pipe(gulp.dest('dist/css/'));
-
-    gulp.src('dist/js/lib/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js/lib/'));
-    gulp.src('dist/js/page/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js/page/'));
+    cb();
 });
 
 //使用合并之后的js/css
-gulp.task('relocateHtml', ['concat', 'combineCSS'], function(cb) {
+gulp.task('relocateHtml', ['conbineJS', 'combineCSS'], function(cb) {
     gulp.src('html/index.html')
         .pipe(htmlreplace({
             'css': '../css/cssAllInOne.css',
@@ -150,7 +178,7 @@ gulp.task('relocateHtml', ['concat', 'combineCSS'], function(cb) {
 });
 
 //使用合并压缩之后的js/css
-gulp.task('releaseHtml', function(cb) {
+gulp.task('releaseHtml', ['compressJS', 'compressCSS'], function(cb) {
     gulp.src('html/index.html')
         .pipe(htmlreplace({
             'css': '../css/cssAllInOne.css',
@@ -164,7 +192,7 @@ gulp.task('releaseHtml', function(cb) {
 
 gulp.task('default', ['connect', 'open', 'connect-watch']);
 //合并小文件
-gulp.task('combine', ['clean', 'concat', 'combineCSS', 'relocateHtml', "connect-dist", "open"]);
+gulp.task('combine', ['clean', 'conbineJS', 'combineCSS', 'relocateHtml', "connect-dist", "open"]);
 //在combine的基础上压缩js大文件
-gulp.task('release', ['compress', 'releaseHtml', "connect-dist", "open"]);
+gulp.task('release', ['clean', 'compressJS', 'compressCSS', 'releaseHtml', "connect-dist", "open"]);
 
