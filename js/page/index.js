@@ -10,7 +10,9 @@ define(function(require, exports) {
             'model': require('../controller/car-model'),
             'cart': require('../controller/car-cart'),
             'schedule': require('../controller/car-schedule'),
-            'success': require('../controller/car-success')
+            'success': require('../controller/car-success'),
+            'orders': require('../controller/user-order-list'),
+            'order': require('../controller/user-order')
         },
 
         // 每个controller对应一个url，从中取到参数
@@ -25,7 +27,9 @@ define(function(require, exports) {
             '/service/:service_id/model/:model_id/cart': 'cart',
             '/service/:service_id/cart': 'cart',
             '/service/:service_id/model/:model_id/schedule': 'schedule',
-            '/service/:service_id/model/:model_id/success': 'success'
+            '/service/:service_id/model/:model_id/success': 'success',
+            '/orders': 'orders',
+            '/orders/:order_id': 'order'
         },
 
         indexPage: '/home',
