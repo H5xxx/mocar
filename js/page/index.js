@@ -51,7 +51,9 @@ define(function(require, exports) {
             });
 
             if(!location.hash || location.hash === '#'){
-                this.navigate(this.indexPage);
+                setTimeout(function(){
+                    page.navigate(page.indexPage);
+                }, 0);
             }
         }
     });
