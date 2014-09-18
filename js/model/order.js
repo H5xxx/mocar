@@ -22,7 +22,13 @@ define(function(require, exports) {
         'name',
         'phone',
         'date',
-        'services'
+        'services',
+        'day',
+        'time',
+        'name',
+        'phone',
+        '__currentService',
+        '__currentVehicle'
     );
 
     Order.extend({
