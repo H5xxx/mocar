@@ -36,20 +36,32 @@ define(function(require, exports) {
                 periodMap = ['凌晨', '上午', '下午', '晚上'],
                 statusInfoMap = {
                     0: {
-                        desc: '等待中',
+                        desc: '待确认',
                         name: 'waiting'
                     },
                     1: {
+                        desc: '已取消',
+                        name: 'canceled'
+                    },
+                    2: {
+                        desc: '已变更',
+                        name: 'changed'
+                    },
+                    3: {
+                        desc: '已确认',
+                        name: 'confirmed'
+                    },
+                    4: {
                         desc: '已排期',
                         name: 'scheduled'
                     },
-                    2: {
+                    5: {
+                        desc: '服务中',
+                        name: 'serving'
+                    },
+                    6: {
                         desc: '已完成',
                         name: 'finished'
-                    },
-                    3: {
-                        desc: '已取消',
-                        name: 'canceled'
                     }
                 };
 

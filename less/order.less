@@ -75,10 +75,13 @@
         background-image: url('./icons/12.jpg');
 
         .order-status{
-            &.waiting{ color: rgb(255, 152, 0); }
-            &.scheduled{ color: rgb(130, 198, 79); }
-            &.finished{ color: rgb(114, 114, 114); }
-            &.canceled{ color: rgb(185, 185, 185); }
+            &.waiting{ color: rgba(255, 152, 0, 0.87); }
+            &.canceled{ color: rgba(0, 0, 0, 0.26); }
+            &.changed{ color: rgba(229, 28, 35, 0.87); }
+            &.confirmed{ color: rgba(131, 199, 80, 0.87); }
+            &.scheduled{ color: rgba(131, 199, 80, 0.87); }
+            &.serving{ color: rgba(131, 199, 80, 0.87); }
+            &.finished{ color: rgba(0, 0, 0, 0.87); }
         }
     }
 

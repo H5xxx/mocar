@@ -65,16 +65,25 @@
   background-image: url('icons/12.jpg');
 }
 .order-detail .order-summary .order-status.waiting {
-  color: #ff9800;
-}
-.order-detail .order-summary .order-status.scheduled {
-  color: #82c64f;
-}
-.order-detail .order-summary .order-status.finished {
-  color: #727272;
+  color: rgba(255, 152, 0, 0.87);
 }
 .order-detail .order-summary .order-status.canceled {
-  color: #b9b9b9;
+  color: rgba(0, 0, 0, 0.26);
+}
+.order-detail .order-summary .order-status.changed {
+  color: rgba(229, 28, 35, 0.87);
+}
+.order-detail .order-summary .order-status.confirmed {
+  color: rgba(131, 199, 80, 0.87);
+}
+.order-detail .order-summary .order-status.scheduled {
+  color: rgba(131, 199, 80, 0.87);
+}
+.order-detail .order-summary .order-status.serving {
+  color: rgba(131, 199, 80, 0.87);
+}
+.order-detail .order-summary .order-status.finished {
+  color: rgba(0, 0, 0, 0.87);
 }
 .order-detail .order-contact {
   background-image: url('icons/05.png');
