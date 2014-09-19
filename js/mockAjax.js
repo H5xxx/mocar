@@ -468,7 +468,99 @@ define(function(require, exports) {
     });
 
     mock(/\/users\/me\/orders$/, function(options) {
-        return {};
+        return [
+            {
+                "id" : 243213,
+                "status" : 0,
+                "modified" : 1388505600000,
+                "model" : "国产奥迪A4 1.8T",
+                "plate" : "京NB110A",
+                "title" : "常规保养",
+                "date": 1388505700000
+            },
+            {
+                "id" : 243214,
+                "status" : 1,
+                "modified" : 1388505600000,
+                "model" : "国产奥迪A4 1.8T",
+                "plate" : "京NB110A",
+                "title" : "空调灭菌",
+                "date": 1388505700000
+            },
+            {
+                "id" : 243215,
+                "status" : 2,
+                "modified" : 1388505600000,
+                "model" : "国产奥迪A4 1.8T",
+                "plate" : "京NB110A",
+                "title" : "空调灭菌",
+                "date": 1388505700000
+            },
+            {
+                "id" : 243216,
+                "status" : 3,
+                "modified" : 1388505600000,
+                "model" : "国产奥迪A4 1.8T",
+                "plate" : "京NB110A",
+                "title" : "常规保养",
+                "date": 1388505700000
+            }
+        ];
+    });
+    mock(/\/users\/me\/orders\/\w+$/, function(options) {
+        return {
+            "id" : 243213,
+            "status" : 1,
+            "technicianId" : 1,
+            "created" : 1388505600000,
+            "modified" : 1388505600000,
+            "sum" : 150,
+            "modelId" : 12,
+            "model" : "国产奥迪A4 1.8T",
+            "vid" : null,
+            "plate" : null,
+            "cityCode" : 100080,
+            "province" : "北京市",
+            "city" : "海淀区",
+            "address" : "西二旗西路领袖新硅谷D区101弄5号楼2单元207室",
+            "name" : "张先生",
+            "phone" : "18662680000",
+            "date": 1388505700000,
+            "services" : [
+                {
+                    "type" : "摩卡服务",
+                    "name" : "常规保养",
+                    "price" : 150,
+                    "quantity" : 1,
+                    "parts" : [
+                        {
+                            "type" : "发动机机油",
+                            "name" : "自备",
+                            "quantity" : 5,
+                            "price" : 0
+                        },
+                        {
+                            "type" : "机油滤清器",
+                            "name" : "马勒OC595",
+                            "quantity" : 1,
+                            "price" : 17
+                        },
+                        {
+                            "type" : "空气滤清器",
+                            "name" : "马勒LX2115",
+                            "quantity" : 1,
+                            "price" : 31
+                        },
+                        {
+                            "type" : "空调滤清器",
+                            "name" : "马勒LA513",
+                            "quantity" : 1,
+                            "price" : 34
+                        }
+                    ]
+                }
+            ]
+        };
     });
     mock(/\/authority\/token/, function(options) {
         return {

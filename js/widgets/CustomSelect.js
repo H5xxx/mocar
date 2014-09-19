@@ -88,10 +88,10 @@ define(function(require, exports, module) {
     }
 
     CustomSelect.prototype.change = function(selectedIndex) {
-        if (selectedIndex < this.optArr.length - 1) {
+        if (selectedIndex <= this.optArr.length - 1) {
             this._originalSelectIndex = this._currentSelectedIndex = selectedIndex;
             this.inputEl.value = this._currentSelectedIndex;
-            self.onchange(self._currentSelectedIndex);
+            this.onchange(this._currentSelectedIndex);
         }
     };
 

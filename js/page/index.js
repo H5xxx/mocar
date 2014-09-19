@@ -1,5 +1,5 @@
 define(function(require, exports) {
-    require('../controller/access-token').init();
+    var util = require('../component/util');
 
     var Page = Spine.Stack.sub({
 
@@ -11,13 +11,15 @@ define(function(require, exports) {
             'model': require('../controller/car-model'),
             'cart': require('../controller/car-cart'),
             'schedule': require('../controller/car-schedule'),
-            'success': require('../controller/car-success')
+            'success': require('../controller/car-success'),
+            'orders': require('../controller/user-order-list'),
+            'order': require('../controller/user-order')
         },
 
         // 每个controller对应一个url，从中取到参数
         routes: {
             '/': function(){
-                this.navigate('/home');
+                this.navigate(this.indexPage);
             },
             '/home': 'home',
             '/service/:service_id/brand': 'brand',
@@ -26,10 +28,12 @@ define(function(require, exports) {
             '/service/:service_id/model/:model_id/cart': 'cart',
             '/service/:service_id/cart': 'cart',
             '/service/:service_id/model/:model_id/schedule': 'schedule',
-            '/service/:service_id/model/:model_id/success': 'success'
+            '/service/:service_id/model/:model_id/success': 'success',
+            '/orders': 'orders',
+            '/orders/:order_id': 'order'
         },
 
-        'default': 'home',
+        indexPage: '/home',
 
         squenceNum: 0,
 
@@ -50,6 +54,20 @@ define(function(require, exports) {
             this.el.delegate('.j-nav', 'click', function(e){
                 page.navigate($(e.currentTarget).attr('data-nav'));
             });
+
+            var params = util.parseURL(location.href).params,
+                target;
+            if(params.path){
+                target = params.path;
+            }else if(!location.hash || location.hash === '#'){
+                target = page.indexPage;
+            }
+
+            if(target){
+                setTimeout(function(){
+                    page.navigate(target);
+                }, 0);
+            }
         }
     });
 

@@ -462,16 +462,18 @@ define(function(require, exports) {
                     optionNameEl.innerHTML = optArrs[i][initialSelectedIndex][0];
                     priceEl.innerHTML = optArrs[i][initialSelectedIndex][1];
                     priceEl.setAttribute('data-price', optArrs[i][initialSelectedIndex][1]);
+                }else if(i >= 2 && data.currentService.parts[i-2].proposal){
+                    selectInput.value = data.currentService.parts[i-2].proposal;
                 }else if(!selectInput.value){
                     selectInput.value = 0;
                 }
                 if(selectTrigger && selectInput){
                     (function(selectTrigger, selectInput, optArr, i){
-                        new CustomSelect({
+                        var customSelect = new CustomSelect({
                             triggerEl: selectTrigger, 
                             inputEl: selectInput, 
                             optArr: optArr,
-                            onchange: function onchange(selectedIndex){
+                            onchange: function (selectedIndex){
                                 if(selectedIndex !== -1){
                                     var productNameEl = selectTrigger.querySelector('.product-name');
                                     var priceEl = selectTrigger.querySelector('.price');
@@ -496,6 +498,7 @@ define(function(require, exports) {
                                 }
                             }
                         });
+                        customSelect.change(parseInt(selectInput.value));
                     })(selectTrigger, selectInput, optArrs[i], i)
                 }
             };

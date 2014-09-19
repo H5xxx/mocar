@@ -6,24 +6,8 @@
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <title>摩卡汽车服务</title>
-    <!-- build:css -->
-    <link rel='stylesheet' href='../css/base.css'>
-    <link rel='stylesheet' href='../css/home.css'>
-    <link rel="stylesheet" href="../css/service.css">
-    <link rel='stylesheet' href='../css/cart.css'>
-    <link rel='stylesheet' href='../css/schedule.css'>
-    <link rel='stylesheet' href='../css/success.css'>
-    <link rel='stylesheet' href='../css/order.css'>
-    <!-- endbuild -->
-    <!-- build:js -->
-    <script src="../js/lib/iScroll-v4.2.5.js"></script>
-    <script src="../js/lib/template.js"></script>
-    <script src="../js/lib/sea.js"></script>
-    <script src="../js/lib/zepto.js"></script>
-    <script src="../js/lib/spine.js"></script>
-    <script src="../js/lib/route.js"></script>
-    <script src="../js/lib/manager.js"></script>
-    <!-- endbuild -->
+    <link rel="stylesheet" href="../css/cssAllInOne.css">
+    <script src="../js/lib/libAllInOne.js"></script>
     <script id="template-loading" type="text/html">
         <div class="spinner">
             <div class="spinner-container container1">
@@ -151,8 +135,6 @@
                 <p>摩卡提供和使用的所有配件，均可<br/>在京东自营商店买到。</p>
                 <br>
                 <p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>
-                <br>
-                <p>摩卡配件价格是完全参照京东自营</br>配件价格哦。</p>
             </div>
             <div class="command-area">
                 <a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>
@@ -371,7 +353,8 @@
                             <li class='form-row'>
                                 <p class="accessory info">{{part.name}}</p>
                                 {{each part.options as option j}}
-                                    {{if (option.id == currentOrder.services[0].parts[i].id)}}
+                                    {{if (option.id == currentOrder.services[0].parts[i].id)
+}}
                                         <span class='model info'>{{option.brand}}{{option.name}} {{option.extra}}</span>
                                         <span class='carNo info last'>
                                             {{option.price}}
@@ -431,67 +414,6 @@
             </div> 
         </div>
     </script>
-    <!-- 我的订单 页面 模板 -->
-    <script id="template-user-order-list" type="text/html">
-        <div id="j-user-order-list-container">
-            <ul class="order-list">
-                {{each list as order i}}
-                <li class="order-summary j-nav" data-nav="/orders/{{order.id}}">
-                    <h4 class="order-title">{{order.title}}</h4>
-                    <p class="order-id">No{{order.id}}</p>
-                    <p class="order-model">{{order.model}}</p>
-                    <p class="order-date">{{order.year}}年{{order.month}}月{{order.day}}日</p>
-                    <p class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</p>
-                </li>
-                {{/each}}
-            </ul>
-        </div>
-    </script>
-    <!-- 订单详情 页面 模板 -->
-    <script id="template-user-order" type="text/html">
-        <div id="j-user-order-container">
-            <ul class="order-detail">
-                <li class="order-detail-item order-summary">
-                    <p class="line">订单编号： No{{order.id}}</p>
-                    <p class="line">总金额： {{order.sum}}元</p>
-                    <p class="line">
-                        当前状态： 
-                        <span class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</span>
-                    </p>
-                    <p class="line">预约时间： {{order.year}}-{{order.month}}-{{order.day}} {{order.period}}</p>
-                </li>
-                <li class="order-detail-item order-contact">
-                    <p class="line">
-                        联系人： {{order.name}}
-                        <span class="fr order-phone">{{order.phone}}</span>
-                    </p>
-                    <p class="line order-address">{{order.fullAddress}}</p>
-                </li>
-                <li class="order-detail-item order-model">
-                    <p class="line">{{order.model}}</p>
-                </li>
-                {{each order.services as service i}}
-                <li class="order-detail-item order-service">
-                    <p class="line service-name">
-                        {{service.name}}
-                        <span class="fr">{{service.price}}</span>
-                    </p>
-                    <ul class="service-parts">
-                        {{each service.parts as part i}}
-                        <li class="service-part">
-                            <h5 class="service-part-type">{{part.type}}</h5>
-                            <p class="line">
-                                {{part.name}}
-                                <span class="fr">{{part.price}}元</span>
-                            </p>
-                        </li>
-                        {{/each}}
-                    </ul>
-                </li>
-                {{/each}}
-            </ul>
-        </div>
-    </script>
 </head>
 
 <body>
@@ -505,8 +427,6 @@
         <div class="page-container moveout" id='car-cart'></div>
         <div class="page-container moveout" id='car-schedule'></div>
         <div class="page-container moveout" id='car-success'></div>
-        <div class="page-container moveout" id='user-order-list'></div>
-        <div class="page-container moveout" id='user-order'></div>
     </div>
 
     <script>
@@ -516,7 +436,7 @@
             "mock": "lib/mock.js"
         }
     })
-    //seajs.use('mockAjax', function() {});
+    // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>

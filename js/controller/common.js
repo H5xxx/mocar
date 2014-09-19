@@ -52,12 +52,17 @@ define(function(require, exports) {
 
             params = params || {};
 
-            this.getData(params, function(err, data) {
+            util.finish([
+                require('../component/token').ready
+            ], function(){
 
-                me.enter();
+                me.getData(params, function(err, data) {
 
-                me.render($.extend(params, data));
+                    me.enter();
 
+                    me.render($.extend(params, data));
+
+                });
             });
 
         },

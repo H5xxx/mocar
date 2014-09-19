@@ -1,0 +1,132 @@
+.order-list{
+    margin-top: 8px;
+
+    .order-summary{
+        @padding: 16px;
+        position: relative;
+        padding: @padding;
+
+        font-size: 14px;
+        line-height: 1em;
+        color: rgb(125, 125, 125);
+
+        .order-title{
+            margin-bottom: 8px;
+
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 1em;
+            color: rgb(62, 62, 62);
+        }
+
+        .order-id{
+            position: absolute;
+            top: @padding;
+            right: @padding;
+
+            text-align: right;
+            font-size: 12px;
+            line-height: 1em;
+            color: rgb(62, 62, 62);
+        }
+
+        .order-model{
+            margin-bottom: 4px;
+        }
+
+        .order-status{
+            position: absolute;
+            bottom: @padding;
+            right: @padding;
+
+            text-align: right;
+
+            &.waiting{ color: rgb(255, 152, 0); }
+            &.scheduled{ color: rgb(130, 198, 79); }
+            &.finished{ color: rgb(114, 114, 114); }
+            &.canceled{ color: rgb(185, 185, 185); }
+        }
+    }
+}
+
+.order-detail{
+    .order-detail-item{
+        padding: 16px 16px 16px 72px;
+        border-bottom: 1px solid rgb(225, 225, 225);
+
+        font-size: 16px;
+        line-height: 20px;
+        color: rgb(33, 33, 33);
+
+        background-position: 16px 16px;
+        background-repeat: no-repeat;
+        background-size: 24px 24px;
+
+        .line{
+            margin-bottom: 8px;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .order-summary{
+        background-image: url('./icons/12.jpg');
+
+        .order-status{
+            &.waiting{ color: rgba(255, 152, 0, 0.87); }
+            &.canceled{ color: rgba(0, 0, 0, 0.26); }
+            &.changed{ color: rgba(229, 28, 35, 0.87); }
+            &.confirmed{ color: rgba(131, 199, 80, 0.87); }
+            &.scheduled{ color: rgba(131, 199, 80, 0.87); }
+            &.serving{ color: rgba(131, 199, 80, 0.87); }
+            &.finished{ color: rgba(0, 0, 0, 0.87); }
+        }
+    }
+
+    .order-contact{
+        background-image: url('./icons/05.png');
+
+        .order-address{
+            font-size: 12px;
+            line-height: 20px;
+        }
+    }
+
+    .order-model{
+        background-image: url('./icons/02.png');
+    }
+
+    .order-service{
+        background: 16px 16px url('./icons/03.png'), 16px 60px url('./icons/04.png');
+        background-size: 24px 24px;
+        background-repeat: no-repeat;
+
+        .service-name{
+            margin-bottom: 12px;
+
+            line-height: 24px;
+        }
+
+        .service-parts{
+            .service-part{
+                margin-bottom: 8px;
+
+                .service-part-type{
+                    margin-bottom: 4px;
+
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: rgb(117, 117, 117);
+                    font-weight: normal
+                }
+
+                .line{
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+
+}
