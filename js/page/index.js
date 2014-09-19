@@ -1,4 +1,5 @@
 define(function(require, exports) {
+    var util = require('../component/util');
 
     var Page = Spine.Stack.sub({
 
@@ -54,9 +55,17 @@ define(function(require, exports) {
                 page.navigate($(e.currentTarget).attr('data-nav'));
             });
 
-            if(!location.hash || location.hash === '#'){
+            var params = util.parseURL(location.href).params,
+                target;
+            if(params.path){
+                target = params.path;
+            }else if(!location.hash || location.hash === '#'){
+                target = page.indexPage;
+            }
+
+            if(target){
                 setTimeout(function(){
-                    page.navigate(page.indexPage);
+                    page.navigate(target);
                 }, 0);
             }
         }
