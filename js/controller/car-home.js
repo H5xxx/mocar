@@ -17,13 +17,17 @@ define(function(require, exports) {
         template: 'template-home',
 
         getData: function(params, callback) {
-            var self = this;
-            var icons = {
-                '1': 'changguibaoyang',
-                '2': 'kongtiaomiejun',
-                '3': 'donglitisheng',
-                '4': 'huanshachepian',
-            };
+            this.params = params;
+
+            callback(null, {});
+        },
+
+        render: function(){
+            this.constructor.__super__.render.apply(this, arguments);
+
+            var self = this,
+                listWrapper = this.el.find('[data-role="service-list"]'),
+                params = this.params;
 
             util.finish([
                 Service.fetch(params),
@@ -49,10 +53,12 @@ define(function(require, exports) {
                     //选车去吧
                     next = 'brand';
                 }
-                callback(null, {
+
+                listWrapper.html(template('template-home-list', {
                     services: services,
                     next: next
-                });
+                }));
+
                 //当前页面是从下单成功页面过来的
                 if(sessionStorage && sessionStorage['success']){
                     delete sessionStorage['success'];
@@ -71,7 +77,6 @@ define(function(require, exports) {
                     });
                 }
             });
-
         }
     });
 

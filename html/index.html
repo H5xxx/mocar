@@ -46,6 +46,28 @@
             </div>
         </div>
     </script>
+
+    <!-- 摩卡服务首页 - 列表 模板 开始 -->
+    <script id="template-home-list" type="text/html">
+        {{each services as service i}}
+        <li class='service-item'>
+            <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/{{next}}">
+                <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
+                <div class="content-area border-bottom">
+                    <span class="title">{{service.name}}</span>
+                    <span class="price">{{service.price}}元</span>
+                    <br/>
+                    <div class="info">
+                        {{service.slogan}}
+                        <br/>
+                        <span>{{service.description}}</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    </script>
+    <!-- 摩卡服务首页 - 列表 模板 结束 -->
     
     <!-- 摩卡服务首页 模板 开始 -->
     <script id="template-home" type="text/html">
@@ -54,24 +76,8 @@
                 <div class='logo-area'>
                     <img src="../css/icons/mocar.png" alt="摩卡服务" width="100%">
                 </div>
-                <ul class='service-list'>
-                    {{each services as service i}}
-                    <li class='service-item'>
-                        <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/{{next}}">
-                            <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
-                            <div class="content-area border-bottom">
-                                <span class="title">{{service.name}}</span>
-                                <span class="price">{{service.price}}元</span>
-                                <br/>
-                                <div class="info">
-                                    {{service.slogan}}
-                                    <br/>
-                                    <span>{{service.description}}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    {{/each}}
+                <ul class='service-list' data-role="service-list">
+                    
                 </ul>
             </div>
         </div>
