@@ -35,6 +35,11 @@ define(function(require, exports) {
             ], function(services, vehicles) {
                 services.forEach(function(service) {
                     service.icon = config.STATIC_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
+
+                    if(service.id == 3){
+                        service.discount = true;
+                        service.originPrice = Math.floor(service.price / 0.88);
+                    }
                 });
                 var next, lastModelId;
                 try{

@@ -19,7 +19,7 @@ define(function(require, exports) {
             "price": 150.0,
             "highestPrice": 300.0
         }, {
-            "id": 2,
+            "id": 3,
             "name": "空调灭菌",
             "slogan": "专业、严谨",
             "description": "使用德国进口药液，有效杀灭细菌。",

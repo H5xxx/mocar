@@ -1,6 +1,8 @@
 define(function(require, exports) {
     var util = require('../component/util');
 
+    template.helper('formatNum', util.formatNum);
+
     var Page = Spine.Stack.sub({
 
         // 所有controller
