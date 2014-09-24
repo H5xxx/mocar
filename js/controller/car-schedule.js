@@ -50,6 +50,7 @@ define(function(require, exports) {
 
                 if (contacts && contacts.length) {
                     currentContact = contacts[0];
+                    cityCode = cityCode || currentContact.cityCode;
                     name = name || currentContact.name;
                     address = address || currentContact.address;
                     phone = phone || currentContact.phone;
