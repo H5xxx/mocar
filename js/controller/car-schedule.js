@@ -253,9 +253,9 @@ define(function(require, exports) {
                 input.on('focus', onFocus);
                 input.on('blur', onBlur);
             });
-            phoneInput.on('focus', function(){
-                window.scrollTo(0, 120);
-            });
+            // phoneInput.on('focus', function(){
+            //     window.scrollTo(0, 120);
+            // });
         },
         saveUserInput: function(){
             //将用户的操作/选择 存储到sessionStorage
