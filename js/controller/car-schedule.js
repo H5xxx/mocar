@@ -239,7 +239,6 @@ define(function(require, exports) {
                 var row = input.parents('.form-row');
                 input.css('color','#88bb7d');
                 console.log(this);
-                window.scrollTo(0, 120);
                 var errorId = this.id + '-error';
                 $('#' + errorId).addClass('dn');
             };
@@ -252,6 +251,9 @@ define(function(require, exports) {
             [addressInput, nameInput, phoneInput].forEach(function(input){
                 input.on('focus', onFocus);
                 input.on('blur', onBlur);
+            });
+            phoneInput.on('focus', function(){
+                window.scrollTo(0, 120);
             });
         },
         saveUserInput: function(){
