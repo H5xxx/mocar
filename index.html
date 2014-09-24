@@ -55,7 +55,13 @@
                 <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                 <div class="content-area border-bottom">
                     <span class="title">{{service.name}}</span>
-                    <span class="price">{{service.price}}元</span>
+                    {{if service.discount}}
+                    <i class="icon-discount"></i>
+                    {{/if}}
+                    <span class="price">{{service.price}}元起</span>
+                    {{if service.discount}}
+                    <span class="origin-price">{{service.originPrice}}元</span>
+                    {{/if}}
                     <br/>
                     <div class="info">
                         {{service.slogan}}
@@ -444,7 +450,7 @@
                 {{each list as order i}}
                 <li class="order-summary j-nav" data-nav="/orders/{{order.id}}">
                     <h4 class="order-title">{{order.title}}</h4>
-                    <p class="order-id">No{{order.id}}</p>
+                    <p class="order-id">No{{order.id | formatNum: 10}}</p>
                     <p class="order-model">{{order.model}}</p>
                     <p class="order-date">{{order.year}}年{{order.month}}月{{order.day}}日</p>
                     <p class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</p>
@@ -458,7 +464,7 @@
         <div id="j-user-order-container">
             <ul class="order-detail">
                 <li class="order-detail-item order-summary">
-                    <p class="line">订单编号： No{{order.id}}</p>
+                    <p class="line">订单编号： No{{order.id | formatNum: 10}}</p>
                     <p class="line">总金额： {{order.sum}}元</p>
                     <p class="line">
                         当前状态： 
@@ -529,4 +535,5 @@
 
 </body>
 
-</html><!-- Tue Sep 23 18:48:30 CST 2014 -->
+</html>
+<!-- 2014年 9月25日 星期四 00时25分10秒 CST -->
