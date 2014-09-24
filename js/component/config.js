@@ -2,6 +2,10 @@ define(function(require, exports, module) {
     var util = require('./util');
     var API_HOST = 'http://api-test.mocar.cn';
     var STATIC_HOST = 'http://static-test.mocar.cn';
+
+    API_HOST = 'http://api.mocar.cn';
+    STATIC_HOST = 'http://static.mocar.cn';
+
     var json = util.parseURL();
     if (json && json.params && json.params['api_hostname']) {
         API_HOST = 'http://' + json.params['api_hostname'];
