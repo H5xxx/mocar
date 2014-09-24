@@ -239,6 +239,7 @@ define(function(require, exports) {
                 var row = input.parents('.form-row');
                 input.css('color','#88bb7d');
                 console.log(this);
+                window.scrollTo(0, 120);
                 var errorId = this.id + '-error';
                 $('#' + errorId).addClass('dn');
             };
