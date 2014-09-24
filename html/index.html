@@ -55,6 +55,9 @@
                 <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                 <div class="content-area border-bottom">
                     <span class="title">{{service.name}}</span>
+                    {{if service.present}}
+                    <i class="icon-present"></i>
+                    {{/if}}
                     {{if service.discount}}
                     <i class="icon-discount"></i>
                     {{/if}}

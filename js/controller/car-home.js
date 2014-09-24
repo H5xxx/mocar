@@ -36,6 +36,10 @@ define(function(require, exports) {
                 services.forEach(function(service) {
                     service.icon = config.STATIC_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
 
+                    if(service.id == 2){
+                        service.present = true;
+                    }
+
                     if(service.id == 3){
                         service.discount = true;
                         service.originPrice = Math.floor(service.price / 0.88);
