@@ -14,6 +14,10 @@ define(function(require, exports) {
     var FastButton = require('../widgets/FastButton');
     var CustomSelect = require('../widgets/CustomSelect');
     var BUY_ELSE = "自行购买";
+    var NOT_REPLACE = "不更换该配件";
+    var checkNotReplace = false; //是否 检查用户 选择的 非  不更换该配件 的数量， quantityStrategy
+
+    var userSelectBitArr = []; //用户是否选择 “不更换该配件”，true 更换配件，false不更换配件
     var CarCart = require('./common').sub({
         // 该controller要渲染&控制的区域
         el: $('#car-cart'),
@@ -31,6 +35,7 @@ define(function(require, exports) {
                     function normalizeData(){
 
                         var parts = data.parts, options, option;
+                        userSelectBitArr = new Array(parts.length);
                         for(var i = 0, ilen = parts.length; i < ilen; i++){
                             options = parts[i].options;
                             if(options){
@@ -127,15 +132,27 @@ define(function(require, exports) {
                     })
                 }]
             });
-            
+            checkNotReplace = params.currentService.quantityStrategy == 1;
             var nextStepBtn = this.el.find('.j-nextstep');
             //表单信息收集
             nextStepBtn.bind('click', function(e){
+                var replaceNum = userSelectBitArr.filter(function(v){
+                    return !!v;
+                }).length;
+                //TODO 
+                if(checkNotReplace && replaceNum == 0){
+                    e.stopPropagation();
+                    e.preventDefault();
+                    alert("请至少选择一项配件");
+                    return;
+                }
+
                 var accessoryInput = self.el.find('input[name=accessoryInput]');
                 accessoryInput.forEach(function(input, i){
                     self.currentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
                 self.currentOrder.save();
+
             });
         },
 
@@ -384,6 +401,23 @@ define(function(require, exports) {
                 var totalPrice = 0, itemPrice;
                 var priceEl = $('[data-price]');
                 var totalPriceEl = $('[data-totalprice]');
+                var replaceNum = userSelectBitArr.filter(function(v){
+                    return !!v;
+                }).length;
+                //TODO 
+                if(checkNotReplace){
+                    replaceNum = replaceNum || 1;
+                    var service = self.currentOrder.__currentService
+                    if(!service.__originalPrice){
+                        service.__originalPrice = service.price;
+                    }
+                    var serviceFee = service.__originalPrice;
+                    serviceFee = serviceFee * replaceNum;
+                    service.price = serviceFee;
+                    priceEl[0].setAttribute('data-price', serviceFee);
+                    priceEl[0].innerHTML = serviceFee;
+                    self.trigger("serviceFeeUpdated", serviceFee);
+                }
                 priceEl.each(function(i, el){
                     itemPrice = el.getAttribute('data-price');
                     if(itemPrice){
@@ -473,7 +507,7 @@ define(function(require, exports) {
                             triggerEl: selectTrigger, 
                             inputEl: selectInput, 
                             optArr: optArr,
-                            onchange: function (selectedIndex){
+                            onchange: function onchange(selectedIndex){
                                 if(selectedIndex !== -1){
                                     var productNameEl = selectTrigger.querySelector('.product-name');
                                     var priceEl = selectTrigger.querySelector('.price');
@@ -484,6 +518,11 @@ define(function(require, exports) {
                                     }
                                 }
                                 if(i >= 2){
+                                    if(optArr[selectedIndex][0].indexOf(NOT_REPLACE) !== -1){
+                                        userSelectBitArr[i] = false;
+                                    }else{
+                                        userSelectBitArr[i] = true;
+                                    }
                                     calculateTotalPrice();
                                 }
                                 if( i == 0){
@@ -499,6 +538,12 @@ define(function(require, exports) {
                             }
                         });
                         customSelect.change(parseInt(selectInput.value));
+                        if(i == 1){
+                            self.bind('serviceFeeUpdated', function(fee){
+                                optArrs[1][0][1] = fee;
+                                customSelect.rebuildOptArr(optArrs[1]);
+                            });
+                        }
                     })(selectTrigger, selectInput, optArrs[i], i)
                 }
             };
