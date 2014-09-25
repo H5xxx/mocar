@@ -7,6 +7,7 @@ define(function(require, exports) {
 
     var Service = require('../model/service');
     var Vehicle = require('../model/vehicle');
+    var Popup = require('../widgets/Popup');
 
     var CarHome = require('./common').sub({
         // 该controller要渲染&控制的区域
@@ -29,10 +30,12 @@ define(function(require, exports) {
                 listWrapper = this.el.find('[data-role="service-list"]'),
                 params = this.params;
 
+            Popup.openLoading();
             util.finish([
                 Service.fetch(params),
                 Vehicle.fetch({uid:'me'})
             ], function(services, vehicles) {
+                Popup.close();
                 services.forEach(function(service) {
                     service.icon = config.STATIC_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
 
