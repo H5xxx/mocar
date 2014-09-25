@@ -1,72 +1,75 @@
 /************************  预约成功  ************************/
-#car-success{
+
+#car-success {
     height: 100%;
     position: static;
 }
-
 .success-header {
+    padding: 24px 16px;
     background-color: #333333;
     color: #EAEAEA;
 }
-#schedule-info{
+#schedule-info {
     overflow: hidden;
     clear: both;
     padding-top: 8px
 }
-#schedule-success .second{
+#schedule-success .second {
     width: 49%;
     display: inline-block;
     height: 100%;
     font-size: 20px;
 }
-#schedule-success .second{
+#schedule-success .second {
     float: right;
     margin-left: 2%;
     width: 49%;
 }
-
-.justify{
+.justify {
     display: table;
     height: 100%;
     width: 100%;
 }
-#schedule-success .content-area{
-    margin-left: 72px;
+#schedule-success .content-area {
+    margin-left: 56px;
 }
-#schedule-success .form-row{
+#schedule-success .form-row {
     margin-bottom: 10px;
 }
-
 /*提示文案区*/
-#schedule-success #success-tip .site-icons{
-    margin-top: 20px;
+
+#schedule-success #success-tip .site-icons {
+    width: 40px;
+    height: 40px;
+    margin-left: 0;
 }
 /*表单区域 图表样式*/
-#schedule-success .site-icons{
+
+#schedule-success .site-icons {
     margin-top: 0;
 }
 /*提示文案区*/
-#schedule-success #success-tip .content-area{
+
+#schedule-success #success-tip .content-area {
     height: 60px;
 }
-
-#schedule-success #success-tip .tip{   
-    display: table-cell;
-    vertical-align: middle;
-    font-size: 16px;
+#schedule-success #success-tip .tip {
+/*    display:table-cell;
+    vertical-align:middle;*/    font-size: 16px;
 }
-#schedule-success .info{
+#schedule-success .info {
     font-size: 16px;
 }
 /*附件单行*/
-#service-detail .form-row{
+
+#service-detail .form-row {
     height: 60px;
 }
-#schedule-success .accessory{
+#schedule-success .accessory {
     color: #60C900;
     margin-bottom: 2px;
 }
-#schedule-success .last{
+#schedule-success .last {
     float: right;
     margin-right: 20px;
     color: #8C8C8C;

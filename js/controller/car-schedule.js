@@ -35,7 +35,7 @@ define(function(require, exports) {
                 var allProvinceArr = [],
                     allCityMatrix = [];
                 currentProvinceIndex = currentCityIndex = 0;
-                
+
                 var previousProvinceIndex = userInputs.provinceInput;
                 var previousCityIndex = userInputs.cityInput;
                 //cityCode = userInputs.cityCode;
@@ -54,7 +54,7 @@ define(function(require, exports) {
                     name = name || currentContact.name;
                     address = address || currentContact.address;
                     phone = phone || currentContact.phone;
-                    
+
                     var tempArr;
                     cities.forEach(function(c, i) {
                         tempArr = [];
@@ -92,19 +92,19 @@ define(function(require, exports) {
                         tempArr.unshift(currentCity);
                         currentCityIndex = 0;
                     }
-                }else{
+                } else {
                     allCityMatrix = [];
-                    allProvinceArr = cities.map(function(c){
-                        allCityMatrix.push(c.cities.map(function(d){
+                    allProvinceArr = cities.map(function(c) {
+                        allCityMatrix.push(c.cities.map(function(d) {
                             return d.city;
                         }));
                         return c.province;
                     });
                 }
-                if(previousProvinceIndex){
+                if (previousProvinceIndex) {
                     currentProvinceIndex = previousProvinceIndex;
                 }
-                if(previousCityIndex){
+                if (previousCityIndex) {
                     currentCityIndex = previousCityIndex;
                 }
                 currentProvince = cities[currentProvinceIndex].province;
@@ -116,11 +116,11 @@ define(function(require, exports) {
                 */
                 var startOffset = 1;
                 var d = new Date();
-                if(d.getHours() >= 14){
+                if (d.getHours() >= 14) {
                     startOffset = 2;
                 }
                 //可提前7天预订
-                var allDayArr = util.getDayArr(7,startOffset);
+                var allDayArr = util.getDayArr(7, startOffset);
                 //可预订的时间
                 var allTimeArr = [
                     '上午',
@@ -180,23 +180,25 @@ define(function(require, exports) {
 
                 // e.stopPropagation();
                 e.preventDefault();
-                if (!address || !name || !phone) {
-                    if (!address) {
-                        $('#addressInput-error').removeClass('dn');
-                    } else if (!name) {
-                        $('#nameInput-error').removeClass('dn');
-                    } else if (!phone) {
-                        $('#phoneInput-error').removeClass('dn');
-                    }
+                // if (!address || !name || !phone) {
+                if (!address || address.length < 6 || address.length > 48) {
+                    $('#addressInput-error').removeClass('dn');
+                    return;
+                } else if (!name) {
+                    $('#nameInput-error').removeClass('dn');
+                    return;
+                } else if (!phone || !/^\d{11}$/.test(phone)) {
+                    $('#phoneInput-error').removeClass('dn');
                     return;
                 }
+                // }
 
                 self.currentOrder.province = data.allProvinceArr[province];
                 self.currentOrder.city = data.allCityMatrix[province][city];
                 self.currentOrder.cityCode = data.allCities[province].cities[city].cityCode;
                 self.currentOrder.address = address;
                 self.currentOrder.day = data.allDayArr[day];
-                self.currentOrder.time = ['09:00','13:00'][time];
+                self.currentOrder.time = ['09:00', '13:00'][time];
                 self.currentOrder.name = name;
                 self.currentOrder.phone = phone;
                 var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
@@ -219,9 +221,9 @@ define(function(require, exports) {
                     }),
                     success: function(responseData, status, xhr) {
                         Popup.close();
-                        try{
+                        try {
                             delete sessionStorage.stepSchedule;
-                        }catch(e){
+                        } catch (e) {
 
                         }
                         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
@@ -234,22 +236,22 @@ define(function(require, exports) {
             };
             new FastButton(nextStepBtn[0], handleSubmit);
             var currentFocusInput;
-            var onFocus = function(e){
+            var onFocus = function(e) {
                 //TODO input 获取焦点时修改样式，和隐藏验证失败提示
                 input = $(this);
                 var row = input.parents('.form-row');
-                input.css('color','#88bb7d');
+                input.css('color', '#88bb7d');
                 console.log(this);
                 var errorId = this.id + '-error';
                 $('#' + errorId).addClass('dn');
             };
-            var onBlur = function(e){
+            var onBlur = function(e) {
                 //TODO input 失去焦点时，重置样式
                 input = $(this);
                 var row = input.parents('.form-row');
                 input.css('color', '');
             };
-            [addressInput, nameInput, phoneInput].forEach(function(input){
+            [addressInput, nameInput, phoneInput].forEach(function(input) {
                 input.on('focus', onFocus);
                 input.on('blur', onBlur);
             });
@@ -257,13 +259,14 @@ define(function(require, exports) {
             //     window.scrollTo(0, 120);
             // });
         },
-        saveUserInput: function(){
+        saveUserInput: function() {
             //将用户的操作/选择 存储到sessionStorage
             var self = this;
-        
-            var userInputs={};
-            var userInputEls = self.el.find('input'), inputName;
-            userInputEls.forEach(function(input, i){
+
+            var userInputs = {};
+            var userInputEls = self.el.find('input'),
+                inputName;
+            userInputEls.forEach(function(input, i) {
                 inputName = input.name;
                 userInputs[inputName] = input.value || '';
             });
@@ -275,13 +278,13 @@ define(function(require, exports) {
             this.constructor.__super__.deactivate.apply(this, arguments);
         },
         // 回复用户之前输入/选择的内容
-        restoreUserInput: function(){
+        restoreUserInput: function() {
             var userInputs;
             userInputs = sessionStorage['scheduleUserInput'];
-            if(userInputs){
-                try{
+            if (userInputs) {
+                try {
                     userInputs = JSON.parse(userInputs);
-                }catch(e){
+                } catch (e) {
                     userInputs = {}
                 }
             }
@@ -295,16 +298,15 @@ define(function(require, exports) {
             delete this.currentOrder;
             try {
                 this.currentOrder = Order.find("-1");
-            } catch (e) {
-            }
-            if (!this.currentOrder  || this.currentOrder.destroyed) {
+            } catch (e) {}
+            if (!this.currentOrder || this.currentOrder.destroyed) {
                 this.page.navigate('/service/' + params.service_id + '/model/' + params.model_id + '/cart');
                 return;
             }
-            try{
+            try {
                 //标示用户来到上门信息页面
                 sessionStorage.stepSchedule = 1;
-            }catch(e){
+            } catch (e) {
 
             }
             userInputs = self.restoreUserInput();
@@ -323,8 +325,7 @@ define(function(require, exports) {
         var optArrs = [
             data.allProvinceArr.map(function(p) {
                 return [p];
-            }),
-            (data.allCityMatrix[data.currentProvinceIndex] || []).map(function(c) {
+            }), (data.allCityMatrix[data.currentProvinceIndex] || []).map(function(c) {
                 return [c];
             }),
             data.allDayArr.map(function(d) {
@@ -343,7 +344,7 @@ define(function(require, exports) {
             selectWrapper = selectWrappers[i];
             selectTrigger = selectWrapper.querySelector('.custom-select-trigger');
             selectInput = selectWrapper.querySelector('input');
-            if(!selectInput.value){
+            if (!selectInput.value) {
                 selectInput.value = 0; //默认第一个为selected
             }
             selectTriggerArr.push(selectTrigger);
