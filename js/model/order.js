@@ -73,7 +73,7 @@ define(function(require, exports) {
 
             return $.extend(order, {
                 year: util.formatNum(date.getFullYear(), 4),
-                month: util.formatNum(date.getMonth(), 2),
+                month: util.formatNum(date.getMonth() + 1, 2),
                 day: util.formatNum(date.getDate(), 2),
                 period: periodMap[Math.floor(date.getHours() / 6)],
                 statusInfo: statusInfoMap[order.status],
