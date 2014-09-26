@@ -181,13 +181,13 @@ define(function(require, exports) {
                 // e.stopPropagation();
                 e.preventDefault();
                 // if (!address || !name || !phone) {
-                if (!address || address.length < 6 || address.length > 48) {
+                if (!address || address.length < 6) {
                     $('#addressInput-error').removeClass('dn');
                     return;
-                } else if (!name) {
+                } else if (!name || name.length < 2) {
                     $('#nameInput-error').removeClass('dn');
                     return;
-                } else if (!phone || !/^\d{11}$/.test(phone)) {
+                } else if (!phone || !/^(1)\d{10}$/.test(phone)) {
                     $('#phoneInput-error').removeClass('dn');
                     return;
                 }

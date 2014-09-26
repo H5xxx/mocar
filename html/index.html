@@ -23,6 +23,7 @@
     <script src="../js/lib/spine.js"></script>
     <script src="../js/lib/route.js"></script>
     <script src="../js/lib/manager.js"></script>
+	<script src="../js/lib/wxshare.js"></script>
     <!-- endbuild -->
     <script id="template-loading" type="text/html">
         <div class="spinner">
@@ -286,7 +287,7 @@
                 </div>
                 <div id='detailAddress' class='form-row'>
                     <div class='content-area border-bottom'>
-                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" required>
+                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" maxlength="40" required>
                     </div>
                 </div>
                 <div  class="error dn" id="addressInput-error">请输入正确的地址信息</div>
@@ -323,14 +324,14 @@
                 <div id='name' class='form-row'>
                     <i class="site-icons icon-user"></i>
                     <div class='content-area border-bottom'>
-                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" required>
+                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" maxlength="12" required>
                     </div>
                 </div>
-                <div  class="error dn" id="nameInput-error">未填写姓名</div>
+                <div  class="error dn" id="nameInput-error">请填写真实姓名</div>
                 <div id='phoneNumber' class='form-row'>
                     <i class="site-icons icon-phone"></i>
                     <div class='content-area border-bottom'>
-                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" required>
+                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" maxlength="16" required>
                     </div>
                 </div>
                 <div  class="error dn" id="phoneInput-error">请输入正确的手机号</div>
@@ -504,6 +505,15 @@
     // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
+    </script>
+	<script>
+    (function() {
+    	var title = "摩卡上门修车 快速预约通道";
+    	var img = "http://static.mocar.cn/images/logo_medium_dark.png";
+    	var link = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf11a985d46739ec5&redirect_uri=http%3A%2F%2Fapp.mocar.cn%2Fmobile%2Fhtml%2Findex.html&response_type=code&scope=snsapi_base#wechat_redirect";
+    	var desc = "最专业服务/最亲民价格\n\n回归80年代老工匠严谨态度     摩卡  懂你   爱车";
+    	wx_share_out(title,img,link,desc);
+    })();
     </script>
 
 </body>
