@@ -38,7 +38,7 @@
 }
 /*提示文案区*/
 
-#schedule-success #success-tip .site-icons {
+#success-tip .site-icons {
     width: 40px;
     height: 40px;
     margin-left: 0;
@@ -50,7 +50,7 @@
 }
 /*提示文案区*/
 
-#schedule-success #success-tip .content-area {
+#success-tip .content-area {
     height: 60px;
 }
 #schedule-success #success-tip .tip {

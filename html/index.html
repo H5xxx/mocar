@@ -348,7 +348,7 @@
     </script>
     <!-- 预约成功 页面 模板 -->
     <script id="template-success" type="text/html">
-        <div class="main" id="j-success-container">
+        <div class="main">
             <div id='schedule-success'>
                 <div id='success-tip' class='success-header'>
                     <i class='site-icons icon-success'></i>
@@ -360,52 +360,53 @@
                         </div>
                     </div> 
                 </div>
-
-                <ul class="order-detail">
-                    <li class="order-detail-item order-summary">
-                        <p class="line">订单编号： No{{currentOrder.id | formatNum: 10}}</p>
-                        <p class="line">总金额： {{currentOrder.sum}}元</p>
-                        <p class="line">
-                            当前状态： <span style="color:rgba(255, 152, 0, 0.87);">待确认</span>
-                        </p>
-                        <p class="line">预约时间： {{currentOrder.day}}</p>
-                    </li>
-                    <li class="order-detail-item order-contact">
-                        <p class="line">
-                            联系人： {{currentOrder.name}}
-                            <span class="fr order-phone">{{currentOrder.phone}}</span>
-                        </p>
-                        <p class="line order-address">{{currentOrder.province}}{{currentOrder.city}}{{currentOrder.address}}</p>
-                    </li>
-                    <li class="order-detail-item order-model">
-                        <p class="line">
-                            {{currentVehicle.prefix}}{{currentVehicle.brand}} {{currentVehicle.family}} {{currentVehicle.model}}
-                        </p>
-                    </li>
-                    {{each currentOrder.services as service i}}
-                    <li class="order-detail-item order-service">
-                        <p class="line service-name">
-                            {{currentService.name}}
-                            <span class="fr">{{currentService.price}}</span>
-                        </p>
-                        <ul class="service-parts">
-                            {{each currentService.parts as part i }}
-                                <li class="service-part">
-                                    <h5 class="service-part-type">{{part.name}}</h5>
-                                    {{each part.options as option j}}
-                                        {{if (option.id == currentOrder.services[0].parts[i].id)}}
-                                        <p class="line">
-                                            {{option.brand}}{{option.name}} {{option.extra}}
-                                            <span class="fr">{{option.price}}元</span>
-                                        </p>
-                                        {{/if}}
-                                    {{/each}}
-                                </li>
-                            {{/each}}
-                        </ul>
-                    </li>
-                    {{/each}}
-                </ul>
+                <div id="j-success-container" class="main" style="margin-top: 108px">
+                    <ul class="order-detail">
+                        <li class="order-detail-item order-summary">
+                            <p class="line">订单编号： No{{currentOrder.id | formatNum: 10}}</p>
+                            <p class="line">总金额： {{currentOrder.sum}}元</p>
+                            <p class="line">
+                                当前状态： <span style="color:rgba(255, 152, 0, 0.87);">待确认</span>
+                            </p>
+                            <p class="line">预约时间： {{currentOrder.day}}</p>
+                        </li>
+                        <li class="order-detail-item order-contact">
+                            <p class="line">
+                                联系人： {{currentOrder.name}}
+                                <span class="fr order-phone">{{currentOrder.phone}}</span>
+                            </p>
+                            <p class="line order-address">{{currentOrder.province}}{{currentOrder.city}}{{currentOrder.address}}</p>
+                        </li>
+                        <li class="order-detail-item order-model">
+                            <p class="line">
+                                {{currentVehicle.prefix}}{{currentVehicle.brand}} {{currentVehicle.family}} {{currentVehicle.model}}
+                            </p>
+                        </li>
+                        {{each currentOrder.services as service i}}
+                        <li class="order-detail-item order-service">
+                            <p class="line service-name">
+                                {{currentService.name}}
+                                <span class="fr">{{currentService.price}}</span>
+                            </p>
+                            <ul class="service-parts">
+                                {{each currentService.parts as part i }}
+                                    <li class="service-part">
+                                        <h5 class="service-part-type">{{part.name}}</h5>
+                                        {{each part.options as option j}}
+                                            {{if (option.id == currentOrder.services[0].parts[i].id)}}
+                                            <p class="line">
+                                                {{option.brand}}{{option.name}} {{option.extra}}
+                                                <span class="fr">{{option.price}}元</span>
+                                            </p>
+                                            {{/if}}
+                                        {{/each}}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
             </div>
         </div>
         <div class='footer dn'>

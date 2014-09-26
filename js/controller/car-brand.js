@@ -26,12 +26,12 @@ define(function(require, exports) {
                     list: list
                 });
                 var s = new iScroll('j-brand-container');
-                setTimeout(function(){
+                setTimeout(function() {
                     Popup.open("");
-                    setTimeout(function(){
+                    setTimeout(function() {
                         Popup.close();
                     }, 0);
-                },600);
+                }, 600);
             });
         }
     });
