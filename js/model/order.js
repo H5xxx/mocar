@@ -6,6 +6,7 @@ define(function(require, exports) {
     Order.configure(
         'Order',
         'id',
+        'orderId',
         'status',
         'technicianId',
         'created',

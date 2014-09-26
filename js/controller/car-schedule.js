@@ -221,6 +221,16 @@ define(function(require, exports) {
                     }),
                     success: function(responseData, status, xhr) {
                         Popup.close();
+
+                        var orderId = xhr.getResponseHeader('Location');
+                        if (orderId) {
+                            var orderIdStart = orderId.lastIndexOf('/');
+
+                            self.currentOrder.orderId = orderIdStart;
+                            self.currentOrder.save();
+                        }
+
+
                         try {
                             delete sessionStorage.stepSchedule;
                         } catch (e) {
