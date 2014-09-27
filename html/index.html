@@ -163,11 +163,9 @@
         <div class="buyelse-popup mocar-tip-popup">
             <div class="title">选择配件</div>
             <div class="popup-content">
-                <p>摩卡提供和使用的所有配件，均可<br/>在<span style="color: rgba(131, 199, 80, 0.87);">京东自营</span>商店买到。</p>
-                <br>
-                <p>如果你选择自行购买配件，下单后</br>我们会将对应的配件信息发送给您。</p>
-                <br>
-                <p>摩卡配件价格是完全参照<span style="color: rgba(131, 199, 80, 0.87);">京东自营</span></br>配件价格哦。</p>
+                <p style="margin-bottom: 16px;">摩卡提供和使用的所有配件，均可在<span style="color: rgba(131, 199, 80, 0.87);">京东自营</span>商店买到。</p>
+                <p style="margin-bottom: 16px;">如果你选择自行购买配件，下单后我们会将对应的配件信息发送给您。</p>
+                <p style="margin-bottom: 16px;">摩卡配件价格是完全参照<span style="color: rgba(131, 199, 80, 0.87);">京东自营</span>配件价格哦。</p>
             </div>
             <div class="command-area">
                 <a href="javascript:void(0);" class="mocarbtn" style="font-weight: bold;">选择摩卡配件</a>
@@ -191,6 +189,7 @@
                                 </span>    
                             </div>
                             <input type="text" name="carInput" style="display:none">
+                            <div class="dropdown"></div>
                         </div>
                     </div>
                 </div>
@@ -204,6 +203,7 @@
                                 <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}&nbsp;</span>    
                             </div>
                             <input type="text" name="serviceInput" style="display:none">
+                            <div class="dropdown"></div>
                         </div>
                     </div>
                 </div>
@@ -231,12 +231,14 @@
                                         </span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
+                                    <div class="dropdown"></div>
                                 {{else}}
                                     <div class='custom-select-trigger'>
                                         <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
                                         <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
                                     </div>
                                     <input type="text" name="accessoryInput" style="display:none" value="0">
+                                    <div class="dropdown"></div>
                                     
                                 {{/if}}
                                 </div>
@@ -272,6 +274,7 @@
                                     <span class='product-name'>{{currentProvince}}</span>  
                                 </div>
                                 <input type="text" name="provinceInput" style="display:none" value="{{currentProvinceIndex}}">
+                                <div class="dropdown"></div>
                             </div>
                         </span>
                         <span class='second border-bottom'>
@@ -280,6 +283,7 @@
                                     <span class='product-name'>{{currentCity}}</span>  
                                 </div>
                                 <input type="text" name="cityInput" style="display:none" value="{{currentCityIndex}}">
+                                <div class="dropdown"></div>
                             </div>
                         </span>
                     </div>
@@ -299,6 +303,7 @@
                                     <span class='product-name'>{{currentDay}}</span>  
                                 </div>
                                 <input type="text" name="dayInput" style="display:none" value="{{currentDayIndex}}">
+                                <div class="dropdown"></div>
                             </div>
                         </span>
                         <span class='second border-bottom'>
@@ -307,6 +312,7 @@
                                     <span class='product-name'>{{currentTime}}</span>  
                                 </div>
                                 <input type="text" name="timeInput" style="display:none" value="{{currentTimeIndex}}">
+                                <div class="dropdown"></div>
                             </div>
                         </span>
                     </div>

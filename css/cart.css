@@ -26,7 +26,7 @@
 /* 自行购买or选择摩卡配件 提示弹窗 */
 
 .buyelse-popup .title {
-    margin: 20px 10px;
+    margin: 24px;
     font-size: 20px;
     color: rgba(0, 0, 0, 0.87);
     text-align: left;
