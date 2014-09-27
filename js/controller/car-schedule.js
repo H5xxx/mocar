@@ -224,8 +224,7 @@ define(function(require, exports) {
 
                         var orderId = xhr.getResponseHeader('Location');
                         if (orderId) {
-                            var orderIdStart = orderId.lastIndexOf('/');
-
+                            var orderIdStart = orderId.split('/').pop();
                             self.currentOrder.orderId = orderIdStart;
                             self.currentOrder.save();
                         }
