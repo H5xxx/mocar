@@ -75,6 +75,19 @@ define(function(require, exports) {
                 //         self.page.navigate(location.hash);
                 //     }
                 // }
+                setTimeout(function(){
+                    window.history.replaceState({page:'success',curr:1},'', location.hash);
+                    window.history.pushState({page:'success', curr: 2}, '', location.hash);
+                    window.onpopstate = function(event){
+                        //下单成功之后，设置为不允许后退
+                        if(event.state && event.state.page == 'success'){
+                            self.page.navigate(location.hash);
+                            setTimeout(function(){
+                                window.history.pushState({page:'success', curr:3}, '', location.hash);
+                            });
+                        }
+                    }                        
+                });
             });
         }
     });
