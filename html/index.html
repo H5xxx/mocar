@@ -118,7 +118,7 @@
     <!-- 选车品牌 模板 开始 -->
     <script id="template-brand" type="text/html">
         {{include 'template-navigator'}}
-        <div class="main mt56px" id="j-brand-container">
+        <div class="main mt64px" id="j-brand-container">
             <div class="j-brand-list">
                 {{each list as item i}}
                     <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
@@ -133,7 +133,7 @@
     <!-- 选车车系 模板 开始 -->
     <script id="template-series" type="text/html">
         {{include 'template-navigator'}}
-        <div class="main mt56px" id="j-series-container">
+        <div class="main mt64px" id="j-series-container">
             <div class="j-series-list">
                 {{each list as item i}}
                     <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
@@ -147,7 +147,7 @@
     <!-- 选车车型 模板 开始 -->
     <script id="template-model" type="text/html">
         {{include 'template-navigator'}}
-        <div class="main mt56px" id="j-model-container">
+        <div class="main mt64px" id="j-model-container">
             <div class="j-model-list">
                 {{each list as item i}}
                     <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
@@ -176,7 +176,7 @@
     <!-- 自行购买/选择摩卡配件 提示框 结束 -->
     <!-- 选择服务类型 与 配件 页面 模板 -->
     <script id="template-cart" type="text/html">
-        <div class="main mb56px" id="j-cart-container">
+        <div class="main mb64px" id="j-cart-container">
             <div class="" id='accessories-info' style="padding-top: 8px;padding-bottom:20px">
                 <div id='car-info' class='mb20px'>
                     <i class='site-icons icon-car'></i>
