@@ -171,17 +171,17 @@
                 <p>摩卡配件价格是完全参照京东自营</br>配件价格哦。</p>
             </div>
             <div class="command-area">
-                <a href="javascript:void(0);" class="mocarbtn">选择摩卡配件</a>
-                <a href="javascript:void(0);" class="buyelsebtn">自行购买</a>
+                <a href="javascript:void(0);" class="mocarbtn" style="font-weight: bold;">选择摩卡配件</a>
+                <a href="javascript:void(0);" class="buyelsebtn" style="font-weight: bold;">自行购买</a>
             </div>
         </div>
     </script>
     <!-- 自行购买/选择摩卡配件 提示框 结束 -->
     <!-- 选择服务类型 与 配件 页面 模板 -->
     <script id="template-cart" type="text/html">
-        <div class="main mb50px" id="j-cart-container">
-            <div class="" id='accessories-info' style="padding-bottom:20px">
-                <div id='car-info' class='pt20px mb20px'>
+        <div class="main mb56px" id="j-cart-container">
+            <div class="" id='accessories-info' style="padding-top: 8px;padding-bottom:20px">
+                <div id='car-info' class='mb20px'>
                     <i class='site-icons icon-car'></i>
                     <div class='content-area form-row'>
                         <p class="accessory info">车辆型号</p>
@@ -420,7 +420,7 @@
     </script>
     <!-- 我的订单 页面 模板 -->
     <script id="template-user-order-list" type="text/html">
-        <div id="j-user-order-list-container">
+        <div class="main" id="j-user-order-list-container">
             <ul class="order-list">
                 {{each list as order i}}
                 <li class="order-summary j-nav" data-nav="/orders/{{order.id}}">
@@ -436,7 +436,7 @@
     </script>
     <!-- 订单详情 页面 模板 -->
     <script id="template-user-order" type="text/html">
-        <div id="j-user-order-container">
+        <div class="main" id="j-user-order-container">
             <ul class="order-detail">
                 <li class="order-detail-item order-summary">
                     <p class="line">订单编号： No{{order.id | formatNum: 10}}</p>
