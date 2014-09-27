@@ -62,9 +62,9 @@
                     {{if service.discount}}
                     <i class="icon-discount"></i>
                     {{/if}}
-                    <span class="price">{{service.price}}元起</span>
+                    <span class="price">{{service.price}} 起</span>
                     {{if service.discount}}
-                    <span class="origin-price">{{service.originPrice}}元</span>
+                    <span class="origin-price">{{service.originPrice}} </span>
                     {{/if}}
                     <br/>
                     <div class="info">
@@ -257,7 +257,7 @@
                 <i class='site-icons icon-nextstep'></i>
             </a>
             <div class='content-area justify-wrap'>
-                <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{currentService.price}}</span>元</span>
+                <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{currentService.price}}</span> </span>
             </div> 
         </div>
     </script>
@@ -346,7 +346,7 @@
                     <i class='site-icons icon-success'></i>
                 </a>
                 <div class='content-area justify-wrap'>
-                    <span class='tip justify-content'>总价：<span>{{sum}}</span>元</span>
+                    <span class='tip justify-content'>总价：<span>{{sum}}</span> </span>
                 </div> 
             </div>
         </div>
@@ -369,7 +369,7 @@
                     <ul class="order-detail">
                         <li class="order-detail-item order-summary">
                             <p class="line">订单编号： No{{currentOrder.orderId | formatNum: 10}}</p>
-                            <p class="line">订单金额： {{currentOrder.sum}}元</p>
+                            <p class="line">订单金额： {{currentOrder.sum}} </p>
                             <p class="line">
                                 当前状态： <span style="color:rgba(255, 152, 0, 0.87);">待确认</span>
                             </p>
@@ -401,7 +401,7 @@
                                             {{if (option.id == currentOrder.services[0].parts[i].id)}}
                                             <p class="line">
                                                 {{option.brand}}{{option.name}} {{option.extra}}
-                                                <span class="fr">{{option.price}}元</span>
+                                                <span class="fr">{{option.price}} </span>
                                             </p>
                                             {{/if}}
                                         {{/each}}
@@ -419,7 +419,7 @@
                 <i class='site-icons icon-home'></i>
             </a>
             <div class='content-area justify-wrap'>
-                <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span>元</span>
+                <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span> </span>
             </div> 
         </div>
     </script>
@@ -445,7 +445,7 @@
             <ul class="order-detail">
                 <li class="order-detail-item order-summary">
                     <p class="line">订单编号： No{{order.id | formatNum: 10}}</p>
-                    <p class="line">订单金额： {{order.sum}}元</p>
+                    <p class="line">订单金额： {{order.sum}} </p>
                     <p class="line">
                         当前状态： 
                         <span class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</span>
@@ -474,7 +474,7 @@
                             <h5 class="service-part-type">{{part.type}}</h5>
                             <p class="line">
                                 {{part.name}}
-                                <span class="fr">{{part.price}}元</span>
+                                <span class="fr">{{part.price}} </span>
                             </p>
                         </li>
                         {{/each}}
