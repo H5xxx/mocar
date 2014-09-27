@@ -118,6 +118,7 @@ select {
     height: 56px;
     background-color: #2d343c;
     color: #EAEAEA;
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.3);
 }
 .btw-header-main {
     position: fixed;

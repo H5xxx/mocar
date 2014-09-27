@@ -354,9 +354,9 @@
                     <i class='site-icons icon-success'></i>
                     <div class='content-area'>
                         <div class='justify'>
-                            <span class='tip' style="color: #60C900;font-weight: bold;">预约订单已提交</span>
+                            <span class='tip' style="color: rgba(131, 199, 80, 0.87);font-weight: bold;">预约订单已提交</span>
                             <br>
-                            <span class='tip' style="font-size: 14px;">稍后摩卡客服会联系您确认本次服务的内容，请保持手机通讯畅通。</span>
+                            <span class='tip' style="font-size: 14px;color: rgba(255,255,255,0.87);">稍后摩卡客服会联系您确认本次服务的内容，请保持手机通讯畅通。</span>
                         </div>
                     </div> 
                 </div>
@@ -364,7 +364,7 @@
                     <ul class="order-detail">
                         <li class="order-detail-item order-summary">
                             <p class="line">订单编号： No{{currentOrder.orderId | formatNum: 10}}</p>
-                            <p class="line">总金额： {{currentOrder.sum}}元</p>
+                            <p class="line">订单金额： {{currentOrder.sum}}元</p>
                             <p class="line">
                                 当前状态： <span style="color:rgba(255, 152, 0, 0.87);">待确认</span>
                             </p>
@@ -440,7 +440,7 @@
             <ul class="order-detail">
                 <li class="order-detail-item order-summary">
                     <p class="line">订单编号： No{{order.id | formatNum: 10}}</p>
-                    <p class="line">总金额： {{order.sum}}元</p>
+                    <p class="line">订单金额： {{order.sum}}元</p>
                     <p class="line">
                         当前状态： 
                         <span class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</span>

@@ -26,7 +26,7 @@
 .service-list .content-area .info {
     padding-top: 8px;
     font-size: 14px;
-    color: #999999;
+    color: rgba(0, 0, 0, 0.54);
 }
 .service-list .content-area .price {
     font-size: 14px;

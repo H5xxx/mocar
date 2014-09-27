@@ -8,6 +8,7 @@
     padding: 24px 16px;
     background-color: #333333;
     color: #EAEAEA;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.6);
 }
 #schedule-info {
     overflow: hidden;

@@ -6,6 +6,7 @@
 }
 #car-schedule .form-row {
     height: auto;
+    margin: 11px 16px 8px 0;
 }
 #schedule-info {
     overflow: hidden;
@@ -14,7 +15,7 @@
 #schedule-info .content-area {
     display: block;
     margin-left: 72px;
-    padding: 11px 10px 9px 0;
+    padding: 6px 0 0 0;
 }
 #schedule-info .site-icons {
     margin: 12px 0 0 16px;
