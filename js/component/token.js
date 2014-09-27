@@ -37,9 +37,9 @@ define(function(require, exports) {
             var token;
             try {
                 token = JSON.parse(localStorage[tokenKey] || "");
-                if (token && token.code == code && token.expiresAt > Date.now() && token.accessToken) {
+                if (token && token.accessToken) {
                     cb(token.accessToken);
-                    return;
+                    // return;
                 }
             } catch (e) {
 

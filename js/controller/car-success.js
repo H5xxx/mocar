@@ -65,7 +65,7 @@ define(function(require, exports) {
             // window.history.pushState({from:'success'},"", '#/home');
             self.doGetData(params, function(err, data) {
                 $.extend(params, data);
-                callback(err,data);
+                callback(err, data);
                 //标识已经访问过成功页面
                 sessionStorage['success'] = 1;
                 // window.history.pushState({}, '');
@@ -75,18 +75,34 @@ define(function(require, exports) {
                 //         self.page.navigate(location.hash);
                 //     }
                 // }
-                setTimeout(function(){
-                    window.history.replaceState({page:'success',curr:1},'', location.hash);
-                    window.history.pushState({page:'success', curr: 2}, '', location.hash);
-                    window.onpopstate = function(event){
+                setTimeout(function() {
+                    window.history.replaceState({
+                        page: 'success',
+                        curr: 1
+                    }, '', location.hash);
+                    window.history.pushState({
+                        page: 'success',
+                        curr: 2
+                    }, '', location.hash);
+                    window.onpopstate = function(event) {
                         //下单成功之后，设置为不允许后退
-                        if(event.state && event.state.page == 'success'){
+                        if (event.state && event.state.page == 'success') {
+                            if (window.WeixinJSBridge) {
+                                window.WeixinJSBridge.invoke('closeWindow', {}, function(res) {
+                                    if (res.err_msg != 'close_window:ok') {
+                                        alert("关闭窗口失败，请点击左上方的关闭按钮关闭窗口");
+                                    }
+                                });
+                            }
                             self.page.navigate(location.hash);
-                            setTimeout(function(){
-                                window.history.pushState({page:'success', curr:3}, '', location.hash);
+                            setTimeout(function() {
+                                window.history.pushState({
+                                    page: 'success',
+                                    curr: 3
+                                }, '', location.hash);
                             });
                         }
-                    }                        
+                    };
                 });
             });
         }
