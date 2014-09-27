@@ -63,9 +63,6 @@ select {
 .mt60px {
     margin-top: 60px;
 }
-.mt64px {
-    margin-top: 64px;
-}
 .ml130px {
     margin-left: 130px;
     display: block;
@@ -78,9 +75,6 @@ select {
 }
 .mb56px {
     margin-bottom: 56px;
-}
-.mb64px {
-    margin-bottom: 64px;
 }
 .pr10px {
     padding-right: 10px;
