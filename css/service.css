@@ -10,7 +10,7 @@ body {
     font-family: "Helvetica Neue", Hiragino Sans GB, Heiti SC, "微软雅黑", Verdana, sans-serif, SimHei, "黑体";
     font-size: 14px;
     line-height: 20px;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     background-color: #fff;
 }
 dl, dd, h1, h2, h3, h4, h5, h6, p, form {
@@ -110,8 +110,8 @@ img {
 }
 .j-brand-list {
     float: left;
-    border-top: 4px solid #f8f8f8;
-    border-left: 4px solid #f8f8f8;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 .brand-item {
     width: 33.33%;
@@ -119,8 +119,8 @@ img {
     float: left;
     line-height: 45px;
     text-align: center;
-    border-bottom: 4px solid #f8f8f8;
-    border-right: 4px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 .brand-item > img {
     height: 50px;
@@ -130,7 +130,7 @@ img {
     margin: 0 20px;
     height: 45px;
     line-height: 45px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
     white-space: nowrap;
     text-overflow: ellipsis;
     /*width: 280px;*/
@@ -150,5 +150,5 @@ img {
     margin: 0 20px;
     height: 45px;
     line-height: 45px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
