@@ -67,6 +67,17 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+.service-item .icon-prefer {
+    display: inline-block;
+    margin-left: 4px;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    background-image: url('./icons/prefer.png');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .service-item .origin-price {
     float: right;
     margin-right: 8px;

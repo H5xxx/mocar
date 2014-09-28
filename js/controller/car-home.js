@@ -47,6 +47,10 @@ define(function(require, exports) {
                         service.discount = true;
                         service.originPrice = Math.floor(service.price / 0.88);
                     }
+
+					if (service.id == 8) {
+						service.prefer = true;
+					}
                 });
                 var next, lastModelId;
                 try{
