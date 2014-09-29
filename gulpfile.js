@@ -94,7 +94,8 @@ gulp.task('conbineJS', ['clean'], function(cb) {
         'js/lib/spine.js',
         'js/lib/route.js',
         'js/lib/route.js',
-        'js/lib/manager.js'
+        'js/lib/manager.js',
+        'js/lib/wxshare.js'
     ])
         .pipe(concat('libAllInOne.js', {
             newLine: ';'
@@ -118,7 +119,8 @@ gulp.task('compressJS', ['clean'], function(cb) {
         'js/lib/spine.js',
         'js/lib/route.js',
         'js/lib/route.js',
-        'js/lib/manager.js'
+        'js/lib/manager.js',
+        'js/lib/wxshare.js'
     ])
         .pipe(concat('libAllInOne.js', {
             newLine: ';'
@@ -142,6 +144,7 @@ gulp.task('combineCSS', function(cb) {
         'css/cart.css',
         'css/schedule.css',
         'css/success.css',
+        'css/order.css',
     ])
         .pipe(concat('cssAllInOne.css'))
         .pipe(gulp.dest('dist/css/'));
@@ -157,6 +160,7 @@ gulp.task('compressCSS', function(cb) {
         'css/cart.css',
         'css/schedule.css',
         'css/success.css',
+        'css/order.css',
     ])
         .pipe(concat('cssAllInOne.css'))
         .pipe(minifyCSS())

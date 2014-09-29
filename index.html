@@ -6,8 +6,25 @@
     <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <title>摩卡汽车服务</title>
-    <link rel="stylesheet" href="../css/cssAllInOne.css">
-    <script src="../js/lib/libAllInOne.js"></script>
+    <!-- build:css -->
+    <link rel='stylesheet' href='./css/base.css'>
+    <link rel='stylesheet' href='./css/home.css'>
+    <link rel="stylesheet" href="./css/service.css">
+    <link rel='stylesheet' href='./css/cart.css'>
+    <link rel='stylesheet' href='./css/schedule.css'>
+    <link rel='stylesheet' href='./css/success.css'>
+    <link rel='stylesheet' href='./css/order.css'>
+    <!-- endbuild -->
+    <!-- build:js -->
+    <script src="./js/lib/iScroll-v4.2.5.js"></script>
+    <script src="./js/lib/template.js"></script>
+    <script src="./js/lib/sea.js"></script>
+    <script src="./js/lib/zepto.js"></script>
+    <script src="./js/lib/spine.js"></script>
+    <script src="./js/lib/route.js"></script>
+    <script src="./js/lib/manager.js"></script>
+	<script src="./js/lib/wxshare.js"></script>
+    <!-- endbuild -->
     <script id="template-loading" type="text/html">
         <div class="spinner">
             <div class="spinner-container container1">
@@ -67,7 +84,7 @@
         <div class="j-home-container">
             <div id='mocar-service-home'>
                 <div class='logo-area'>
-                    <img src="../css/icons/mocar.png" alt="摩卡服务" width="100%">
+                    <img src="./css/icons/mocar.png" alt="摩卡服务" width="100%">
                 </div>
                 <ul class='service-list' data-role="service-list">
                     
@@ -480,7 +497,7 @@
 
     <script>
     seajs.config({
-        base: '../js',
+        base: './js',
         alias: {
             "mock": "lib/mock.js"
         }
@@ -502,3 +519,4 @@
 </body>
 
 </html>
+<!-- 2014年 9月27日 星期六 16时57分06秒 CST -->
