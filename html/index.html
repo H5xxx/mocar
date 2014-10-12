@@ -396,8 +396,8 @@
                                 {{currentService.name}}
                                 <span class="fr">{{currentService.price}}</span>
                             </p>
+							{{each currentService.parts as part i }}
                             <ul class="service-parts">
-                                {{each currentService.parts as part i }}
                                     <li class="service-part">
                                         <h5 class="service-part-type">{{part.name}}</h5>
                                         {{each part.options as option j}}
@@ -409,8 +409,8 @@
                                             {{/if}}
                                         {{/each}}
                                     </li>
-                                {{/each}}
                             </ul>
+							{{/each}}
                         </li>
                         {{/each}}
                     </ul>
@@ -471,8 +471,8 @@
                         {{service.name}}
                         <span class="fr">{{service.price}}</span>
                     </p>
+					{{each service.parts as part i}}
                     <ul class="service-parts">
-                        {{each service.parts as part i}}
                         <li class="service-part">
                             <h5 class="service-part-type">{{part.type}}</h5>
                             <p class="line">
@@ -480,8 +480,8 @@
                                 <span class="fr">{{part.price}} </span>
                             </p>
                         </li>
-                        {{/each}}
                     </ul>
+					{{/each}}
                 </li>
                 {{/each}}
 				{{each order.attachments as attachment i}}
