@@ -28,6 +28,7 @@ define(function(require, exports) {
         'time',
         'name',
         'phone',
+		'attachments',
         '__currentService',
         '__currentVehicle'
     );

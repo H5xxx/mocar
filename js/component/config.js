@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
     var util = require('./util');
-    var API_HOST = 'http://api-test.mocar.cn';
+    var API_HOST = 'https://api-test.mocar.cn';
     var STATIC_HOST = 'http://static-test.mocar.cn';
 
     API_HOST = 'http://api.mocar.cn';

@@ -62,6 +62,9 @@
                     {{if service.discount}}
                     <i class="icon-discount"></i>
                     {{/if}}
+                    {{if service.prefer}}
+                    <i class="icon-prefer"></i>
+                    {{/if}}
                     <span class="price">{{service.price}} 起</span>
                     {{if service.discount}}
                     <span class="origin-price">{{service.originPrice}} </span>
@@ -481,6 +484,13 @@
                     </ul>
                 </li>
                 {{/each}}
+				{{each order.attachments as attachment i}}
+				<a href="{{attachment.uri}}">
+				<li class="order-detail-item order-attachments">
+                    <p class="line">{{attachment.name}}</p>
+                </li>
+				</a>
+				{{/each}}
             </ul>
         </div>
     </script>
