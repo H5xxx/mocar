@@ -1,3 +1,7 @@
+a {
+	font-family: "Helvetica Neue", Hiragino Sans GB, Heiti SC, "Microsoft YaHei", Verdana, sans-serif, SimHei, "bold figure";
+    color: rgba(0, 0, 0, 0.87);
+}
 .order-list {
     margin-top: 8px;
 }
@@ -63,7 +67,7 @@
     margin-bottom: 0;
 }
 .order-detail .order-summary {
-    background-image: url('icons/12.jpg');
+    background-image: url('icons/12.png');
 }
 .order-detail .order-summary .order-status.waiting {
     color: rgba(255, 152, 0, 0.87);
@@ -117,4 +121,7 @@
 }
 .order-detail .order-service .service-parts .service-part .line {
     line-height: 24px;
+}
+.order-detail .order-attachments {
+    background-image: url('icons/13.png');
 }
