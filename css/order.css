@@ -93,6 +93,9 @@ a {
 .order-detail .order-contact {
     background-image: url('icons/05.png');
 }
+.order-detail .order-remark {
+    background-image: url('icons/14.png');
+}
 .order-detail .order-contact .order-address {
     font-size: 12px;
     line-height: 20px;

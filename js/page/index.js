@@ -2,6 +2,11 @@ define(function(require, exports) {
     var util = require('../component/util');
 
     template.helper('formatNum', util.formatNum);
+    template.helper('splitString', function(source, length) {
+        length = length || 46;
+        return source.substr(0, length) + '···';
+    });
+
 
     var Page = Spine.Stack.sub({
 

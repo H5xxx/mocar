@@ -169,6 +169,7 @@ define(function(require, exports) {
                 var cityInput = self.el.find('input[name=cityInput]');
                 var dayInput = self.el.find('input[name=dayInput]');
                 var timeInput = self.el.find('input[name=timeInput]');
+                var boardInput = self.el.find('textarea[name=boardInput]');
 
                 var province = provinceInput.val();
                 var city = cityInput.val();
@@ -177,6 +178,7 @@ define(function(require, exports) {
                 var time = timeInput.val();
                 var name = nameInput.val();
                 var phone = phoneInput.val();
+                var remark = boardInput.val();
 
                 // e.stopPropagation();
                 e.preventDefault();
@@ -201,6 +203,7 @@ define(function(require, exports) {
                 self.currentOrder.time = ['09:00', '13:00'][time];
                 self.currentOrder.name = name;
                 self.currentOrder.phone = phone;
+                self.currentOrder.remark = remark;
                 var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
                 self.currentOrder.date = d.valueOf();
                 self.currentOrder.save();
@@ -217,7 +220,8 @@ define(function(require, exports) {
                         "address": self.currentOrder.address,
                         "phone": self.currentOrder.phone,
                         "date": self.currentOrder.date,
-                        "services": self.currentOrder.services
+                        "services": self.currentOrder.services,
+                        "remark": self.currentOrder.remark
                     }),
                     success: function(responseData, status, xhr) {
                         Popup.close();

@@ -277,7 +277,6 @@ select {
     /*border-color: blue;*/
 }
 /* 模拟SELECT END */
-
 /*表单区域 单行*/
 
 .form-row {
@@ -351,6 +350,10 @@ select {
     background: url('./icons/11.png');
     background-size: contain;
 }
+.icon-board {
+    background: url('./icons/14.png');
+    background-size: contain;
+}
 .icon-expand {
     background: url('./icons/22.png');
     background-size: contain;
@@ -372,7 +375,6 @@ select {
     background-size: contain;
 }
 /*垂直居中*/
-
 .justify-wrap {
     display: table;
     height: 100%;
@@ -385,7 +387,6 @@ select {
     font-weight: bold;
 }
 /*loading*/
-
 .spinner {
     margin: 20px;
     width: 40px;

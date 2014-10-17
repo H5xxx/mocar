@@ -3,8 +3,8 @@ define(function(require, exports, module) {
     var API_HOST = 'https://api-test.mocar.cn';
     var STATIC_HOST = 'http://static-test.mocar.cn';
 
-    API_HOST = 'http://api.mocar.cn';
-    STATIC_HOST = 'http://static.mocar.cn';
+    // API_HOST = 'http://api.mocar.cn';
+    // STATIC_HOST = 'http://static.mocar.cn';
 
     var json = util.parseURL();
     if (json && json.params && json.params['api_hostname']) {

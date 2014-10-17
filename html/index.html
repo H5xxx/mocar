@@ -343,6 +343,12 @@
                     </div>
                 </div>
                 <div  class="error dn" id="phoneInput-error">请输入正确的手机号</div>
+                <div id="board" class="form-row">
+                    <i class="site-icons icon-board"></i>
+                    <div class="content-area border-bottom">
+                        <textarea placeholder="留言（选填）" id="boardInput" name="boardInput" value="" maxlength="256" onkeydown="this.style.height=this.scrollHeight+'px'"></textarea>
+                    </div>
+                </div>
             </div>
             <div class='footer'>
                 <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
@@ -378,6 +384,15 @@
                             </p>
                             <p class="line">预约时间： {{currentOrder.day}}</p>
                         </li>
+
+                        {{if currentOrder.remark}}
+                            <li class="order-detail-item order-remark">
+                                <p class="line">
+                                    留言： 
+                                </p>
+                                <p class="line">{{currentOrder.remark | splitString}}</p>
+                            </li>
+                        {{/if}}
                         <li class="order-detail-item order-contact">
                             <p class="line">
                                 联系人： {{currentOrder.name}}
@@ -455,6 +470,15 @@
                     </p>
                     <p class="line">预约时间： {{order.year}}-{{order.month}}-{{order.day}} {{order.period}}</p>
                 </li>
+                remark: {{order.remark}}
+                {{if order.remark}}
+                    <li class="order-detail-item order-remark">
+                        <p class="line">
+                            留言： 
+                        </p>
+                        <p class="line">{{order.remark | splitString}}</p>
+                    </li>
+                {{/if}}
                 <li class="order-detail-item order-contact">
                     <p class="line">
                         联系人： {{order.name}}
