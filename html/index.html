@@ -387,10 +387,7 @@
 
                         {{if currentOrder.remark}}
                             <li class="order-detail-item order-remark">
-                                <p class="line">
-                                    留言： 
-                                </p>
-                                <p class="line">{{currentOrder.remark | splitString}}</p>
+                                <p class="line">{{currentOrder.remark}}</p>
                             </li>
                         {{/if}}
                         <li class="order-detail-item order-contact">
@@ -472,10 +469,7 @@
                 </li>
                 {{if order.remark}}
                     <li class="order-detail-item order-remark">
-                        <p class="line">
-                            留言： 
-                        </p>
-                        <p class="line">{{order.remark | splitString}}</p>
+                        <p class="line">{{order.remark}}</p>
                     </li>
                 {{/if}}
                 <li class="order-detail-item order-contact">

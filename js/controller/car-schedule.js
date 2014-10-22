@@ -271,6 +271,13 @@ define(function(require, exports) {
             // phoneInput.on('focus', function(){
             //     window.scrollTo(0, 120);
             // });
+            var boardInput = document.getElementById('boardInput');
+            boardInput.setAttribute('style', 'height:75px');
+            setInterval(function() {
+                if (boardInput) {
+                    boardInput.setAttribute('style', 'height:' + boardInput.scrollHeight + 'px');
+                }
+            }, 20);
         },
         saveUserInput: function() {
             //将用户的操作/选择 存储到sessionStorage
