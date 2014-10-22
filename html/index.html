@@ -23,7 +23,8 @@
     <script src="../js/lib/spine.js"></script>
     <script src="../js/lib/route.js"></script>
     <script src="../js/lib/manager.js"></script>
-	<script src="../js/lib/wxshare.js"></script>
+    <script src="../js/lib/wxshare.js"></script>
+	<script src="../js/lib/swipeSlide.min.js"></script>
     <!-- endbuild -->
     <script id="template-loading" type="text/html">
         <div class="spinner">
@@ -85,9 +86,12 @@
     <!-- 摩卡服务首页 模板 开始 -->
     <script id="template-home" type="text/html">
         <div class="j-home-container">
-            <div id='mocar-service-home'>
-                <div class='logo-area'>
+            <div id="mocar-service-home">
+                <div id="logo-area" class="logo-area">
                     <img src="../css/icons/mocar.png" alt="摩卡服务" width="100%">
+                </div>
+                <div id="slide-area" class="slide-area" style="display:none;">
+                    
                 </div>
                 <ul class='service-list' data-role="service-list">
                     

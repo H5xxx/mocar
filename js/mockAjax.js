@@ -568,4 +568,24 @@ define(function(require, exports) {
             "expiresIn": 7200
         };
     });
+
+    mock(/\/advertisement\/banners/, function(options) {
+        return [
+            {
+                "id" : 1,
+                "title" : "下单有礼",
+                "tag" : "优惠",
+                "color" : 0,
+                "uri" : "http://static.mocar.cn/1"
+            },
+            {
+                "id" : 2,
+                "title" : "参加活动",
+                "tag" : "活动",
+                "color" : 1,
+                "uri" : "http://static.mocar.cn/2"
+            }
+        ];
+    });
+    
 });
