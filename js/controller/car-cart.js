@@ -68,26 +68,31 @@ define(function(require, exports) {
             this.el.html(html);
 
             var scroll = new iScroll('j-cart-container',{hScrollbar:false, vScrollbar:false});
+
             var showPopup = true;
-            //从 地址信息页面 返回到 选配件页面，不弹窗
-            if(sessionStorage && sessionStorage.stepSchedule){
+            if(!params.isStandardService){
                 showPopup = false;
-                delete sessionStorage.stepSchedule;
-            }
-            //服务无配件，or 配件中无 自行购买，不弹自行购买提醒
-            if(showPopup){
-                showPopup = false;
-                var parts = params.currentService.parts, part, options, option;
-                if(parts && parts.length > 0){
-                    outer: for(var i = 0, ilen = parts.length; i < ilen; i++){
-                        part = parts[i];
-                        options = part.options;
-                        if(options && options.length > 0){
-                            inner: for(var j = 0, jlen = options.length; j < jlen; j++){
-                                option = options[j];
-                                if(option.name == BUY_ELSE){
-                                    showPopup = true;
-                                    break outer;
+            }else{
+                //从 地址信息页面 返回到 选配件页面，不弹窗
+                if(sessionStorage && sessionStorage.stepSchedule){
+                    showPopup = false;
+                    delete sessionStorage.stepSchedule;
+                }
+                //服务无配件，or 配件中无 自行购买，不弹自行购买提醒
+                if(showPopup){
+                    showPopup = false;
+                    var parts = params.currentService.parts, part, options, option;
+                    if(parts && parts.length > 0){
+                        outer: for(var i = 0, ilen = parts.length; i < ilen; i++){
+                            part = parts[i];
+                            options = part.options;
+                            if(options && options.length > 0){
+                                inner: for(var j = 0, jlen = options.length; j < jlen; j++){
+                                    option = options[j];
+                                    if(option.name == BUY_ELSE){
+                                        showPopup = true;
+                                        break outer;
+                                    }
                                 }
                             }
                         }
@@ -151,6 +156,9 @@ define(function(require, exports) {
                 accessoryInput.forEach(function(input, i){
                     self.currentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
+                if(!params.isStandardService){
+                    self.currentOrder.remark = $('#remarkInput').val();
+                }
                 self.currentOrder.save();
 
             });
@@ -226,6 +234,8 @@ define(function(require, exports) {
             if(lastServiceId && !params.service_id){
                 params.service_id = lastServiceId;
             }
+
+            params.isStandardService = params.service_id != 1;
 
             var lastUnsavedVehicle = {
                 brand: localStorage["brand"] || "",
@@ -401,6 +411,9 @@ define(function(require, exports) {
                 var totalPrice = 0, itemPrice;
                 var priceEl = $('[data-price]');
                 var totalPriceEl = $('[data-totalprice]');
+                if(!priceEl.length || !totalPriceEl.length){
+                    return;
+                }
                 var replaceNum = userSelectBitArr.filter(function(v){
                     return !!v;
                 }).length;

@@ -203,7 +203,7 @@ define(function(require, exports) {
                 self.currentOrder.time = ['09:00', '13:00'][time];
                 self.currentOrder.name = name;
                 self.currentOrder.phone = phone;
-                self.currentOrder.remark = remark;
+                self.currentOrder.remark = self.currentOrder.remark || remark;
                 var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
                 self.currentOrder.date = d.valueOf();
                 self.currentOrder.save();
@@ -272,12 +272,14 @@ define(function(require, exports) {
             //     window.scrollTo(0, 120);
             // });
             var boardInput = document.getElementById('boardInput');
-            boardInput.setAttribute('style', 'height:75px');
-            setInterval(function() {
-                if (boardInput) {
-                    boardInput.setAttribute('style', 'height:' + boardInput.scrollHeight + 'px');
-                }
-            }, 20);
+            if(boardInput){                
+                boardInput.setAttribute('style', 'height:75px');
+                setInterval(function() {
+                    if (boardInput) {
+                        boardInput.setAttribute('style', 'height:' + boardInput.scrollHeight + 'px');
+                    }
+                }, 20);
+            }
         },
         saveUserInput: function() {
             //将用户的操作/选择 存储到sessionStorage
@@ -329,6 +331,9 @@ define(function(require, exports) {
             } catch (e) {
 
             }
+
+            params.isStandardService = params.service_id != 1;
+
             userInputs = self.restoreUserInput();
             params.userInputs = userInputs;
             self.doGetData(params, function(err, data) {

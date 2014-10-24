@@ -12,7 +12,7 @@ define(function(require, exports) {
 
     mock(/\/models\/generic\/services$/, function(options) {
         return [{
-            "id": 1,
+            "id": 2,
             "name": "常规保养",
             "slogan": "附赠发动机仓清洗服务",
             "description": "最专业的技师，最合理的价格。",
@@ -25,6 +25,13 @@ define(function(require, exports) {
             "description": "使用德国进口药液，有效杀灭细菌。",
             "price": 400.0,
             "highestPrice": 600.0
+        },{
+            "id": 1,
+            "name": "其他服务",
+            "slogan": "其他维修和养护服务",
+            "description": "其他维修和养护服务",
+            "price": 150.0,
+            "highestPrice": 300.0
         }];
     });
 

@@ -202,6 +202,7 @@
                 </div>
                 <div id='service-info' class='mb20px'>
                     <i class='site-icons icon-service'></i>
+                    {{if isStandardService}}
                     <div class='content-area form-row'>
                         <p class="accessory info">服务项目</p>
                         <div class="select-wrapper">
@@ -213,49 +214,70 @@
                             <div class="dropdown"></div>
                         </div>
                     </div>
-                </div>
-                <!-- 配件列表 开始 -->
-                {{if (currentService.parts && currentService.parts.length > 0) }}
-                <div id='service-detail' class='mb20px'>
-                    <i class='site-icons icon-accessory'></i>
-                    <div class='content-area'>
-                        <ul>
-                        {{each currentService.parts as part i}}
-                            <li class='form-row' data-part-seq="{{i}}">
-                                <p class="accessory info">
-                                    {{part.name}}
-                                </p>
-                                <div class="select-wrapper">
-                                {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
-                                    <div class='custom-select-trigger'>
-                                        <span class='product-name'>
-                                        {{part.options[i].brand}}
-                                        {{part.options[i].name}}
-                                        {{part.options[i].extra}}
-                                        </span>
-                                        <span class='price' data-price='{{part.options[i].price}}'>
-                                        {{part.options[i].price}}&nbsp;
-                                        </span>
-                                    </div>
-                                    <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
-                                    <div class="dropdown"></div>
-                                {{else}}
-                                    <div class='custom-select-trigger'>
-                                        <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
-                                    </div>
-                                    <input type="text" name="accessoryInput" style="display:none" value="0">
-                                    <div class="dropdown"></div>
-                                    
-                                {{/if}}
-                                </div>
-                            </li>
-                        {{/each}}
-                        </ul>
+                    {{else}}
+
+                    <div class='content-area form-row input-row'>
+                        <p class="accessory info">服务项目</p>
+                        <div class="input-wrapper">
+                            <input type="text" placeholder='' id='serviceInput' name='serviceInput' value="其他维修服务">
+                        </div>
                     </div>
+
+                    {{/if}}
                 </div>
-                {{/if}}
-                <!-- 配件列表 结束 -->
+                <div id='service-detail' class='mb20px'>
+                    {{if isStandardService}}
+
+                    <!-- 配件列表 开始 -->
+                    {{if (currentService.parts && currentService.parts.length > 0) }}
+                        <i class='site-icons icon-accessory'></i>
+                        <div class='content-area'>
+                            <ul>
+                            {{each currentService.parts as part i}}
+                                <li class='form-row' data-part-seq="{{i}}">
+                                    <p class="accessory info">
+                                        {{part.name}}
+                                    </p>
+                                    <div class="select-wrapper">
+                                    {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
+                                        <div class='custom-select-trigger'>
+                                            <span class='product-name'>
+                                            {{part.options[i].brand}}
+                                            {{part.options[i].name}}
+                                            {{part.options[i].extra}}
+                                            </span>
+                                            <span class='price' data-price='{{part.options[i].price}}'>
+                                            {{part.options[i].price}}&nbsp;
+                                            </span>
+                                        </div>
+                                        <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
+                                        <div class="dropdown"></div>
+                                    {{else}}
+                                        <div class='custom-select-trigger'>
+                                            <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
+                                            <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
+                                        </div>
+                                        <input type="text" name="accessoryInput" style="display:none" value="0">
+                                        <div class="dropdown"></div>
+                                        
+                                    {{/if}}
+                                    </div>
+                                </li>
+                            {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+                    <!-- 配件列表 结束 -->
+
+                    {{else}}
+                    <i class="site-icons icon-board"></i>
+                    <div class='content-area form-row input-row'>
+                        <div class="input-wrapper">
+                            <input type="text" placeholder='需求或问题描述' id='remarkInput' name='remarkInput'>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
             </div>
         </div>
 
@@ -264,7 +286,11 @@
                 <i class='site-icons icon-nextstep'></i>
             </a>
             <div class='content-area justify-wrap'>
+                {{if isStandardService}}
                 <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{currentService.price}}</span> </span>
+                {{else}}
+                <span class='tip justify-content'>摩卡客服人员将在下单后主动联系您，为您提供维修方案和报价</span>
+                {{/if}}
             </div> 
         </div>
     </script>
@@ -347,12 +373,14 @@
                     </div>
                 </div>
                 <div  class="error dn" id="phoneInput-error">请输入正确的手机号</div>
+                {{if isStandardService}}
                 <div id="board" class="form-row">
                     <i class="site-icons icon-board"></i>
                     <div class="content-area border-bottom">
                         <textarea placeholder="留言（选填）" id="boardInput" name="boardInput" value="" maxlength="256" onkeydown="this.style.height=this.scrollHeight+'px'"></textarea>
                     </div>
                 </div>
+                {{/if}}
             </div>
             <div class='footer'>
                 <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
