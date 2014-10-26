@@ -108,11 +108,12 @@ define(function(require, exports) {
                         return util.format(
                             '<li>' +
                                 '<a href="${uri}">' +
+                                    '<img src="' + config.STATIC_HOST + '/images/ads/banners/medium/${id}.jpg" width="100%">' +
+                                    '<div class="slide-title-bg"></div>' +
                                     '<h5 class="slide-title">' +
                                         '<span class="slide-tag" style="background-color:#${color}">${tag}</span>' +
                                         '${title}' +
                                     '</h5>' +
-                                    '<img src="' + config.STATIC_HOST + '/images/ads/banners/medium/${id}.jpg" width="100%">' +
                                 '</a>' +
                             '</li>',
                             banner
@@ -126,7 +127,7 @@ define(function(require, exports) {
                     '</div>'
                 ).show().swipeSlide({
                     continuousScroll:true,
-                    speed : 30000,
+                    speed : 3000,
                     transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)'
                 },function(i){
                     $('#dots').children().eq(i).addClass('active').siblings().removeClass('active');
