@@ -39,7 +39,7 @@ define(function(require, exports) {
                 token = JSON.parse(localStorage[tokenKey] || "");
                 if (token && token.accessToken) {
                     cb(token.accessToken);
-                    // return;
+                    return;
                 }
             } catch (e) {
 
