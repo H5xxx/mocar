@@ -178,7 +178,7 @@ define(function(require, exports) {
                 var time = timeInput.val();
                 var name = nameInput.val();
                 var phone = phoneInput.val();
-                var remark = boardInput.val();
+                var message = boardInput.val();
 
                 // e.stopPropagation();
                 e.preventDefault();
@@ -203,7 +203,7 @@ define(function(require, exports) {
                 self.currentOrder.time = ['09:00', '13:00'][time];
                 self.currentOrder.name = name;
                 self.currentOrder.phone = phone;
-                self.currentOrder.remark = self.currentOrder.remark || remark;
+                self.currentOrder.message = self.currentOrder.message || message;
                 var d = util.makeDateFromStr(self.currentOrder.day + " " + self.currentOrder.time);
                 self.currentOrder.date = d.valueOf();
                 self.currentOrder.save();
@@ -221,7 +221,7 @@ define(function(require, exports) {
                         "phone": self.currentOrder.phone,
                         "date": self.currentOrder.date,
                         "services": self.currentOrder.services,
-                        "remark": self.currentOrder.remark
+                        "message": self.currentOrder.message
                     }),
                     success: function(responseData, status, xhr) {
                         Popup.close();

@@ -273,7 +273,7 @@
                     <i class="site-icons icon-board"></i>
                     <div class='content-area form-row input-row'>
                         <div class="input-wrapper">
-                            <input type="text" placeholder='需求或问题描述' id='remarkInput' name='remarkInput'>
+                            <textarea type="text" placeholder='需求或问题描述' id='remarkInput' name='remarkInput'></textarea>
                         </div>
                     </div>
                     {{/if}}
@@ -417,9 +417,9 @@
                             <p class="line">预约时间： {{currentOrder.day}}</p>
                         </li>
 
-                        {{if currentOrder.remark}}
+                        {{if currentOrder.message}}
                             <li class="order-detail-item order-remark">
-                                <p class="line">{{currentOrder.remark}}</p>
+                                <p class="line">{{currentOrder.message}}</p>
                             </li>
                         {{/if}}
                         <li class="order-detail-item order-contact">
@@ -499,9 +499,9 @@
                     </p>
                     <p class="line">预约时间： {{order.year}}-{{order.month}}-{{order.day}} {{order.period}}</p>
                 </li>
-                {{if order.remark}}
+                {{if order.message}}
                     <li class="order-detail-item order-remark">
-                        <p class="line">{{order.remark}}</p>
+                        <p class="line">{{order.message}}</p>
                     </li>
                 {{/if}}
                 <li class="order-detail-item order-contact">

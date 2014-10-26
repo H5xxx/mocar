@@ -157,11 +157,21 @@ define(function(require, exports) {
                     self.currentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
                 if(!params.isStandardService){
-                    self.currentOrder.remark = $('#remarkInput').val();
+                    self.currentOrder.message = $('#remarkInput').val();
                 }
                 self.currentOrder.save();
 
             });
+
+            var boardInput = document.getElementById('remarkInput');
+            if(boardInput){
+                boardInput.setAttribute('style', 'height:75px');
+                setInterval(function() {
+                    if (boardInput) {
+                        boardInput.setAttribute('style', 'height:' + boardInput.scrollHeight + 'px');
+                    }
+                }, 20);
+            }
         },
 
         clean: function(){
