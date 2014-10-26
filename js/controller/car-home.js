@@ -104,14 +104,15 @@ define(function(require, exports) {
                 $('#slide-area').html(
                     '<img src="../css/icons/mocar.png" width="100%"><ul>' +
                     banners.map(function(banner){
+                        banner.color = util.formatNum(parseInt(banner.color, 10).toString(16), 6);
                         return util.format(
                             '<li>' +
                                 '<a href="${uri}">' +
                                     '<h5 class="slide-title">' +
-                                        '<span class="slide-tag color${color}">${tag}</span>' +
+                                        '<span class="slide-tag" style="background-color:#${color}">${tag}</span>' +
                                         '${title}' +
                                     '</h5>' +
-                                    '<img src="' + config.STATIC_HOST + '/images/ads/banner/medium/${id}.jpg" width="100%">' +
+                                    '<img src="' + config.STATIC_HOST + '/images/ads/banners/medium/${id}.jpg" width="100%">' +
                                 '</a>' +
                             '</li>',
                             banner

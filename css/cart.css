@@ -111,3 +111,8 @@
     border: none;
     outline: none;
 }
+
+/*iscroll有bug，就先不用了*/
+#j-cart-container{
+    overflow: auto;
+}

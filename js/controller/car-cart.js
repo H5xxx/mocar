@@ -67,7 +67,7 @@ define(function(require, exports) {
 
             this.el.html(html);
 
-            var scroll = new iScroll('j-cart-container',{hScrollbar:false, vScrollbar:false});
+            //var scroll = new iScroll('j-cart-container',{hScrollbar:false, vScrollbar:false});
 
             var showPopup = true;
             if(!params.isStandardService){
