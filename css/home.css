@@ -45,14 +45,14 @@
         linear,
         left top,
         left bottom,
-        color-stop(0, #FFFFFF),
-        color-stop(1, #333333)
+        color-stop(0, rgba(0, 0, 0, 0)),
+        color-stop(1, rgba(0, 0, 0, 0.54))
     );
-    background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
-    background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
-    background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
-    background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
-    background-image: linear-gradient(to bottom, #FFFFFF 0%, #333333 100%);
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.54) 100%);
+    background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.54) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.54) 100%);
+    background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.54) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.54) 100%);
 }
 .slide-area .slide-title{
     position: absolute;
@@ -66,6 +66,7 @@
 .slide-area .slide-title .slide-tag{
     margin-right: 10px;
     padding: 0 8px;
+    height: 16px;
     line-height: 16px;
     font-size: 10px;
     background-color: red;

@@ -52,6 +52,10 @@ define(function(require, exports) {
 					if (service.id == 8) {
 						service.prefer = true;
 					}
+                    
+                    service.isStandardService = service.id != 1;
+
+                    service.priceNotCertain = !(service.id == 3 || service.id == 8 || service.id == 9);
                 });
                 var next, lastModelId;
                 try{
@@ -127,7 +131,7 @@ define(function(require, exports) {
                     '</div>'
                 ).show().swipeSlide({
                     continuousScroll:true,
-                    speed : 3000,
+                    speed : 5000,
                     transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)'
                 },function(i){
                     $('#dots').children().eq(i).addClass('active').siblings().removeClass('active');

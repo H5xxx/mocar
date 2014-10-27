@@ -140,7 +140,7 @@ define(function(require, exports) {
             checkNotReplace = params.currentService.quantityStrategy == 1;
             var nextStepBtn = this.el.find('.j-nextstep');
             //表单信息收集
-            nextStepBtn.bind('click', function(e){
+            nextStepBtn.bind('tap', function(e){
                 var replaceNum = userSelectBitArr.filter(function(v){
                     return !!v;
                 }).length;
@@ -152,12 +152,21 @@ define(function(require, exports) {
                     return;
                 }
 
+
+
                 var accessoryInput = self.el.find('input[name=accessoryInput]');
                 accessoryInput.forEach(function(input, i){
                     self.currentOrder.services[0].parts[i].id = params.currentService.parts[i].options[input.value].id;
                 });
                 if(!params.isStandardService){
                     self.currentOrder.message = $('#remarkInput').val();
+
+                    if(!self.currentOrder.message){
+                        e.stopPropagation();
+                        e.preventDefault();
+                        $('#remarkInput-error').show();
+                        return;
+                    }
                 }
                 self.currentOrder.save();
 
