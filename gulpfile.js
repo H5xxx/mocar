@@ -93,8 +93,8 @@ gulp.task('conbineJS', ['clean'], function(cb) {
         'js/lib/zepto.js',
         'js/lib/spine.js',
         'js/lib/route.js',
-        'js/lib/route.js',
-        'js/lib/manager.js'
+        'js/lib/manager.js',
+        'js/lib/swipeSlide.min.js'
     ])
         .pipe(concat('libAllInOne.js', {
             newLine: ';'
@@ -117,8 +117,8 @@ gulp.task('compressJS', ['clean'], function(cb) {
         'js/lib/zepto.js',
         'js/lib/spine.js',
         'js/lib/route.js',
-        'js/lib/route.js',
-        'js/lib/manager.js'
+        'js/lib/manager.js',
+        'js/lib/swipeSlide.min.js'
     ])
         .pipe(concat('libAllInOne.js', {
             newLine: ';'

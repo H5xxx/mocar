@@ -58,7 +58,7 @@ define(function(require, exports) {
             var page = this;
 
             // 所有class="j-nav" data-nav="/xxx"的点击会跳转到/xxx
-            this.el.delegate('.j-nav', 'click', function(e){
+            this.el.delegate('.j-nav', 'tap', function(e){
                 page.navigate($(e.currentTarget).attr('data-nav'));
             });
 

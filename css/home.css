@@ -7,6 +7,90 @@
 #mocar-service-home .logo-area > img {
     margin: auto;
 }
+
+.slide-area{
+    position: relative;
+    padding-bottom: 8px;
+    max-width: 100%;
+    overflow: hidden;
+}
+.slide-area > img{
+    opacity: 0;
+}
+.slide-area ul{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.slide-area li{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+}
+.slide-area img{
+    width: 100%;
+}
+.slide-area .slide-title-bg{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    left: 0;
+    bottom: 0;
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #FFFFFF),
+        color-stop(1, #333333)
+    );
+    background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
+    background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
+    background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
+    background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #333333 100%);
+    background-image: linear-gradient(to bottom, #FFFFFF 0%, #333333 100%);
+}
+.slide-area .slide-title{
+    position: absolute;
+    bottom: 10px;
+    left: 16px;
+
+    font-size: 12px;
+    color: white;
+    font-weight: normal;
+}
+.slide-area .slide-title .slide-tag{
+    margin-right: 10px;
+    padding: 0 8px;
+    line-height: 16px;
+    font-size: 10px;
+    background-color: red;
+}
+.slide-area .dots{
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+
+    text-align: right;
+}
+.slide-area .dots span{
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-left: 10px;
+
+    vertical-align: middle;
+    border-radius: 3px;
+    background-color: #fff;
+}
+.slide-area .dots .active{
+    border: 1px solid red;
+}
+
 .service-list {
     /*margin: 16px;*/
     /* padding-bottom: 65535px;

@@ -1012,7 +1012,7 @@
                 if (item) {
                     var data = Mock.mock(item.template);
                     if (options.success) 
-                        setTimeout(function(){options.success(data, xhr, options)}, 1000);
+                        setTimeout(function(){options.success(data, xhr, options)}, 200);
                     // options.success(data, xhr, options);
                     if (options.complete) options.complete(xhr.status, xhr, options);
                     return xhr;

@@ -91,3 +91,42 @@
     margin-right: 20px;
     color: #8C8C8C;
 }
+
+#accessories-info .input-row{
+    padding-bottom: 0;
+}
+#accessories-info #service-detail .input-row{
+    height: auto;
+}
+
+#accessories-info .form-row input{
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100%;
+    height: 36px;
+    /* line-height: 40px; */
+    /* margin-top: 50px; */
+    padding: 0;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+/*iscroll有bug，就先不用了*/
+#j-cart-container{
+    overflow: auto;
+}
+
+#remarkInput{
+    display: inline-block;
+vertical-align: bottom;
+width: 100%;
+min-height: 36px;
+overflow-y: visible;
+/* line-height: 40px; */
+/* margin-top: 50px; */
+padding: 0;
+font-size: 14px;
+border: none;
+outline: none;
+}
