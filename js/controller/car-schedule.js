@@ -180,7 +180,7 @@ define(function(require, exports) {
                 var phone = phoneInput.val();
                 var message = boardInput.val();
 
-                // e.stopPropagation();
+                e.stopPropagation();
                 e.preventDefault();
                 // if (!address || !name || !phone) {
                 if (!address || address.length < 6) {

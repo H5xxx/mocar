@@ -29,18 +29,22 @@ define(function(require, exports) {
             alert('no param code');
         } else {
             var cb = function(accessToken) {
-                $(document).on('ajaxBeforeSend', function(e, xhr, options) {
-                    xhr.setRequestHeader('Access-Token', accessToken);
-                });
+                // $(document).on('ajaxBeforeSend', function(e, xhr, options) {
+                //     xhr.setRequestHeader('Access-Token', accessToken);
+                // });
                 callback();
             };
             var token;
             try {
-                token = JSON.parse(localStorage[tokenKey] || "");
-                if (token && token.accessToken) {
-                    cb(token.accessToken);
-                    return;
-                }
+                // if (token && token.accessToken) {
+                //     cb(token.accessToken);
+                //     return;
+                // }
+                $(document).on('ajaxBeforeSend', function(e, xhr, options) {
+                    token = JSON.parse(localStorage[tokenKey] || "{}");
+                    var accessToken = token && token.accessToken;
+                    xhr.setRequestHeader('Access-Token', accessToken);
+                });
             } catch (e) {
 
             }
