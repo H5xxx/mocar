@@ -10,7 +10,7 @@
 
 .slide-area{
     position: relative;
-    padding-bottom: 8px;
+    /*padding-bottom: 8px;*/
     max-width: 100%;
     overflow: hidden;
 }
@@ -65,10 +65,10 @@
 }
 .slide-area .slide-title .slide-tag{
     margin-right: 10px;
-    padding: 0 8px;
+    padding: 1px 8px;
     height: 16px;
     line-height: 16px;
-    font-size: 10px;
+    font-size: 12px;
     background-color: red;
 }
 .slide-area .dots{
@@ -118,6 +118,9 @@
     /*color: #000000;*/
     color: rgb(179, 20, 0);
     float: right;
+}
+.service-list .content-area .price .priceStart{
+    font-size: 12px;
 }
 .service-list .site-icons {
     float: left;

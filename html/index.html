@@ -68,7 +68,7 @@
                     {{/if}}
                     {{if service.isStandardService}}
                         {{if service.priceNotCertain}}
-                        <span class="price">{{service.price}} 元起</span>
+                        <span class="price"><span>{{service.price}} 元</span><span class="priceStart">起</span></span>
                         {{else}}
                         <span class="price">{{service.price}} 元</span>
                         {{/if}}
