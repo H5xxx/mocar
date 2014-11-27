@@ -52,30 +52,30 @@ define(function(require, exports) {
 
             params = params || {};
 
-            util.finish([
-                require('../component/token').ready
-            ], function(){
+            // util.finish([
+            //     require('../component/token').ready
+            // ], function() {
 
-                me.getData(params, function(err, data) {
+            me.getData(params, function(err, data) {
 
-                    me.enter();
+                me.enter();
 
-                    me.render($.extend(params, data));
+                me.render($.extend(params, data));
 
-                });
             });
+            // });
 
         },
 
         // 视图正式进入当前controller
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
-        enter: function(){
+        enter: function() {
             var prev = this.page.curr,
-                prevId = prev  ? prev.squenceId : -1,
+                prevId = prev ? prev.squenceId : -1,
                 currId = this.squenceId,
                 direction = currId >= prevId ? 'right' : 'left';
 
-            if(prev){
+            if (prev) {
                 prev.leave();
             }
 
@@ -88,14 +88,14 @@ define(function(require, exports) {
         // 离开到其对应的url时执行
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
         deactivate: function() {
-            if(this === this.page.curr){
+            if (this === this.page.curr) {
                 Popup.openLoading();
             }
         },
 
         // 清理当前controller的内容并移出视图
         // 尽量不要重写该方法，即使实在要扩展，需保留逻辑(this.constructor.__super__.xxx.apply(...))
-        leave: function(){
+        leave: function() {
             Popup.close();
             this.moveout();
             this.clean();
