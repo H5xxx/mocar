@@ -558,6 +558,23 @@
             </ul>
         </div>
     </script>
+
+    <!-- 输入手机验证码 页面 模板 -->
+    <script id="template-captcha" type="text/html">
+        <div class="buyelse-popup mocar-tip-popup">
+            <div class="title">验证手机号码</div>
+            <div class="popup-content">
+                <p>我们已将验证码发送到以下手机号</p>
+                <p>{{phone}}</p>
+                <input type="text" placeholder='请填入您收到的验证码'>
+            </div>
+            <div class="command-area">
+                <a href="javascript:void(0);" class="mocarbtn" style="font-weight: bold;">取消</a>
+                <a href="javascript:void(0);" class="buyelsebtn" style="font-weight: bold;color: RGB(119, 119, 119);">重试（）</a>
+                <a href="javascript:void(0);" class="buyelsebtn" style="font-weight: bold;">确定</a>
+            </div>
+        </div>
+    </script>
 </head>
 
 <body>

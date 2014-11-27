@@ -45,9 +45,9 @@ define(function(require, exports) {
                 timeIndex = previousTimeIndex || 0;
 
                 var currentContact;
-                try{
+                try {
                     currentContact = JSON.parse(localStorage['contact']);
-                }catch(e){}
+                } catch (e) {}
 
                 if (currentContact) {
                     cityCode = cityCode || currentContact.cityCode;
@@ -148,6 +148,85 @@ define(function(require, exports) {
                 callback(null, data);
             });
         },
+
+        // 提交订单
+        submit: function(token) {
+            var self = this;
+
+            $.ajax({
+                type: 'POST',
+                url: config.API_HOST + '/users/me/orders',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "modelId": self.currentOrder.modelId,
+                    "cityCode": self.currentOrder.cityCode,
+                    "name": self.currentOrder.name,
+                    "address": self.currentOrder.address,
+                    "phone": self.currentOrder.phone,
+                    "date": self.currentOrder.date,
+                    "services": self.currentOrder.services,
+                    "message": self.currentOrder.message
+                }),
+                success: function(responseData, status, xhr) {
+                    Popup.close();
+
+                    var orderId = xhr.getResponseHeader('Location');
+                    if (orderId) {
+                        var orderIdStart = orderId.split('/').pop();
+                        self.currentOrder.orderId = orderIdStart;
+                        self.currentOrder.save();
+                    }
+
+
+                    try {
+                        delete sessionStorage.stepSchedule;
+                    } catch (e) {
+
+                    }
+                    self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
+                },
+                error: function(xhr, errorType, error) {
+                    Popup.close();
+                    alert("出错啦: " + errorType + error);
+                }
+            });
+        },
+        // 获取验证码
+        getCaptcha: function() {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                url: config.API_HOST + '/captcha/' + self.currentOrder.phone,
+                contentType: 'application/json',
+                success: function(responseData, status, xhr) {
+                    Popup.close();
+                    var html = template('template-captcha', {
+                        phone: self.currentOrder.phone
+                    });
+                    Popup.open(html);
+                },
+                error: function(xhr, errorType, error) {
+                    Popup.close();
+                }
+            });
+        },
+        // 获取token
+        getToken: function(captcha) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                url: config.API_HOST + '/authority/token?credential=CA' + self.currentOrder.phone + ':' + captcha,
+                contentType: 'application/json',
+                success: function(responseData, status, xhr) {
+                    Popup.close();
+                    self.submit(responseData.accessToken);
+
+                },
+                error: function(xhr, errorType, error) {
+                    Popup.close();
+                }
+            });
+        },
         // 渲染内容
         render: function(data) {
             var self = this;
@@ -211,52 +290,53 @@ define(function(require, exports) {
                 Popup.openLoading();
 
                 // 将地址信息存入locastorage
-                try{
+                try {
                     localStorage['contact'] = JSON.stringify({
                         cityCode: self.currentOrder.cityCode,
                         name: self.currentOrder.name,
                         address: self.currentOrder.address,
                         phone: self.currentOrder.phone
                     });
-                }catch(e){}
+                } catch (e) {}
 
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        "modelId": self.currentOrder.modelId,
-                        "cityCode": self.currentOrder.cityCode,
-                        "name": self.currentOrder.name,
-                        "address": self.currentOrder.address,
-                        "phone": self.currentOrder.phone,
-                        "date": self.currentOrder.date,
-                        "services": self.currentOrder.services,
-                        "message": self.currentOrder.message
-                    }),
-                    success: function(responseData, status, xhr) {
-                        Popup.close();
+                self.getCaptcha();
+                // $.ajax({
+                //     type: 'POST',
+                //     url: url,
+                //     contentType: 'application/json',
+                //     data: JSON.stringify({
+                //         "modelId": self.currentOrder.modelId,
+                //         "cityCode": self.currentOrder.cityCode,
+                //         "name": self.currentOrder.name,
+                //         "address": self.currentOrder.address,
+                //         "phone": self.currentOrder.phone,
+                //         "date": self.currentOrder.date,
+                //         "services": self.currentOrder.services,
+                //         "message": self.currentOrder.message
+                //     }),
+                //     success: function(responseData, status, xhr) {
+                //         Popup.close();
 
-                        var orderId = xhr.getResponseHeader('Location');
-                        if (orderId) {
-                            var orderIdStart = orderId.split('/').pop();
-                            self.currentOrder.orderId = orderIdStart;
-                            self.currentOrder.save();
-                        }
+                //         var orderId = xhr.getResponseHeader('Location');
+                //         if (orderId) {
+                //             var orderIdStart = orderId.split('/').pop();
+                //             self.currentOrder.orderId = orderIdStart;
+                //             self.currentOrder.save();
+                //         }
 
 
-                        try {
-                            delete sessionStorage.stepSchedule;
-                        } catch (e) {
+                //         try {
+                //             delete sessionStorage.stepSchedule;
+                //         } catch (e) {
 
-                        }
-                        self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
-                    },
-                    error: function(xhr, errorType, error) {
-                        Popup.close();
-                        alert("出错啦: " + errorType + error);
-                    }
-                });
+                //         }
+                //         self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
+                //     },
+                //     error: function(xhr, errorType, error) {
+                //         Popup.close();
+                //         alert("出错啦: " + errorType + error);
+                //     }
+                // });
             };
             new FastButton(nextStepBtn[0], handleSubmit);
             var currentFocusInput;
@@ -283,7 +363,7 @@ define(function(require, exports) {
             //     window.scrollTo(0, 120);
             // });
             var boardInput = document.getElementById('boardInput');
-            if(boardInput){                
+            if (boardInput) {
                 boardInput.setAttribute('style', 'height:75px');
                 setInterval(function() {
                     if (boardInput) {
