@@ -6,7 +6,6 @@ define(function(require, exports) {
     var util = require('../component/util');
     var City = require('../model/city');
     var Order = require('../model/order');
-    var Contact = require('../model/contact');
     var Brand = require('../model/brand');
     var Model = require('../model/model');
     var Popup = require('../widgets/Popup');
@@ -25,11 +24,8 @@ define(function(require, exports) {
             var self = this;
             var userInputs = params.userInputs || {};
             util.finish([
-                City.fetch(),
-                Contact.fetch({
-                    uid: 'me'
-                })
-            ], function(cities, contacts) {
+                City.fetch()
+            ], function(cities) {
                 var currentContact, currentProvinceIndex, currentCityIndex, currentProvince, currentCity;
                 var name, address, phone, cityCode;
                 var allProvinceArr = [],
@@ -48,8 +44,12 @@ define(function(require, exports) {
                 dayIndex = previousDayIndex || 0;
                 timeIndex = previousTimeIndex || 0;
 
-                if (contacts && contacts.length) {
-                    currentContact = contacts[0];
+                var currentContact;
+                try{
+                    currentContact = JSON.parse(localStorage['contact']);
+                }catch(e){}
+
+                if (currentContact) {
                     cityCode = cityCode || currentContact.cityCode;
                     name = name || currentContact.name;
                     address = address || currentContact.address;
@@ -209,6 +209,17 @@ define(function(require, exports) {
                 self.currentOrder.save();
                 var url = config.API_HOST + '/users/me/orders';
                 Popup.openLoading();
+
+                // 将地址信息存入locastorage
+                try{
+                    localStorage['contact'] = JSON.stringify({
+                        cityCode: self.currentOrder.cityCode,
+                        name: self.currentOrder.name,
+                        address: self.currentOrder.address,
+                        phone: self.currentOrder.phone
+                    });
+                }catch(e){}
+
                 $.ajax({
                     type: 'POST',
                     url: url,

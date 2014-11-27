@@ -6,7 +6,6 @@ define(function(require, exports) {
     var util = require('../component/util');
 
     var Service = require('../model/service');
-    var Vehicle = require('../model/vehicle');
     var Banner = require('../model/banner');
     var Popup = require('../widgets/Popup');
 
@@ -33,9 +32,8 @@ define(function(require, exports) {
 
             Popup.openLoading();
             util.finish([
-                Service.fetch(params),
-                Vehicle.fetch({uid:'me'})
-            ], function(services, vehicles) {
+                Service.fetch(params)
+            ], function(services) {
                 Popup.close();
                 services.forEach(function(service) {
                     service.icon = config.STATIC_HOST + '/images/services/' + util.formatNum(service.id, 3) + '.png';
@@ -64,10 +62,7 @@ define(function(require, exports) {
                 }catch(e){
 
                 }
-                if(vehicles && vehicles.length){
-                    //如果用户提交过订单，用最新下单的车辆
-                    next = 'cart';
-                }else if(lastModelId){
+                if(lastModelId){
                     //如果用户之前没提交过订单，但经过了完整的选车流程，使用之前选的车
                     next = 'model/' + lastModelId + '/cart'
                 }else{
