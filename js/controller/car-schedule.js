@@ -179,13 +179,12 @@ define(function(require, exports) {
                         self.currentOrder.save();
                     }
 
-
                     try {
                         delete sessionStorage.stepSchedule;
                     } catch (e) {
 
                     }
-                    self.page.navigate('/service/' + data.service_id + '/model/' + data.model_id + '/success');
+                    self.page.navigate('/service/' + self.data.service_id + '/model/' + self.data.model_id + '/success');
                 },
                 error: function(xhr, errorType, error) {
                     Popup.close();
@@ -201,13 +200,14 @@ define(function(require, exports) {
             var interval;
             if (repeatCaptcha) {
                 repeatCaptcha.off();
-
             }
             clearInterval(interval);
             var time = 10;
             interval = setInterval(function() {
                 if (time >= 0) {
-                    repeatCaptcha.html('重试（' + (time--) + '）');
+                    if (repeatCaptcha) {
+                        repeatCaptcha.html('重试（' + (time--) + '）');
+                    }
                 } else {
                     repeatCaptcha.html('重试');
                     repeatCaptcha.off();
@@ -228,6 +228,9 @@ define(function(require, exports) {
                     Popup.open(html);
                     repeatCaptcha = $('#repeat-captcha');
                     confirmCaptcha = $('#confirm-captcha');
+                    $('#cancel-captcha').on('click', function() {
+                        Popup.close();
+                    });
                     confirmCaptcha.off();
                     confirmCaptcha.on('click', function() {
                         self.getToken();
@@ -477,6 +480,7 @@ define(function(require, exports) {
 
     function initCustomSelect(data) {
         var self = this;
+        self.data = data;
         var optArrs = [
             data.allProvinceArr.map(function(p) {
                 return [p];
