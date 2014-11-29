@@ -150,13 +150,15 @@ define(function(require, exports) {
         },
 
         // 提交订单
-        submit: function(token) {
+        submit: function() {
             var self = this;
-
             $.ajax({
                 type: 'POST',
                 url: config.API_HOST + '/users/me/orders',
                 contentType: 'application/json',
+                headers: {
+                    'Access-Token': self.token
+                },
                 data: JSON.stringify({
                     "modelId": self.currentOrder.modelId,
                     "cityCode": self.currentOrder.cityCode,
@@ -194,6 +196,26 @@ define(function(require, exports) {
         // 获取验证码
         getCaptcha: function() {
             var self = this;
+            var repeatCaptcha;
+            var confirmCaptcha;
+            var interval;
+            if (repeatCaptcha) {
+                repeatCaptcha.off();
+
+            }
+            clearInterval(interval);
+            var time = 10;
+            interval = setInterval(function() {
+                if (time >= 0) {
+                    repeatCaptcha.html('重试（' + (time--) + '）');
+                } else {
+                    repeatCaptcha.html('重试');
+                    repeatCaptcha.off();
+                    repeatCaptcha.on('click', function() {
+                        self.getCaptcha();
+                    });
+                }
+            }, 1000);
             $.ajax({
                 type: 'GET',
                 url: config.API_HOST + '/captcha/' + self.currentOrder.phone,
@@ -204,6 +226,13 @@ define(function(require, exports) {
                         phone: self.currentOrder.phone
                     });
                     Popup.open(html);
+                    repeatCaptcha = $('#repeat-captcha');
+                    confirmCaptcha = $('#confirm-captcha');
+                    confirmCaptcha.off();
+                    confirmCaptcha.on('click', function() {
+                        self.getToken();
+                    });
+
                 },
                 error: function(xhr, errorType, error) {
                     Popup.close();
@@ -211,21 +240,31 @@ define(function(require, exports) {
             });
         },
         // 获取token
-        getToken: function(captcha) {
+        getToken: function() {
             var self = this;
-            $.ajax({
-                type: 'GET',
-                url: config.API_HOST + '/authority/token?credential=CA' + self.currentOrder.phone + ':' + captcha,
-                contentType: 'application/json',
-                success: function(responseData, status, xhr) {
-                    Popup.close();
-                    self.submit(responseData.accessToken);
-
-                },
-                error: function(xhr, errorType, error) {
-                    Popup.close();
-                }
-            });
+            var captcha = $('#captcha').val();
+            if (captcha.length > 2) {
+                $.ajax({
+                    type: 'GET',
+                    url: config.API_HOST + '/authority/token?credential=CA' + self.currentOrder.phone + ':' + captcha,
+                    contentType: 'application/json',
+                    success: function(responseData, status, xhr) {
+                        // Popup.close();
+                        self.token = responseData.accessToken;
+                        self.submit();
+                    },
+                    error: function(xhr, errorType, error) {
+                        if (xhr.status == 403) {
+                            Popup.open('Error: 验证码错误');
+                            setTimeout(function() {
+                                Popup.close();
+                            }, 1000);
+                        }
+                        console.log(errorType);
+                        // Popup.close();
+                    }
+                });
+            }
         },
         // 渲染内容
         render: function(data) {

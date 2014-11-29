@@ -217,6 +217,11 @@ select {
     padding: 11px 16px;
     color: rgba(0, 0, 0, 0.87);
 }
+.popup .command-area a {
+    float: right;
+    padding: 11px 16px;
+    color: rgba(0, 0, 0, 0.87);
+}
 .popup .command-area .mocarbtn {
     color: #67CA2F;
 }

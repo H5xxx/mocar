@@ -24,7 +24,7 @@
     <script src="../js/lib/route.js"></script>
     <script src="../js/lib/manager.js"></script>
     <script src="../js/lib/wxshare.js"></script>
-	<script src="../js/lib/swipeSlide.min.js"></script>
+    <script src="../js/lib/swipeSlide.min.js"></script>
     <!-- endbuild -->
     <script id="template-loading" type="text/html">
         <div class="spinner">
@@ -56,29 +56,15 @@
             <a href="javascript:void(0)" class="j-nav" data-nav="/service/{{service.id}}/{{next}}">
                 <i class="site-icons"><img width="100%" src="{{service.icon}}" alt=""></i>
                 <div class="content-area border-bottom">
-                    <span class="title">{{service.name}}</span>
-                    {{if service.present}}
-                    <i class="icon-present"></i>
-                    {{/if}}
-                    {{if service.discount}}
-                    <i class="icon-discount"></i>
-                    {{/if}}
-                    {{if service.prefer}}
-                    <i class="icon-prefer"></i>
-                    {{/if}}
-                    {{if service.isStandardService}}
-                        {{if service.priceNotCertain}}
-                        <span class="price"><span>{{service.price}} 元</span><span class="priceStart">起</span></span>
-                        {{else}}
-                        <span class="price">{{service.price}} 元</span>
-                        {{/if}}
+                    <span class="title">{{service.name}}</span> {{if service.present}}
+                    <i class="icon-present"></i> {{/if}} {{if service.discount}}
+                    <i class="icon-discount"></i> {{/if}} {{if service.prefer}}
+                    <i class="icon-prefer"></i> {{/if}} {{if service.isStandardService}} {{if service.priceNotCertain}}
+                    <span class="price"><span>{{service.price}} 元</span><span class="priceStart">起</span></span>
                     {{else}}
-                        <span class="price">客服报价</span>
-                    {{/if}}
-                    
-                    {{if service.discount}}
-                    <span class="origin-price">{{service.originPrice}} 元</span>
-                    {{/if}}
+                    <span class="price">{{service.price}} 元</span> {{/if}} {{else}}
+                    <span class="price">客服报价</span> {{/if}} {{if service.discount}}
+                    <span class="origin-price">{{service.originPrice}} 元</span> {{/if}}
                     <br/>
                     <div class="info">
                         {{service.slogan}}
@@ -91,7 +77,7 @@
         {{/each}}
     </script>
     <!-- 摩卡服务首页 - 列表 模板 结束 -->
-    
+
     <!-- 摩卡服务首页 模板 开始 -->
     <script id="template-home" type="text/html">
         <div class="j-home-container">
@@ -100,10 +86,10 @@
                     <img src="../css/icons/mocar.png" alt="摩卡服务" width="100%">
                 </div>
                 <div id="slide-area" class="slide-area" style="display:none;">
-                    
+
                 </div>
                 <ul class='service-list' data-role="service-list">
-                    
+
                 </ul>
             </div>
         </div>
@@ -113,21 +99,13 @@
     <script id="template-navigator" type="text/html">
         <div class="header">
             {{if brand_id}}
-                <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span>
-                {{if series_id}}
-                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> {{family}}</span>
-                    {{if model_id}}
-                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
-                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span>
-                    {{else}}
-                        <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span>
-                    {{/if}}
-                {{else}}
-                    <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> 车系</span>
-                {{/if}}
-            {{else}}
-                <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span>
-            {{/if}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand">{{brand}}</span> {{if series_id}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> {{family}}</span> {{if model_id}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> {{model}}</span>
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model/{{model_id}}/displacement">>> 排量</span> {{else}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{series_id}}/model">>> 年款</span> {{/if}} {{else}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series">>> 车系</span> {{/if}} {{else}}
+            <span class="j-nav" data-nav="/service/{{service_id}}/brand">品牌</span> {{/if}}
         </div>
     </script>
     <!-- 选车面包屑 模板 结束 -->
@@ -137,10 +115,10 @@
         <div class="main mt56px" id="j-brand-container">
             <div class="j-brand-list">
                 {{each list as item i}}
-                    <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
-                        <img src="{{item.icon}}">
-                        <span>{{item.brand}}</span>
-                    </div>
+                <div class="brand-item j-nav" data-nav="/service/{{service_id}}/brand/{{item.id}}/series">
+                    <img src="{{item.icon}}">
+                    <span>{{item.brand}}</span>
+                </div>
                 {{/each}}
             </div>
         </div>
@@ -152,9 +130,9 @@
         <div class="main mt56px" id="j-series-container">
             <div class="j-series-list">
                 {{each list as item i}}
-                    <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
-                        <span>{{item.prefix}} {{item.family}}</span>
-                    </div>
+                <div class="series-item j-nav" data-nav="/service/{{service_id}}/brand/{{brand_id}}/series/{{item.id}}/model">
+                    <span>{{item.prefix}} {{item.family}}</span>
+                </div>
                 {{/each}}
             </div>
         </div>
@@ -166,9 +144,9 @@
         <div class="main mt56px" id="j-model-container">
             <div class="j-model-list">
                 {{each list as item i}}
-                    <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
-                        <span>{{item.model}} {{item.suffix}}</span>
-                    </div>
+                <div class="model-item j-nav" data-nav="/service/{{service_id}}/model/{{item.id}}/cart">
+                    <span>{{item.model}} {{item.suffix}}</span>
+                </div>
                 {{/each}}
             </div>
         </div>
@@ -193,7 +171,7 @@
     <!-- 选择服务类型 与 配件 页面 模板 -->
     <script id="template-cart" type="text/html">
         <div class="main mb56px" id="j-cart-container">
-            <div class="" id='accessories-info' style="padding-top: 8px;padding-bottom:20px">
+            <div id='accessories-info' style="padding-top: 8px;padding-bottom:20px">
                 <div id='car-info' class='mb20px'>
                     <i class='site-icons icon-car'></i>
                     <div class='content-area form-row'>
@@ -202,7 +180,7 @@
                             <div class='custom-select-trigger'>
                                 <span class='product-name'>
                                 {{currentVehicle.prefix}}{{currentVehicle.brand}} {{currentVehicle.family}} {{currentVehicle.model}}
-                                </span>    
+                                </span>
                             </div>
                             <input type="text" name="carInput" style="display:none">
                             <div class="dropdown"></div>
@@ -210,14 +188,13 @@
                     </div>
                 </div>
                 <div id='service-info' class='mb20px'>
-                    <i class='site-icons icon-service'></i>
-                    {{if isStandardService}}
+                    <i class='site-icons icon-service'></i> {{if isStandardService}}
                     <div class='content-area form-row'>
                         <p class="accessory info">服务项目</p>
                         <div class="select-wrapper">
                             <div class='custom-select-trigger'>
                                 <span class='product-name'>{{currentService.name}}</span>
-                                <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}&nbsp;</span>    
+                                <span class='price' data-price='{{currentService.price}}'>{{currentService.price}}&nbsp;</span>
                             </div>
                             <input type="text" name="serviceInput" style="display:none">
                             <div class="dropdown"></div>
@@ -239,42 +216,42 @@
 
                     <!-- 配件列表 开始 -->
                     {{if (currentService.parts && currentService.parts.length > 0) }}
-                        <i class='site-icons icon-accessory'></i>
-                        <div class='content-area'>
-                            <ul>
+                    <i class='site-icons icon-accessory'></i>
+                    <div class='content-area'>
+                        <ul>
                             {{each currentService.parts as part i}}
-                                <li class='form-row' data-part-seq="{{i}}">
-                                    <p class="accessory info">
-                                        {{part.name}}
-                                    </p>
-                                    <div class="select-wrapper">
+                            <li class='form-row' data-part-seq="{{i}}">
+                                <p class="accessory info">
+                                    {{part.name}}
+                                </p>
+                                <div class="select-wrapper">
                                     {{if (userInputs && userInputs.accessoryInputs && (i = userInputs.accessoryInputs[i])) }}
-                                        <div class='custom-select-trigger'>
-                                            <span class='product-name'>
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>
                                             {{part.options[i].brand}}
                                             {{part.options[i].name}}
                                             {{part.options[i].extra}}
                                             </span>
-                                            <span class='price' data-price='{{part.options[i].price}}'>
+                                        <span class='price' data-price='{{part.options[i].price}}'>
                                             {{part.options[i].price}}&nbsp;
                                             </span>
-                                        </div>
-                                        <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
-                                        <div class="dropdown"></div>
-                                    {{else}}
-                                        <div class='custom-select-trigger'>
-                                            <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
-                                            <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
-                                        </div>
-                                        <input type="text" name="accessoryInput" style="display:none" value="0">
-                                        <div class="dropdown"></div>
-                                        
-                                    {{/if}}
                                     </div>
-                                </li>
+                                    <input type="text" name="accessoryInput" style="display:none" value="{{i}}">
+                                    <div class="dropdown"></div>
+                                    {{else}}
+                                    <div class='custom-select-trigger'>
+                                        <span class='product-name'>{{part.options[0].brand}}{{part.options[0].name}} {{part.options[0].extra}}</span>
+                                        <span class='price' data-price='{{part.options[0].price}}'>{{part.options[0].price}}&nbsp;</span>
+                                    </div>
+                                    <input type="text" name="accessoryInput" style="display:none" value="0">
+                                    <div class="dropdown"></div>
+
+                                    {{/if}}
+                                </div>
+                            </li>
                             {{/each}}
-                            </ul>
-                        </div>
+                        </ul>
+                    </div>
                     {{/if}}
                     <!-- 配件列表 结束 -->
 
@@ -299,9 +276,8 @@
                 {{if isStandardService}}
                 <span class='tip justify-content'>总价：<span data-totalprice='{{price}}'>{{currentService.price}}</span> </span>
                 {{else}}
-                <span class='tip justify-content'>摩卡客服人员将在下单后主动联系您，为您提供维修方案和报价</span>
-                {{/if}}
-            </div> 
+                <span class='tip justify-content'>摩卡客服人员将在下单后主动联系您，为您提供维修方案和报价</span> {{/if}}
+            </div>
         </div>
     </script>
     <!-- 预约上门信息 页面 模板 -->
@@ -314,53 +290,53 @@
                         <span class='first border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>{{currentProvince}}</span>  
-                                </div>
-                                <input type="text" name="provinceInput" style="display:none" value="{{currentProvinceIndex}}">
-                                <div class="dropdown"></div>
-                            </div>
-                        </span>
-                        <span class='second border-bottom'>
+                                    <span class='product-name'>{{currentProvince}}</span>
+                    </div>
+                    <input type="text" name="provinceInput" style="display:none" value="{{currentProvinceIndex}}">
+                    <div class="dropdown"></div>
+                </div>
+                </span>
+                <span class='second border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>{{currentCity}}</span>  
-                                </div>
-                                <input type="text" name="cityInput" style="display:none" value="{{currentCityIndex}}">
-                                <div class="dropdown"></div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <div id='detailAddress' class='form-row'>
-                    <div class='content-area border-bottom'>
-                        <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" maxlength="40" required>
-                    </div>
-                </div>
-                <div  class="error dn" id="addressInput-error">请输入正确的地址信息</div>
-                <div id='scheduleTime' class='form-row'>
-                    <i class="site-icons icon-time"></i>
-                    <div class='content-area zero-font-size'>
-                        <span class='first border-bottom'>
+                                    <span class='product-name'>{{currentCity}}</span>
+            </div>
+            <input type="text" name="cityInput" style="display:none" value="{{currentCityIndex}}">
+            <div class="dropdown"></div>
+        </div>
+        </span>
+        </div>
+        </div>
+        <div id='detailAddress' class='form-row'>
+            <div class='content-area border-bottom'>
+                <input type="text" name='addressInput' id='addressInput' placeholder='输入详细地址' value="{{address}}" maxlength="40" required>
+            </div>
+        </div>
+        <div class="error dn" id="addressInput-error">请输入正确的地址信息</div>
+        <div id='scheduleTime' class='form-row'>
+            <i class="site-icons icon-time"></i>
+            <div class='content-area zero-font-size'>
+                <span class='first border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>{{currentDay}}</span>  
-                                </div>
-                                <input type="text" name="dayInput" style="display:none" value="{{currentDayIndex}}">
-                                <div class="dropdown"></div>
-                            </div>
-                        </span>
-                        <span class='second border-bottom'>
+                                    <span class='product-name'>{{currentDay}}</span>
+            </div>
+            <input type="text" name="dayInput" style="display:none" value="{{currentDayIndex}}">
+            <div class="dropdown"></div>
+        </div>
+        </span>
+        <span class='second border-bottom'>
                             <div class="select-wrapper">
                                 <div class='custom-select-trigger'>
-                                    <span class='product-name'>{{currentTime}}</span>  
-                                </div>
-                                <input type="text" name="timeInput" style="display:none" value="{{currentTimeIndex}}">
-                                <div class="dropdown"></div>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <!-- 
+                                    <span class='product-name'>{{currentTime}}</span>
+        </div>
+        <input type="text" name="timeInput" style="display:none" value="{{currentTimeIndex}}">
+        <div class="dropdown"></div>
+        </div>
+        </span>
+        </div>
+        </div>
+        <!-- 
                 <div id='carNo' class='form-row'>
                     <i class="site-icons icon-car"></i>
 
@@ -369,42 +345,41 @@
                     </div>
                 </div>
                  -->
-                <div id='name' class='form-row'>
-                    <i class="site-icons icon-user"></i>
-                    <div class='content-area border-bottom'>
-                        <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" maxlength="12" required>
-                    </div>
-                </div>
-                <div  class="error dn" id="nameInput-error">请填写真实姓名</div>
-                <div id='phoneNumber' class='form-row'>
-                    <i class="site-icons icon-phone"></i>
-                    <div class='content-area border-bottom'>
-                        <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" maxlength="16" required>
-                    </div>
-                </div>
-                <div  class="error dn" id="phoneInput-error">请输入正确的手机号</div>
+        <div id='name' class='form-row'>
+            <i class="site-icons icon-user"></i>
+            <div class='content-area border-bottom'>
+                <input type="text" placeholder='姓名' id='nameInput' name='nameInput' value="{{name}}" maxlength="12" required>
+            </div>
+        </div>
+        <div class="error dn" id="nameInput-error">请填写真实姓名</div>
+        <div id='phoneNumber' class='form-row'>
+            <i class="site-icons icon-phone"></i>
+            <div class='content-area border-bottom'>
+                <input type="tel" placeholder='手机号码' id='phoneInput' name='phoneInput' value="{{phone}}" maxlength="16" required>
+            </div>
+        </div>
+        <div class="error dn" id="phoneInput-error">请输入正确的手机号</div>
+        {{if isStandardService}}
+        <div id="board" class="form-row">
+            <i class="site-icons icon-board"></i>
+            <div class="content-area border-bottom">
+                <textarea placeholder="留言（选填）" id="boardInput" name="boardInput" value="" maxlength="256" onkeydown="this.style.height=this.scrollHeight+'px'"></textarea>
+            </div>
+        </div>
+        {{/if}}
+        </div>
+        <div class='footer'>
+            <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
+                <i class='site-icons icon-success'></i>
+            </a>
+            <div class='content-area justify-wrap'>
                 {{if isStandardService}}
-                <div id="board" class="form-row">
-                    <i class="site-icons icon-board"></i>
-                    <div class="content-area border-bottom">
-                        <textarea placeholder="留言（选填）" id="boardInput" name="boardInput" value="" maxlength="256" onkeydown="this.style.height=this.scrollHeight+'px'"></textarea>
-                    </div>
-                </div>
-                {{/if}}
+                <span class='tip justify-content'>总价：<span>{{sum}}</span> </span>
+                {{else}}
+                <span class='tip justify-content'>摩卡客服人员将在下单后主动联系您，为您提供维修方案和报价</span> {{/if}}
             </div>
-            <div class='footer'>
-                <a href="javascript:void(0);" class="j-nav j-nextstep" data-nav="/service/{{service_id}}/model/{{model_id}}/success">
-                    <i class='site-icons icon-success'></i>
-                </a>
-                <div class='content-area justify-wrap'>
-                    {{if isStandardService}}
-                    <span class='tip justify-content'>总价：<span>{{sum}}</span> </span>
-                    {{else}}
-                    <span class='tip justify-content'>摩卡客服人员将在下单后主动联系您，为您提供维修方案和报价</span>
-                    {{/if}}
-                </div> 
 
-            </div>
+        </div>
         </div>
     </script>
     <!-- 预约成功 页面 模板 -->
@@ -419,7 +394,7 @@
                             <br>
                             <span class='tip' style="font-size: 14px;color: rgba(255,255,255,0.87);">稍后摩卡客服会联系您确认本次服务的内容，请保持手机通讯畅通。</span>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div id="j-success-container" class="main" style="margin-top: 108px">
                     <ul class="order-detail">
@@ -433,9 +408,9 @@
                         </li>
 
                         {{if currentOrder.message}}
-                            <li class="order-detail-item order-remark">
-                                <p class="line">{{currentOrder.message}}</p>
-                            </li>
+                        <li class="order-detail-item order-remark">
+                            <p class="line">{{currentOrder.message}}</p>
+                        </li>
                         {{/if}}
                         <li class="order-detail-item order-contact">
                             <p class="line">
@@ -455,21 +430,18 @@
                                 {{currentService.name}}
                                 <span class="fr">{{currentService.price}}</span>
                             </p>
-							{{each currentService.parts as part i }}
+                            {{each currentService.parts as part i }}
                             <ul class="service-parts">
-                                    <li class="service-part">
-                                        <h5 class="service-part-type">{{part.name}}</h5>
-                                        {{each part.options as option j}}
-                                            {{if (option.id == currentOrder.services[0].parts[i].id)}}
-                                            <p class="line">
-                                                {{option.brand}}{{option.name}} {{option.extra}}
-                                                <span class="fr">{{option.price}} </span>
-                                            </p>
-                                            {{/if}}
-                                        {{/each}}
-                                    </li>
+                                <li class="service-part">
+                                    <h5 class="service-part-type">{{part.name}}</h5> {{each part.options as option j}} {{if (option.id == currentOrder.services[0].parts[i].id)}}
+                                    <p class="line">
+                                        {{option.brand}}{{option.name}} {{option.extra}}
+                                        <span class="fr">{{option.price}} </span>
+                                    </p>
+                                    {{/if}} {{/each}}
+                                </li>
                             </ul>
-							{{/each}}
+                            {{/each}}
                         </li>
                         {{/each}}
                     </ul>
@@ -482,7 +454,7 @@
             </a>
             <div class='content-area justify-wrap'>
                 <span class='tip justify-content'>总价：<span>{{currentOrder.sum}}</span> </span>
-            </div> 
+            </div>
         </div>
     </script>
     <!-- 我的订单 页面 模板 -->
@@ -509,15 +481,15 @@
                     <p class="line">订单编号： No{{order.id | formatNum: 10}}</p>
                     <p class="line">订单金额： {{order.sum}} </p>
                     <p class="line">
-                        当前状态： 
+                        当前状态：
                         <span class="order-status {{order.statusInfo.name}}">{{order.statusInfo.desc}}</span>
                     </p>
                     <p class="line">预约时间： {{order.year}}-{{order.month}}-{{order.day}} {{order.period}}</p>
                 </li>
                 {{if order.message}}
-                    <li class="order-detail-item order-remark">
-                        <p class="line">{{order.message}}</p>
-                    </li>
+                <li class="order-detail-item order-remark">
+                    <p class="line">{{order.message}}</p>
+                </li>
                 {{/if}}
                 <li class="order-detail-item order-contact">
                     <p class="line">
@@ -535,7 +507,7 @@
                         {{service.name}}
                         <span class="fr">{{service.price}}</span>
                     </p>
-					{{each service.parts as part i}}
+                    {{each service.parts as part i}}
                     <ul class="service-parts">
                         <li class="service-part">
                             <h5 class="service-part-type">{{part.type}}</h5>
@@ -545,16 +517,15 @@
                             </p>
                         </li>
                     </ul>
-					{{/each}}
+                    {{/each}}
                 </li>
+                {{/each}} {{each order.attachments as attachment i}}
+                <a href="{{attachment.uri}}">
+                    <li class="order-detail-item order-attachments">
+                        <p class="line">{{attachment.name}}</p>
+                    </li>
+                </a>
                 {{/each}}
-				{{each order.attachments as attachment i}}
-				<a href="{{attachment.uri}}">
-				<li class="order-detail-item order-attachments">
-                    <p class="line">{{attachment.name}}</p>
-                </li>
-				</a>
-				{{/each}}
             </ul>
         </div>
     </script>
@@ -566,12 +537,12 @@
             <div class="popup-content">
                 <p>我们已将验证码发送到以下手机号</p>
                 <p>{{phone}}</p>
-                <input type="text" placeholder='请填入您收到的验证码'>
+                <input id="captcha" type="text" placeholder='请填入您收到的验证码'>
             </div>
             <div class="command-area">
-                <a href="javascript:void(0);" class="mocarbtn" style="font-weight: bold;">取消</a>
-                <a href="javascript:void(0);" class="buyelsebtn" style="font-weight: bold;color: RGB(119, 119, 119);">重试（）</a>
-                <a href="javascript:void(0);" class="buyelsebtn" style="font-weight: bold;">确定</a>
+                <a href="javascript:void(0);" id="confirm-captcha" style="font-weight: bold;">确定</a>
+                <a href="javascript:void(0);" id="repeat-captcha" style="font-weight: bold;color: RGB(119, 119, 119);">重试（）</a>
+                <a href="javascript:void(0);" id="cancel-captcha" style="font-weight: bold;color: #67CA2F;">取消</a>
             </div>
         </div>
     </script>
@@ -594,22 +565,22 @@
 
     <script>
     seajs.config({
-        base: '../js',
-        alias: {
-            "mock": "lib/mock.js"
-        }
-    })
-    // seajs.use('mockAjax', function() {});
+            base: '../js',
+            alias: {
+                "mock": "lib/mock.js"
+            }
+        })
+        // seajs.use('mockAjax', function() {});
 
     seajs.use("page/index");
     </script>
-	<script>
+    <script>
     (function() {
-    	var title = "摩卡上门修车 快速预约通道";
-    	var img = "http://static.mocar.cn/images/logo_medium_dark.png";
-    	var link = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf11a985d46739ec5&redirect_uri=http%3A%2F%2Fapp.mocar.cn%2Fmobile%2Fhtml%2Findex.html&response_type=code&scope=snsapi_base#wechat_redirect";
-    	var desc = "最专业服务/最亲民价格\n\n回归80年代老工匠严谨态度     摩卡  懂你   爱车";
-    	wx_share_out(title,img,link,desc);
+        var title = "摩卡上门修车 快速预约通道";
+        var img = "http://static.mocar.cn/images/logo_medium_dark.png";
+        var link = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf11a985d46739ec5&redirect_uri=http%3A%2F%2Fapp.mocar.cn%2Fmobile%2Fhtml%2Findex.html&response_type=code&scope=snsapi_base#wechat_redirect";
+        var desc = "最专业服务/最亲民价格\n\n回归80年代老工匠严谨态度     摩卡  懂你   爱车";
+        wx_share_out(title, img, link, desc);
     })();
     </script>
 
