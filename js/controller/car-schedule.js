@@ -202,7 +202,7 @@ define(function(require, exports) {
                 repeatCaptcha.off();
             }
             clearInterval(interval);
-            var time = 10;
+            var time = 60;
             interval = setInterval(function() {
                 if (time >= 0) {
                     if (repeatCaptcha) {
