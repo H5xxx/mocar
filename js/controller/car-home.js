@@ -94,6 +94,7 @@ define(function(require, exports) {
                 }
             });
 
+/*
             Banner.fetch(params, function(err, banners){
                 if(err){
                     return;
@@ -135,6 +136,7 @@ define(function(require, exports) {
 				}
 
             });
+*/
         }
     });
 
