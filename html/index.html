@@ -401,7 +401,7 @@
                 <div id="j-success-container" class="main" style="margin-top: 108px">
                     <ul class="order-detail">
                         <li class="order-detail-item order-summary">
-                            <p class="line">订单编号： No{{currentOrder.orderId | formatNum: 10}}</p>
+                            <p class="line {{if !currentOrder.orderId}}dn{{/if}}">订单编号： No{{currentOrder.orderId | formatNum: 10}}</p>
                             <p class="line">订单金额： {{currentOrder.sum}} </p>
                             <p class="line">
                                 当前状态： <span style="color:rgba(255, 152, 0, 0.87);">待确认</span>
